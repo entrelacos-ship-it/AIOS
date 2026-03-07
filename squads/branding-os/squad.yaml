@@ -1,0 +1,39 @@
+name: branding-os
+version: 1.0.0
+description: Squad que cria design systems para toda a estrutura ad Entrelaços, como sistemas escaláveis, LPs e redes sociais, de forma consistente e memorável.
+author: Tatiana Kellen Ribeiro da Silva
+license: MIT
+slashPrefix: branding-os
+
+aiox:
+  minVersion: "2.1.0"
+  type: squad
+
+components:
+  tasks:
+    - define-brand-system.md
+    - build-design-system-brief.md
+    - create-campaign-asset-system.md
+  agents:
+    - brand-system-strategist.md
+    - design-system-architect.md
+    - campaign-creative-director.md
+  workflows: []
+  checklists: []
+  templates: []
+  tools: []
+  scripts: []
+
+config:
+  extends: extend
+  coding-standards: ../../docs/framework/CODING-STANDARDS.md
+  tech-stack: ../../docs/framework/TECH-STACK.md
+  source-tree: ../../docs/framework/SOURCE-TREE.md
+
+dependencies:
+  node: []
+  python: []
+  squads: []
+
+tags:
+  - custom

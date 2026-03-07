@@ -59,6 +59,8 @@ squads/*
 !squads/_example/
 # Published squads (whitelisted for repository)
 !squads/claude-code-mastery/
+!squads/branding-os/
+!squads/branding-os/**
 keys/
 *.secret
 *.credentials
