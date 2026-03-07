@@ -32,6 +32,11 @@ Ative os agentes do squad e use os comandos para estruturar a marca, o design sy
 2. Rode `@design-system-architect *design-system` para converter a base em sistema operacional visual.
 3. Rode `@campaign-creative-director *campaign-system` para desdobrar o sistema em ativos de growth e comunicacao.
 
+## Official Artifacts
+
+- `data/eds-v2.1-operational-foundation.md` - documento-base do sistema visual
+- `data/eds-tokens-v2.1.json` - tokens primitivos, semanticos, temas e componentes
+
 ## Configuration
 
 This squad extends the core AIOX configuration.

@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "name": "Entrelacos Design System",
+    "version": "2.1.0-rc1",
+    "date": "2026-03-07",
+    "status": "approved-conceptually-pending-technical-validation"
+  },
+  "primitives": {
+    "color": {
+      "brand": {
+        "violet": {
+          "core": "#4A1FD1",
+          "deep": "#2B0B7A",
+          "electric": "#6A4BFF"
+        },
+        "orange": {
+          "signal": "#FF5A1F",
+          "burn": "#D94711",
+          "soft": "#FF8D63"
+        },
+        "teal": {
+          "core": "#00B4C6",
+          "deep": "#007A8A",
+          "soft": "#4DD6E3"
+        }
+      },
+      "neutral": {
+        "dark": {
+          "inkBlack": "#0A0A0F",
+          "graphite01": "#12121A",
+          "graphite02": "#1A1A24",
+          "slate01": "#2A2A36",
+          "slate02": "#444456",
+          "mist01": "#D9DAE3",
+          "pearlSoft": "#F5F5F8"
+        },
+        "light": {
+          "ivoryWhite": "#FAFAFC",
+          "cloud01": "#F1F2F7",
+          "cloud02": "#E8E9F0",
+          "stone01": "#D6D8E2",
+          "textPrimary": "#12121A",
+          "textSecondary": "#515366"
+        }
+      },
+      "feedback": {
+        "error": "#E53935"
+      }
+    },
+    "spacing": {
+      "01": "4px",
+      "02": "8px",
+      "03": "12px",
+      "04": "16px",
+      "05": "24px",
+      "06": "32px",
+      "07": "48px",
+      "08": "64px",
+      "09": "96px",
+      "10": "128px"
+    },
+    "radius": {
+      "xs": "6px",
+      "sm": "12px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "full": "9999px"
+    },
+    "fontFamily": {
+      "display": "Geist, 'DM Sans', ui-sans-serif, system-ui, sans-serif",
+      "body": "Inter, 'DM Sans', ui-sans-serif, system-ui, sans-serif"
+    },
+    "fontWeight": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "fontSize": {
+      "display": "64px",
+      "h1": "48px",
+      "h2": "36px",
+      "h3": "28px",
+      "h4": "20px",
+      "bodyLg": "18px",
+      "body": "16px",
+      "bodySm": "14px",
+      "caption": "12px",
+      "overline": "11px"
+    },
+    "lineHeight": {
+      "display": 1.05,
+      "h1": 1.1,
+      "h2": 1.15,
+      "h3": 1.2,
+      "h4": 1.25,
+      "bodyLg": 1.6,
+      "body": 1.6,
+      "bodySm": 1.55,
+      "caption": 1.4,
+      "overline": 1.35
+    },
+    "letterSpacing": {
+      "display": "-0.02em",
+      "h1": "-0.01em",
+      "h2": "-0.005em",
+      "default": "0",
+      "caption": "0.01em",
+      "overline": "0.08em"
+    },
+    "duration": {
+      "instant": "80ms",
+      "fast": "120ms",
+      "base": "200ms",
+      "slow": "350ms",
+      "xslow": "500ms"
+    },
+    "easing": {
+      "default": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "entrance": "cubic-bezier(0, 0, 0.2, 1)",
+      "exit": "cubic-bezier(0.4, 0, 1, 1)",
+      "spring": "cubic-bezier(0.34, 1.56, 0.64, 1)"
+    }
+  },
+  "semantic": {
+    "action": {
+      "primary": "{primitives.color.brand.orange.signal}",
+      "primaryHover": "{primitives.color.brand.orange.burn}",
+      "secondary": "{primitives.color.brand.violet.core}",
+      "secondaryHover": "{primitives.color.brand.violet.electric}"
+    },
+    "feedback": {
+      "success": "{primitives.color.brand.teal.core}",
+      "warning": "{primitives.color.brand.orange.soft}",
+      "error": "{primitives.color.feedback.error}",
+      "info": "{primitives.color.brand.violet.electric}"
+    },
+    "focus": {
+      "ring": "{primitives.color.brand.violet.core}"
+    }
+  },
+  "themes": {
+    "dark": {
+      "surface": {
+        "base": "{primitives.color.neutral.dark.inkBlack}",
+        "elevated": "{primitives.color.neutral.dark.graphite01}",
+        "card": "{primitives.color.neutral.dark.graphite02}",
+        "overlay": "{primitives.color.neutral.dark.slate01}"
+      },
+      "text": {
+        "primary": "{primitives.color.neutral.dark.pearlSoft}",
+        "secondary": "{primitives.color.neutral.dark.mist01}"
+      },
+      "border": {
+        "subtle": "rgba(255,255,255,0.06)",
+        "strong": "rgba(255,255,255,0.12)"
+      },
+      "focusOffset": "{primitives.color.neutral.dark.inkBlack}"
+    },
+    "light": {
+      "surface": {
+        "base": "{primitives.color.neutral.light.ivoryWhite}",
+        "elevated": "{primitives.color.neutral.light.cloud01}",
+        "card": "{primitives.color.neutral.light.cloud02}",
+        "overlay": "#FFFFFF"
+      },
+      "text": {
+        "primary": "{primitives.color.neutral.light.textPrimary}",
+        "secondary": "{primitives.color.neutral.light.textSecondary}"
+      },
+      "border": {
+        "subtle": "rgba(0,0,0,0.08)",
+        "strong": "rgba(0,0,0,0.14)"
+      },
+      "focusOffset": "{primitives.color.neutral.light.ivoryWhite}"
+    }
+  },
+  "components": {
+    "button": {
+      "height": {
+        "sm": "32px",
+        "md": "40px",
+        "lg": "48px"
+      },
+      "paddingInline": {
+        "sm": "{primitives.spacing.04}",
+        "md": "{primitives.spacing.05}",
+        "lg": "{primitives.spacing.05}"
+      },
+      "radius": "{primitives.radius.sm}",
+      "fontWeight": "{primitives.fontWeight.semibold}",
+      "primary": {
+        "background": "{semantic.action.primary}",
+        "backgroundHover": "{semantic.action.primaryHover}",
+        "text": "#FFFFFF"
+      },
+      "secondary": {
+        "background": "transparent"
+      }
+    },
+    "card": {
+      "radius": "{primitives.radius.md}",
+      "padding": "{primitives.spacing.05}"
+    },
+    "input": {
+      "minHeight": "44px",
+      "radius": "{primitives.radius.sm}",
+      "paddingY": "{primitives.spacing.03}",
+      "paddingX": "{primitives.spacing.04}",
+      "focusRing": "{semantic.focus.ring}",
+      "errorBorder": "{semantic.feedback.error}"
+    },
+    "badge": {
+      "radius": "{primitives.radius.full}"
+    },
+    "modal": {
+      "radius": "{primitives.radius.lg}",
+      "padding": "{primitives.spacing.06}",
+      "widthMin": "480px",
+      "widthMax": "640px"
+    }
+  },
+  "rules": {
+    "accentBudget": {
+      "maxCombinedAccentArea": "8%",
+      "defaultViolet": "5-6%",
+      "defaultOrange": "1-2%",
+      "defaultTeal": "0-2%"
+    },
+    "accessibility": {
+      "contrastMinimum": "WCAG AA",
+      "touchTargetMinimum": "44x44",
+      "focusVisibleRequired": true,
+      "reducedMotionRequired": true
+    }
+  }
+}
