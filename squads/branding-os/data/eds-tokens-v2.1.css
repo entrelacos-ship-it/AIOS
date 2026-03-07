@@ -1,0 +1,137 @@
+:root {
+  --eds-font-display: Geist, "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --eds-font-body: Inter, "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --eds-space-01: 4px;
+  --eds-space-02: 8px;
+  --eds-space-03: 12px;
+  --eds-space-04: 16px;
+  --eds-space-05: 24px;
+  --eds-space-06: 32px;
+  --eds-space-07: 48px;
+  --eds-space-08: 64px;
+  --eds-space-09: 96px;
+  --eds-space-10: 128px;
+
+  --eds-radius-xs: 6px;
+  --eds-radius-sm: 12px;
+  --eds-radius-md: 16px;
+  --eds-radius-lg: 24px;
+  --eds-radius-xl: 32px;
+  --eds-radius-full: 9999px;
+
+  --eds-duration-instant: 80ms;
+  --eds-duration-fast: 120ms;
+  --eds-duration-base: 200ms;
+  --eds-duration-slow: 350ms;
+  --eds-duration-xslow: 500ms;
+
+  --eds-easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --eds-easing-entrance: cubic-bezier(0, 0, 0.2, 1);
+  --eds-easing-exit: cubic-bezier(0.4, 0, 1, 1);
+  --eds-easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --eds-font-size-display: 64px;
+  --eds-font-size-h1: 48px;
+  --eds-font-size-h2: 36px;
+  --eds-font-size-h3: 28px;
+  --eds-font-size-h4: 20px;
+  --eds-font-size-body-lg: 18px;
+  --eds-font-size-body: 16px;
+  --eds-font-size-body-sm: 14px;
+  --eds-font-size-caption: 12px;
+  --eds-font-size-overline: 11px;
+
+  --eds-line-height-display: 1.05;
+  --eds-line-height-h1: 1.1;
+  --eds-line-height-h2: 1.15;
+  --eds-line-height-h3: 1.2;
+  --eds-line-height-h4: 1.25;
+  --eds-line-height-body-lg: 1.6;
+  --eds-line-height-body: 1.6;
+  --eds-line-height-body-sm: 1.55;
+  --eds-line-height-caption: 1.4;
+  --eds-line-height-overline: 1.35;
+
+  --eds-letter-spacing-display: -0.02em;
+  --eds-letter-spacing-h1: -0.01em;
+  --eds-letter-spacing-h2: -0.005em;
+  --eds-letter-spacing-default: 0;
+  --eds-letter-spacing-caption: 0.01em;
+  --eds-letter-spacing-overline: 0.08em;
+
+  --eds-color-brand-violet-core: #4a1fd1;
+  --eds-color-brand-violet-deep: #2b0b7a;
+  --eds-color-brand-violet-electric: #6a4bff;
+  --eds-color-brand-orange-signal: #ff5a1f;
+  --eds-color-brand-orange-burn: #d94711;
+  --eds-color-brand-orange-soft: #ff8d63;
+  --eds-color-brand-teal-core: #00b4c6;
+  --eds-color-brand-teal-deep: #007a8a;
+  --eds-color-brand-teal-soft: #4dd6e3;
+  --eds-color-feedback-error: #e53935;
+
+  --eds-button-height-sm: 32px;
+  --eds-button-height-md: 40px;
+  --eds-button-height-lg: 48px;
+  --eds-button-radius: var(--eds-radius-sm);
+  --eds-button-padding-inline-sm: var(--eds-space-04);
+  --eds-button-padding-inline-md: var(--eds-space-05);
+  --eds-button-padding-inline-lg: var(--eds-space-05);
+
+  --eds-card-radius: var(--eds-radius-md);
+  --eds-card-padding: var(--eds-space-05);
+
+  --eds-input-min-height: 44px;
+  --eds-input-radius: var(--eds-radius-sm);
+  --eds-input-padding-y: var(--eds-space-03);
+  --eds-input-padding-x: var(--eds-space-04);
+
+  --eds-modal-radius: var(--eds-radius-lg);
+  --eds-modal-padding: var(--eds-space-06);
+  --eds-modal-width-min: 480px;
+  --eds-modal-width-max: 640px;
+
+  --eds-color-action-primary: var(--eds-color-brand-orange-signal);
+  --eds-color-action-primary-hover: var(--eds-color-brand-orange-burn);
+  --eds-color-action-secondary: var(--eds-color-brand-violet-core);
+  --eds-color-action-secondary-hover: var(--eds-color-brand-violet-electric);
+  --eds-color-feedback-success: var(--eds-color-brand-teal-core);
+  --eds-color-feedback-warning: var(--eds-color-brand-orange-soft);
+  --eds-color-feedback-info: var(--eds-color-brand-violet-electric);
+  --eds-color-focus-ring: var(--eds-color-brand-violet-core);
+}
+
+[data-theme="dark"] {
+  --eds-color-surface-base: #0a0a0f;
+  --eds-color-surface-elevated: #12121a;
+  --eds-color-surface-card: #1a1a24;
+  --eds-color-surface-overlay: #2a2a36;
+  --eds-color-text-primary: #f5f5f8;
+  --eds-color-text-secondary: #d9dae3;
+  --eds-color-border-subtle: rgba(255, 255, 255, 0.06);
+  --eds-color-border-strong: rgba(255, 255, 255, 0.12);
+  --eds-color-focus-offset: #0a0a0f;
+}
+
+[data-theme="light"] {
+  --eds-color-surface-base: #fafafc;
+  --eds-color-surface-elevated: #f1f2f7;
+  --eds-color-surface-card: #e8e9f0;
+  --eds-color-surface-overlay: #ffffff;
+  --eds-color-text-primary: #12121a;
+  --eds-color-text-secondary: #515366;
+  --eds-color-border-subtle: rgba(0, 0, 0, 0.08);
+  --eds-color-border-strong: rgba(0, 0, 0, 0.14);
+  --eds-color-focus-offset: #fafafc;
+}
+
+.eds-theme-dark {
+  color: var(--eds-color-text-primary);
+  background: var(--eds-color-surface-base);
+}
+
+.eds-theme-light {
+  color: var(--eds-color-text-primary);
+  background: var(--eds-color-surface-base);
+}

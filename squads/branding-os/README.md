@@ -36,6 +36,8 @@ Ative os agentes do squad e use os comandos para estruturar a marca, o design sy
 
 - `data/eds-v2.1-operational-foundation.md` - documento-base do sistema visual
 - `data/eds-tokens-v2.1.json` - tokens primitivos, semanticos, temas e componentes
+- `data/eds-tokens-v2.1.css` - export inicial em CSS variables para integracao
+- `data/button-spec-v2.1.md` - especificacao tecnica do Button como componente-piloto
 
 ## Configuration
 
