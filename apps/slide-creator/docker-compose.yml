@@ -1,0 +1,7 @@
+services:
+  slide-creator:
+    build: .
+    ports:
+      - "3002:3000"
+    env_file: .env
+    restart: unless-stopped

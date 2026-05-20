@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide Creator</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Slide Creator</h1>
+      <p class="subtitle">Crie apresentações profissionais com IA</p>
+    </header>
+
+    <main>
+      <form id="slide-form">
+        <label for="briefing">Briefing da apresentação</label>
+        <textarea
+          id="briefing"
+          name="briefing"
+          rows="8"
+          placeholder="Descreva sua apresentação: audiência, objetivo, contexto, número de slides, tom desejado..."
+          required
+        ></textarea>
+        <button type="submit" id="submit-btn">Gerar Deck</button>
+      </form>
+
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Gerando deck... isso pode levar até 2 minutos.</p>
+      </div>
+
+      <div id="result" class="result hidden">
+        <div class="result-header">
+          <h2>Deck Gerado</h2>
+          <button id="copy-btn" class="copy-btn">Copiar Markdown</button>
+        </div>
+        <div id="result-content" class="result-content"></div>
+      </div>
+
+      <div id="error" class="error hidden"></div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
