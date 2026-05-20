@@ -1,21 +1,20 @@
 'use strict';
 
-const Anthropic = require('@anthropic-ai/sdk');
-
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-const MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-4-6';
+const { execSync } = require('child_process');
 
 async function generateDeck(briefing, skillContent) {
+  const fullPrompt = `${skillContent}\n\n---\n\nUser briefing:\n${briefing}`;
+
   try {
-    const message = await client.messages.create({
-      model: MODEL,
-      max_tokens: 8192,
-      system: skillContent,
-      messages: [{ role: 'user', content: briefing }],
+    const result = execSync('claude --print', {
+      input: fullPrompt,
+      encoding: 'utf8',
+      timeout: 120000,
+      env: process.env,
     });
-    return message.content[0].text;
+    return result;
   } catch (error) {
-    throw new Error(`Failed to generate deck via Claude API: ${error.message}`);
+    throw new Error(`Failed to generate deck via Claude CLI: ${error.stderr || error.message}`);
   }
 }
 

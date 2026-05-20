@@ -3,7 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const SKILL_PATH = path.resolve(__dirname, '../../../.agents/skills/slide-creator/SKILL.md');
+const SKILL_PATH = process.env.SKILL_PATH ||
+  path.resolve(__dirname, '../../../.agents/skills/slide-creator/SKILL.md');
 
 function loadSkill() {
   if (!fs.existsSync(SKILL_PATH)) {

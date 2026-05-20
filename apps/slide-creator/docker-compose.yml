@@ -4,4 +4,9 @@ services:
     ports:
       - "3002:3000"
     env_file: .env
+    environment:
+      - SKILL_PATH=/skill/SKILL.md
+    volumes:
+      - ./skill:/skill:ro
+      - /root/.claude:/root/.claude:ro
     restart: unless-stopped
