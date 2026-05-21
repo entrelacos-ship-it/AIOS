@@ -8,5 +8,5 @@ services:
       - SKILL_PATH=/skill/SKILL.md
     volumes:
       - ./skill:/skill:ro
-      - /root/.claude:/root/.claude:ro
+      - /root/.claude:/root/.claude:rw
     restart: unless-stopped
