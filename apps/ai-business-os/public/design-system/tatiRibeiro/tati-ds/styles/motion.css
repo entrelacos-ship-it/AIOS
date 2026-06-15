@@ -1,0 +1,86 @@
+/* ============================================================
+   TATI RIBEIRO · DESIGN SYSTEM
+   motion.css — Animações reutilizáveis
+   ============================================================ */
+
+/* ─── KEYFRAMES ─── */
+@keyframes t-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes t-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes t-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139,92,246,0.3); }
+  50%      { box-shadow: 0 0 40px rgba(139,92,246,0.6); }
+}
+@keyframes t-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes t-orbit {
+  from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+@keyframes t-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@keyframes t-cursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes t-stroke {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ─── UTILITY ANIMATIONS ─── */
+.t-anim-fade-up    { animation: t-fade-up var(--t-dur-slow) var(--t-ease-out) both; }
+.t-anim-fade-in    { animation: t-fade-in var(--t-dur-slow) var(--t-ease) both; }
+.t-anim-glow       { animation: t-glow 3s ease-in-out infinite; }
+.t-anim-float      { animation: t-float 4s ease-in-out infinite; }
+
+/* delays escalonados */
+.t-anim-d-1 { animation-delay: 0.1s; }
+.t-anim-d-2 { animation-delay: 0.2s; }
+.t-anim-d-3 { animation-delay: 0.3s; }
+.t-anim-d-4 { animation-delay: 0.4s; }
+.t-anim-d-5 { animation-delay: 0.5s; }
+.t-anim-d-6 { animation-delay: 0.6s; }
+
+/* shimmer (placeholder, loading) */
+.t-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--t-surface) 0%,
+    var(--t-surface-2) 50%,
+    var(--t-surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: t-shimmer 2s linear infinite;
+}
+
+/* cursor piscando */
+.t-cursor::after {
+  content: '|';
+  animation: t-cursor 1s step-end infinite;
+  color: var(--t-accent-light);
+  margin-left: 2px;
+}
+
+/* SVG path draw */
+.t-svg-draw path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: t-stroke 2s var(--t-ease-out) forwards;
+}
+
+/* Hover lift utility */
+.t-hover-lift {
+  transition: transform var(--t-dur-fast) var(--t-ease-out);
+}
+.t-hover-lift:hover {
+  transform: translateY(-2px);
+}

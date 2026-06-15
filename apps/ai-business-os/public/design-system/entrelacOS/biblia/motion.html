@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motion · Bíblia · Entrelaços</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="site.css">
+
+<link rel="icon" href="../assets/favicon.ico">
+<link rel="icon" type="image/png" href="../assets/borboleta.png">
+</head>
+<body>
+<header class="e-header">
+  <div class="e-header-pill" id="bibliaHeader">
+    <a class="e-brand" href="../index.html">
+      <img class="e-logo-img" src="../assets/borboleta.png" alt="" aria-hidden="true">
+      <span>Entrelaços<em>Psi</em></span>
+    </a>
+    <nav class="e-nav">
+      <a href="../index.html#fundamentos">Fundamentos</a>
+      <a href="../index.html#tokens">Tokens</a>
+      <a href="../index.html#componentes">Componentes</a>
+      <a href="../index.html#padroes">Padrões</a>
+      <a href="../index.html#regras">Regras</a>
+    </nav>
+    <div class="e-header-cta">
+      <a href="../index.html" class="e-btn e-btn-primary e-btn-sm">Sumário →</a>
+    </div>
+  </div>
+</header><div class="bs-shell"><aside class="bs-toc"><nav><h4>Fundamentos</h4><a href="filosofia.html" class=""><span class="bs-toc-num">01</span><span>Filosofia</span></a><a href="identidade.html" class=""><span class="bs-toc-num">02</span><span>Identidade visual</span></a><a href="voz.html" class=""><span class="bs-toc-num">03</span><span>Voz da marca</span></a><h4>Tokens</h4><a href="cores.html" class=""><span class="bs-toc-num">04</span><span>Paleta & cores</span></a><a href="tipografia.html" class=""><span class="bs-toc-num">05</span><span>Tipografia</span></a><a href="espaco.html" class=""><span class="bs-toc-num">06</span><span>Espaçamento</span></a><a href="raio.html" class=""><span class="bs-toc-num">07</span><span>Raio & geometria</span></a><a href="sombra.html" class=""><span class="bs-toc-num">08</span><span>Sombras & depth</span></a><a href="motion.html" class="is-active"><span class="bs-toc-num">09</span><span>Motion</span></a><a href="motion-effects.html" class=""><span class="bs-toc-num">09+</span><span>Motion FX library</span></a><h4>Componentes</h4><a href="botoes.html" class=""><span class="bs-toc-num">10</span><span>Botões</span></a><a href="eyebrows.html" class=""><span class="bs-toc-num">11</span><span>Eyebrows</span></a><a href="cards.html" class=""><span class="bs-toc-num">12</span><span>Cards</span></a><a href="stats.html" class=""><span class="bs-toc-num">13</span><span>Stats</span></a><a href="inputs.html" class=""><span class="bs-toc-num">14</span><span>Inputs & forms</span></a><a href="badges.html" class=""><span class="bs-toc-num">15</span><span>Badges</span></a><a href="header.html" class=""><span class="bs-toc-num">16</span><span>Header pill</span></a><a href="avancados.html" class=""><span class="bs-toc-num">17</span><span>Avançados</span></a><h4>Padrões</h4><a href="dobras.html" class=""><span class="bs-toc-num">18</span><span>11 dobras canônicas</span></a><a href="copy.html" class=""><span class="bs-toc-num">19</span><span>Copy & CTAs</span></a><a href="marketing.html" class=""><span class="bs-toc-num">20</span><span>Marketing arc</span></a><h4>Regras</h4><a href="regras.html" class=""><span class="bs-toc-num">21</span><span>Faça / não faça</span></a><a href="acessibilidade.html" class=""><span class="bs-toc-num">22</span><span>Acessibilidade</span></a><a href="quickstart.html" class=""><span class="bs-toc-num">23</span><span>Quickstart</span></a><h4>Exemplos</h4><a href="exemplos.html"><span class="bs-toc-num">★</span><span>LP Comunidade</span></a></nav></aside><main class="bs-main">
+      <div class="bs-crumbs">
+        <a href="../index.html">Bíblia</a>
+        <span class="sep">/</span>
+        <a href="../index.html#tokens">Tokens</a>
+        <span class="sep">/</span>
+        <span class="current">09 · Motion</span>
+      </div>
+      <header class="bs-pghead">
+        <div class="bs-pghead-num"><span>09</span><span class="dot"></span><span class="group-tag">Tokens</span></div>
+        <h1>Curva assinatura: <em>cubic-bezier</em>.</h1>
+        <p class="bs-pghead-lead">Tudo respira na mesma curva. Tudo aparece com o mesmo reveal. A coerência de motion é o que faz o sistema sentir vivo, não animado.</p>
+      </header>
+      
+<div class="bs-body">
+  <h3>Curvas e durações</h3>
+  <ul>
+    <li><code class="bs-inline">--e-ease</code> · cubic-bezier(0.22, 1, 0.36, 1) · default</li>
+    <li><code class="bs-inline">--e-ease-out</code> · cubic-bezier(0.16, 1, 0.3, 1) · reveals</li>
+    <li><code class="bs-inline">--e-ease-spring</code> · cubic-bezier(0.34, 1.56, 0.64, 1) · CTAs press</li>
+    <li><code class="bs-inline">--e-dur-fast</code> · 150ms · hover micro</li>
+    <li><code class="bs-inline">--e-dur-base</code> · 300ms · default</li>
+    <li><code class="bs-inline">--e-dur-slow</code> · 600ms · reveals</li>
+  </ul>
+
+  <h3>Demo de curva</h3>
+  <div class="bs-demo">
+    <div class="bs-demo-row">
+      <button class="e-btn e-btn-ghost" id="motionFast">fast · 150ms</button>
+      <button class="e-btn e-btn-ghost" id="motionBase">base · 300ms</button>
+      <button class="e-btn e-btn-ghost" id="motionSlow">slow · 600ms</button>
+    </div>
+    <div style="margin-top: 32px; height: 80px; position: relative; background: rgba(180,140,255,0.04); border-radius: var(--e-r-md); border: 1px dashed var(--e-border);">
+      <div id="motionBall" style="position: absolute; left: 16px; top: 16px; width: 48px; height: 48px; border-radius: 50%; background: var(--e-grad-purple); box-shadow: var(--e-sh-purple); transition: left 300ms var(--e-ease);"></div>
+    </div>
+  </div>
+
+  <h3>Padrões de uso</h3>
+  <ul>
+    <li><strong>Reveal on scroll:</strong> <code class="bs-inline">opacity 0→1 + translateY(20px→0)</code> em 600ms ease-out.</li>
+    <li><strong>Hover de card:</strong> <code class="bs-inline">translateY(-2px)</code> + spotlight em 250ms.</li>
+    <li><strong>CTA press:</strong> <code class="bs-inline">scale(0.98)</code> em 150ms ease-spring.</li>
+    <li><strong>Counter:</strong> 0→target em 1800ms cubic-out, dispara no IntersectionObserver.</li>
+    <li><strong>Marquee:</strong> linear infinite, <code class="bs-inline">animation-play-state: paused</code> no hover.</li>
+  </ul>
+
+  <div class="bs-note"><strong>prefers-reduced-motion:</strong> sempre desativar marquee, parallax, reveal e cometas do Lorenz. Manter só hovers de botão (essenciais para feedback).</div>
+</div>
+
+<script>
+const ball = document.getElementById('motionBall');
+let right = false;
+function go(d) {
+  ball.style.transition = 'left ' + d + 'ms var(--e-ease)';
+  right = !right;
+  const w = ball.parentElement.clientWidth;
+  ball.style.left = right ? (w-64)+'px' : '16px';
+}
+document.getElementById('motionFast').onclick = () => go(150);
+document.getElementById('motionBase').onclick = () => go(300);
+document.getElementById('motionSlow').onclick = () => go(600);
+</script>
+      <nav class="bs-pagenav"><a href="sombra.html" class="prev"><span class="bs-pagenav-tag">← 08 · Anterior</span><span class="bs-pagenav-title"><span class="bs-pagenav-arrow">←</span> Sombras & depth</span></a><a href="botoes.html" class="next"><span class="bs-pagenav-tag">Próxima · 10 →</span><span class="bs-pagenav-title">Botões <span class="bs-pagenav-arrow">→</span></span></a></nav>
+      <div class="bs-footer">
+  <span>BÍBLIA · DESIGN SYSTEM · ENTRELAÇOS PSICOLOGIA · v1.6 · LENDÁRIA EDITION</span>
+  <br><br>
+  <em>"Cada psicóloga que se reposiciona desloca um sistema inteiro."</em>
+</div>
+    </main></div><script>
+// Header shrink on scroll
+const headerPill = document.getElementById('bibliaHeader');
+if (headerPill) {
+  window.addEventListener('scroll', () => {
+    headerPill.classList.toggle('is-scrolled', window.scrollY > 32);
+  });
+}
+
+// Card spotlight
+document.querySelectorAll('[data-spotlight]').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+// Reveal
+const ioReveal = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && (e.target.classList.add('is-visible'), ioReveal.unobserve(e.target))), { threshold: 0.15 });
+document.querySelectorAll('.e-reveal').forEach(el => ioReveal.observe(el));
+
+// Stat counter
+const animateCount = (el) => {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const dur = 1800;
+  const start = performance.now();
+  const tick = (now) => {
+    const t = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const v = Math.round(target * eased);
+    el.textContent = (target >= 1000 ? v.toLocaleString('pt-BR') : v) + suffix;
+    if (t < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+const ioCounter = new IntersectionObserver(es => es.forEach(en => en.isIntersecting && (animateCount(en.target), ioCounter.unobserve(en.target))), { threshold: 0.4 });
+document.querySelectorAll('[data-count]').forEach(el => ioCounter.observe(el));
+// Snippet copy (com fallback robusto)
+document.querySelectorAll('.snippet-copy').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const code = btn.closest('.snippet').querySelector('code').textContent;
+    // Feedback otimista: aplica imediatamente
+    const orig = btn.dataset.origLabel || btn.textContent;
+    btn.dataset.origLabel = orig;
+    btn.textContent = 'COPIADO ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1800);
+    // Tenta clipboard API; fallback para textarea + execCommand
+    const tryClipboard = () => {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(code).catch(() => fallback());
+      }
+      return fallback();
+    };
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = code; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    };
+    tryClipboard();
+  });
+});
+</script></body></html>

@@ -1,0 +1,63 @@
+# EntrelacOS — app container
+# Localização no servidor: /etc/docker/entrelacOS/docker-compose.yml
+
+networks:
+  web:
+    external: true
+
+services:
+  app:
+    image: entrelac-os:latest
+    container_name: entrelac-os
+    restart: unless-stopped
+    networks:
+      - web
+    env_file: .env
+    volumes:
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+      - ./data:/app/.aiox
+      - ./claudecli-creds:/home/claudecli/.claude
+      - ./claudecli-creds/.claude.json:/home/claudecli/.claude.json
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.entrelac-os-http.rule=Host(`os.entrelacospsicologia.com.br`)"
+      - "traefik.http.routers.entrelac-os-http.entrypoints=web"
+      - "traefik.http.routers.entrelac-os-http.service=entrelac-os"
+      - "traefik.http.routers.entrelac-os.rule=Host(`os.entrelacospsicologia.com.br`)"
+      - "traefik.http.routers.entrelac-os.entrypoints=websecure"
+      - "traefik.http.routers.entrelac-os.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.entrelac-os.service=entrelac-os"
+      - "traefik.http.services.entrelac-os.loadbalancer.server.port=3010"
+
+  opendesign:
+    build:
+      context: ./opendesign
+      dockerfile: Dockerfile
+      args:
+        OPEN_DESIGN_REF: main
+    image: open-design:latest
+    container_name: open-design
+    restart: unless-stopped
+    networks:
+      - web
+    env_file: ./opendesign/.env
+    volumes:
+      - ./opendesign-data:/data
+      - ./opendesign-creds/claude:/home/node/.claude
+      - ./opendesign-creds/codex:/home/node/.codex
+      - ./opendesign-creds/gemini:/home/node/.gemini
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.opendesign-http.rule=Host(`opendesign.entrelacospsicologia.com.br`)"
+      - "traefik.http.routers.opendesign-http.entrypoints=web"
+      - "traefik.http.routers.opendesign-http.service=opendesign"
+      - "traefik.http.routers.opendesign.rule=Host(`opendesign.entrelacospsicologia.com.br`)"
+      - "traefik.http.routers.opendesign.entrypoints=websecure"
+      - "traefik.http.routers.opendesign.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.opendesign.service=opendesign"
+      - "traefik.http.services.opendesign.loadbalancer.server.port=7456"
+      # Injeta Authorization: Bearer <OD_API_TOKEN> em toda request (UI não envia bearer nativamente)
+      - "traefik.http.middlewares.opendesign-auth.headers.customrequestheaders.Authorization=Bearer e968523773cc6425bb42b3bf6bd6ac1e29f3f7883a728644315e3988112c65bc"
+      - "traefik.http.routers.opendesign.middlewares=opendesign-auth"
+      - "traefik.http.routers.opendesign-http.middlewares=opendesign-auth"

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inputs & forms · Bíblia · Entrelaços</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="site.css">
+
+<link rel="icon" href="../assets/favicon.ico">
+<link rel="icon" type="image/png" href="../assets/borboleta.png">
+</head>
+<body>
+<header class="e-header">
+  <div class="e-header-pill" id="bibliaHeader">
+    <a class="e-brand" href="../index.html">
+      <img class="e-logo-img" src="../assets/borboleta.png" alt="" aria-hidden="true">
+      <span>Entrelaços<em>Psi</em></span>
+    </a>
+    <nav class="e-nav">
+      <a href="../index.html#fundamentos">Fundamentos</a>
+      <a href="../index.html#tokens">Tokens</a>
+      <a href="../index.html#componentes">Componentes</a>
+      <a href="../index.html#padroes">Padrões</a>
+      <a href="../index.html#regras">Regras</a>
+    </nav>
+    <div class="e-header-cta">
+      <a href="../index.html" class="e-btn e-btn-primary e-btn-sm">Sumário →</a>
+    </div>
+  </div>
+</header><div class="bs-shell"><aside class="bs-toc"><nav><h4>Fundamentos</h4><a href="filosofia.html" class=""><span class="bs-toc-num">01</span><span>Filosofia</span></a><a href="identidade.html" class=""><span class="bs-toc-num">02</span><span>Identidade visual</span></a><a href="voz.html" class=""><span class="bs-toc-num">03</span><span>Voz da marca</span></a><h4>Tokens</h4><a href="cores.html" class=""><span class="bs-toc-num">04</span><span>Paleta & cores</span></a><a href="tipografia.html" class=""><span class="bs-toc-num">05</span><span>Tipografia</span></a><a href="espaco.html" class=""><span class="bs-toc-num">06</span><span>Espaçamento</span></a><a href="raio.html" class=""><span class="bs-toc-num">07</span><span>Raio & geometria</span></a><a href="sombra.html" class=""><span class="bs-toc-num">08</span><span>Sombras & depth</span></a><a href="motion.html" class=""><span class="bs-toc-num">09</span><span>Motion</span></a><a href="motion-effects.html" class=""><span class="bs-toc-num">09+</span><span>Motion FX library</span></a><h4>Componentes</h4><a href="botoes.html" class=""><span class="bs-toc-num">10</span><span>Botões</span></a><a href="eyebrows.html" class=""><span class="bs-toc-num">11</span><span>Eyebrows</span></a><a href="cards.html" class=""><span class="bs-toc-num">12</span><span>Cards</span></a><a href="stats.html" class=""><span class="bs-toc-num">13</span><span>Stats</span></a><a href="inputs.html" class="is-active"><span class="bs-toc-num">14</span><span>Inputs & forms</span></a><a href="badges.html" class=""><span class="bs-toc-num">15</span><span>Badges</span></a><a href="header.html" class=""><span class="bs-toc-num">16</span><span>Header pill</span></a><a href="avancados.html" class=""><span class="bs-toc-num">17</span><span>Avançados</span></a><h4>Padrões</h4><a href="dobras.html" class=""><span class="bs-toc-num">18</span><span>11 dobras canônicas</span></a><a href="copy.html" class=""><span class="bs-toc-num">19</span><span>Copy & CTAs</span></a><a href="marketing.html" class=""><span class="bs-toc-num">20</span><span>Marketing arc</span></a><h4>Regras</h4><a href="regras.html" class=""><span class="bs-toc-num">21</span><span>Faça / não faça</span></a><a href="acessibilidade.html" class=""><span class="bs-toc-num">22</span><span>Acessibilidade</span></a><a href="quickstart.html" class=""><span class="bs-toc-num">23</span><span>Quickstart</span></a><h4>Exemplos</h4><a href="exemplos.html"><span class="bs-toc-num">★</span><span>LP Comunidade</span></a></nav></aside><main class="bs-main">
+      <div class="bs-crumbs">
+        <a href="../index.html">Bíblia</a>
+        <span class="sep">/</span>
+        <a href="../index.html#componentes">Componentes</a>
+        <span class="sep">/</span>
+        <span class="current">14 · Inputs & forms</span>
+      </div>
+      <header class="bs-pghead">
+        <div class="bs-pghead-num"><span>14</span><span class="dot"></span><span class="group-tag">Componentes</span></div>
+        <h1>Quadrado. Foco roxo. <em>Sem pílula nunca.</em></h1>
+        <p class="bs-pghead-lead">Input é entrada de dado, não ação. Por isso é quadrado — diferente de botões e badges. Focus ring é halo roxo de 3px com border purple-400.</p>
+      </header>
+      
+<div class="bs-body">
+  <h3>Form completo</h3>
+  <div class="bs-demo">
+    <form class="form-grid" onsubmit="event.preventDefault();">
+      <div>
+        <label class="form-label" for="emailDemo">Seu e-mail</label>
+        <input id="emailDemo" class="e-input" type="email" placeholder="seu@email.com">
+      </div>
+      <div>
+        <label class="form-label" for="msgDemo">O que você está procurando?</label>
+        <textarea id="msgDemo" class="e-input e-textarea" placeholder="Conte um pouco sobre você..."></textarea>
+      </div>
+      <div class="form-row">
+        <input class="e-input" type="email" placeholder="newsletter@email.com">
+        <button type="submit" class="e-btn e-btn-primary">Receber →</button>
+      </div>
+    </form>
+  </div>
+
+  <h3>Estados</h3>
+  <ul>
+    <li><strong>Default:</strong> border hairline, fundo bg-elev levemente translúcido.</li>
+    <li><strong>Focus:</strong> border purple-400 + halo de 3px <code class="bs-inline">rgba(116,39,212,0.20)</code>.</li>
+    <li><strong>Disabled:</strong> opacity 0.5, cursor not-allowed.</li>
+    <li><strong>Error:</strong> border error, mensagem em mono 0.7rem abaixo.</li>
+  </ul>
+
+  <h3>Microcopy obrigatória</h3>
+  <p>Sempre acompanhar formulários com microcopy de transparência (em <code class="bs-inline">.e-eyebrow-dash</code>): "Sem spam · Cancele quando quiser · LGPD-ready". Sem isso, o formulário quebra o tom de voz da marca.</p>
+
+  <h3>Snippet · pronto pra colar</h3>
+  <div class="snippet">
+    <div class="snippet-head">
+      <span class="snippet-tag">HTML · cole no seu projeto</span>
+      <button class="snippet-copy" type="button">COPIAR</button>
+    </div>
+    <pre><code>&lt;!-- Form vertical --&gt;
+&lt;form class="form-grid" onsubmit="event.preventDefault();"&gt;
+  &lt;div&gt;
+    &lt;label class="form-label" for="email"&gt;Seu e-mail&lt;/label&gt;
+    &lt;input id="email" class="e-input" type="email" placeholder="seu@email.com"&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;label class="form-label" for="msg"&gt;O que você está procurando?&lt;/label&gt;
+    &lt;textarea id="msg" class="e-input e-textarea" placeholder="Conte um pouco sobre você..."&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+
+&lt;!-- Form inline (newsletter) --&gt;
+&lt;form class="form-row"&gt;
+  &lt;input class="e-input" type="email" placeholder="newsletter@email.com"&gt;
+  &lt;button type="submit" class="e-btn e-btn-primary"&gt;Receber →&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;!-- Microcopy obrigatória abaixo do form --&gt;
+&lt;span class="e-eyebrow-dash"&gt;
+  &lt;span class="e-dash-line"&gt;&lt;/span&gt;
+  &lt;span&gt;Sem spam · Cancele quando quiser · LGPD-ready&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+  </div>
+</div>
+      <nav class="bs-pagenav"><a href="stats.html" class="prev"><span class="bs-pagenav-tag">← 13 · Anterior</span><span class="bs-pagenav-title"><span class="bs-pagenav-arrow">←</span> Stats</span></a><a href="badges.html" class="next"><span class="bs-pagenav-tag">Próxima · 15 →</span><span class="bs-pagenav-title">Badges <span class="bs-pagenav-arrow">→</span></span></a></nav>
+      <div class="bs-footer">
+  <span>BÍBLIA · DESIGN SYSTEM · ENTRELAÇOS PSICOLOGIA · v1.6 · LENDÁRIA EDITION</span>
+  <br><br>
+  <em>"Cada psicóloga que se reposiciona desloca um sistema inteiro."</em>
+</div>
+    </main></div><script>
+// Header shrink on scroll
+const headerPill = document.getElementById('bibliaHeader');
+if (headerPill) {
+  window.addEventListener('scroll', () => {
+    headerPill.classList.toggle('is-scrolled', window.scrollY > 32);
+  });
+}
+
+// Card spotlight
+document.querySelectorAll('[data-spotlight]').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+// Reveal
+const ioReveal = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && (e.target.classList.add('is-visible'), ioReveal.unobserve(e.target))), { threshold: 0.15 });
+document.querySelectorAll('.e-reveal').forEach(el => ioReveal.observe(el));
+
+// Stat counter
+const animateCount = (el) => {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const dur = 1800;
+  const start = performance.now();
+  const tick = (now) => {
+    const t = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const v = Math.round(target * eased);
+    el.textContent = (target >= 1000 ? v.toLocaleString('pt-BR') : v) + suffix;
+    if (t < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+const ioCounter = new IntersectionObserver(es => es.forEach(en => en.isIntersecting && (animateCount(en.target), ioCounter.unobserve(en.target))), { threshold: 0.4 });
+document.querySelectorAll('[data-count]').forEach(el => ioCounter.observe(el));
+// Snippet copy (com fallback robusto)
+document.querySelectorAll('.snippet-copy').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const code = btn.closest('.snippet').querySelector('code').textContent;
+    // Feedback otimista: aplica imediatamente
+    const orig = btn.dataset.origLabel || btn.textContent;
+    btn.dataset.origLabel = orig;
+    btn.textContent = 'COPIADO ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1800);
+    // Tenta clipboard API; fallback para textarea + execCommand
+    const tryClipboard = () => {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(code).catch(() => fallback());
+      }
+      return fallback();
+    };
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = code; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    };
+    tryClipboard();
+  });
+});
+</script></body></html>

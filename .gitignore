@@ -155,7 +155,11 @@ apps/
 !apps/branding-os-showcase/**
 !apps/slide-creator/
 !apps/slide-creator/**
+!apps/ai-business-os/
+!apps/ai-business-os/**
 apps/slide-creator/node_modules/
+apps/ai-business-os/node_modules/
+apps/ai-business-os/dist/
 
 # External projects (separate repositories)
 aiox-guide-app/

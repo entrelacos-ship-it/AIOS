@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #050508;
+  color: #F0F0F8;
+  font-family: 'Sora', sans-serif;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0D0D14; }
+::-webkit-scrollbar-thumb { background: #1E1E2E; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #FFB800; }

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bíblia · Design System Entrelaços Psicologia · Lendária Edition v1.6</title>
+<meta name="description" content="Mini-site interno: tokens, componentes, dobras e regras para qualquer landing page, site ou app da Entrelaços.">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="biblia/site.css">
+<link rel="icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" href="assets/borboleta.png">
+</head>
+<body>
+
+<header class="e-header">
+  <div class="e-header-pill" id="bibliaHeader">
+    <a class="e-brand" href="#topo">
+      <img class="e-logo-img" src="assets/borboleta.png" alt="" aria-hidden="true">
+      <span>Entrelaços<em>Psi</em></span>
+    </a>
+    <nav class="e-nav">
+      <a href="#fundamentos">Fundamentos</a>
+      <a href="#tokens">Tokens</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#padroes">Padrões</a>
+      <a href="#regras">Regras</a>
+    </nav>
+    <div class="e-header-cta">
+      <a href="biblia/quickstart.html" class="e-btn e-btn-primary e-btn-sm">Quickstart →</a>
+    </div>
+  </div>
+</header>
+
+<section class="home-hero" id="topo">
+  <div class="container">
+    <div class="home-hero-meta">
+      <span>BÍBLIA · v1.6</span>
+      <span class="dot"></span>
+      <span>LENDÁRIA EDITION</span>
+      <span class="dot"></span>
+      <span>MINI-SITE INTERNO</span>
+    </div>
+    <h1>O sistema visual que faz<br>tudo da Entrelaços <em class="protagonist">existir</em>.</h1>
+    <p class="home-hero-lead">Tokens, componentes, padrões de seção e regras de uso. Esta é a fonte única de verdade para qualquer landing page, página de vendas, site institucional ou app da <em>Entrelaços Psicologia</em>.</p>
+    <div class="home-hero-actions">
+      <a href="biblia/quickstart.html" class="e-btn e-btn-primary e-btn-lg">Começar uma página <span>→</span></a>
+      <a href="biblia/filosofia.html" class="e-btn e-btn-ghost e-btn-lg">Ler a filosofia</a>
+    </div>
+    <div style="margin-top: 32px; position: relative; z-index: 1;">
+      <a href="biblia/cores.html" class="home-quicklink">→ Paleta &amp; cores</a>
+      <a href="biblia/tipografia.html" class="home-quicklink">→ Tipografia</a>
+      <a href="biblia/dobras.html" class="home-quicklink">→ 11 dobras</a>
+      <a href="biblia/avancados.html" class="home-quicklink">→ Lorenz + Constellation</a>
+      <a href="biblia/exemplos.html" class="home-quicklink" style="background: rgba(255,138,31,0.12); border-color: rgba(255,138,31,0.4); color: #FFB87A;">★ Exemplo canônico · LP Comunidade</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 64px 0 0;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 48px; align-items: center;">
+      <div>
+        <span class="e-eyebrow-chip"><span class="e-eyebrow-dot"></span><span>EXEMPLO CANÔNICO</span></span>
+        <h2 class="h-section" style="margin: 18px 0 16px;">A Bíblia <em>aplicada</em>, em uma página real.</h2>
+        <p class="lead">A landing page Cohort Inverno 2026 reúne todas as decisões deste sistema — 11 dobras, regra de 3 do laranja, inversão cream, Lorenz, constellation. É a referência de teste-de-cheiro.</p>
+        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="biblia/exemplos.html" class="e-btn e-btn-primary">Abrir na Bíblia <span>→</span></a>
+          <a href="biblia/exemplos/landing-page-comunidade.html" target="_blank" rel="noopener" class="e-btn e-btn-ghost">Abrir tela cheia ↗</a>
+        </div>
+      </div>
+      <a href="biblia/exemplos.html" style="display: block; border-radius: var(--e-r-xl); overflow: hidden; border: 1px solid var(--e-border); box-shadow: var(--e-sh-purple-lg); background: var(--e-bg-deep); aspect-ratio: 16/10; position: relative;">
+        <iframe src="biblia/exemplos/landing-page-comunidade.html" loading="lazy" style="width: 200%; height: 200%; transform: scale(0.5); transform-origin: 0 0; border: 0; pointer-events: none;" title="Preview LP"></iframe>
+        <span style="position: absolute; bottom: 12px; right: 12px; padding: 6px 12px; border-radius: var(--e-r-pill); background: var(--e-purple-600); color: #fff; font-family: var(--ff-mono); font-size: 0.66rem; letter-spacing: 0.16em;">VER EXEMPLO →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="home-groups">
+    <div class="home-group" id="fundamentos"><h2>Fundamentos</h2><div class="home-grid"><a href="biblia/filosofia.html" class="home-card">
+        <span class="home-card-num">01</span>
+        <h3>Filosofia</h3>
+        <p>Todo o sistema é construído sobre três decisões nucleares. Quem violar qualquer uma delas está fazendo outra m...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/identidade.html" class="home-card">
+        <span class="home-card-num">02</span>
+        <h3>Identidade visual</h3>
+        <p>A logo Entrelaços traduz a marca em três sinais: as duas asas em roxo (entrelaçar), o ponto laranja no centro ...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/voz.html" class="home-card">
+        <span class="home-card-num">03</span>
+        <h3>Voz da marca</h3>
+        <p>A Entrelaços fala como quem já viu, já fez, e ainda escolhe acreditar. Confronto que abre escolha — nunca conf...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a></div></div><div class="home-group" id="tokens"><h2>Tokens</h2><div class="home-grid"><a href="biblia/cores.html" class="home-card">
+        <span class="home-card-num">04</span>
+        <h3>Paleta & cores</h3>
+        <p>A escala foi calibrada para que --e-purple-600 seja o tom de CTAs e destaques, --e-purple-900/950 para fundos ...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/tipografia.html" class="home-card">
+        <span class="home-card-num">05</span>
+        <h3>Tipografia</h3>
+        <p>Inter Tight para sans tight, Instrument Serif para italic editorial, JetBrains Mono para labels técnicas. A "a...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/espaco.html" class="home-card">
+        <span class="home-card-num">06</span>
+        <h3>Espaçamento</h3>
+        <p>Toda seção respira a mesma quantidade. Toda card tem padding mínimo de 32px. Esse rigor é o que faz o sistema ...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/raio.html" class="home-card">
+        <span class="home-card-num">07</span>
+        <h3>Raio & geometria</h3>
+        <p>A geometria diferencia famílias de componente. Botões e badges são pílulas. Cards são retângulos suaves de 20p...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/sombra.html" class="home-card">
+        <span class="home-card-num">08</span>
+        <h3>Sombras & depth</h3>
+        <p>Toda sombra de identidade combina inset hairline branco + glow roxo translúcido. Isso é o que diferencia visua...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/motion.html" class="home-card">
+        <span class="home-card-num">09</span>
+        <h3>Motion</h3>
+        <p>Tudo respira na mesma curva. Tudo aparece com o mesmo reveal. A coerência de motion é o que faz o sistema sent...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/motion-effects.html" class="home-card" style="border-color: rgba(255,138,31,0.30); background: rgba(255,138,31,0.04);">
+        <span class="home-card-num" style="color: var(--e-orange);">09+ · NOVO</span>
+        <h3>Motion FX <em>library</em></h3>
+        <p>18 efeitos prontos para LPs e sites — reveal, stagger, magnetic, tilt, ripple, shimmer, parallax. Cada um com snippet HTML/CSS/JS copiável.</p>
+        <span class="home-card-arrow" style="color: var(--e-orange);">Copiar snippets <span>→</span></span>
+      </a></div></div><div class="home-group" id="componentes"><h2>Componentes</h2><div class="home-grid"><a href="biblia/botoes.html" class="home-card">
+        <span class="home-card-num">10</span>
+        <h3>Botões</h3>
+        <p>CTAs primários sempre roxo-600 com inset hairline + glow. Ghost para secundários. Link para terciários. Varian...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/eyebrows.html" class="home-card">
+        <span class="home-card-num">11</span>
+        <h3>Eyebrows</h3>
+        <p>Três variantes. O chip carrega ações pequenas com dot-glow. O dash é mais discreto. O separator é para trust s...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/cards.html" class="home-card">
+        <span class="home-card-num">12</span>
+        <h3>Cards</h3>
+        <p>O card é a unidade de conteúdo padrão. Sempre 20px de raio, 32px de padding mínimo, índice mono opcional, e sp...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/stats.html" class="home-card">
+        <span class="home-card-num">13</span>
+        <h3>Stats</h3>
+        <p>Use stats em grupos de 4, mono no número, mono em CAPS no label. O counter anima de 0 ao valor com cubic-out 1...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/inputs.html" class="home-card">
+        <span class="home-card-num">14</span>
+        <h3>Inputs & forms</h3>
+        <p>Input é entrada de dado, não ação. Por isso é quadrado — diferente de botões e badges. Focus ring é halo roxo ...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/badges.html" class="home-card">
+        <span class="home-card-num">15</span>
+        <h3>Badges</h3>
+        <p>Badges são pílulas pequenas em mono. Roxo é o default. Laranja é reservado para urgência genuína (segue a regr...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/header.html" class="home-card">
+        <span class="home-card-num">16</span>
+        <h3>Header pill</h3>
+        <p>Pílula flutuante, fixed top, com backdrop-blur e inset hairline. Encolhe sutilmente após 32px de scroll — econ...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/avancados.html" class="home-card">
+        <span class="home-card-num">17</span>
+        <h3>Avançados</h3>
+        <p>Os componentes assinatura da marca — onde a metáfora vira interação. Use com parcimônia: no máximo um por pági...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a></div></div><div class="home-group" id="padroes"><h2>Padrões</h2><div class="home-grid"><a href="biblia/dobras.html" class="home-card">
+        <span class="home-card-num">18</span>
+        <h3>11 dobras canônicas</h3>
+        <p>A copy precisa respeitar a onda emocional. Não pular dobras sem razão estratégica. Não colar CTA hard antes da...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/copy.html" class="home-card">
+        <span class="home-card-num">19</span>
+        <h3>Copy & CTAs</h3>
+        <p>A copy da Entrelaços não vende — convida. Não promete faturamento — devolve dignidade. CTAs ranqueados do soft...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/marketing.html" class="home-card">
+        <span class="home-card-num">20</span>
+        <h3>Marketing arc</h3>
+        <p>Cada dobra responde a uma pergunta interna do leitor. A LP cria uma onda — quebrar a ordem é quebrar a transfo...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a></div></div><div class="home-group" id="regras"><h2>Regras</h2><div class="home-grid"><a href="biblia/regras.html" class="home-card">
+        <span class="home-card-num">21</span>
+        <h3>Faça / não faça</h3>
+        <p>Algumas decisões são preferência. Estas não são. Cruzar qualquer uma delas é fazer outra marca, não Entrelaços...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/acessibilidade.html" class="home-card">
+        <span class="home-card-num">22</span>
+        <h3>Acessibilidade</h3>
+        <p>A Entrelaços é uma marca que fala em dignidade. A acessibilidade não é checklist — é coerência ética com o man...</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a><a href="biblia/quickstart.html" class="home-card">
+        <span class="home-card-num">23</span>
+        <h3>Quickstart</h3>
+        <p>Sete passos. Se você seguir, sai uma página que parece da marca. Se pular qualquer um, sai um SaaS roxo.</p>
+        <span class="home-card-arrow">Abrir <span>→</span></span>
+      </a></div></div>
+  </div>
+</div>
+
+<div class="bs-footer">
+  <span>BÍBLIA · DESIGN SYSTEM · ENTRELAÇOS PSICOLOGIA · v1.6 · LENDÁRIA EDITION · 2026</span>
+  <br><br>
+  <em>"Cada psicóloga que se reposiciona desloca um sistema inteiro."</em>
+</div>
+
+<script>
+const headerPill = document.getElementById('bibliaHeader');
+window.addEventListener('scroll', () => {
+  headerPill.classList.toggle('is-scrolled', window.scrollY > 32);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>Tati Ribeiro · Design System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="tokens/tokens.css">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/typography.css">
+<link rel="stylesheet" href="styles/components.css">
+<link rel="stylesheet" href="styles/components-app.css">
+<link rel="stylesheet" href="styles/motion.css">
+<style>
+  /* DOC-ONLY (não faz parte do DS) */
+  .doc-shell { padding: var(--t-space-3xl) 0; }
+  .doc-grid { display: grid; gap: var(--t-space-md); }
+  .doc-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .doc-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .doc-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width:880px){ .doc-grid-3,.doc-grid-4{grid-template-columns:repeat(2,1fr);} .doc-grid-2{grid-template-columns:1fr;} }
+
+  .doc-swatch {
+    aspect-ratio: 1.4/1;
+    border-radius: var(--t-radius-lg);
+    border: 1px solid var(--t-border);
+    padding: var(--t-space-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+  .doc-swatch__name {
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .doc-swatch__hex {
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
+  .doc-tile {
+    padding: var(--t-space-lg);
+    background: var(--t-surface);
+    border: 1px solid var(--t-border);
+    border-radius: var(--t-radius-lg);
+  }
+  .doc-tile__caption {
+    font-family: var(--t-font-mono);
+    font-size: 9px;
+    color: var(--t-text-mute);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-top: var(--t-space-md);
+    padding-top: var(--t-space-md);
+    border-top: 1px dashed var(--t-border);
+  }
+
+  .doc-toc {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--t-bg) 80%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--t-border);
+    padding: 14px 0;
+  }
+  .doc-toc__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--t-space-md);
+    flex-wrap: wrap;
+  }
+  .doc-toc__brand {
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--t-font-serif); font-style: italic; font-size: 18px;
+    font-weight: 300; color: var(--t-text-strong); letter-spacing: -0.02em;
+  }
+  .doc-toc__brand svg { width: 28px; height: 28px; }
+  .doc-toc__nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  .doc-toc__link {
+    font-family: var(--t-font-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--t-text-2);
+    padding: 6px 10px;
+    border-radius: var(--t-radius-full);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .doc-toc__link:hover { color: var(--t-accent-light); background: var(--t-accent-bg); }
+
+  .doc-section-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--t-space-md);
+    margin-bottom: var(--t-space-2xl);
+    padding-bottom: var(--t-space-md);
+    border-bottom: 1px solid var(--t-border);
+  }
+  .doc-section-num {
+    font-family: var(--t-font-mono);
+    font-size: 11px;
+    color: var(--t-accent-light);
+    letter-spacing: 0.25em;
+  }
+  .doc-section-title {
+    font-family: var(--t-font-display);
+    font-size: 32px;
+    font-weight: 200;
+    letter-spacing: -0.03em;
+    color: var(--t-text-strong);
+  }
+  .doc-section-title em {
+    font-family: var(--t-font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--t-accent-light);
+  }
+
+  /* Theme toggle */
+  .doc-theme-toggle {
+    display: inline-flex;
+    background: var(--t-surface);
+    border: 1px solid var(--t-border);
+    border-radius: var(--t-radius-full);
+    padding: 3px;
+    gap: 2px;
+  }
+  .doc-theme-toggle button {
+    font-family: var(--t-font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    padding: 5px 10px;
+    border-radius: var(--t-radius-full);
+    color: var(--t-text-2);
+    text-transform: uppercase;
+  }
+  .doc-theme-toggle button.is-active {
+    background: var(--t-accent);
+    color: var(--t-pearl);
+  }
+
+  /* Hero */
+  .doc-hero {
+    padding: 100px 0 80px;
+    position: relative;
+  }
+  .doc-hero__id {
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    color: var(--t-accent-light);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: var(--t-space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--t-space-sm);
+  }
+  .doc-hero__id::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--t-accent-light);
+  }
+</style>
+</head>
+<body>
+<div class="t-circuit-bg"></div>
+
+<!-- Brand SVG sprite -->
+<div id="sprite-host" style="display:none"></div>
+
+<!-- TOC -->
+<div class="doc-toc">
+  <div class="t-container doc-toc__inner">
+    <div class="doc-toc__brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="hd-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#A78BFA"/>
+            <stop offset="100%" stop-color="#6B46C1"/>
+          </linearGradient>
+        </defs>
+        <circle cx="32" cy="32" r="30" fill="none" stroke="url(#hd-grad)" stroke-width="1.2"/>
+        <text x="32" y="42" text-anchor="middle"
+              font-family="Source Serif 4, Georgia, serif"
+              font-style="italic" font-weight="300"
+              font-size="30" fill="url(#hd-grad)"
+              letter-spacing="-0.02em">tr</text>
+      </svg>
+      <span>tati ribeiro <span style="font-family:var(--t-font-mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--t-text-mute); margin-left:8px;">design&nbsp;system v1.0</span></span>
+    </div>
+    <nav class="doc-toc__nav">
+      <a class="doc-toc__link" href="#fundamentos">Fundamentos</a>
+      <a class="doc-toc__link" href="#cor">Cor</a>
+      <a class="doc-toc__link" href="#tipo">Tipo</a>
+      <a class="doc-toc__link" href="#componentes">Componentes</a>
+      <a class="doc-toc__link" href="#mobile">Mobile</a>
+      <a class="doc-toc__link" href="#motion">Motion</a>
+    </nav>
+    <div class="doc-theme-toggle" role="tablist">
+      <button data-theme-set="dark"  class="is-active">Dark</button>
+      <button data-theme-set="light">Light</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="doc-hero">
+  <div class="t-container">
+    <div class="doc-hero__id">DS / TATI RIBEIRO / V1.0 · 2026</div>
+    <h1 class="t-display">um <em>sistema de design</em><br>para a próxima<br>versão de mim.</h1>
+    <p class="t-lead t-anim-fade-up t-anim-d-2" style="margin-top:var(--t-space-2xl);">
+      Tokens, tipografia, componentes e movimento — todos derivados de um único acento roxo, herdado dos <strong>Entrelaços</strong>.
+      Construído para escrita, mentoria, supervisão e produtos de IA com identidade.
+    </p>
+
+    <div class="t-cluster" style="margin-top:var(--t-space-2xl);">
+      <span class="t-badge t-badge--pulse">v1.0 — em produção</span>
+      <span class="t-badge t-badge--mono">7 módulos css</span>
+      <span class="t-badge t-badge--mono">2 temas</span>
+      <span class="t-badge t-badge--mono">tokens tripartidos</span>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDAMENTOS -->
+<section class="t-section" id="fundamentos">
+  <div class="t-container">
+    <div class="doc-section-header">
+      <span class="doc-section-num">01</span>
+      <h2 class="doc-section-title"><em>Fundamentos</em> filosóficos</h2>
+    </div>
+
+    <div class="doc-grid doc-grid-3">
+      <div class="t-card t-card--feature">
+        <div class="t-card__eyebrow">Princípio 01</div>
+        <h3 class="t-card__title">Monocromático com 1 acento</h3>
+        <p class="t-card__body">Tudo é cinza ou roxo. Nenhuma terceira cor. A herança Entrelaços continua viva, mas o novo território é mais quieto, mais técnico.</p>
+      </div>
+      <div class="t-card t-card--feature">
+        <div class="t-card__eyebrow">Princípio 02</div>
+        <h3 class="t-card__title">Tipografia como protagonista</h3>
+        <p class="t-card__body">Inter (200/300) para estrutura. Source Serif italic para emoção. JetBrains Mono para etiquetas técnicas e marginália. Sem ornamento.</p>
+      </div>
+      <div class="t-card t-card--feature">
+        <div class="t-card__eyebrow">Princípio 03</div>
+        <h3 class="t-card__title">Espaço primeiro</h3>
+        <p class="t-card__body">Densidade baixa. Espaço entre elementos é o material principal — não o preenchimento. Cada bloco respira.</p>
+      </div>
+    </div>
+
+    <div class="t-thesis" style="margin-top:var(--t-space-2xl);">
+      <div class="t-thesis__label">◆ Tese central</div>
+      <p class="t-thesis__statement">
+        Identidade não é ornamento — é <em>restrição inteligente</em>.
+        Quanto menos decisões cada peça precisa tomar,
+        mais consistente é o sistema inteiro.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- COR -->
+<section class="t-section" id="cor">
+  <div class="t-container">
+    <div class="doc-section-header">
+      <span class="doc-section-num">02</span>
+      <h2 class="doc-section-title">Paleta · <em>monocromática</em> + roxo</h2>
+    </div>
+
+    <h3 class="t-h3" style="margin-bottom:var(--t-space-md);">Acento — herança</h3>
+    <div class="doc-grid doc-grid-4">
+      <div class="doc-swatch" style="background:#4C1D95; color:#fff;">
+        <div class="doc-swatch__name">Deep</div><div class="doc-swatch__hex">#4C1D95</div>
+      </div>
+      <div class="doc-swatch" style="background:#6B46C1; color:#fff;">
+        <div class="doc-swatch__name">Accent</div><div class="doc-swatch__hex">#6B46C1</div>
+      </div>
+      <div class="doc-swatch" style="background:#8B5CF6; color:#fff;">
+        <div class="doc-swatch__name">Light</div><div class="doc-swatch__hex">#8B5CF6</div>
+      </div>
+      <div class="doc-swatch" style="background:#A78BFA; color:#1a1a1a;">
+        <div class="doc-swatch__name">Glow</div><div class="doc-swatch__hex">#A78BFA</div>
+      </div>
+    </div>
+
+    <h3 class="t-h3" style="margin:var(--t-space-2xl) 0 var(--t-space-md);">Escala monocromática</h3>
+    <div class="doc-grid doc-grid-4">
+      <div class="doc-swatch" style="background:#050505; color:#C4C4CC; border-color:#1C1C25;">
+        <div class="doc-swatch__name">Void</div><div class="doc-swatch__hex">#050505</div>
+      </div>
+      <div class="doc-swatch" style="background:#14141A; color:#C4C4CC; border-color:#262631;">
+        <div class="doc-swatch__name">Charcoal</div><div class="doc-swatch__hex">#14141A</div>
+      </div>
+      <div class="doc-swatch" style="background:#262631; color:#E0E0E5;">
+        <div class="doc-swatch__name">Stone</div><div class="doc-swatch__hex">#262631</div>
+      </div>
+      <div class="doc-swatch" style="background:#6B6B7A; color:#FAFAF7;">
+        <div class="doc-swatch__name">Fog</div><div class="doc-swatch__hex">#6B6B7A</div>
+      </div>
+      <div class="doc-swatch" style="background:#C4C4CC; color:#14141A;">
+        <div class="doc-swatch__name">Paper</div><div class="doc-swatch__hex">#C4C4CC</div>
+      </div>
+      <div class="doc-swatch" style="background:#E0E0E5; color:#14141A;">
+        <div class="doc-swatch__name">Bone</div><div class="doc-swatch__hex">#E0E0E5</div>
+      </div>
+      <div class="doc-swatch" style="background:#F5F4F0; color:#14141A;">
+        <div class="doc-swatch__name">Warm white</div><div class="doc-swatch__hex">#F5F4F0</div>
+      </div>
+      <div class="doc-swatch" style="background:#FFFFFE; color:#14141A;">
+        <div class="doc-swatch__name">Pearl</div><div class="doc-swatch__hex">#FFFFFE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPOGRAFIA -->
+<section class="t-section" id="tipo">
+  <div class="t-container">
+    <div class="doc-section-header">
+      <span class="doc-section-num">03</span>
+      <h2 class="doc-section-title"><em>Tipografia</em> — três vozes</h2>
+    </div>
+
+    <div class="t-stack-xl">
+      <div>
+        <span class="t-meta">DISPLAY · Inter 200 + Source Serif italic 300</span>
+        <h1 class="t-display" style="margin-top:var(--t-space-md);">a <em>palavra</em> certa<br>no peso certo.</h1>
+      </div>
+
+      <div>
+        <span class="t-meta">H1 / H2 / H3</span>
+        <div class="t-stack" style="margin-top:var(--t-space-md);">
+          <h1 class="t-h1">não é só uma <em>página</em> — é uma <em>tese</em>.</h1>
+          <h2 class="t-h2">o que muda quando a <em>identidade</em> vira sistema.</h2>
+          <h3 class="t-h3">subtítulos curtos, diretos, com personalidade.</h3>
+        </div>
+      </div>
+
+      <div>
+        <span class="t-meta">LEAD · Source Serif italic</span>
+        <p class="t-lead" style="margin-top:var(--t-space-md);">
+          Esta é uma frase de abertura editorial. Ela carrega a emoção da página, segura o leitor por três segundos antes do conteúdo principal aparecer.
+          <strong>Ela é a entrada.</strong>
+        </p>
+      </div>
+
+      <div>
+        <span class="t-meta">BODY · Inter 400</span>
+        <p class="t-body" style="margin-top:var(--t-space-md);">
+          Texto longo usa Inter 400 com line-height generoso (1.7) para conforto de leitura. Em parágrafos de manifesto e ensaios, o ritmo importa mais do que a densidade. <strong>Palavras importantes</strong> recebem peso 500 e cor mais escura — nunca cor diferente.
+        </p>
+      </div>
+
+      <div>
+        <span class="t-meta">QUOTE · serif italic 300</span>
+        <blockquote class="t-quote" style="margin-top:var(--t-space-md);">
+          "A clínica é uma cena. E toda cena precisa de uma luz boa para ser vista — antes de ser interpretada."
+        </blockquote>
+      </div>
+
+      <div>
+        <span class="t-meta">EYEBROW · MONO · MONO META</span>
+        <div class="t-stack-sm" style="margin-top:var(--t-space-md);">
+          <div class="t-eyebrow">Manifesto · v1</div>
+          <div class="t-mono">node_id: 0x4C1D95 · supervised</div>
+          <div class="t-meta">CAPÍTULO 03 · ENTRELAÇOS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTES -->
+<section class="t-section" id="componentes">
+  <div class="t-container">
+    <div class="doc-section-header">
+      <span class="doc-section-num">04</span>
+      <h2 class="doc-section-title"><em>Componentes</em> · web</h2>
+    </div>
+
+    <h3 class="t-h3" style="margin-bottom:var(--t-space-md);">Botões</h3>
+    <div class="doc-tile">
+      <div class="t-cluster">
+        <button class="t-btn t-btn--primary">Continuar
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><polyline points="14 5 21 12 14 19"/></svg>
+        </button>
+        <button class="t-btn t-btn--ghost">Saiba mais</button>
+        <button class="t-btn t-btn--mono">Read manifesto →</button>
+        <button class="t-btn t-btn--icon">→</button>
+        <button class="t-btn t-btn--primary t-btn--lg">CTA grande</button>
+      </div>
+      <div class="doc-tile__caption">.t-btn · primary / ghost / mono / icon · –lg / –block</div>
+    </div>
+
+    <h3 class="t-h3" style="margin:var(--t-space-2xl) 0 var(--t-space-md);">Inputs</h3>
+    <div class="doc-grid doc-grid-2">
+      <div class="doc-tile">
+        <label class="t-label">Email — input padrão</label>
+        <input class="t-input" placeholder="seu@email.com" />
+        <div class="doc-tile__caption">.t-input</div>
+      </div>
+      <div class="doc-tile">
+        <label class="t-label">Pergunta — input editorial</label>
+        <input class="t-input--editorial" placeholder="o que você está construindo agora?" />
+        <div class="doc-tile__caption">.t-input--editorial</div>
+      </div>
+    </div>
+
+    <h3 class="t-h3" style="margin:var(--t-space-2xl) 0 var(--t-space-md);">Cards & stats</h3>
+    <div class="doc-grid doc-grid-3">
+      <div class="t-card">
+        <div class="t-card__eyebrow">Mentoria</div>
+        <h3 class="t-card__title">Cena clínica · 1:1</h3>
+        <p class="t-card__body">Quatro encontros para olhar, em conjunto, para uma cena específica do seu trabalho.</p>
+      </div>
+      <div class="t-card t-card--accent">
+        <div class="t-card__eyebrow">Em destaque</div>
+        <h3 class="t-card__title">Supervisão de IA</h3>
+        <p class="t-card__body">Acompanhamento sistemático de prompts, histórico e resultados.</p>
+      </div>
+      <div class="t-card">
+        <div class="doc-grid doc-grid-2">
+          <div class="t-stat"><span class="t-stat__num">12</span><span class="t-stat__label">Anos · clínica</span></div>
+          <div class="t-stat"><span class="t-stat__num">300+</span><span class="t-stat__label">Sessões · sup.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="t-h3" style="margin:var(--t-space-2xl) 0 var(--t-space-md);">Badges, divider, toast & nav</h3>
+    <div class="doc-grid doc-grid-2">
+      <div class="doc-tile">
+        <div class="t-cluster">
+          <span class="t-badge t-badge--accent">novo</span>
+          <span class="t-badge t-badge--pulse">ao vivo</span>
+          <span class="t-badge t-badge--mono">v1.0</span>
+          <span class="t-manifesto-source">manifesto · §3</span>
+        </div>
+        <div style="margin-top:var(--t-space-md);">
+          <div class="t-divider"><span>seção</span><span class="t-divider__dot"></span></div>
+        </div>
+        <div class="doc-tile__caption">.t-badge · .t-divider · .t-manifesto-source</div>
+      </div>
+      <div class="doc-tile">
+        <div class="t-toast"><div class="t-toast__icon"></div>Sua sessão foi salva.</div>
+        <nav class="t-nav" style="margin-top:var(--t-space-md);">
+          <a class="t-nav__item t-nav__item--active" href="#">Início</a>
+          <a class="t-nav__item" href="#">Manifesto</a>
+          <a class="t-nav__item" href="#">Mentoria</a>
+          <a class="t-nav__item" href="#">Contato</a>
+        </nav>
+        <div class="doc-tile__caption">.t-toast · .t-nav</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOBILE / APP -->
+<section class="t-section" id="mobile">
+  <div class="t-container">
+    <div class="doc-section-header">
+      <span class="doc-section-num">05</span>
+      <h2 class="doc-section-title"><em>Mobile</em> · apps de IA & supervisão</h2>
+    </div>
+
+    <div class="doc-grid doc-grid-3">
+
+      <!-- App 1 — supervisão -->
+      <div class="t-app-frame">
+        <div class="t-app-screen">
+          <div class="t-app-header">
+            <div>
+              <div class="t-app-eyebrow">Supervisão</div>
+              <div class="t-app-title">cenas · esta semana</div>
+            </div>
+            <button class="t-btn t-btn--icon">+</button>
+          </div>
+
+          <div class="t-app-tabs">
+            <button class="t-app-tab t-app-tab--active">Ativas</button>
+            <button class="t-app-tab">Arquivo</button>
+            <button class="t-app-tab">Notas</button>
+          </div>
+
+          <div class="t-stack-sm">
+            <div class="t-app-list-item">
+              <div class="t-app-list-item__icon">M</div>
+              <div class="t-app-list-item__content">
+                <div class="t-app-list-item__title">Cena · transferência negativa</div>
+                <div class="t-app-list-item__meta">QUI · 14:00 · 45min</div>
+              </div>
+            </div>
+            <div class="t-app-list-item">
+              <div class="t-app-list-item__icon">L</div>
+              <div class="t-app-list-item__content">
+                <div class="t-app-list-item__title">Cena · primeira sessão</div>
+                <div class="t-app-list-item__meta">SEX · 09:30 · 50min</div>
+              </div>
+            </div>
+            <div class="t-app-list-item">
+              <div class="t-app-list-item__icon">R</div>
+              <div class="t-app-list-item__content">
+                <div class="t-app-list-item__title">Cena · término</div>
+                <div class="t-app-list-item__meta">SAB · 11:00 · 60min</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="t-app-fab">+</button>
+
+          <div class="t-app-bottom-nav">
+            <div class="t-app-nav-item t-app-nav-item--active">
+              <div class="t-app-nav-icon"></div>
+              <div class="t-app-nav-label">Cenas</div>
+            </div>
+            <div class="t-app-nav-item">
+              <div class="t-app-nav-icon"></div>
+              <div class="t-app-nav-label">Notas</div>
+            </div>
+            <div class="t-app-nav-item">
+              <div class="t-app-nav-icon"></div>
+              <div class="t-app-nav-label">IA</div>
+            </div>
+            <div class="t-app-nav-item">
+              <div class="t-app-nav-icon"></div>
+              <div class="t-app-nav-label">Eu</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App 2 — chat IA -->
+      <div class="t-app-frame">
+        <div class="t-app-screen">
+          <div class="t-app-header">
+            <div>
+              <div class="t-app-eyebrow">IA · supervisor</div>
+              <div class="t-app-title">conversa</div>
+            </div>
+            <span class="t-badge t-badge--pulse" style="font-size:8px;">on</span>
+          </div>
+
+          <div class="t-app-message t-app-message--ai">
+            Como você sentiu a paciente entrar na sessão hoje?
+          </div>
+          <div class="t-app-message t-app-message--user">
+            Ela chegou em silêncio. Sentou e olhou pra parede.
+          </div>
+          <div class="t-app-message t-app-message--ai">
+            E o que esse silêncio te disse?
+          </div>
+
+          <div style="margin-top:auto;">
+            <div class="t-app-progress" style="margin-bottom:12px;">
+              <div class="t-app-progress__bar" style="width:65%"></div>
+            </div>
+            <div class="t-app-prompt">
+              <div class="t-app-prompt__icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L 13.5 9 L 21 12 L 13.5 15 L 12 22 L 10.5 15 L 3 12 L 10.5 9 Z"/></svg>
+              </div>
+              <input class="t-app-prompt__input" placeholder="continue a cena…" />
+              <button class="t-app-prompt__send">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App 3 — mentoria progress -->
+      <div class="t-app-frame">
+        <div class="t-app-screen">
+          <div class="t-app-header">
+            <div>
+              <div class="t-app-eyebrow">Mentoria · módulo 03</div>
+              <div class="t-app-title">cena clínica</div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+              <span class="t-mono" style="font-size:10px;">3 de 8 encontros</span>
+              <span class="t-mono" style="font-size:10px;">37%</span>
+            </div>
+            <div class="t-app-progress">
+              <div class="t-app-progress__bar" style="width:37%"></div>
+            </div>
+          </div>
+
+          <div class="t-stack-sm">
+            <div class="t-app-list-item">
+              <div class="t-app-list-item__icon" style="background:transparent;border-color:var(--t-border-2);color:var(--t-text-mute);">✓</div>
+              <div class="t-app-list-item__content">
+                <div class="t-app-list-item__title" style="opacity:0.6;text-decoration:line-through;">O que é uma cena?</div>
+                <div class="t-app-list-item__meta">Concluído</div>
+              </div>
+            </div>
+            <div class="t-app-list-item">
+              <div class="t-app-list-item__icon" style="background:transparent;border-color:var(--t-border-2);color:var(--t-text-mute);">✓</div>
+              <div class="t-app-list-item__content">
+                <div class="t-app-list-item__title" style="opacity:0.6;text-decoration:line-through;">A primeira luz</div>
+                <div class="t-app-list-item__meta">Concluído</div>
+              </div>
+            </div>
+            <div class="t-app-list-item" style="border-color:var(--t-accent-border);">
+              <div class="t-app-list-item__icon">3</div>
+              <div class="t-app-list-item__content">
+                <div class="t-app-list-item__title">Transferência</div>
+                <div class="t-app-list-item__meta">Em andamento</div>
+              </div>
+            </div>
+            <div class="t-app-list-item">
+              <div class="t-app-list-item__icon" style="background:transparent;border-color:var(--t-border);color:var(--t-text-mute);">4</div>
+              <div class="t-app-list-item__content">
+                <div class="t-app-list-item__title" style="opacity:0.7;">Contratransferência</div>
+                <div class="t-app-list-item__meta">Bloqueado</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MOTION -->
+<section class="t-section" id="motion">
+  <div class="t-container">
+    <div class="doc-section-header">
+      <span class="doc-section-num">06</span>
+      <h2 class="doc-section-title"><em>Motion</em> · ritmo do sistema</h2>
+    </div>
+
+    <div class="doc-grid doc-grid-3">
+      <div class="doc-tile" style="text-align:center;">
+        <div class="t-anim-float" style="display:inline-block;width:48px;height:48px;border-radius:50%;background:var(--t-grad-accent);box-shadow:0 0 24px rgba(139,92,246,0.5);"></div>
+        <div class="doc-tile__caption">.t-anim-float · 4s loop</div>
+      </div>
+      <div class="doc-tile" style="text-align:center;">
+        <div class="t-anim-glow" style="display:inline-block;width:48px;height:48px;border-radius:50%;background:var(--t-accent);"></div>
+        <div class="doc-tile__caption">.t-anim-glow · pulso 3s</div>
+      </div>
+      <div class="doc-tile" style="text-align:center;">
+        <div class="t-shimmer" style="height:48px;border-radius:var(--t-radius-md);"></div>
+        <div class="doc-tile__caption">.t-shimmer · loading</div>
+      </div>
+    </div>
+
+    <div class="doc-tile" style="margin-top:var(--t-space-md);">
+      <p class="t-lead">
+        digitando <span class="t-cursor"></span>
+      </p>
+      <div class="doc-tile__caption">.t-cursor · piscante editorial</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:var(--t-space-3xl) 0; border-top:1px solid var(--t-border); position:relative; z-index:1;">
+  <div class="t-container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:var(--t-space-lg);">
+      <div>
+        <div class="t-eyebrow">Tati Ribeiro · Design System</div>
+        <p class="t-h2" style="margin-top:var(--t-space-md);">v1.0 · <em>2026</em></p>
+        <p class="t-small" style="margin-top:var(--t-space-sm); max-width:480px;">
+          Tokens, tipografia, componentes e movimento.
+          Construído para quem escreve a próxima cena.
+        </p>
+      </div>
+      <div class="t-stack-sm" style="text-align:right;">
+        <div class="t-mono">tokens / styles / brand</div>
+        <div class="t-meta">© tati ribeiro · entrelaçospsicologia.com.br</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // theme toggle
+  document.querySelectorAll('[data-theme-set]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const theme = btn.dataset.themeSet;
+      document.documentElement.dataset.theme = theme;
+      document.querySelectorAll('[data-theme-set]').forEach(b => b.classList.toggle('is-active', b === btn));
+    });
+  });
+</script>
+</body>
+</html>

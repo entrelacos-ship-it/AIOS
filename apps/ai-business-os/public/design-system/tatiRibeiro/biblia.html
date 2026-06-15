@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bíblia do Design System · Tati Ribeiro · v2</title>
+
+<link rel="stylesheet" href="tati-ds/tokens/tokens.css">
+<link rel="stylesheet" href="tati-ds/styles/base.css">
+<link rel="stylesheet" href="tati-ds/styles/typography.css">
+<link rel="stylesheet" href="tati-ds/styles/components.css">
+<link rel="stylesheet" href="tati-ds/styles/components-app.css">
+<link rel="stylesheet" href="tati-ds/styles/motion.css">
+
+<style>
+  body { padding-bottom: 0; }
+
+  /* SHELL */
+  .bb-shell { display: grid; grid-template-columns: 300px 1fr; min-height: 100vh; }
+  @media (max-width: 960px){ .bb-shell{grid-template-columns:1fr;} }
+
+  /* SIDEBAR */
+  .bb-side {
+    border-right: 1px solid var(--t-border);
+    background: var(--t-bg-1);
+    padding: var(--t-space-xl) var(--t-space-lg);
+    position: sticky; top: 0; align-self: start;
+    height: 100vh; overflow-y: auto;
+  }
+  @media (max-width:960px){ .bb-side{position:static;height:auto;border-right:none;border-bottom:1px solid var(--t-border);} }
+  .bb-side__brand{display:flex;align-items:center;gap:12px;padding-bottom:var(--t-space-lg);border-bottom:1px solid var(--t-border);margin-bottom:var(--t-space-lg);}
+  .bb-side__mark{width:36px;height:36px;border-radius:50%;border:1px solid var(--t-accent-border);display:flex;align-items:center;justify-content:center;color:var(--t-accent-light);font-family:var(--t-font-serif);font-style:italic;font-weight:300;font-size:18px;}
+  .bb-side__brand-text{font-family:var(--t-font-serif);font-style:italic;font-weight:300;font-size:17px;color:var(--t-text-strong);letter-spacing:-0.02em;line-height:1.1;}
+  .bb-side__brand-text small{display:block;font-family:var(--t-font-mono);font-size:9px;color:var(--t-accent-light);letter-spacing:0.22em;text-transform:uppercase;font-style:normal;margin-top:4px;}
+
+  .bb-side__group { margin-bottom: var(--t-space-md); }
+  .bb-side__label {
+    font-family: var(--t-font-mono); font-size: 9px; color: var(--t-text-mute);
+    letter-spacing: 0.28em; text-transform: uppercase; padding: 4px 10px;
+    margin-bottom: 4px;
+  }
+  .bb-toc { list-style: none; }
+  .bb-toc a {
+    display: flex; gap: 12px; padding: 7px 10px; border-radius: var(--t-radius-md);
+    font-family: var(--t-font-display); font-size: 13px; font-weight: 400;
+    color: var(--t-text-2); transition: all var(--t-dur-fast) var(--t-ease);
+  }
+  .bb-toc__num {
+    font-family: var(--t-font-mono); font-size: 10px; color: var(--t-text-mute);
+    letter-spacing: 0.1em; flex-shrink: 0; padding-top: 2px; min-width: 20px;
+  }
+  .bb-toc a:hover, .bb-toc a.is-active { background: var(--t-accent-bg); color: var(--t-accent-light); }
+  .bb-toc a:hover .bb-toc__num, .bb-toc a.is-active .bb-toc__num { color: var(--t-accent-light); }
+
+  .bb-side__theme {
+    margin-top: var(--t-space-md); display: flex;
+    background: var(--t-surface); border: 1px solid var(--t-border);
+    border-radius: var(--t-radius-full); padding: 3px;
+  }
+  .bb-side__theme button { flex:1;font-family:var(--t-font-mono);font-size:9px;letter-spacing:0.18em;padding:6px 10px;border-radius:var(--t-radius-full);color:var(--t-text-2);text-transform:uppercase;}
+  .bb-side__theme button.is-active { background: var(--t-accent); color: var(--t-pearl); }
+
+  /* CONTENT */
+  .bb-content { padding: var(--t-space-3xl) var(--t-space-2xl); max-width: 1040px; }
+  @media (max-width:600px){ .bb-content{padding:var(--t-space-xl) var(--t-space-md);} }
+
+  /* COVER */
+  .bb-cover { padding: var(--t-space-4xl) 0 var(--t-space-3xl); border-bottom: 1px solid var(--t-border); margin-bottom: var(--t-space-3xl); }
+  .bb-cover__id{display:inline-flex;align-items:center;gap:12px;font-family:var(--t-font-mono);font-size:10px;color:var(--t-accent-light);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:var(--t-space-lg);}
+  .bb-cover__id::before{content:'';width:36px;height:1px;background:var(--t-accent-light);}
+  .bb-cover__title{font-family:var(--t-font-display);font-size:clamp(48px,8vw,112px);font-weight:200;line-height:0.95;letter-spacing:-0.045em;color:var(--t-text-strong);}
+  .bb-cover__title em{font-family:var(--t-font-serif);font-style:italic;font-weight:300;background:var(--t-grad-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .bb-cover__sub{margin-top:var(--t-space-lg);font-family:var(--t-font-serif);font-style:italic;font-weight:300;font-size:var(--t-fs-lg);color:var(--t-text-2);max-width:640px;line-height:1.55;}
+  .bb-cover__meta{margin-top:var(--t-space-xl);display:flex;flex-wrap:wrap;gap:var(--t-space-md);font-family:var(--t-font-mono);font-size:10px;color:var(--t-text-mute);letter-spacing:0.18em;text-transform:uppercase;}
+  .bb-cover__meta span{display:flex;align-items:center;gap:8px;}
+  .bb-cover__meta span::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--t-accent-light);}
+
+  /* PART HEADER */
+  .bb-part {
+    margin: var(--t-space-3xl) 0 var(--t-space-2xl);
+    padding-top: var(--t-space-xl); border-top: 1px solid var(--t-border-2);
+    display: flex; align-items: baseline; gap: var(--t-space-md);
+  }
+  .bb-part__num { font-family: var(--t-font-mono); font-size: 11px; color: var(--t-accent-light); letter-spacing: 0.3em; text-transform: uppercase; }
+  .bb-part__name { font-family: var(--t-font-display); font-size: 24px; font-weight: 300; letter-spacing: -0.025em; color: var(--t-text-strong); }
+
+  /* CHAPTER */
+  .bb-ch { padding: var(--t-space-2xl) 0; border-bottom: 1px solid var(--t-border); }
+  .bb-ch:last-child { border-bottom: none; }
+  .bb-ch__head { margin-bottom: var(--t-space-xl); }
+  .bb-ch__num { font-family: var(--t-font-mono); font-size: 11px; color: var(--t-accent-light); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: var(--t-space-sm); }
+  .bb-ch__title { font-family: var(--t-font-display); font-size: clamp(28px,4vw,44px); font-weight: 200; line-height: 1.05; letter-spacing: -0.035em; color: var(--t-text-strong); }
+  .bb-ch__title em { font-family: var(--t-font-serif); font-style: italic; font-weight: 300; background: var(--t-grad-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .bb-ch__lead { margin-top: var(--t-space-md); font-family: var(--t-font-serif); font-style: italic; font-weight: 300; font-size: var(--t-fs-md); color: var(--t-text-2); max-width: 640px; line-height: 1.55; }
+  .bb-ch h3 { font-family: var(--t-font-display); font-size: 21px; font-weight: 500; letter-spacing: -0.02em; color: var(--t-text-strong); margin: var(--t-space-2xl) 0 var(--t-space-md); }
+  .bb-ch h4 { font-family: var(--t-font-display); font-size: 15px; font-weight: 500; letter-spacing: -0.015em; color: var(--t-text-strong); margin: var(--t-space-lg) 0 var(--t-space-sm); }
+  .bb-ch p { font-family: var(--t-font-body); font-size: var(--t-fs-base); line-height: 1.75; color: var(--t-text); max-width: 68ch; margin-bottom: var(--t-space-md); }
+  .bb-ch p strong { color: var(--t-text-strong); font-weight: 500; }
+  .bb-ch ul { list-style: none; margin: var(--t-space-md) 0; max-width: 68ch; }
+  .bb-ch ul li { padding: 8px 0; padding-left: 24px; position: relative; font-family: var(--t-font-body); font-size: var(--t-fs-base); line-height: 1.65; color: var(--t-text); }
+  .bb-ch ul li::before { content: '◆'; position: absolute; left: 0; top: 14px; font-size: 7px; color: var(--t-accent-light); }
+  .bb-ch code { font-family: var(--t-font-mono); font-size: 0.86em; color: var(--t-accent-light); padding: 2px 6px; background: var(--t-surface-2); border-radius: 3px; }
+
+  /* CALLOUT */
+  .bb-callout { margin: var(--t-space-xl) 0; padding: var(--t-space-lg); background: var(--t-accent-bg); border: 1px solid var(--t-accent-border); border-radius: var(--t-radius-xl); border-left: 3px solid var(--t-accent-light); }
+  .bb-callout__label { font-family: var(--t-font-mono); font-size: 10px; color: var(--t-accent-light); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: var(--t-space-sm); }
+  .bb-callout p { font-family: var(--t-font-serif); font-style: italic; font-size: var(--t-fs-md); line-height: 1.55; color: var(--t-text-strong); margin: 0; max-width: none; }
+
+  /* DO / DONT */
+  .bb-do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: var(--t-space-md); margin: var(--t-space-lg) 0; }
+  @media (max-width:720px){ .bb-do-dont{grid-template-columns:1fr;} }
+  .bb-card { padding: var(--t-space-lg); border-radius: var(--t-radius-lg); border: 1px solid var(--t-border); background: var(--t-surface); }
+  .bb-card--do { border-color: var(--t-accent-border); background: var(--t-accent-bg); }
+  .bb-card--dont { border-color: rgba(255,80,80,0.18); background: rgba(255,80,80,0.04); }
+  [data-theme="light"] .bb-card--dont { background: rgba(180,30,30,0.04); border-color: rgba(180,30,30,0.18); }
+  .bb-card__tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--t-font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; color: var(--t-text-mute); }
+  .bb-card--do .bb-card__tag { color: var(--t-accent-light); }
+  .bb-card--dont .bb-card__tag { color: #ff7b7b; }
+  [data-theme="light"] .bb-card--dont .bb-card__tag { color: #c43838; }
+  .bb-card--do .bb-card__tag::before { content: '✓'; font-size: 11px; }
+  .bb-card--dont .bb-card__tag::before { content: '✕'; font-size: 11px; }
+  .bb-card p { font-family: var(--t-font-body); font-size: var(--t-fs-sm); line-height: 1.55; color: var(--t-text); margin: 0; }
+
+  /* SWATCHES */
+  .bb-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: 8px; margin: var(--t-space-md) 0; }
+  .bb-swatch { aspect-ratio: 1.3/1; border-radius: var(--t-radius-md); border: 1px solid var(--t-border); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; font-family: var(--t-font-mono); font-size: 10px; letter-spacing: 0.12em; }
+  .bb-swatch__name { text-transform: uppercase; }
+  .bb-swatch__hex { opacity: 0.7; }
+
+  /* TYPE SPEC */
+  .bb-spec { border: 1px solid var(--t-border); border-radius: var(--t-radius-lg); overflow: hidden; margin: var(--t-space-md) 0; }
+  .bb-spec__row { display: grid; grid-template-columns: 140px 1fr 220px; border-bottom: 1px solid var(--t-border); padding: 14px var(--t-space-md); align-items: center; }
+  .bb-spec__row:last-child { border-bottom: none; }
+  @media (max-width:720px){ .bb-spec__row{grid-template-columns:1fr;gap:6px;} }
+  .bb-spec__name { font-family: var(--t-font-mono); font-size: 10px; color: var(--t-accent-light); letter-spacing: 0.18em; text-transform: uppercase; }
+  .bb-spec__sample { color: var(--t-text-strong); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bb-spec__meta { font-family: var(--t-font-mono); font-size: 10px; color: var(--t-text-mute); letter-spacing: 0.1em; text-align: right; }
+  @media (max-width:720px){ .bb-spec__meta{text-align:left;} }
+
+  /* SPACING */
+  .bb-spaces { display: flex; flex-direction: column; gap: 4px; margin: var(--t-space-md) 0; }
+  .bb-space-row { display: grid; grid-template-columns: 80px 60px 1fr; align-items: center; gap: var(--t-space-md); font-family: var(--t-font-mono); font-size: 11px; }
+  .bb-space-row__name { color: var(--t-accent-light); letter-spacing: 0.15em; text-transform: uppercase; }
+  .bb-space-row__val { color: var(--t-text-mute); }
+  .bb-space-row__bar { height: 14px; background: var(--t-grad-accent); border-radius: 2px; box-shadow: 0 0 8px rgba(139,92,246,0.3); }
+
+  /* CODE */
+  .bb-code { margin: var(--t-space-md) 0; padding: var(--t-space-lg); background: var(--t-bg); border: 1px solid var(--t-border-2); border-radius: var(--t-radius-lg); font-family: var(--t-font-mono); font-size: 12px; line-height: 1.7; color: var(--t-text-2); overflow-x: auto; white-space: pre; }
+  .bb-code .k { color: var(--t-accent-light); }
+  .bb-code .v { color: var(--t-text-strong); }
+  .bb-code .c { color: var(--t-text-mute); font-style: italic; }
+
+  /* PREVIEW */
+  .bb-preview { margin: var(--t-space-md) 0; padding: var(--t-space-2xl); background: var(--t-bg-1); border: 1px solid var(--t-border); border-radius: var(--t-radius-xl); display: flex; flex-wrap: wrap; gap: var(--t-space-md); align-items: center; justify-content: center; min-height: 140px; }
+  .bb-preview--col { flex-direction: column; align-items: stretch; }
+
+  /* RADIUS GEOMETRY */
+  .bb-radii { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--t-space-sm); margin: var(--t-space-md) 0; }
+  .bb-radius-card { padding: var(--t-space-md); background: var(--t-surface); border: 1px solid var(--t-border); display: flex; flex-direction: column; align-items: center; gap: 12px; font-family: var(--t-font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--t-text-mute); }
+  .bb-radius-shape { width: 56px; height: 56px; background: var(--t-grad-accent); }
+
+  /* SHADOWS */
+  .bb-shadows { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: var(--t-space-md); margin: var(--t-space-md) 0; }
+  .bb-shadow-card { padding: var(--t-space-2xl) var(--t-space-md) var(--t-space-md); background: var(--t-surface); border: 1px solid var(--t-border); border-radius: var(--t-radius-lg); text-align: center; font-family: var(--t-font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--t-text-mute); }
+  .bb-shadow-block { width: 80px; height: 60px; background: var(--t-bg-2); border-radius: var(--t-radius-md); margin: 0 auto var(--t-space-md); }
+
+  /* MOTION */
+  .bb-motion { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: var(--t-space-md); margin: var(--t-space-md) 0; }
+  .bb-motion-card { padding: var(--t-space-md); background: var(--t-surface); border: 1px solid var(--t-border); border-radius: var(--t-radius-lg); text-align: center; }
+  .bb-motion-name { font-family: var(--t-font-mono); font-size: 9px; color: var(--t-accent-light); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+  .bb-motion-curve { font-family: var(--t-font-mono); font-size: 10px; color: var(--t-text-mute); }
+  .bb-motion-demo { width: 100%; height: 6px; background: var(--t-surface-2); border-radius: 3px; margin: 12px 0 8px; position: relative; overflow: hidden; }
+  .bb-motion-dot { position: absolute; top: 0; left: 0; width: 14px; height: 6px; border-radius: 3px; background: var(--t-grad-accent); animation: bb-slide 2.4s infinite; }
+  .bb-motion-dot.ease     { animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+  .bb-motion-dot.out      { animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+  .bb-motion-dot.precise  { animation-timing-function: cubic-bezier(0.83, 0, 0.17, 1); }
+  .bb-motion-dot.spring   { animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+  @keyframes bb-slide { 0%,8%{left:0;} 50%,58%{left:calc(100% - 14px);} 100%{left:0;} }
+
+  /* DOBRA TIMELINE */
+  .bb-arc { margin: var(--t-space-lg) 0; }
+  .bb-arc__row {
+    display: grid; grid-template-columns: 80px 1fr 120px; gap: var(--t-space-md);
+    padding: 14px 0; border-bottom: 1px dashed var(--t-border); align-items: baseline;
+  }
+  .bb-arc__num { font-family: var(--t-font-mono); font-size: 11px; color: var(--t-accent-light); letter-spacing: 0.18em; }
+  .bb-arc__title { font-family: var(--t-font-display); font-size: var(--t-fs-md); font-weight: 500; color: var(--t-text-strong); letter-spacing: -0.015em; }
+  .bb-arc__title small { display: block; font-family: var(--t-font-body); font-size: 13px; font-weight: 400; color: var(--t-text-2); margin-top: 4px; line-height: 1.5; letter-spacing: 0; }
+  .bb-arc__role { font-family: var(--t-font-mono); font-size: 10px; color: var(--t-text-mute); letter-spacing: 0.18em; text-transform: uppercase; text-align: right; }
+  @media (max-width:720px){ .bb-arc__row{grid-template-columns:1fr;} .bb-arc__role{text-align:left;} }
+
+  /* QUICKSTART STEPS */
+  .bb-steps { counter-reset: step; margin: var(--t-space-md) 0; }
+  .bb-step {
+    counter-increment: step; padding: var(--t-space-md) 0;
+    border-bottom: 1px solid var(--t-border);
+    display: grid; grid-template-columns: 60px 1fr; gap: var(--t-space-md);
+  }
+  .bb-step::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--t-font-mono); font-size: 14px; color: var(--t-accent-light);
+    letter-spacing: 0.15em; padding-top: 2px;
+  }
+
+  /* end mark */
+  .bb-end { text-align: center; margin-top: var(--t-space-lg); font-family: var(--t-font-mono); font-size: 10px; color: var(--t-text-mute); letter-spacing: 0.3em; }
+  .bb-end::before { content: '◆ ◆ ◆'; }
+
+  /* progress */
+  .bb-progress { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: var(--t-grad-accent); z-index: var(--t-z-toast); transition: width 0.1s linear; }
+
+  /* preview helpers para 16-Header pill */
+  .bb-headerpill {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--t-space-md);
+    padding: 8px 8px 8px 16px; background: var(--t-surface);
+    border: 1px solid var(--t-border); border-radius: var(--t-radius-full);
+  }
+  .bb-headerpill__brand { display: flex; align-items: center; gap: 10px; font-family: var(--t-font-serif); font-style: italic; font-weight: 300; color: var(--t-text-strong); }
+  .bb-headerpill__nav { display: flex; gap: 4px; align-items: center; }
+  .bb-headerpill__nav a { font-family: var(--t-font-mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--t-text-2); padding: 6px 10px; border-radius: var(--t-radius-full); }
+  .bb-headerpill__cta { background: var(--t-accent); color: var(--t-pearl)!important; padding: 6px 12px; border-radius: var(--t-radius-full); }
+</style>
+</head>
+
+<body>
+<div class="t-circuit-bg"></div>
+<div class="bb-progress" id="progress"></div>
+
+<div class="bb-shell">
+
+  <!-- ================== SIDEBAR ================== -->
+  <aside class="bb-side">
+    <div class="bb-side__brand">
+      <span class="bb-side__mark">tr</span>
+      <div class="bb-side__brand-text">
+        bíblia
+        <small>design system v2.0</small>
+      </div>
+    </div>
+
+    <div class="bb-side__group">
+      <div class="bb-side__label">Fundamentos</div>
+      <ol class="bb-toc">
+        <li><a href="#c01"><span class="bb-toc__num">01</span>Filosofia</a></li>
+        <li><a href="#c02"><span class="bb-toc__num">02</span>Identidade visual</a></li>
+        <li><a href="#c03"><span class="bb-toc__num">03</span>Voz da marca</a></li>
+      </ol>
+    </div>
+
+    <div class="bb-side__group">
+      <div class="bb-side__label">Tokens</div>
+      <ol class="bb-toc">
+        <li><a href="#c04"><span class="bb-toc__num">04</span>Paleta &amp; cores</a></li>
+        <li><a href="#c05"><span class="bb-toc__num">05</span>Tipografia</a></li>
+        <li><a href="#c06"><span class="bb-toc__num">06</span>Espaçamento</a></li>
+        <li><a href="#c07"><span class="bb-toc__num">07</span>Raio &amp; geometria</a></li>
+        <li><a href="#c08"><span class="bb-toc__num">08</span>Sombras &amp; depth</a></li>
+        <li><a href="#c09"><span class="bb-toc__num">09</span>Motion</a></li>
+      </ol>
+    </div>
+
+    <div class="bb-side__group">
+      <div class="bb-side__label">Componentes</div>
+      <ol class="bb-toc">
+        <li><a href="#c10"><span class="bb-toc__num">10</span>Botões</a></li>
+        <li><a href="#c11"><span class="bb-toc__num">11</span>Eyebrows</a></li>
+        <li><a href="#c12"><span class="bb-toc__num">12</span>Cards</a></li>
+        <li><a href="#c13"><span class="bb-toc__num">13</span>Stats</a></li>
+        <li><a href="#c14"><span class="bb-toc__num">14</span>Inputs &amp; forms</a></li>
+        <li><a href="#c15"><span class="bb-toc__num">15</span>Badges</a></li>
+        <li><a href="#c16"><span class="bb-toc__num">16</span>Header pill</a></li>
+        <li><a href="#c17"><span class="bb-toc__num">17</span>Avançados</a></li>
+      </ol>
+    </div>
+
+    <div class="bb-side__group">
+      <div class="bb-side__label">Padrões</div>
+      <ol class="bb-toc">
+        <li><a href="#c18"><span class="bb-toc__num">18</span>11 dobras canônicas</a></li>
+        <li><a href="#c19"><span class="bb-toc__num">19</span>Copy &amp; CTAs</a></li>
+        <li><a href="#c20"><span class="bb-toc__num">20</span>Marketing arc</a></li>
+      </ol>
+    </div>
+
+    <div class="bb-side__group">
+      <div class="bb-side__label">Regras</div>
+      <ol class="bb-toc">
+        <li><a href="#c21"><span class="bb-toc__num">21</span>Faça / não faça</a></li>
+        <li><a href="#c22"><span class="bb-toc__num">22</span>Acessibilidade</a></li>
+        <li><a href="#c23"><span class="bb-toc__num">23</span>Quickstart</a></li>
+      </ol>
+    </div>
+
+    <div class="bb-side__group">
+      <div class="bb-side__label">Anexos</div>
+      <ol class="bb-toc">
+        <li><a href="Animações para LPs.html"><span class="bb-toc__num">24</span>Animações ↗</a></li>
+      </ol>
+    </div>
+
+    <div class="bb-side__theme">
+      <button data-theme-set="dark" class="is-active">Dark</button>
+      <button data-theme-set="light">Light</button>
+    </div>
+  </aside>
+
+  <!-- ================== CONTENT ================== -->
+  <main class="bb-content">
+
+    <!-- COVER -->
+    <section class="bb-cover">
+      <div class="bb-cover__id">DS · BÍBLIA · V2.0 · 2026</div>
+      <h1 class="bb-cover__title">a <em>bíblia</em><br>do design.</h1>
+      <p class="bb-cover__sub">
+        Documento canônico do design system Tati Ribeiro. 23 capítulos
+        em 5 partes — fundamentos, tokens, componentes, padrões e regras.
+        Toda decisão visual e de copy mora aqui.
+      </p>
+      <div class="bb-cover__meta">
+        <span>23 capítulos</span>
+        <span>5 partes</span>
+        <span>~45 min de leitura</span>
+        <span>v2.0 · 2026</span>
+      </div>
+    </section>
+
+    <!-- ============ PART I — FUNDAMENTOS ============ -->
+    <div class="bb-part">
+      <div class="bb-part__num">Parte 01</div>
+      <div class="bb-part__name"><em>Fundamentos</em></div>
+    </div>
+
+    <!-- 01 FILOSOFIA -->
+    <section class="bb-ch" id="c01">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 01</div>
+        <h2 class="bb-ch__title"><em>Filosofia</em>.</h2>
+        <p class="bb-ch__lead">Antes da cor e da tipografia, vem a tese. Sem clareza filosófica, todo sistema desmonta.</p>
+      </header>
+
+      <h3>Quem é a marca</h3>
+      <p>
+        Tati Ribeiro opera em três frentes: <strong>clínica psicanalítica</strong>,
+        <strong>mentoria/supervisão</strong> e <strong>produtos digitais com IA</strong>.
+        O design system precisa servir, com coerência, a três tons:
+        acolhedor (cliente), técnico (colega) e editorial (leitor).
+      </p>
+
+      <h3>Os cinco princípios</h3>
+      <p><strong>01. Restrição inteligente.</strong> Identidade não é ornamento — é o que se decide <em>não</em> fazer. Uma única cor de acento, três famílias tipográficas, escala curta.</p>
+      <p><strong>02. Monocromático com 1 acento.</strong> Tudo é cinza ou roxo. Nenhuma terceira cor. O roxo herdado do Entrelaços é a única ponte cromática entre passado e futuro.</p>
+      <p><strong>03. Tipografia como protagonista.</strong> Sem ilustrações decorativas. A página é construída pela escrita.</p>
+      <p><strong>04. Espaço primeiro.</strong> Densidade baixa. O espaço entre elementos é o material principal, não o preenchimento.</p>
+      <p><strong>05. Movimento contido.</strong> Animação serve à legibilidade, nunca ao espetáculo.</p>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Tese central</div>
+        <p>Identidade não é ornamento — é restrição inteligente. Quanto menos decisões cada peça precisa tomar, mais consistente é o sistema inteiro.</p>
+      </div>
+
+      <h3>Quem ela <em>não</em> é</h3>
+      <ul>
+        <li>Não é marca de bem-estar performático (frases motivacionais, gradientes coloridos, pôr-do-sol).</li>
+        <li>Não é marca de tech genérica (Inter sem alma, gradiente azul-roxo Stripe, ícones outline iguais a todo SaaS).</li>
+        <li>Não é marca de psicóloga "fofa" (cores pastel, ilustrações de planta, lettering cursivo).</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 02 IDENTIDADE VISUAL -->
+    <section class="bb-ch" id="c02">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 02</div>
+        <h2 class="bb-ch__title">Identidade <em>visual</em>.</h2>
+        <p class="bb-ch__lead">A assinatura visual da marca em três camadas: monograma, wordmark e ambiência.</p>
+      </header>
+
+      <h3>Monograma "tr"</h3>
+      <p>
+        Marca primária. Duas letras em <strong>Source Serif 4 Italic 300</strong> dentro
+        de um círculo de 1.2px com gradient roxo. O monograma tem aura de signature:
+        é o que fica no avatar, no favicon, no canto do papel.
+      </p>
+      <div class="bb-preview">
+        <svg viewBox="0 0 64 64" width="80" height="80">
+          <defs>
+            <linearGradient id="bb-id-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#A78BFA"/>
+              <stop offset="100%" stop-color="#6B46C1"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="30" fill="none" stroke="url(#bb-id-grad)" stroke-width="1.2"/>
+          <text x="32" y="42" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-style="italic" font-weight="300" font-size="30" fill="url(#bb-id-grad)" letter-spacing="-0.02em">tr</text>
+        </svg>
+        <svg viewBox="0 0 64 64" width="48" height="48">
+          <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="1.2" style="color:var(--t-text-strong)"/>
+          <text x="32" y="42" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-style="italic" font-weight="300" font-size="30" fill="currentColor" letter-spacing="-0.02em" style="color:var(--t-text-strong)">tr</text>
+        </svg>
+      </div>
+
+      <h3>Wordmark "tati ribeiro"</h3>
+      <p>
+        Marca extensa. <em>tati</em> em Source Serif italic 300 + <em>ribeiro</em> em Inter 200 — duas vozes no nome. Tracking levemente negativo (-0.02em) para densidade. Espaço entre palavras um pouco menor que o padrão.
+      </p>
+      <div class="bb-preview">
+        <span style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;font-size:32px;letter-spacing:-0.02em;color:var(--t-text-strong);">tati</span>
+        <span style="font-family:var(--t-font-display);font-weight:200;font-size:32px;letter-spacing:-0.04em;color:var(--t-text-strong);">ribeiro</span>
+      </div>
+
+      <h3>Grid de circuito (ambiência)</h3>
+      <p>
+        O fundo discreto de linhas roxas é a "atmosfera" do sistema. Nunca aparece em primeiro plano. Aplicado via classe <code>.t-circuit-bg</code>, com mask radial que apaga as bordas. Densidade: <strong>96px</strong> entre linhas.
+      </p>
+      <div class="bb-preview" style="position:relative; min-height:160px; overflow:hidden;">
+        <div style="position:absolute;inset:0;opacity:0.6;background-image:linear-gradient(to right, rgba(139,92,246,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(139,92,246,0.12) 1px, transparent 1px); background-size: 96px 96px; mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);"></div>
+        <span style="position:relative; font-family:var(--t-font-mono); font-size:11px; color:var(--t-accent-light); letter-spacing:0.25em; text-transform:uppercase;">.t-circuit-bg · 96px</span>
+      </div>
+
+      <h3>Áreas de proteção</h3>
+      <ul>
+        <li>Em torno do monograma, espaço livre = <strong>raio do círculo</strong>.</li>
+        <li>Em torno do wordmark, espaço livre = <strong>altura da letra "t"</strong>.</li>
+        <li>Tamanho mínimo do monograma: <strong>20px</strong>. Abaixo disso, o miolo "tr" perde leitura.</li>
+        <li>Nunca aplicar sombra, contorno extra ou gradient diferente sobre a marca.</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 03 VOZ DA MARCA -->
+    <section class="bb-ch" id="c03">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 03</div>
+        <h2 class="bb-ch__title">A <em>voz</em> da marca.</h2>
+        <p class="bb-ch__lead">Identidade visual sem voz consistente é apenas estilo. A copy é parte do design.</p>
+      </header>
+
+      <h3>Tom geral</h3>
+      <p>
+        Editorial. Lúcido. Direto, sem ser frio. Acolhedor, sem ser performático.
+        A voz fala como quem escreve um manifesto e atende uma sessão clínica
+        no mesmo dia: <strong>rigor + cuidado</strong>.
+      </p>
+
+      <h3>Atributos</h3>
+      <ul>
+        <li><strong>Precisa.</strong> Nomeia o problema com exatidão antes de oferecer caminho.</li>
+        <li><strong>Pausada.</strong> Frases curtas onde dói. Frases longas onde argumenta.</li>
+        <li><strong>Não-prescritiva.</strong> Não vende fórmula, não promete cura, não chama de "jornada".</li>
+        <li><strong>Em primeira voz.</strong> "eu", "você", "a gente". Sem "nós da marca".</li>
+        <li><strong>Letra minúscula em assinaturas.</strong> "tati ribeiro", "manifesto", "bíblia". Reservar maiúscula para início de frase.</li>
+      </ul>
+
+      <h3>Estrutura editorial recorrente</h3>
+      <p>
+        Toda peça importante segue uma micro-estrutura:
+        <strong>diagnóstico → virada → proposta</strong>.
+        Primeiro nomeia o problema com precisão, depois oferece uma releitura
+        ("talvez não seja X, talvez seja Y"), depois apresenta o caminho.
+      </p>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Frase-modelo</div>
+        <p>"Talvez não seja falta de força. Talvez seja excesso de silêncio." Esse padrão "não é A, é B" é a assinatura retórica da marca.</p>
+      </div>
+
+      <h3>Banidos</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card bb-card--dont">
+          <div class="bb-card__tag">Vetado</div>
+          <p>"Transforme sua vida", "desbloqueie seu potencial", "jornada incrível", "metodologia exclusiva". Clichês de copy genérico.</p>
+        </div>
+        <div class="bb-card bb-card--dont">
+          <div class="bb-card__tag">Vetado</div>
+          <p>Pontos de exclamação. A marca não grita. Ponto final basta.</p>
+        </div>
+        <div class="bb-card bb-card--dont">
+          <div class="bb-card__tag">Vetado</div>
+          <p>Emojis em qualquer superfície oficial — incluindo cards de mentoria, posts e e-mails.</p>
+        </div>
+        <div class="bb-card bb-card--do">
+          <div class="bb-card__tag">Faça</div>
+          <p>Verbos no presente. "Você se reconhece" &gt; "Você vai se reconhecer". Italic dentro do texto carrega ênfase emocional.</p>
+        </div>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ============ PART II — TOKENS ============ -->
+    <div class="bb-part">
+      <div class="bb-part__num">Parte 02</div>
+      <div class="bb-part__name"><em>Tokens</em></div>
+    </div>
+
+    <!-- 04 PALETA -->
+    <section class="bb-ch" id="c04">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 04</div>
+        <h2 class="bb-ch__title">Paleta &amp; <em>cores</em>.</h2>
+        <p class="bb-ch__lead">Uma cor decide tudo. Tudo o mais é graduação de cinza.</p>
+      </header>
+
+      <h3>Acento — herança Entrelaços</h3>
+      <div class="bb-swatches">
+        <div class="bb-swatch" style="background:#2E1065;color:#fff;"><div class="bb-swatch__name">Purple deep</div><div class="bb-swatch__hex">#2E1065</div></div>
+        <div class="bb-swatch" style="background:#4C1D95;color:#fff;"><div class="bb-swatch__name">Purple circuit</div><div class="bb-swatch__hex">#4C1D95</div></div>
+        <div class="bb-swatch" style="background:#6B46C1;color:#fff;"><div class="bb-swatch__name">Accent</div><div class="bb-swatch__hex">#6B46C1</div></div>
+        <div class="bb-swatch" style="background:#8B5CF6;color:#fff;"><div class="bb-swatch__name">Light</div><div class="bb-swatch__hex">#8B5CF6</div></div>
+        <div class="bb-swatch" style="background:#A78BFA;color:#1a1a1a;"><div class="bb-swatch__name">Glow</div><div class="bb-swatch__hex">#A78BFA</div></div>
+      </div>
+
+      <h3>Escala monocromática (15 níveis)</h3>
+      <div class="bb-swatches">
+        <div class="bb-swatch" style="background:#050505;color:#C4C4CC;border-color:#1C1C25;"><div class="bb-swatch__name">Void</div><div class="bb-swatch__hex">#050505</div></div>
+        <div class="bb-swatch" style="background:#0A0A0A;color:#C4C4CC;border-color:#1C1C25;"><div class="bb-swatch__name">Black</div><div class="bb-swatch__hex">#0A0A0A</div></div>
+        <div class="bb-swatch" style="background:#0F0F14;color:#C4C4CC;border-color:#1C1C25;"><div class="bb-swatch__name">Onyx</div><div class="bb-swatch__hex">#0F0F14</div></div>
+        <div class="bb-swatch" style="background:#14141A;color:#C4C4CC;border-color:#262631;"><div class="bb-swatch__name">Charcoal</div><div class="bb-swatch__hex">#14141A</div></div>
+        <div class="bb-swatch" style="background:#1C1C25;color:#C4C4CC;"><div class="bb-swatch__name">Graphite</div><div class="bb-swatch__hex">#1C1C25</div></div>
+        <div class="bb-swatch" style="background:#262631;color:#E0E0E5;"><div class="bb-swatch__name">Stone</div><div class="bb-swatch__hex">#262631</div></div>
+        <div class="bb-swatch" style="background:#33333F;color:#FAFAF7;"><div class="bb-swatch__name">Iron</div><div class="bb-swatch__hex">#33333F</div></div>
+        <div class="bb-swatch" style="background:#45454F;color:#FAFAF7;"><div class="bb-swatch__name">Ash</div><div class="bb-swatch__hex">#45454F</div></div>
+        <div class="bb-swatch" style="background:#6B6B7A;color:#FAFAF7;"><div class="bb-swatch__name">Fog</div><div class="bb-swatch__hex">#6B6B7A</div></div>
+        <div class="bb-swatch" style="background:#8E8E9A;color:#14141A;"><div class="bb-swatch__name">Mist</div><div class="bb-swatch__hex">#8E8E9A</div></div>
+        <div class="bb-swatch" style="background:#C4C4CC;color:#14141A;"><div class="bb-swatch__name">Paper</div><div class="bb-swatch__hex">#C4C4CC</div></div>
+        <div class="bb-swatch" style="background:#E0E0E5;color:#14141A;"><div class="bb-swatch__name">Bone</div><div class="bb-swatch__hex">#E0E0E5</div></div>
+        <div class="bb-swatch" style="background:#F5F4F0;color:#14141A;"><div class="bb-swatch__name">Warm white</div><div class="bb-swatch__hex">#F5F4F0</div></div>
+        <div class="bb-swatch" style="background:#FAFAF7;color:#14141A;"><div class="bb-swatch__name">Ivory</div><div class="bb-swatch__hex">#FAFAF7</div></div>
+        <div class="bb-swatch" style="background:#FFFFFE;color:#14141A;"><div class="bb-swatch__name">Pearl</div><div class="bb-swatch__hex">#FFFFFE</div></div>
+      </div>
+
+      <h3>Tokens semânticos</h3>
+      <p>Para temas, o sistema mapeia roles semânticos. Você usa <code>--t-text</code>, não <code>--t-bone</code>. Isso permite trocar tema sem reescrever componentes.</p>
+      <pre class="bb-code"><span class="c">/* dark (default) */</span>
+<span class="k">--t-bg</span>:           <span class="v">var(--t-void)</span>
+<span class="k">--t-bg-1</span>:         <span class="v">var(--t-onyx)</span>
+<span class="k">--t-surface</span>:      <span class="v">rgba(255,255,255,0.02)</span>
+<span class="k">--t-border</span>:       <span class="v">rgba(255,255,255,0.06)</span>
+<span class="k">--t-text</span>:         <span class="v">var(--t-bone)</span>
+<span class="k">--t-text-strong</span>:  <span class="v">var(--t-pearl)</span>
+
+<span class="c">/* light — apenas trocar [data-theme="light"] em html */</span>
+<span class="k">--t-bg</span>:           <span class="v">var(--t-warm-white)</span>
+<span class="k">--t-text</span>:         <span class="v">var(--t-graphite)</span>
+<span class="k">--t-text-strong</span>:  <span class="v">var(--t-black)</span></pre>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Regra dos 5%</div>
+        <p>O roxo deve ocupar, no máximo, 5% da área da peça. Se passar disso, ele deixa de ser acento e vira cor dominante — quebrando a hierarquia.</p>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 05 TIPOGRAFIA -->
+    <section class="bb-ch" id="c05">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 05</div>
+        <h2 class="bb-ch__title">Tipografia <em>· três vozes</em>.</h2>
+        <p class="bb-ch__lead">Estrutura, alma e sistema. Três famílias, três funções claras.</p>
+      </header>
+
+      <h3>Famílias</h3>
+      <p><strong>Inter</strong> — pesos 200, 300, 400, 500. Estrutura. Títulos finos (200/300) e corpo (400) com line-height 1.7.</p>
+      <p><strong>Source Serif 4 Italic</strong> — pesos 300, 400. Alma. Leads, citações, palavras destacadas em títulos. Sempre italic — o serif romano não aparece.</p>
+      <p><strong>JetBrains Mono</strong> — pesos 400, 500. Sistema. Eyebrows, marginália, números técnicos. Sempre uppercase com tracking 0.18–0.30em.</p>
+
+      <h3>Escala completa</h3>
+      <div class="bb-spec">
+        <div class="bb-spec__row"><span class="bb-spec__name">Display</span><span class="bb-spec__sample" style="font-family:var(--t-font-display);font-size:36px;font-weight:200;letter-spacing:-0.05em;">a palavra certa</span><span class="bb-spec__meta">clamp 64–152 / 200</span></div>
+        <div class="bb-spec__row"><span class="bb-spec__name">H1</span><span class="bb-spec__sample" style="font-family:var(--t-font-display);font-size:30px;font-weight:200;letter-spacing:-0.04em;">não é só uma página</span><span class="bb-spec__meta">clamp 40–76 / 200</span></div>
+        <div class="bb-spec__row"><span class="bb-spec__name">H2</span><span class="bb-spec__sample" style="font-family:var(--t-font-display);font-size:24px;font-weight:300;letter-spacing:-0.03em;">o que muda quando</span><span class="bb-spec__meta">32px / 300 / -0.03em</span></div>
+        <div class="bb-spec__row"><span class="bb-spec__name">H3</span><span class="bb-spec__sample" style="font-family:var(--t-font-display);font-size:21px;font-weight:500;letter-spacing:-0.02em;">subtítulos diretos</span><span class="bb-spec__meta">26px / 500 / -0.02em</span></div>
+        <div class="bb-spec__row"><span class="bb-spec__name">Lead</span><span class="bb-spec__sample" style="font-family:var(--t-font-serif);font-style:italic;font-size:19px;font-weight:300;">a entrada é editorial</span><span class="bb-spec__meta">21px / serif italic 300</span></div>
+        <div class="bb-spec__row"><span class="bb-spec__name">Body</span><span class="bb-spec__sample" style="font-family:var(--t-font-body);font-size:15px;font-weight:400;">Inter 400 com 1.7 de line-height</span><span class="bb-spec__meta">15px / 400 / 1.7</span></div>
+        <div class="bb-spec__row"><span class="bb-spec__name">Quote</span><span class="bb-spec__sample" style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;font-size:17px;">a clínica é uma cena.</span><span class="bb-spec__meta">17px / serif italic 300</span></div>
+        <div class="bb-spec__row"><span class="bb-spec__name">Eyebrow</span><span class="bb-spec__sample" style="font-family:var(--t-font-mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--t-accent-light);">manifesto · v1</span><span class="bb-spec__meta">11px / mono / 0.3em</span></div>
+        <div class="bb-spec__row"><span class="bb-spec__name">Mono</span><span class="bb-spec__sample" style="font-family:var(--t-font-mono);font-size:13px;color:var(--t-accent-light);">node_id: 0x4C1D95</span><span class="bb-spec__meta">13px / mono</span></div>
+        <div class="bb-spec__row"><span class="bb-spec__name">Meta</span><span class="bb-spec__sample" style="font-family:var(--t-font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--t-text-mute);">CAPÍTULO 03</span><span class="bb-spec__meta">10px / mono / 0.2em</span></div>
+      </div>
+
+      <h3>Regras inegociáveis</h3>
+      <ul>
+        <li>Toda peça tem <strong>uma única</strong> Display gigante. Nunca duas.</li>
+        <li>Italic serif aparece <strong>só para emoção</strong>: leads, citações, palavras-chave em títulos.</li>
+        <li>Mono é sempre <strong>uppercase</strong>, tracking 0.18–0.30em, nunca bold.</li>
+        <li>Eyebrows recebem cor de acento; resto da família mono fica neutro.</li>
+        <li><strong>Nunca</strong> sublinhar texto. Para link, cor de acento + hover sutil.</li>
+        <li>Line-height: títulos 1.05, leads 1.55, body 1.65–1.75.</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 06 ESPAÇAMENTO -->
+    <section class="bb-ch" id="c06">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 06</div>
+        <h2 class="bb-ch__title"><em>Espaço</em> como matéria.</h2>
+        <p class="bb-ch__lead">O ritmo da página vem da escala de espaçamento, não dos elementos.</p>
+      </header>
+
+      <div class="bb-spaces">
+        <div class="bb-space-row"><span class="bb-space-row__name">2xs</span><span class="bb-space-row__val">2px</span><div class="bb-space-row__bar" style="width:2px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">xs</span><span class="bb-space-row__val">4px</span><div class="bb-space-row__bar" style="width:4px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">sm</span><span class="bb-space-row__val">8px</span><div class="bb-space-row__bar" style="width:8px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">md</span><span class="bb-space-row__val">16px</span><div class="bb-space-row__bar" style="width:16px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">lg</span><span class="bb-space-row__val">24px</span><div class="bb-space-row__bar" style="width:24px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">xl</span><span class="bb-space-row__val">32px</span><div class="bb-space-row__bar" style="width:32px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">2xl</span><span class="bb-space-row__val">48px</span><div class="bb-space-row__bar" style="width:48px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">3xl</span><span class="bb-space-row__val">64px</span><div class="bb-space-row__bar" style="width:64px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">4xl</span><span class="bb-space-row__val">96px</span><div class="bb-space-row__bar" style="width:96px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">5xl</span><span class="bb-space-row__val">128px</span><div class="bb-space-row__bar" style="width:128px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">6xl</span><span class="bb-space-row__val">192px</span><div class="bb-space-row__bar" style="width:192px;"></div></div>
+      </div>
+
+      <h3>Onde aplicar</h3>
+      <ul>
+        <li><strong>Dentro de um componente</strong>: <code>sm</code>, <code>md</code>, <code>lg</code>.</li>
+        <li><strong>Entre componentes</strong> (lista, grid): <code>md</code>, <code>lg</code>, <code>xl</code>.</li>
+        <li><strong>Entre seções</strong>: <code>3xl</code>, <code>4xl</code>, <code>5xl</code>.</li>
+        <li>Padding lateral de container: <code>lg</code> em mobile, <code>xl</code> em desktop.</li>
+      </ul>
+
+      <h3>Larguras canônicas</h3>
+      <ul>
+        <li>Container padrão: <strong>1280px</strong>.</li>
+        <li>Coluna de leitura (artigo, manifesto): <strong>720px</strong> (≈ 65 ch).</li>
+        <li>Container largo (galeria, dashboard): <strong>1440px</strong>.</li>
+        <li>Grid: 2, 3 ou 4 colunas — nunca 5.</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 07 RAIO -->
+    <section class="bb-ch" id="c07">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 07</div>
+        <h2 class="bb-ch__title">Raio &amp; <em>geometria</em>.</h2>
+        <p class="bb-ch__lead">Cantos são uma decisão tonal. Quase reto = institucional. Muito redondo = casual.</p>
+      </header>
+
+      <div class="bb-radii">
+        <div class="bb-radius-card"><div class="bb-radius-shape" style="border-radius:0;"></div>none / 0</div>
+        <div class="bb-radius-card"><div class="bb-radius-shape" style="border-radius:2px;"></div>xs / 2</div>
+        <div class="bb-radius-card"><div class="bb-radius-shape" style="border-radius:4px;"></div>sm / 4</div>
+        <div class="bb-radius-card"><div class="bb-radius-shape" style="border-radius:8px;"></div>md / 8</div>
+        <div class="bb-radius-card"><div class="bb-radius-shape" style="border-radius:12px;"></div>lg / 12</div>
+        <div class="bb-radius-card"><div class="bb-radius-shape" style="border-radius:16px;"></div>xl / 16</div>
+        <div class="bb-radius-card"><div class="bb-radius-shape" style="border-radius:24px;"></div>2xl / 24</div>
+        <div class="bb-radius-card"><div class="bb-radius-shape" style="border-radius:9999px;"></div>full</div>
+      </div>
+
+      <h3>Quando usar cada um</h3>
+      <ul>
+        <li><strong>0 / xs</strong>: divisores de seção, separadores em tabelas. Nunca em interativos.</li>
+        <li><strong>sm (4px)</strong>: chips, tags inline pequenas, focus ring.</li>
+        <li><strong>md (8px)</strong>: botões padrão, inputs, dropdowns.</li>
+        <li><strong>lg (12px)</strong>: list items, cards densos.</li>
+        <li><strong>xl (16px)</strong>: cards padrão. <em>É o raio mais usado do sistema.</em></li>
+        <li><strong>2xl (24px)</strong>: painéis grandes, manifesto inset, thesis cards.</li>
+        <li><strong>full</strong>: badges, navegação pílula, FAB, avatar, focus dot.</li>
+      </ul>
+
+      <h3>Regras</h3>
+      <ul>
+        <li>Em um componente aninhado, raio interno = raio externo − 4px.</li>
+        <li>Nunca misturar raios extremos na mesma peça (ex: card 24px com botão 0px dentro).</li>
+        <li>Raio nunca é decorativo. Cada nível de raio comunica densidade.</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 08 SOMBRAS -->
+    <section class="bb-ch" id="c08">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 08</div>
+        <h2 class="bb-ch__title">Sombras &amp; <em>depth</em>.</h2>
+        <p class="bb-ch__lead">Depth é discreto. Não há drop-shadow forte no sistema. Borda &gt; sombra.</p>
+      </header>
+
+      <div class="bb-shadows">
+        <div class="bb-shadow-card">
+          <div class="bb-shadow-block" style="box-shadow: var(--t-shadow-sm);"></div>
+          shadow-sm
+        </div>
+        <div class="bb-shadow-card">
+          <div class="bb-shadow-block" style="box-shadow: var(--t-shadow-md);"></div>
+          shadow-md
+        </div>
+        <div class="bb-shadow-card">
+          <div class="bb-shadow-block" style="box-shadow: var(--t-shadow-lg);"></div>
+          shadow-lg
+        </div>
+        <div class="bb-shadow-card">
+          <div class="bb-shadow-block" style="box-shadow: var(--t-shadow-purple);"></div>
+          shadow-purple
+        </div>
+        <div class="bb-shadow-card">
+          <div class="bb-shadow-block" style="box-shadow: var(--t-shadow-glow);"></div>
+          shadow-glow
+        </div>
+      </div>
+
+      <h3>Hierarquia de profundidade</h3>
+      <ul>
+        <li><strong>Plano 0 — flat</strong>: maior parte da UI. Bordas 1px sutis (<code>--t-border</code>).</li>
+        <li><strong>Plano 1 — sm</strong>: hover de cards leves.</li>
+        <li><strong>Plano 2 — md</strong>: dropdowns, tooltips, toasts.</li>
+        <li><strong>Plano 3 — lg</strong>: modal, sheet mobile.</li>
+        <li><strong>Acento — purple/glow</strong>: <em>somente</em> no CTA principal e no FAB. É a luz do sistema.</li>
+      </ul>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Regra de profundidade</div>
+        <p>Se hesitar entre sombra e borda, escolha borda. A marca é plana. Sombras roxas são raras — guarde-as para o momento certo.</p>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 09 MOTION -->
+    <section class="bb-ch" id="c09">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 09</div>
+        <h2 class="bb-ch__title"><em>Motion</em>.</h2>
+        <p class="bb-ch__lead">Animação serve à legibilidade, nunca ao espetáculo. Easings precisos, durações curtas.</p>
+      </header>
+
+      <h3>Easing</h3>
+      <div class="bb-motion">
+        <div class="bb-motion-card">
+          <div class="bb-motion-name">--t-ease</div>
+          <div class="bb-motion-demo"><span class="bb-motion-dot ease"></span></div>
+          <div class="bb-motion-curve">0.4, 0, 0.2, 1</div>
+        </div>
+        <div class="bb-motion-card">
+          <div class="bb-motion-name">--t-ease-out</div>
+          <div class="bb-motion-demo"><span class="bb-motion-dot out"></span></div>
+          <div class="bb-motion-curve">0.16, 1, 0.3, 1</div>
+        </div>
+        <div class="bb-motion-card">
+          <div class="bb-motion-name">--t-ease-precise</div>
+          <div class="bb-motion-demo"><span class="bb-motion-dot precise"></span></div>
+          <div class="bb-motion-curve">0.83, 0, 0.17, 1</div>
+        </div>
+        <div class="bb-motion-card">
+          <div class="bb-motion-name">--t-ease-spring</div>
+          <div class="bb-motion-demo"><span class="bb-motion-dot spring"></span></div>
+          <div class="bb-motion-curve">0.34, 1.56, 0.64, 1</div>
+        </div>
+      </div>
+
+      <h3>Duração</h3>
+      <ul>
+        <li><strong>150ms</strong> instant — hover, focus, mudança de estado UI.</li>
+        <li><strong>250ms</strong> fast — toggles, troca de tema.</li>
+        <li><strong>400ms</strong> base — entrada de elementos, fade-up.</li>
+        <li><strong>600ms</strong> slow — reveal de seção em scroll.</li>
+        <li><strong>1000ms</strong> slower — narrativa (loading hero, intro de slide).</li>
+      </ul>
+
+      <h3>Animações canônicas</h3>
+      <ul>
+        <li><code>.t-anim-fade-up</code> — entrada de blocos editoriais. Stagger 100–200ms.</li>
+        <li><code>.t-anim-glow</code> — pulso de "ao vivo". Loop 3s.</li>
+        <li><code>.t-anim-float</code> — flutuação leve. Loop 4s.</li>
+        <li><code>.t-shimmer</code> — placeholder de carregamento.</li>
+        <li><code>.t-cursor</code> — cursor piscando.</li>
+      </ul>
+
+      <h3>Banidos</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card bb-card--dont"><div class="bb-card__tag">Vetado</div><p>Bounce excessivo (overshoot &gt; 5%). Quebra a sobriedade.</p></div>
+        <div class="bb-card bb-card--dont"><div class="bb-card__tag">Vetado</div><p>Parallax pesado em scroll. Distrai e gera ansiedade — oposto da marca.</p></div>
+        <div class="bb-card bb-card--dont"><div class="bb-card__tag">Vetado</div><p>Animação infinita em texto longo. Letras animadas só em cursor.</p></div>
+        <div class="bb-card bb-card--do"><div class="bb-card__tag">Faça</div><p>Respeite <code>prefers-reduced-motion</code>. Reset já está no <code>base.css</code>.</p></div>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ============ PART III — COMPONENTES ============ -->
+    <div class="bb-part">
+      <div class="bb-part__num">Parte 03</div>
+      <div class="bb-part__name"><em>Componentes</em></div>
+    </div>
+
+    <!-- 10 BOTÕES -->
+    <section class="bb-ch" id="c10">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 10</div>
+        <h2 class="bb-ch__title"><em>Botões</em>.</h2>
+        <p class="bb-ch__lead">Quatro variantes, quatro tamanhos. Cada peça tem <strong>um</strong> primário. Nunca dois.</p>
+      </header>
+
+      <h3>Variantes</h3>
+      <div class="bb-preview">
+        <button class="t-btn t-btn--primary">marcar sessão</button>
+        <button class="t-btn t-btn--ghost">saber mais</button>
+        <button class="t-btn t-btn--outline">manifesto</button>
+        <button class="t-btn t-btn--link">↗ ler artigo</button>
+      </div>
+
+      <ul>
+        <li><strong>Primary</strong> — único por seção. Fundo roxo, sombra de acento. Ação que move o usuário adiante (agendar, enviar, baixar).</li>
+        <li><strong>Ghost</strong> — secundário neutro. Borda translúcida, sem fundo. Usado ao lado de primary.</li>
+        <li><strong>Outline</strong> — terciário. Borda roxa, texto roxo. Ações editoriais (manifesto, bíblia).</li>
+        <li><strong>Link</strong> — sublinhado por composição com seta. Sem padding, fica inline em texto corrido.</li>
+      </ul>
+
+      <h3>Tamanhos</h3>
+      <div class="bb-preview">
+        <button class="t-btn t-btn--primary t-btn--sm">small · 36px</button>
+        <button class="t-btn t-btn--primary">default · 44px</button>
+        <button class="t-btn t-btn--primary t-btn--lg">large · 52px</button>
+      </div>
+
+      <h3>Estados</h3>
+      <div class="bb-preview">
+        <button class="t-btn t-btn--primary">default</button>
+        <button class="t-btn t-btn--primary" style="transform:translateY(-1px);box-shadow:var(--t-shadow-glow);">:hover</button>
+        <button class="t-btn t-btn--primary" style="outline:2px solid var(--t-accent-light);outline-offset:3px;">:focus</button>
+        <button class="t-btn t-btn--primary" disabled>disabled</button>
+      </div>
+
+      <h3>Regras</h3>
+      <ul>
+        <li>Texto em <strong>minúscula</strong>. "marcar sessão", não "MARCAR SESSÃO".</li>
+        <li>Verbos no infinitivo ou imperativo curto. Máximo 3 palavras.</li>
+        <li>Em hover, primary sobe 1px e ganha glow. Easing <code>--t-ease</code>, 250ms.</li>
+        <li>Focus ring é parte do design — nunca remover. Ring 2px com offset 3px.</li>
+        <li>Botões têm raio <code>md</code> (8px), nunca <code>full</code>. <em>Pílula</em> é outra coisa (header).</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 11 EYEBROWS -->
+    <section class="bb-ch" id="c11">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 11</div>
+        <h2 class="bb-ch__title"><em>Eyebrows</em>.</h2>
+        <p class="bb-ch__lead">A pequena etiqueta editorial acima do título. Microcópia que ancora a peça.</p>
+      </header>
+
+      <div class="bb-preview bb-preview--col">
+        <div>
+          <div class="t-eyebrow t-eyebrow--accent">◆ Manifesto · v1</div>
+          <h3 style="margin-top:8px;font-family:var(--t-font-display);font-size:32px;font-weight:200;letter-spacing:-0.04em;color:var(--t-text-strong);">a palavra <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;background:var(--t-grad-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">certa</em>.</h3>
+        </div>
+        <div>
+          <div class="t-eyebrow t-eyebrow--mute">— mentoria · turma 03 · 2026</div>
+          <h3 style="margin-top:8px;font-family:var(--t-font-display);font-size:24px;font-weight:300;letter-spacing:-0.03em;color:var(--t-text-strong);">o que muda quando<br>a teoria pousa na sessão.</h3>
+        </div>
+        <div>
+          <div class="t-eyebrow t-eyebrow--dot">disponível agora</div>
+          <h3 style="margin-top:8px;font-family:var(--t-font-display);font-size:24px;font-weight:300;letter-spacing:-0.03em;color:var(--t-text-strong);">turma 03 · começo em março.</h3>
+        </div>
+      </div>
+
+      <h3>Anatomia</h3>
+      <ul>
+        <li>Sempre <strong>JetBrains Mono</strong> uppercase, tracking 0.30em.</li>
+        <li>Tamanho 11px. Em peças muito grandes, 12px. Nunca acima.</li>
+        <li>Três variantes: <code>accent</code> (◆ + roxo), <code>mute</code> (— + cinza), <code>dot</code> (• + glow animado).</li>
+        <li>Sempre acima do título, com gap <code>sm</code> (8px).</li>
+        <li>Texto curto: 2 a 5 palavras. Pode incluir número de versão ou data.</li>
+      </ul>
+
+      <h3>Quando usar cada</h3>
+      <ul>
+        <li><strong>Accent (◆)</strong>: marca o "tipo" da peça (manifesto, bíblia, ensaio).</li>
+        <li><strong>Mute (—)</strong>: dá contexto factual (turma, data, edição).</li>
+        <li><strong>Dot (•)</strong>: status ao vivo (disponível, vagas abertas, em andamento).</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 12 CARDS -->
+    <section class="bb-ch" id="c12">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 12</div>
+        <h2 class="bb-ch__title"><em>Cards</em>.</h2>
+        <p class="bb-ch__lead">A unidade editorial do sistema. Quatro variantes — uma para cada função narrativa.</p>
+      </header>
+
+      <h3>Card padrão</h3>
+      <div class="bb-preview">
+        <article class="t-card" style="max-width:340px;">
+          <div class="t-eyebrow t-eyebrow--accent" style="margin-bottom:12px;">◆ Mentoria</div>
+          <h3 style="font-family:var(--t-font-display);font-size:20px;font-weight:400;letter-spacing:-0.02em;color:var(--t-text-strong);margin-bottom:8px;">Turma 03 · escrita clínica</h3>
+          <p style="font-family:var(--t-font-body);font-size:14px;line-height:1.6;color:var(--t-text-2);margin-bottom:16px;">Doze encontros para escrever sobre o que se escuta na sessão.</p>
+          <button class="t-btn t-btn--ghost t-btn--sm">saber mais</button>
+        </article>
+      </div>
+
+      <h3>Thesis card (com inset roxo)</h3>
+      <div class="bb-preview">
+        <article class="t-card t-card--thesis" style="max-width:420px;">
+          <div class="t-card__inset"></div>
+          <div class="t-eyebrow t-eyebrow--accent" style="margin-bottom:12px;">◆ Tese 02</div>
+          <p style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;font-size:19px;line-height:1.45;color:var(--t-text-strong);margin:0;">talvez não seja falta de força. talvez seja excesso de silêncio.</p>
+        </article>
+      </div>
+
+      <h3>Spec card (técnico)</h3>
+      <div class="bb-preview">
+        <article class="t-card" style="max-width:340px;">
+          <div class="t-eyebrow t-eyebrow--mute" style="margin-bottom:12px;">— Spec · 0x4C1D95</div>
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-family:var(--t-font-mono);font-size:11px;color:var(--t-text-2);">
+            <span style="color:var(--t-text-mute);">family</span><span style="color:var(--t-text-strong);">Source Serif 4</span>
+            <span style="color:var(--t-text-mute);">style</span><span style="color:var(--t-text-strong);">italic 300</span>
+            <span style="color:var(--t-text-mute);">size</span><span style="color:var(--t-text-strong);">21px / 1.55</span>
+          </div>
+        </article>
+      </div>
+
+      <h3>Quote card</h3>
+      <div class="bb-preview">
+        <article class="t-card" style="max-width:420px;">
+          <div style="font-family:var(--t-font-serif);font-style:italic;font-size:32px;color:var(--t-accent-light);line-height:1;margin-bottom:8px;">"</div>
+          <p style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;font-size:17px;line-height:1.55;color:var(--t-text-strong);margin-bottom:16px;">A clínica não é onde o sintoma se cura. É onde ele aprende a falar.</p>
+          <footer style="font-family:var(--t-font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t-text-mute);">— sessão 042</footer>
+        </article>
+      </div>
+
+      <h3>Anatomia</h3>
+      <ul>
+        <li>Padding interno: <code>lg</code> (24px) padrão, <code>xl</code> (32px) em destaques.</li>
+        <li>Raio: <code>xl</code> (16px). Thesis card pode usar <code>2xl</code>.</li>
+        <li>Borda 1px <code>--t-border</code>. Hover: borda fica <code>--t-border-strong</code>, eleva 2px.</li>
+        <li>Estrutura interna: <strong>eyebrow → título → corpo → ação</strong>. Sempre nessa ordem.</li>
+        <li>Imagem dentro de card é rara. Quando aparece, full-bleed top, sem padding.</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 13 STATS -->
+    <section class="bb-ch" id="c13">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 13</div>
+        <h2 class="bb-ch__title"><em>Stats</em>.</h2>
+        <p class="bb-ch__lead">Números que carregam peso. Display gigante + label mono. Nada de ícones decorativos.</p>
+      </header>
+
+      <div class="bb-preview" style="gap:48px;">
+        <div style="text-align:left;">
+          <div style="font-family:var(--t-font-display);font-size:80px;font-weight:200;letter-spacing:-0.05em;color:var(--t-text-strong);line-height:0.9;">12<span style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">y</span></div>
+          <div class="t-eyebrow t-eyebrow--mute" style="margin-top:8px;">— anos de clínica</div>
+        </div>
+        <div style="text-align:left;">
+          <div style="font-family:var(--t-font-display);font-size:80px;font-weight:200;letter-spacing:-0.05em;color:var(--t-text-strong);line-height:0.9;">120<span style="font-family:var(--t-font-mono);font-size:24px;color:var(--t-accent-light);vertical-align:super;">+</span></div>
+          <div class="t-eyebrow t-eyebrow--mute" style="margin-top:8px;">— mentorados</div>
+        </div>
+        <div style="text-align:left;">
+          <div style="font-family:var(--t-font-display);font-size:80px;font-weight:200;letter-spacing:-0.05em;color:var(--t-text-strong);line-height:0.9;">03</div>
+          <div class="t-eyebrow t-eyebrow--mute" style="margin-top:8px;">— linhas de trabalho</div>
+        </div>
+      </div>
+
+      <h3>Regras</h3>
+      <ul>
+        <li>Número em Inter 200, tamanho 64–96px (clamp).</li>
+        <li>Sufixos (<code>+</code>, <code>%</code>, <code>y</code>) em <strong>mono ou serif italic</strong>, sempre menor e em cor de acento.</li>
+        <li>Label sempre <code>eyebrow mute</code> abaixo. Nunca acima.</li>
+        <li>Em sequência (3–4 stats), separar com 48–64px ou divisor vertical 1px.</li>
+        <li>Não animar contagem crescente. A marca não usa esse truque.</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 14 INPUTS -->
+    <section class="bb-ch" id="c14">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 14</div>
+        <h2 class="bb-ch__title"><em>Inputs</em> &amp; forms.</h2>
+        <p class="bb-ch__lead">O formulário é o lugar onde a marca pede algo de volta. Calmo, claro, sem ruído.</p>
+      </header>
+
+      <div class="bb-preview bb-preview--col" style="max-width:520px;margin:0 auto;">
+        <label style="display:flex;flex-direction:column;gap:8px;">
+          <span class="t-eyebrow t-eyebrow--mute">— nome</span>
+          <input type="text" class="t-input" placeholder="como você se apresenta" value="Maria Silva">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:8px;">
+          <span class="t-eyebrow t-eyebrow--mute">— e-mail</span>
+          <input type="email" class="t-input" placeholder="onde te alcanço">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:8px;">
+          <span class="t-eyebrow t-eyebrow--mute">— mensagem</span>
+          <textarea class="t-input" rows="3" placeholder="me conta um pouco do que te trouxe aqui"></textarea>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;font-family:var(--t-font-body);font-size:14px;color:var(--t-text-2);">
+          <input type="checkbox" class="t-checkbox" checked>
+          aceito receber a carta mensal
+        </label>
+        <div style="display:flex;gap:12px;margin-top:8px;">
+          <button class="t-btn t-btn--primary">enviar</button>
+          <button class="t-btn t-btn--ghost">cancelar</button>
+        </div>
+      </div>
+
+      <h3>Anatomia</h3>
+      <ul>
+        <li>Label sempre como <strong>eyebrow mute</strong> acima do campo. Nunca placeholder como label.</li>
+        <li>Altura padrão: <strong>44px</strong>. Textarea: 3–5 linhas iniciais.</li>
+        <li>Borda 1px sutil. Em focus, borda roxa + glow leve. Sem outline padrão do browser.</li>
+        <li>Placeholder em <code>--t-text-mute</code>, italic se for instrução conversacional ("como você se apresenta").</li>
+        <li>Campo com erro: borda <code>#FF7B7B</code> + mensagem em mono 11px abaixo, mesma cor.</li>
+        <li>Spacing entre campos: <code>md</code> (16px). Entre grupos: <code>lg</code> (24px).</li>
+      </ul>
+
+      <h3>Tom da copy</h3>
+      <ul>
+        <li>Labels em minúscula: "nome", "e-mail", "mensagem".</li>
+        <li>Placeholders são <em>convites</em>, não instruções: "como você se apresenta" &gt; "Digite seu nome completo".</li>
+        <li>Mensagem de sucesso: curta. "recebi. respondo em 48h." &gt; "Mensagem enviada com sucesso!".</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 15 BADGES -->
+    <section class="bb-ch" id="c15">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 15</div>
+        <h2 class="bb-ch__title"><em>Badges</em>.</h2>
+        <p class="bb-ch__lead">Microetiqueta de status. Quase sempre redonda, sempre mono.</p>
+      </header>
+
+      <div class="bb-preview">
+        <span class="t-badge t-badge--accent">disponível</span>
+        <span class="t-badge t-badge--ghost">agenda 2026</span>
+        <span class="t-badge t-badge--live"><span class="t-badge__dot"></span> ao vivo</span>
+        <span class="t-badge t-badge--soft">v2.0</span>
+      </div>
+
+      <ul>
+        <li><strong>Accent</strong> — fundo roxo translúcido, texto roxo claro.</li>
+        <li><strong>Ghost</strong> — sem fundo, borda 1px, texto neutro.</li>
+        <li><strong>Live</strong> — accent + dot pulsante. Apenas para "ao vivo / agora".</li>
+        <li><strong>Soft</strong> — fundo <code>--t-surface</code>, neutro. Versão, ID, capítulo.</li>
+      </ul>
+
+      <h3>Regras</h3>
+      <ul>
+        <li>Sempre raio <code>full</code>. Padding 4px 10px. Altura ~22px.</li>
+        <li>Texto mono uppercase, 9–10px, tracking 0.18–0.25em.</li>
+        <li>Máximo de <strong>2 badges</strong> visíveis ao mesmo tempo num bloco.</li>
+        <li>Nunca usar como botão clicável. Badge é <em>etiqueta</em>, não ação.</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 16 HEADER PILL -->
+    <section class="bb-ch" id="c16">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 16</div>
+        <h2 class="bb-ch__title">Header <em>pill</em>.</h2>
+        <p class="bb-ch__lead">A navegação canônica da marca. Pílula flutuante, fundo translúcido, blur de fundo.</p>
+      </header>
+
+      <div class="bb-preview" style="padding:32px 24px;">
+        <div class="bb-headerpill" style="width:100%;max-width:720px;">
+          <div class="bb-headerpill__brand">
+            <svg viewBox="0 0 32 32" width="28" height="28">
+              <circle cx="16" cy="16" r="14.5" fill="none" stroke="currentColor" stroke-width="1" style="color:var(--t-accent-light)"/>
+              <text x="16" y="21" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-style="italic" font-weight="300" font-size="15" fill="currentColor" style="color:var(--t-accent-light)">tr</text>
+            </svg>
+            <span>tati ribeiro</span>
+          </div>
+          <nav class="bb-headerpill__nav">
+            <a href="#">manifesto</a>
+            <a href="#">mentoria</a>
+            <a href="#">clínica</a>
+            <a href="#" class="bb-headerpill__cta">marcar</a>
+          </nav>
+        </div>
+      </div>
+
+      <h3>Anatomia</h3>
+      <ul>
+        <li>Container: raio <code>full</code>, padding 8px 8px 8px 16px (assimétrico — lado do CTA mais "fechado").</li>
+        <li>Fundo: <code>--t-surface</code> com blur 20px backdrop. Borda 1px.</li>
+        <li>Posição: fixed top, com <code>md</code> (16px) de afastamento do topo. Centralizado horizontalmente, max-width 920–1100px.</li>
+        <li>Brand à esquerda: monograma + wordmark em italic 17px.</li>
+        <li>Nav: links em mono 9–10px uppercase. CTA pill no final.</li>
+      </ul>
+
+      <h3>Comportamento</h3>
+      <ul>
+        <li>Em scroll, ganha sombra <code>shadow-md</code> e leve aumento de opacidade.</li>
+        <li>Em mobile, colapsa para botão menu + pill mantém apenas brand + CTA.</li>
+        <li>Link ativo: cor roxa, sem underline.</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 17 AVANÇADOS -->
+    <section class="bb-ch" id="c17">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 17</div>
+        <h2 class="bb-ch__title">Componentes <em>avançados</em>.</h2>
+        <p class="bb-ch__lead">Peças menos frequentes mas essenciais quando o contexto pede.</p>
+      </header>
+
+      <h3>Toast / notificação</h3>
+      <div class="bb-preview">
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--t-surface);border:1px solid var(--t-border);border-radius:var(--t-radius-lg);box-shadow:var(--t-shadow-md);min-width:280px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--t-accent-light);box-shadow:0 0 8px var(--t-accent-light);"></span>
+          <span style="font-family:var(--t-font-body);font-size:14px;color:var(--t-text);">recebi sua mensagem.</span>
+        </div>
+      </div>
+
+      <h3>Divisor editorial</h3>
+      <div class="bb-preview" style="flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:center;gap:16px;width:100%;max-width:480px;">
+          <span style="flex:1;height:1px;background:var(--t-border);"></span>
+          <span style="font-family:var(--t-font-mono);font-size:10px;color:var(--t-accent-light);letter-spacing:0.3em;text-transform:uppercase;">◆ ◆ ◆</span>
+          <span style="flex:1;height:1px;background:var(--t-border);"></span>
+        </div>
+      </div>
+
+      <h3>Tag list</h3>
+      <div class="bb-preview">
+        <span class="t-badge t-badge--ghost">psicanálise</span>
+        <span class="t-badge t-badge--ghost">supervisão</span>
+        <span class="t-badge t-badge--ghost">escrita clínica</span>
+        <span class="t-badge t-badge--ghost">IA aplicada</span>
+      </div>
+
+      <h3>Pull-quote (full-bleed)</h3>
+      <div class="bb-preview" style="padding:48px 24px;">
+        <blockquote style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;font-size:28px;line-height:1.35;color:var(--t-text-strong);max-width:680px;text-align:center;letter-spacing:-0.015em;border:none;margin:0;">
+          o sintoma fala uma língua que ninguém ensinou.
+          <footer style="margin-top:16px;font-family:var(--t-font-mono);font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--t-text-mute);">— manifesto · v1</footer>
+        </blockquote>
+      </div>
+
+      <h3>Lista numerada (mono)</h3>
+      <div class="bb-preview" style="flex-direction:column;align-items:flex-start;max-width:520px;margin:0 auto;">
+        <ol style="list-style:none;width:100%;">
+          <li style="display:grid;grid-template-columns:60px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--t-border);"><span style="font-family:var(--t-font-mono);font-size:11px;color:var(--t-accent-light);letter-spacing:0.18em;">01.</span><span style="font-family:var(--t-font-body);font-size:15px;color:var(--t-text);">Escutar antes de interpretar.</span></li>
+          <li style="display:grid;grid-template-columns:60px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--t-border);"><span style="font-family:var(--t-font-mono);font-size:11px;color:var(--t-accent-light);letter-spacing:0.18em;">02.</span><span style="font-family:var(--t-font-body);font-size:15px;color:var(--t-text);">Suspender o saber prévio.</span></li>
+          <li style="display:grid;grid-template-columns:60px 1fr;gap:16px;padding:12px 0;"><span style="font-family:var(--t-font-mono);font-size:11px;color:var(--t-accent-light);letter-spacing:0.18em;">03.</span><span style="font-family:var(--t-font-body);font-size:15px;color:var(--t-text);">Deixar o tempo trabalhar.</span></li>
+        </ol>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ============ PART IV — PADRÕES ============ -->
+    <div class="bb-part">
+      <div class="bb-part__num">Parte 04</div>
+      <div class="bb-part__name"><em>Padrões</em></div>
+    </div>
+
+    <!-- 18 11 DOBRAS -->
+    <section class="bb-ch" id="c18">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 18</div>
+        <h2 class="bb-ch__title">As <em>11 dobras</em> canônicas.</h2>
+        <p class="bb-ch__lead">Toda landing page longa da marca passa por essas dobras, nessa ordem. É a partitura.</p>
+      </header>
+
+      <div class="bb-arc">
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">01.</span>
+          <span class="bb-arc__title">Hero<small>Frase única, italic, gigante. Microcópia abaixo. Um único CTA primary.</small></span>
+          <span class="bb-arc__role">— ancoragem</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">02.</span>
+          <span class="bb-arc__title">Diagnóstico<small>"Você reconhece isto?". Lista curta de sintomas/sinais em primeira pessoa.</small></span>
+          <span class="bb-arc__role">— espelho</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">03.</span>
+          <span class="bb-arc__title">Tese<small>A reformulação editorial: "Talvez não seja A. Talvez seja B." Quote card grande.</small></span>
+          <span class="bb-arc__role">— virada</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">04.</span>
+          <span class="bb-arc__title">Método<small>3 passos numerados. Lista mono. Cada passo em uma linha curta.</small></span>
+          <span class="bb-arc__role">— caminho</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">05.</span>
+          <span class="bb-arc__title">Manifesto inset<small>Bloco roxo. Trecho do manifesto da marca. Pull-quote full-bleed.</small></span>
+          <span class="bb-arc__role">— alma</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">06.</span>
+          <span class="bb-arc__title">Para quem é<small>Persona em 3 frases. "Você é... que sente... e quer..." Sem demografia.</small></span>
+          <span class="bb-arc__role">— filtro</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">07.</span>
+          <span class="bb-arc__title">Para quem não é<small>Anti-persona. 3 frases francas. Constrói confiança ao recusar.</small></span>
+          <span class="bb-arc__role">— honestidade</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">08.</span>
+          <span class="bb-arc__title">Prova<small>Stats + 1 ou 2 quote cards de mentorados/pacientes. Sem foto, só palavra.</small></span>
+          <span class="bb-arc__role">— peso</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">09.</span>
+          <span class="bb-arc__title">FAQ<small>5 a 7 perguntas. Acordeão sutil. Linguagem direta, sem evasivas.</small></span>
+          <span class="bb-arc__role">— atrito</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">10.</span>
+          <span class="bb-arc__title">Encerramento<small>Voltar à frase do hero, ou a uma irmã dela. CTA primary novamente.</small></span>
+          <span class="bb-arc__role">— ancoragem</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">11.</span>
+          <span class="bb-arc__title">Assinatura<small>"— tati", em serif italic, alinhada à direita. Como uma carta.</small></span>
+          <span class="bb-arc__role">— autoria</span>
+        </div>
+      </div>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Não é receita</div>
+        <p>As 11 dobras são um repertório, não um molde. Páginas curtas usam 5 ou 6. O que importa é a sequência editorial: <strong>diagnóstico → virada → método → assinatura</strong>.</p>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 19 COPY & CTAS -->
+    <section class="bb-ch" id="c19">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 19</div>
+        <h2 class="bb-ch__title"><em>Copy</em> &amp; CTAs.</h2>
+        <p class="bb-ch__lead">A escrita da marca tem regras. Especialmente onde o usuário precisa decidir.</p>
+      </header>
+
+      <h3>CTAs canônicos</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card bb-card--do">
+          <div class="bb-card__tag">Faça</div>
+          <p>"marcar sessão", "saber mais", "ler manifesto", "entrar na turma", "receber a carta".</p>
+        </div>
+        <div class="bb-card bb-card--dont">
+          <div class="bb-card__tag">Vetado</div>
+          <p>"Clique aqui", "Saiba mais!", "Garante já sua vaga", "Acesse agora", "Cadastre-se grátis".</p>
+        </div>
+      </div>
+
+      <h3>Headlines — padrões aprovados</h3>
+      <ul>
+        <li><strong>Negação + reformulação</strong>: "não é A. é B."</li>
+        <li><strong>Pergunta direta</strong>: "o que muda quando..."</li>
+        <li><strong>Definição editorial</strong>: "a clínica é uma cena."</li>
+        <li><strong>Frase nua</strong>: 4–7 palavras, italic dentro destacando uma.</li>
+      </ul>
+
+      <h3>Microcopy</h3>
+      <ul>
+        <li>Confirmação após envio: "recebi. respondo em 48h."</li>
+        <li>Erro de campo: "esse e-mail está incompleto."</li>
+        <li>Estado vazio: "ainda não tem nada aqui. volte em alguns dias."</li>
+        <li>Loading: "carregando" + cursor piscando. Sem spinner colorido.</li>
+        <li>404: "essa página não existe — pelo menos não nessa forma."</li>
+      </ul>
+
+      <h3>Princípio de cadência</h3>
+      <p>
+        Texto longo da marca alterna <strong>frase curta + frase longa</strong>.
+        Curta nomeia. Longa contextualiza. Curta. Longa. É o ritmo da escuta.
+        Quando você lê em voz alta, deve soar como conversa pausada, não como pitch.
+      </p>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 20 MARKETING ARC -->
+    <section class="bb-ch" id="c20">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 20</div>
+        <h2 class="bb-ch__title">Marketing <em>arc</em>.</h2>
+        <p class="bb-ch__lead">Como uma campanha se desenrola no tempo. Da semente à colheita.</p>
+      </header>
+
+      <div class="bb-arc">
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">F1</span>
+          <span class="bb-arc__title">Semente — pré-anúncio<small>Carta na newsletter falando do problema, sem mencionar produto. 2 a 3 semanas antes.</small></span>
+          <span class="bb-arc__role">— editorial</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">F2</span>
+          <span class="bb-arc__title">Tese — manifesto<small>Manifesto público (post longo, página dedicada). Frase central começa a circular.</small></span>
+          <span class="bb-arc__role">— posição</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">F3</span>
+          <span class="bb-arc__title">Anúncio — landing<small>Landing page com as 11 dobras. CTA primary aberto.</small></span>
+          <span class="bb-arc__role">— oferta</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">F4</span>
+          <span class="bb-arc__title">Tração — provas<small>Quote cards de quem entrou primeiro. Recortes do manifesto reaparecem.</small></span>
+          <span class="bb-arc__role">— prova</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">F5</span>
+          <span class="bb-arc__title">Encerramento<small>"as inscrições fecham" sem urgência teatral. Frase nua, data clara, badge live.</small></span>
+          <span class="bb-arc__role">— corte</span>
+        </div>
+        <div class="bb-arc__row">
+          <span class="bb-arc__num">F6</span>
+          <span class="bb-arc__title">Pós — agradecimento<small>Carta interna a quem entrou. Reposiciona expectativas. Define ritmo.</small></span>
+          <span class="bb-arc__role">— continuidade</span>
+        </div>
+      </div>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Princípio do arco</div>
+        <p>A marca não vende com escassez fabricada. A urgência vem da clareza da tese e da limitação real (turma pequena, calendário fechado). Sem countdown piscante, sem "últimas vagas" repetido.</p>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ============ PART V — REGRAS ============ -->
+    <div class="bb-part">
+      <div class="bb-part__num">Parte 05</div>
+      <div class="bb-part__name"><em>Regras</em></div>
+    </div>
+
+    <!-- 21 FAÇA / NÃO FAÇA -->
+    <section class="bb-ch" id="c21">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 21</div>
+        <h2 class="bb-ch__title"><em>Faça</em> / <em>não faça</em>.</h2>
+        <p class="bb-ch__lead">As regras vivas. Releia antes de qualquer peça nova.</p>
+      </header>
+
+      <h3>Tipografia</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card bb-card--do"><div class="bb-card__tag">Faça</div><p>Uma única Display por peça. Italic serif para palavras de emoção. Mono uppercase para etiquetas.</p></div>
+        <div class="bb-card bb-card--dont"><div class="bb-card__tag">Não faça</div><p>Misturar serif e sans no mesmo título sem propósito editorial. Usar italic em texto corrido.</p></div>
+      </div>
+
+      <h3>Cor</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card bb-card--do"><div class="bb-card__tag">Faça</div><p>Roxo como acento (≤ 5% da peça). Cinza como tudo o mais. Preto e branco extremos só na tipografia maior.</p></div>
+        <div class="bb-card bb-card--dont"><div class="bb-card__tag">Não faça</div><p>Adicionar uma terceira cor "porque combina". Usar gradient roxo em fundo de card grande.</p></div>
+      </div>
+
+      <h3>Espaço</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card bb-card--do"><div class="bb-card__tag">Faça</div><p>Respirar. Padding generoso. Coluna de leitura limitada a 65ch.</p></div>
+        <div class="bb-card bb-card--dont"><div class="bb-card__tag">Não faça</div><p>Encher seção até a borda. Quatro colunas onde caberiam três.</p></div>
+      </div>
+
+      <h3>Componentes</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card bb-card--do"><div class="bb-card__tag">Faça</div><p>Um único CTA primary por seção. Eyebrow antes do título. Estrutura "eyebrow → título → corpo → ação".</p></div>
+        <div class="bb-card bb-card--dont"><div class="bb-card__tag">Não faça</div><p>Dois primaries lado a lado. Card sem hierarquia clara. Botão CTA como link de menu.</p></div>
+      </div>
+
+      <h3>Movimento</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card bb-card--do"><div class="bb-card__tag">Faça</div><p>Fade-up suave em entrada. Hover sutil (1px + glow). Cursor piscando em loading.</p></div>
+        <div class="bb-card bb-card--dont"><div class="bb-card__tag">Não faça</div><p>Parallax pesado. Bounce overshoot. Texto longo animando letra por letra.</p></div>
+      </div>
+
+      <h3>Voz</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card bb-card--do"><div class="bb-card__tag">Faça</div><p>Frase curta + frase longa. Italic interno para emoção. Letra minúscula em assinaturas.</p></div>
+        <div class="bb-card bb-card--dont"><div class="bb-card__tag">Não faça</div><p>Pontos de exclamação. Emojis. "Jornada", "transformação", "metodologia exclusiva".</p></div>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 22 ACESSIBILIDADE -->
+    <section class="bb-ch" id="c22">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 22</div>
+        <h2 class="bb-ch__title"><em>Acessibilidade</em>.</h2>
+        <p class="bb-ch__lead">Marca editorial não é desculpa para baixa acessibilidade. Pelo contrário.</p>
+      </header>
+
+      <h3>Contraste</h3>
+      <ul>
+        <li>Texto corpo: contraste mínimo <strong>4.5:1</strong>. <code>--t-bone</code> sobre <code>--t-void</code> = 14.2:1.</li>
+        <li>Texto grande (≥ 24px ou ≥ 19px bold): mínimo <strong>3:1</strong>.</li>
+        <li>Roxo de acento sobre fundo escuro: <code>--t-accent-light</code> (#8B5CF6) atinge ~4.7:1 sobre void. Para texto corrido roxo, usar <code>--t-accent-glow</code> (#A78BFA) → 6.1:1.</li>
+        <li>Componentes interativos (botões, links): mínimo <strong>3:1</strong> contra fundo adjacente.</li>
+      </ul>
+
+      <h3>Foco</h3>
+      <ul>
+        <li>Toda peça interativa tem outline <code>2px</code> em <code>--t-accent-light</code>, offset 3px.</li>
+        <li>Nunca remover <code>:focus-visible</code>. Nem em "design-only".</li>
+        <li>Skip-link no topo de toda página: "ir para conteúdo principal".</li>
+      </ul>
+
+      <h3>Leitura</h3>
+      <ul>
+        <li>Coluna de leitura limitada a <strong>65–75ch</strong>. Mais que isso quebra o olho.</li>
+        <li>Line-height nunca abaixo de <strong>1.5</strong> em texto corrido.</li>
+        <li>Letra mínima de corpo: <strong>15px</strong>. Mono pode descer a 11–12px só em metadados curtos.</li>
+        <li>Hierarquia clara de h1 → h2 → h3. Nunca pular níveis.</li>
+      </ul>
+
+      <h3>Motion</h3>
+      <ul>
+        <li><code>prefers-reduced-motion: reduce</code> desativa todas as animações decorativas. Reset incluído em <code>base.css</code>.</li>
+        <li>Nada pisca a mais de 3Hz. (Risco fotossensível.)</li>
+        <li>Animações nunca são única forma de comunicar estado. Sempre há texto/cor reforçando.</li>
+      </ul>
+
+      <h3>Semântica</h3>
+      <ul>
+        <li>Botão é <code>&lt;button&gt;</code>, não <code>&lt;div onclick&gt;</code>.</li>
+        <li>Link é <code>&lt;a href&gt;</code> com destino real.</li>
+        <li>Imagem decorativa: <code>alt=""</code>. Imagem com conteúdo: <code>alt</code> descritivo.</li>
+        <li>Form field tem <code>&lt;label for&gt;</code> ou <code>aria-label</code>. Sempre.</li>
+      </ul>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Tese de acessibilidade</div>
+        <p>O design editorial sóbrio da marca é, por construção, mais acessível que o web design médio. Texto grande, contraste forte, pouca distração. Mantenha esse trabalho — não regrida.</p>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- 23 QUICKSTART -->
+    <section class="bb-ch" id="c23">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 23</div>
+        <h2 class="bb-ch__title"><em>Quickstart</em>.</h2>
+        <p class="bb-ch__lead">Você abriu um arquivo em branco. Faça nessa ordem.</p>
+      </header>
+
+      <ol class="bb-steps">
+        <li class="bb-step">
+          <div>
+            <h4>Importe os 5 arquivos base</h4>
+            <p><code>tokens.css</code>, <code>base.css</code>, <code>typography.css</code>, <code>components.css</code>, <code>motion.css</code>. Nessa ordem, no <code>&lt;head&gt;</code>.</p>
+          </div>
+        </li>
+        <li class="bb-step">
+          <div>
+            <h4>Defina o tema no <code>&lt;html&gt;</code></h4>
+            <p><code>data-theme="dark"</code> ou <code>data-theme="light"</code>. Sem isso o sistema não sabe qual paleta servir.</p>
+          </div>
+        </li>
+        <li class="bb-step">
+          <div>
+            <h4>Adicione o fundo de circuito (opcional)</h4>
+            <p><code>&lt;div class="t-circuit-bg"&gt;&lt;/div&gt;</code> como primeiro filho do <code>&lt;body&gt;</code>. Só em páginas com hero grande.</p>
+          </div>
+        </li>
+        <li class="bb-step">
+          <div>
+            <h4>Comece pelo eyebrow</h4>
+            <p>Toda peça começa com a etiqueta editorial. <code>&lt;div class="t-eyebrow t-eyebrow--accent"&gt;◆ tipo · v1&lt;/div&gt;</code></p>
+          </div>
+        </li>
+        <li class="bb-step">
+          <div>
+            <h4>Display gigante com italic interno</h4>
+            <p>Uma frase. Uma palavra em <code>&lt;em&gt;</code>. Tamanho clamp(48px, 8vw, 112px). Peso 200.</p>
+          </div>
+        </li>
+        <li class="bb-step">
+          <div>
+            <h4>Lead em serif italic</h4>
+            <p>Subtítulo curto, 19–21px, Source Serif 4 italic 300. Largura máxima 640px.</p>
+          </div>
+        </li>
+        <li class="bb-step">
+          <div>
+            <h4>Um único CTA primary</h4>
+            <p>Se a peça precisa de ação, <code>&lt;button class="t-btn t-btn--primary"&gt;</code>. Se houver secundário, <code>--ghost</code>.</p>
+          </div>
+        </li>
+        <li class="bb-step">
+          <div>
+            <h4>Respire</h4>
+            <p>Entre seções, <code>--t-space-3xl</code> ou <code>--t-space-4xl</code>. Não economize espaço. É o material principal.</p>
+          </div>
+        </li>
+        <li class="bb-step">
+          <div>
+            <h4>Releia o capítulo 21</h4>
+            <p>Antes de publicar, passe pelo "faça / não faça". Se houver um único item violado, volte e corrija.</p>
+          </div>
+        </li>
+      </ol>
+
+      <h3>Cheat sheet de classes</h3>
+      <pre class="bb-code"><span class="c">/* tipografia */</span>
+<span class="k">.t-display</span>     <span class="v">— título display 200</span>
+<span class="k">.t-h1 .t-h2 .t-h3</span> <span class="v">— hierarquia</span>
+<span class="k">.t-lead</span>        <span class="v">— serif italic 300</span>
+<span class="k">.t-quote</span>       <span class="v">— citação serif</span>
+<span class="k">.t-eyebrow</span>     <span class="v">— mono uppercase</span>
+<span class="k">.t-eyebrow--accent</span> <span class="k">.t-eyebrow--mute</span> <span class="k">.t-eyebrow--dot</span>
+
+<span class="c">/* botões */</span>
+<span class="k">.t-btn</span>
+<span class="k">.t-btn--primary</span> <span class="k">.t-btn--ghost</span> <span class="k">.t-btn--outline</span> <span class="k">.t-btn--link</span>
+<span class="k">.t-btn--sm</span> <span class="k">.t-btn--lg</span>
+
+<span class="c">/* superfícies */</span>
+<span class="k">.t-card</span> <span class="k">.t-card--thesis</span>
+<span class="k">.t-input</span> <span class="k">.t-checkbox</span>
+<span class="k">.t-badge</span> <span class="k">.t-badge--accent .t-badge--ghost .t-badge--live .t-badge--soft</span>
+
+<span class="c">/* ambiência */</span>
+<span class="k">.t-circuit-bg</span>  <span class="v">— grid roxo de fundo</span>
+<span class="k">.t-anim-fade-up</span> <span class="k">.t-anim-glow</span> <span class="k">.t-anim-float</span>
+<span class="k">.t-shimmer</span> <span class="k">.t-cursor</span></pre>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ última linha</div>
+        <p>A bíblia é viva. Quando uma peça pede algo que ela não cobre, o caminho não é improvisar — é abrir uma proposta de capítulo novo.</p>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  document.querySelectorAll('[data-theme-set]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.documentElement.dataset.theme = btn.dataset.themeSet;
+      document.querySelectorAll('[data-theme-set]').forEach(b => b.classList.toggle('is-active', b === btn));
+    });
+  });
+
+  const progress = document.getElementById('progress');
+  const tocLinks = document.querySelectorAll('.bb-toc a');
+  const chapters = [...document.querySelectorAll('.bb-ch')];
+
+  function onScroll() {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = ((window.scrollY / h) * 100) + '%';
+    const top = window.scrollY + 200;
+    let active = chapters[0]?.id;
+    chapters.forEach(c => { if (c.offsetTop <= top) active = c.id; });
+    tocLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + active));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+</body>
+</html>

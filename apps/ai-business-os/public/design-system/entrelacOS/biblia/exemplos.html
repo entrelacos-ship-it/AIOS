@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exemplo de LP · Bíblia · Entrelaços</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="site.css">
+<link rel="icon" href="../assets/favicon.ico">
+<link rel="icon" type="image/png" href="../assets/borboleta.png">
+<style>
+  /* LP Viewer */
+  .lp-viewer {
+    margin-top: 28px;
+    border: 1px solid var(--e-border);
+    border-radius: var(--e-r-xl);
+    overflow: hidden;
+    background: var(--e-bg-deep);
+    box-shadow: var(--e-sh-purple-lg);
+  }
+  .lp-viewer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--e-bg-elev);
+    border-bottom: 1px solid var(--e-border);
+  }
+  .lp-viewer-dots { display: inline-flex; gap: 6px; align-items: center; }
+  .lp-viewer-dots span {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(180,140,255,0.20);
+  }
+  .lp-viewer-dots span:nth-child(2) { background: rgba(255,138,31,0.55); }
+  .lp-viewer-url {
+    font-family: var(--ff-mono);
+    font-size: 0.72rem;
+    color: var(--e-text-muted);
+    flex: 1;
+    text-align: center;
+    letter-spacing: 0.06em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .lp-viewer-actions { display: inline-flex; gap: 8px; }
+  .lp-viewer-actions a {
+    font-family: var(--ff-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--e-text-secondary);
+    padding: 6px 12px;
+    border-radius: var(--e-r-pill);
+    border: 1px solid var(--e-border);
+    transition: all 200ms var(--e-ease);
+  }
+  .lp-viewer-actions a:hover {
+    color: var(--e-text);
+    border-color: var(--e-purple-400);
+    background: rgba(180,140,255,0.08);
+  }
+  .lp-viewer-actions a.primary {
+    background: var(--e-purple-600);
+    border-color: var(--e-purple-600);
+    color: #fff;
+  }
+  .lp-viewer-actions a.primary:hover { background: var(--e-purple-700); }
+  .lp-viewer-frame {
+    position: relative;
+    width: 100%;
+    height: clamp(520px, 78vh, 880px);
+    background: #0A0612;
+  }
+  .lp-viewer-frame iframe {
+    width: 100%; height: 100%;
+    border: 0; display: block;
+  }
+
+  /* Anatomy chips */
+  .anatomy-chips {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 16px 0;
+  }
+  .anatomy-chips a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: var(--e-r-pill);
+    background: rgba(180,140,255,0.06);
+    border: 1px solid var(--e-border);
+    font-family: var(--ff-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--e-text-secondary);
+    transition: all 200ms var(--e-ease);
+  }
+  .anatomy-chips a:hover {
+    color: var(--e-text);
+    border-color: var(--e-purple-400);
+    background: rgba(180,140,255,0.12);
+  }
+  .anatomy-chips a span.idx {
+    color: var(--e-purple-300);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+<header class="e-header">
+  <div class="e-header-pill" id="bibliaHeader">
+    <a class="e-brand" href="../index.html">
+      <img class="e-logo-img" src="../assets/borboleta.png" alt="" aria-hidden="true">
+      <span>Entrelaços<em>Psi</em></span>
+    </a>
+    <nav class="e-nav">
+      <a href="../index.html#fundamentos">Fundamentos</a>
+      <a href="../index.html#tokens">Tokens</a>
+      <a href="../index.html#componentes">Componentes</a>
+      <a href="../index.html#padroes">Padrões</a>
+      <a href="../index.html#regras">Regras</a>
+    </nav>
+    <div class="e-header-cta">
+      <a href="../index.html" class="e-btn e-btn-primary e-btn-sm">Sumário →</a>
+    </div>
+  </div>
+</header>
+
+<div class="bs-shell">
+  <aside class="bs-toc"><nav>
+    <h4>Fundamentos</h4>
+    <a href="filosofia.html"><span class="bs-toc-num">01</span><span>Filosofia</span></a>
+    <a href="identidade.html"><span class="bs-toc-num">02</span><span>Identidade visual</span></a>
+    <a href="voz.html"><span class="bs-toc-num">03</span><span>Voz da marca</span></a>
+    <h4>Tokens</h4>
+    <a href="cores.html"><span class="bs-toc-num">04</span><span>Paleta &amp; cores</span></a>
+    <a href="tipografia.html"><span class="bs-toc-num">05</span><span>Tipografia</span></a>
+    <a href="espaco.html"><span class="bs-toc-num">06</span><span>Espaçamento</span></a>
+    <a href="raio.html"><span class="bs-toc-num">07</span><span>Raio &amp; geometria</span></a>
+    <a href="sombra.html"><span class="bs-toc-num">08</span><span>Sombras &amp; depth</span></a>
+    <a href="motion.html"><span class="bs-toc-num">09</span><span>Motion</span></a>
+    <h4>Componentes</h4>
+    <a href="botoes.html"><span class="bs-toc-num">10</span><span>Botões</span></a>
+    <a href="eyebrows.html"><span class="bs-toc-num">11</span><span>Eyebrows</span></a>
+    <a href="cards.html"><span class="bs-toc-num">12</span><span>Cards</span></a>
+    <a href="stats.html"><span class="bs-toc-num">13</span><span>Stats</span></a>
+    <a href="inputs.html"><span class="bs-toc-num">14</span><span>Inputs &amp; forms</span></a>
+    <a href="badges.html"><span class="bs-toc-num">15</span><span>Badges</span></a>
+    <a href="header.html"><span class="bs-toc-num">16</span><span>Header pill</span></a>
+    <a href="avancados.html"><span class="bs-toc-num">17</span><span>Avançados</span></a>
+    <h4>Padrões</h4>
+    <a href="dobras.html"><span class="bs-toc-num">18</span><span>11 dobras canônicas</span></a>
+    <a href="copy.html"><span class="bs-toc-num">19</span><span>Copy &amp; CTAs</span></a>
+    <a href="marketing.html"><span class="bs-toc-num">20</span><span>Marketing arc</span></a>
+    <h4>Regras</h4>
+    <a href="regras.html"><span class="bs-toc-num">21</span><span>Faça / não faça</span></a>
+    <a href="acessibilidade.html"><span class="bs-toc-num">22</span><span>Acessibilidade</span></a>
+    <a href="quickstart.html"><span class="bs-toc-num">23</span><span>Quickstart</span></a>
+    <h4>Exemplos</h4>
+    <a href="exemplos.html" class="is-active"><span class="bs-toc-num">★</span><span>LP Comunidade</span></a>
+  </nav></aside>
+
+  <main class="bs-main">
+    <div class="bs-crumbs">
+      <a href="../index.html">Bíblia</a>
+      <span class="sep">/</span>
+      <span class="current">Exemplos · LP Comunidade</span>
+    </div>
+    <header class="bs-pghead">
+      <div class="bs-pghead-num"><span>★</span><span class="dot"></span><span class="group-tag">Exemplo canônico</span></div>
+      <h1>Esta é a Bíblia <em>aplicada.</em></h1>
+      <p class="bs-pghead-lead">A landing page <em>Cohort Inverno 2026</em> é a referência canônica do sistema Entrelaços. Toda decisão dos capítulos anteriores aparece aqui, encadeada nas 11 dobras. Use como teste-de-cheiro: se sua nova página não respira como esta, algo está fora.</p>
+    </header>
+
+    <div class="bs-body">
+      <h2>Pré-visualização</h2>
+      <p>Iframe sandboxed dentro da Bíblia. Não há tracking — só HTML estático. Para experiência completa (canvas, scroll, motion), abra em tela cheia.</p>
+
+      <div class="lp-viewer">
+        <div class="lp-viewer-bar">
+          <span class="lp-viewer-dots"><span></span><span></span><span></span></span>
+          <span class="lp-viewer-url">entrelacospsicologia.com.br/comunidade · cohort-inverno-2026</span>
+          <span class="lp-viewer-actions">
+            <a href="exemplos/landing-page-comunidade.html" target="_blank" rel="noopener" class="primary">Abrir tela cheia ↗</a>
+          </span>
+        </div>
+        <div class="lp-viewer-frame">
+          <iframe src="exemplos/landing-page-comunidade.html" loading="lazy" title="LP Comunidade · Cohort Inverno 2026"></iframe>
+        </div>
+      </div>
+
+      <h3>Anatomia · clique para abrir o capítulo</h3>
+      <div class="anatomy-chips">
+        <a href="dobras.html"><span class="idx">01</span> Hero · constellation + 4 stats</a>
+        <a href="eyebrows.html"><span class="idx">02</span> Trust strip · separator + marquee</a>
+        <a href="voz.html"><span class="idx">03</span> Manifesto cream · âncoras italic</a>
+        <a href="cards.html"><span class="idx">04</span> Por que existimos · bento 2x2</a>
+        <a href="cards.html"><span class="idx">05</span> Programas · stack vertical</a>
+        <a href="motion.html"><span class="idx">06</span> Provas · marquee 40s</a>
+        <a href="avancados.html"><span class="idx">06.5</span> Efeito Borboleta · Lorenz + cometas</a>
+        <a href="stats.html"><span class="idx">07</span> Comunidade · 4 stats + cidades</a>
+        <a href="identidade.html"><span class="idx">08</span> Co-fundadoras · CRP chip laranja</a>
+        <a href="inputs.html"><span class="idx">09</span> Newsletter · input quadrado + LGPD</a>
+        <a href="header.html"><span class="idx">10</span> Footer · 4 colunas + legal</a>
+      </div>
+
+      <h3>O que esta página prova</h3>
+      <ul>
+        <li><strong>3 fontes em harmonia:</strong> Inter Tight em body, Instrument Serif italic em palavras-âncora, JetBrains Mono em eyebrows e stats.</li>
+        <li><strong>Regra de 3 do laranja respeitada:</strong> ponto da logo (decorativo), CRP chip (credencial), palavra-protagonista no hero. Conte na página — nada além disso.</li>
+        <li><strong>Inversão cream presente:</strong> dobra Manifesto rompe o ritmo dark — exatamente como a regra define.</li>
+        <li><strong>Ritmo de eyebrow:</strong> toda dobra começa com mono. Nenhuma headline aparece sem eyebrow antes.</li>
+        <li><strong>Motion coerente:</strong> mesmas curvas, mesmas durações, mesmo reveal-on-scroll em toda dobra.</li>
+        <li><strong>Densidade emocional:</strong> CTAs ranqueados (soft → hard), copy de transparência sob forms, microcopy LGPD.</li>
+      </ul>
+
+      <div class="bs-note"><strong>Como usar como referência.</strong> Antes de publicar uma página nova, abra esta lado-a-lado. Se a sua não tem inversão cream, não tem stats âncoras, não tem palavra-protagonista, não respira nas mesmas durações — você fez outra coisa, não Entrelaços.</div>
+
+      <h3>Snippet · iframe embed em outras páginas</h3>
+      <div class="snippet">
+        <div class="snippet-head">
+          <span class="snippet-tag">HTML · embed da LP exemplo</span>
+          <button class="snippet-copy" type="button">COPIAR</button>
+        </div>
+        <pre><code>&lt;iframe
+  src="/biblia/exemplos/landing-page-comunidade.html"
+  style="width: 100%; height: 78vh; border: 0; border-radius: 20px;"
+  loading="lazy"
+  title="LP Comunidade · Cohort Inverno 2026"&gt;&lt;/iframe&gt;</code></pre>
+      </div>
+    </div>
+
+    <nav class="bs-pagenav">
+      <a href="quickstart.html" class="prev">
+        <span class="bs-pagenav-tag">← 23 · Anterior</span>
+        <span class="bs-pagenav-title"><span class="bs-pagenav-arrow">←</span> Quickstart</span>
+      </a>
+      <a href="../index.html" class="next">
+        <span class="bs-pagenav-tag">Sumário →</span>
+        <span class="bs-pagenav-title">Voltar ao início <span class="bs-pagenav-arrow">→</span></span>
+      </a>
+    </nav>
+
+    <div class="bs-footer">
+      <span>BÍBLIA · DESIGN SYSTEM · ENTRELAÇOS PSICOLOGIA · v1.6 · LENDÁRIA EDITION</span>
+      <br><br>
+      <em>"Cada psicóloga que se reposiciona desloca um sistema inteiro."</em>
+    </div>
+  </main>
+</div>
+
+<script>
+const headerPill = document.getElementById('bibliaHeader');
+window.addEventListener('scroll', () => {
+  headerPill.classList.toggle('is-scrolled', window.scrollY > 32);
+});
+
+// Snippet copy (com fallback robusto)
+document.querySelectorAll('.snippet-copy').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const code = btn.closest('.snippet').querySelector('code').textContent;
+    const orig = btn.dataset.origLabel || btn.textContent;
+    btn.dataset.origLabel = orig;
+    btn.textContent = 'COPIADO ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1800);
+    const tryClipboard = () => {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(code).catch(() => fallback());
+      }
+      return fallback();
+    };
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = code; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    };
+    tryClipboard();
+  });
+});
+</script>
+</body>
+</html>

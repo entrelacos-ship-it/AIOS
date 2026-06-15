@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motion Effects · Biblioteca · Bíblia · Entrelaços</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="motion-fx.css">
+<link rel="icon" href="../assets/favicon.ico">
+<link rel="icon" type="image/png" href="../assets/borboleta.png">
+</head>
+<body>
+
+<header class="e-header">
+  <div class="e-header-pill" id="bibliaHeader">
+    <a class="e-brand" href="../index.html">
+      <img class="e-logo-img" src="../assets/borboleta.png" alt="" aria-hidden="true">
+      <span>Entrelaços<em>Psi</em></span>
+    </a>
+    <nav class="e-nav">
+      <a href="../index.html#fundamentos">Fundamentos</a>
+      <a href="../index.html#tokens">Tokens</a>
+      <a href="../index.html#componentes">Componentes</a>
+      <a href="../index.html#padroes">Padrões</a>
+      <a href="../index.html#regras">Regras</a>
+    </nav>
+    <div class="e-header-cta">
+      <a href="../index.html" class="e-btn e-btn-primary e-btn-sm">Sumário →</a>
+    </div>
+  </div>
+</header>
+
+<div class="bs-shell">
+  <aside class="bs-toc">
+    <nav>
+      <h4>Fundamentos</h4>
+      <a href="filosofia.html"><span class="bs-toc-num">01</span><span>Filosofia</span></a>
+      <a href="identidade.html"><span class="bs-toc-num">02</span><span>Identidade visual</span></a>
+      <a href="voz.html"><span class="bs-toc-num">03</span><span>Voz da marca</span></a>
+      <h4>Tokens</h4>
+      <a href="cores.html"><span class="bs-toc-num">04</span><span>Paleta &amp; cores</span></a>
+      <a href="tipografia.html"><span class="bs-toc-num">05</span><span>Tipografia</span></a>
+      <a href="espaco.html"><span class="bs-toc-num">06</span><span>Espaçamento</span></a>
+      <a href="raio.html"><span class="bs-toc-num">07</span><span>Raio &amp; geometria</span></a>
+      <a href="sombra.html"><span class="bs-toc-num">08</span><span>Sombras &amp; depth</span></a>
+      <a href="motion.html"><span class="bs-toc-num">09</span><span>Motion</span></a>
+      <a href="motion-effects.html" class="is-active"><span class="bs-toc-num">09+</span><span>Motion FX library</span></a>
+      <h4>Componentes</h4>
+      <a href="botoes.html"><span class="bs-toc-num">10</span><span>Botões</span></a>
+      <a href="eyebrows.html"><span class="bs-toc-num">11</span><span>Eyebrows</span></a>
+      <a href="cards.html"><span class="bs-toc-num">12</span><span>Cards</span></a>
+      <a href="stats.html"><span class="bs-toc-num">13</span><span>Stats</span></a>
+      <a href="inputs.html"><span class="bs-toc-num">14</span><span>Inputs &amp; forms</span></a>
+      <a href="badges.html"><span class="bs-toc-num">15</span><span>Badges</span></a>
+      <a href="header.html"><span class="bs-toc-num">16</span><span>Header pill</span></a>
+      <a href="avancados.html"><span class="bs-toc-num">17</span><span>Avançados</span></a>
+      <h4>Padrões</h4>
+      <a href="dobras.html"><span class="bs-toc-num">18</span><span>11 dobras canônicas</span></a>
+      <a href="copy.html"><span class="bs-toc-num">19</span><span>Copy &amp; CTAs</span></a>
+      <a href="marketing.html"><span class="bs-toc-num">20</span><span>Marketing arc</span></a>
+      <h4>Regras</h4>
+      <a href="regras.html"><span class="bs-toc-num">21</span><span>Faça / não faça</span></a>
+      <a href="acessibilidade.html"><span class="bs-toc-num">22</span><span>Acessibilidade</span></a>
+      <a href="quickstart.html"><span class="bs-toc-num">23</span><span>Quickstart</span></a>
+      <h4>Exemplos</h4>
+      <a href="exemplos.html"><span class="bs-toc-num">★</span><span>LP Comunidade</span></a>
+    </nav>
+  </aside>
+
+  <main class="bs-main">
+    <div class="bs-crumbs">
+      <a href="../index.html">Bíblia</a>
+      <span class="sep">/</span>
+      <a href="../index.html#tokens">Tokens</a>
+      <span class="sep">/</span>
+      <span class="current">09+ · Motion FX library</span>
+    </div>
+
+    <header class="bs-pghead">
+      <div class="bs-pghead-num"><span>09+</span><span class="dot"></span><span class="group-tag">Tokens · Biblioteca</span></div>
+      <h1>18 efeitos prontos. <em>Cole e funciona.</em></h1>
+      <p class="bs-pghead-lead">Biblioteca de motion para sites e LPs Entrelaços. Cada cartão tem demo ao vivo + snippet HTML/CSS/JS copiável. Tudo respira na curva-assinatura <code class="bs-inline">cubic-bezier(0.22, 1, 0.36, 1)</code> e suporta <code class="bs-inline">prefers-reduced-motion</code>.</p>
+    </header>
+
+    <div class="bs-body">
+
+      <div class="fx-jump">
+        <span class="fx-jump-label">Saltar para:</span>
+        <a href="#fx-01">01 Reveal</a>
+        <a href="#fx-02">02 Stagger</a>
+        <a href="#fx-03">03 Counter</a>
+        <a href="#fx-04">04 Marquee</a>
+        <a href="#fx-05">05 Lift</a>
+        <a href="#fx-06">06 Magnetic</a>
+        <a href="#fx-07">07 Spotlight</a>
+        <a href="#fx-08">08 Shimmer</a>
+        <a href="#fx-09">09 Underline</a>
+        <a href="#fx-10">10 Press</a>
+        <a href="#fx-11">11 Tilt 3D</a>
+        <a href="#fx-12">12 Ripple</a>
+        <a href="#fx-13">13 Split text</a>
+        <a href="#fx-14">14 Image zoom</a>
+        <a href="#fx-15">15 Progress bar</a>
+        <a href="#fx-16">16 Parallax</a>
+        <a href="#fx-17">17 Pulse</a>
+        <a href="#fx-18">18 Border draw</a>
+      </div>
+
+      <div class="bs-note"><strong>Como usar:</strong> cada snippet é independente. Cole o CSS no seu &lt;style&gt;, o HTML no markup, e o JS no final do &lt;body&gt;. Tudo herda das variáveis do <code class="bs-inline">tokens.css</code> (roxo/laranja/curvas). Se você não tem esses tokens, troque pelos seus hex/curvas.</p>
+
+      <div class="fx-lib">
+
+        <!-- ============ 01 REVEAL ============ -->
+        <section class="fx-card" id="fx-01">
+          <header class="fx-head">
+            <span class="fx-num">01</span>
+            <span class="fx-title">Reveal on scroll <em>· fade + translate</em></span>
+            <span class="fx-tag js">CSS+JS</span>
+          </header>
+          <p class="fx-desc">O efeito mais usado em LPs Entrelaços. Elementos aparecem com <strong>opacity 0→1 + translateY 24px→0</strong> ao entrar no viewport. <code class="bs-inline">IntersectionObserver</code> dispara apenas uma vez por elemento.</p>
+          <div class="fx-demo tall">
+            <div style="display: grid; gap: 16px; width: 100%; max-width: 480px;">
+              <div class="fx-reveal" data-reveal style="padding: 22px 24px; border: 1px solid var(--e-border); border-radius: var(--e-r-lg); background: var(--e-bg-card);"><strong style="color: var(--e-text);">Item 1</strong> — role para revelar</div>
+              <div class="fx-reveal" data-reveal style="padding: 22px 24px; border: 1px solid var(--e-border); border-radius: var(--e-r-lg); background: var(--e-bg-card);"><strong style="color: var(--e-text);">Item 2</strong> — fade + translateY</div>
+              <div class="fx-reveal" data-reveal style="padding: 22px 24px; border: 1px solid var(--e-border); border-radius: var(--e-r-lg); background: var(--e-bg-card);"><strong style="color: var(--e-text);">Item 3</strong> — 800ms ease-out</div>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx01-html">HTML</button>
+            <button class="fx-tab" data-target="fx01-css">CSS</button>
+            <button class="fx-tab" data-target="fx01-js">JS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx01-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-reveal"</span> <span class="tk-attr">data-reveal</span><span class="tk-tag">&gt;</span>Conteúdo<span class="tk-tag">&lt;/div&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx01-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-reveal</span> {
+  opacity: <span class="tk-num">0</span>;
+  transform: translateY(<span class="tk-num">24px</span>);
+  transition: opacity <span class="tk-num">800ms</span> cubic-bezier(<span class="tk-num">0.16, 1, 0.3, 1</span>),
+              transform <span class="tk-num">800ms</span> cubic-bezier(<span class="tk-num">0.16, 1, 0.3, 1</span>);
+}
+<span class="tk-key">.fx-reveal.is-revealed</span> { opacity: <span class="tk-num">1</span>; transform: translateY(<span class="tk-num">0</span>); }</pre></div>
+          <div class="fx-panel" data-panel="fx01-js"><button class="fx-copy">Copiar</button><pre><span class="tk-key">const</span> io = <span class="tk-key">new</span> IntersectionObserver(entries =&gt; {
+  entries.forEach(e =&gt; {
+    <span class="tk-key">if</span> (e.isIntersecting) {
+      e.target.classList.add(<span class="tk-str">'is-revealed'</span>);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: <span class="tk-num">0.18</span>, rootMargin: <span class="tk-str">'0px 0px -10% 0px'</span> });
+
+document.querySelectorAll(<span class="tk-str">'[data-reveal]'</span>).forEach(el =&gt; io.observe(el));</pre></div>
+        </section>
+
+        <!-- ============ 02 STAGGER ============ -->
+        <section class="fx-card" id="fx-02">
+          <header class="fx-head">
+            <span class="fx-num">02</span>
+            <span class="fx-title">Stagger children <em>· cascata em série</em></span>
+            <span class="fx-tag js">CSS+JS</span>
+          </header>
+          <p class="fx-desc">Cards filhos revelam em sequência com delay incremental. Use em grids de pilares, depoimentos, features. <strong>90ms</strong> é o passo padrão Entrelaços — rítmico sem ficar lento.</p>
+          <div class="fx-demo tall">
+            <div data-stagger="90" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100%; max-width: 540px;">
+              <div class="fx-stagger-item" data-stagger-item style="padding: 24px 14px; border: 1px solid var(--e-border); border-radius: var(--e-r-lg); background: var(--e-bg-card); text-align: center; font-family: var(--ff-mono); font-size: 0.78rem; color: var(--e-text);">A</div>
+              <div class="fx-stagger-item" data-stagger-item style="padding: 24px 14px; border: 1px solid var(--e-border); border-radius: var(--e-r-lg); background: var(--e-bg-card); text-align: center; font-family: var(--ff-mono); font-size: 0.78rem; color: var(--e-text);">B</div>
+              <div class="fx-stagger-item" data-stagger-item style="padding: 24px 14px; border: 1px solid var(--e-border); border-radius: var(--e-r-lg); background: var(--e-bg-card); text-align: center; font-family: var(--ff-mono); font-size: 0.78rem; color: var(--e-text);">C</div>
+              <div class="fx-stagger-item" data-stagger-item style="padding: 24px 14px; border: 1px solid var(--e-border); border-radius: var(--e-r-lg); background: var(--e-bg-card); text-align: center; font-family: var(--ff-mono); font-size: 0.78rem; color: var(--e-text);">D</div>
+              <div class="fx-stagger-item" data-stagger-item style="padding: 24px 14px; border: 1px solid var(--e-border); border-radius: var(--e-r-lg); background: var(--e-bg-card); text-align: center; font-family: var(--ff-mono); font-size: 0.78rem; color: var(--e-text);">E</div>
+              <div class="fx-stagger-item" data-stagger-item style="padding: 24px 14px; border: 1px solid var(--e-border); border-radius: var(--e-r-lg); background: var(--e-bg-card); text-align: center; font-family: var(--ff-mono); font-size: 0.78rem; color: var(--e-text);">F</div>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx02-html">HTML</button>
+            <button class="fx-tab" data-target="fx02-css">CSS</button>
+            <button class="fx-tab" data-target="fx02-js">JS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx02-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;div</span> <span class="tk-attr">data-stagger</span>=<span class="tk-str">"90"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-stagger-item"</span> <span class="tk-attr">data-stagger-item</span><span class="tk-tag">&gt;</span>A<span class="tk-tag">&lt;/div&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-stagger-item"</span> <span class="tk-attr">data-stagger-item</span><span class="tk-tag">&gt;</span>B<span class="tk-tag">&lt;/div&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-stagger-item"</span> <span class="tk-attr">data-stagger-item</span><span class="tk-tag">&gt;</span>C<span class="tk-tag">&lt;/div&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx02-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-stagger-item</span> {
+  opacity: <span class="tk-num">0</span>;
+  transform: translateY(<span class="tk-num">18px</span>);
+  transition: opacity <span class="tk-num">600ms</span> cubic-bezier(<span class="tk-num">0.16, 1, 0.3, 1</span>),
+              transform <span class="tk-num">600ms</span> cubic-bezier(<span class="tk-num">0.16, 1, 0.3, 1</span>);
+}
+<span class="tk-key">.fx-stagger-item.is-revealed</span> { opacity: <span class="tk-num">1</span>; transform: translateY(<span class="tk-num">0</span>); }</pre></div>
+          <div class="fx-panel" data-panel="fx02-js"><button class="fx-copy">Copiar</button><pre>document.querySelectorAll(<span class="tk-str">'[data-stagger]'</span>).forEach(group =&gt; {
+  <span class="tk-key">const</span> kids = group.querySelectorAll(<span class="tk-str">'[data-stagger-item]'</span>);
+  <span class="tk-key">const</span> step = parseInt(group.dataset.stagger || <span class="tk-str">'90'</span>);
+  <span class="tk-key">const</span> io = <span class="tk-key">new</span> IntersectionObserver(entries =&gt; {
+    entries.forEach(e =&gt; {
+      <span class="tk-key">if</span> (e.isIntersecting) {
+        kids.forEach((c, i) =&gt; setTimeout(() =&gt; c.classList.add(<span class="tk-str">'is-revealed'</span>), i * step));
+        io.unobserve(group);
+      }
+    });
+  }, { threshold: <span class="tk-num">0.18</span> });
+  io.observe(group);
+});</pre></div>
+        </section>
+
+        <!-- ============ 03 COUNTER ============ -->
+        <section class="fx-card" id="fx-03">
+          <header class="fx-head">
+            <span class="fx-num">03</span>
+            <span class="fx-title">Counter animado <em>· 0 ao alvo</em></span>
+            <span class="fx-tag js">JS</span>
+          </header>
+          <p class="fx-desc">Stats que animam quando entram na tela. Curva <strong>cubic-out</strong> em <strong>1800ms</strong>. Aceita decimais e sufixos (%, +, x).</p>
+          <div class="fx-demo tall">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; width: 100%; max-width: 640px; text-align: center;">
+              <div><div data-count="120" data-suffix="+" style="font-family: var(--ff-mono); font-size: 2.4rem; color: var(--e-text);">0</div><div style="font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.18em; color: var(--e-text-muted); text-transform: uppercase; margin-top: 4px;">Mulheres</div></div>
+              <div><div data-count="98.5" data-suffix="%" style="font-family: var(--ff-mono); font-size: 2.4rem; color: var(--e-text);">0</div><div style="font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.18em; color: var(--e-text-muted); text-transform: uppercase; margin-top: 4px;">Retenção</div></div>
+              <div><div data-count="3" data-suffix="x" style="font-family: var(--ff-mono); font-size: 2.4rem; color: var(--e-text);">0</div><div style="font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.18em; color: var(--e-text-muted); text-transform: uppercase; margin-top: 4px;">Crescimento</div></div>
+              <div><div data-count="14" style="font-family: var(--ff-mono); font-size: 2.4rem; color: var(--e-text);">0</div><div style="font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.18em; color: var(--e-text-muted); text-transform: uppercase; margin-top: 4px;">Cohorts</div></div>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx03-html">HTML</button>
+            <button class="fx-tab" data-target="fx03-js">JS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx03-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;div</span> <span class="tk-attr">data-count</span>=<span class="tk-str">"120"</span> <span class="tk-attr">data-suffix</span>=<span class="tk-str">"+"</span><span class="tk-tag">&gt;</span>0<span class="tk-tag">&lt;/div&gt;</span>
+<span class="tk-tag">&lt;div</span> <span class="tk-attr">data-count</span>=<span class="tk-str">"98.5"</span> <span class="tk-attr">data-suffix</span>=<span class="tk-str">"%"</span><span class="tk-tag">&gt;</span>0<span class="tk-tag">&lt;/div&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx03-js"><button class="fx-copy">Copiar</button><pre><span class="tk-key">const</span> easeOut = t =&gt; <span class="tk-num">1</span> - Math.pow(<span class="tk-num">1</span> - t, <span class="tk-num">3</span>);
+
+<span class="tk-key">const</span> animate = (el) =&gt; {
+  <span class="tk-key">const</span> target = parseFloat(el.dataset.count);
+  <span class="tk-key">const</span> suffix = el.dataset.suffix || <span class="tk-str">''</span>;
+  <span class="tk-key">const</span> decimals = (el.dataset.count.split(<span class="tk-str">'.'</span>)[<span class="tk-num">1</span>] || <span class="tk-str">''</span>).length;
+  <span class="tk-key">const</span> start = performance.now();
+  <span class="tk-key">const</span> tick = (now) =&gt; {
+    <span class="tk-key">const</span> t = Math.min(<span class="tk-num">1</span>, (now - start) / <span class="tk-num">1800</span>);
+    el.textContent = (target * easeOut(t)).toFixed(decimals) + suffix;
+    <span class="tk-key">if</span> (t &lt; <span class="tk-num">1</span>) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+
+<span class="tk-key">const</span> io = <span class="tk-key">new</span> IntersectionObserver(entries =&gt; {
+  entries.forEach(e =&gt; { <span class="tk-key">if</span> (e.isIntersecting) { animate(e.target); io.unobserve(e.target); } });
+}, { threshold: <span class="tk-num">0.5</span> });
+
+document.querySelectorAll(<span class="tk-str">'[data-count]'</span>).forEach(el =&gt; io.observe(el));</pre></div>
+        </section>
+
+        <!-- ============ 04 MARQUEE ============ -->
+        <section class="fx-card" id="fx-04">
+          <header class="fx-head">
+            <span class="fx-num">04</span>
+            <span class="fx-title">Marquee infinito <em>· logos / palavras</em></span>
+            <span class="fx-tag css">CSS</span>
+          </header>
+          <p class="fx-desc">Esteira horizontal contínua para trust strips, palavras-chave, logos. <strong>Pausa no hover</strong>. Mask gradiente nas bordas para fade-in/out elegante. Sem JS — duplica o conteúdo no HTML.</p>
+          <div class="fx-demo">
+            <div class="fx-marquee" style="width: 100%;">
+              <div class="fx-marquee-track">
+                <span class="fx-marquee-item">Confronto fértil</span>
+                <span class="fx-marquee-item">Densidade emocional</span>
+                <span class="fx-marquee-item">Travessia, não promessa</span>
+                <span class="fx-marquee-item">Comunidade primeiro</span>
+                <span class="fx-marquee-item">Confronto fértil</span>
+                <span class="fx-marquee-item">Densidade emocional</span>
+                <span class="fx-marquee-item">Travessia, não promessa</span>
+                <span class="fx-marquee-item">Comunidade primeiro</span>
+              </div>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx04-html">HTML</button>
+            <button class="fx-tab" data-target="fx04-css">CSS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx04-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-marquee"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-marquee-track"</span><span class="tk-tag">&gt;</span>
+    <span class="tk-com">&lt;!-- duplique a lista 2x para loop sem corte --&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-marquee-item"</span><span class="tk-tag">&gt;</span>Item A<span class="tk-tag">&lt;/span&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-marquee-item"</span><span class="tk-tag">&gt;</span>Item B<span class="tk-tag">&lt;/span&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-marquee-item"</span><span class="tk-tag">&gt;</span>Item A<span class="tk-tag">&lt;/span&gt;</span>
+    <span class="tk-tag">&lt;span</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-marquee-item"</span><span class="tk-tag">&gt;</span>Item B<span class="tk-tag">&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;/div&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx04-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-marquee</span> {
+  overflow: hidden;
+  mask-image: linear-gradient(<span class="tk-num">90deg</span>, transparent, <span class="tk-num">#000 12%</span>, <span class="tk-num">#000 88%</span>, transparent);
+}
+<span class="tk-key">.fx-marquee-track</span> {
+  display: flex;
+  gap: <span class="tk-num">48px</span>;
+  width: max-content;
+  animation: fx-marquee-x <span class="tk-num">24s</span> linear infinite;
+}
+<span class="tk-key">.fx-marquee:hover .fx-marquee-track</span> { animation-play-state: paused; }
+<span class="tk-key">@keyframes fx-marquee-x</span> {
+  from { transform: translateX(<span class="tk-num">0</span>); }
+  to   { transform: translateX(<span class="tk-num">-50%</span>); }
+}</pre></div>
+        </section>
+
+        <!-- ============ 05 LIFT ============ -->
+        <section class="fx-card" id="fx-05">
+          <header class="fx-head">
+            <span class="fx-num">05</span>
+            <span class="fx-title">Hover lift <em>· o card respira</em></span>
+            <span class="fx-tag css">CSS</span>
+          </header>
+          <p class="fx-desc">O hover canônico de cards Entrelaços. <strong>translateY(-4px)</strong> + sombra roxa colorida + borda assumindo o tom da marca. Nunca sombra preta.</p>
+          <div class="fx-demo">
+            <div class="fx-lift">
+              <h6>Passe o mouse</h6>
+              <p>Lift + glow roxo. Curva 0.22, 1, 0.36, 1.</p>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx05-html">HTML</button>
+            <button class="fx-tab" data-target="fx05-css">CSS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx05-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-lift"</span><span class="tk-tag">&gt;</span>...<span class="tk-tag">&lt;/div&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx05-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-lift</span> {
+  transition: transform <span class="tk-num">300ms</span> cubic-bezier(<span class="tk-num">0.22, 1, 0.36, 1</span>),
+              border-color <span class="tk-num">300ms</span>,
+              box-shadow <span class="tk-num">300ms</span>;
+}
+<span class="tk-key">.fx-lift:hover</span> {
+  transform: translateY(<span class="tk-num">-4px</span>);
+  border-color: <span class="tk-str">#A878EC</span>;
+  box-shadow: <span class="tk-num">0 12px 30px</span> rgba(<span class="tk-num">116,39,212,0.30</span>);
+}</pre></div>
+        </section>
+
+        <!-- ============ 06 MAGNETIC ============ -->
+        <section class="fx-card" id="fx-06">
+          <header class="fx-head">
+            <span class="fx-num">06</span>
+            <span class="fx-title">Magnetic button <em>· segue o cursor</em></span>
+            <span class="fx-tag js">CSS+JS</span>
+          </header>
+          <p class="fx-desc">CTAs que reagem fisicamente ao cursor. Movem-se ~35% da distância até o ponteiro. <strong>Use com parcimônia</strong> — só 1 botão por dobra. Excessivo cansa.</p>
+          <div class="fx-demo">
+            <a href="#" class="e-btn e-btn-primary fx-magnetic-wrap" data-magnetic="0.35" style="font-size: 0.95rem;">Quero entrar <span>→</span></a>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx06-html">HTML</button>
+            <button class="fx-tab" data-target="fx06-js">JS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx06-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;a</span> <span class="tk-attr">class</span>=<span class="tk-str">"e-btn fx-magnetic-wrap"</span> <span class="tk-attr">data-magnetic</span>=<span class="tk-str">"0.35"</span><span class="tk-tag">&gt;</span>Botão<span class="tk-tag">&lt;/a&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx06-js"><button class="fx-copy">Copiar</button><pre>document.querySelectorAll(<span class="tk-str">'[data-magnetic]'</span>).forEach(btn =&gt; {
+  <span class="tk-key">const</span> strength = parseFloat(btn.dataset.magnetic) || <span class="tk-num">0.35</span>;
+  btn.addEventListener(<span class="tk-str">'mousemove'</span>, e =&gt; {
+    <span class="tk-key">const</span> r = btn.getBoundingClientRect();
+    <span class="tk-key">const</span> dx = (e.clientX - r.left - r.width / <span class="tk-num">2</span>) * strength;
+    <span class="tk-key">const</span> dy = (e.clientY - r.top - r.height / <span class="tk-num">2</span>) * strength;
+    btn.style.transform = `translate(${dx}px, ${dy}px)`;
+  });
+  btn.addEventListener(<span class="tk-str">'mouseleave'</span>, () =&gt; { btn.style.transform = <span class="tk-str">'translate(0,0)'</span>; });
+});</pre></div>
+        </section>
+
+        <!-- ============ 07 SPOTLIGHT ============ -->
+        <section class="fx-card" id="fx-07">
+          <header class="fx-head">
+            <span class="fx-num">07</span>
+            <span class="fx-title">Cursor spotlight <em>· radial seguindo o mouse</em></span>
+            <span class="fx-tag js">CSS+JS</span>
+          </header>
+          <p class="fx-desc">A "luz roxa" que segue o cursor dentro do card. CSS controla o gradiente via custom-properties; o JS só atualiza <code class="bs-inline">--mx</code> e <code class="bs-inline">--my</code>.</p>
+          <div class="fx-demo">
+            <div class="fx-spot" data-spotlight>
+              <h6 style="color: var(--e-text);">Mova o mouse aqui</h6>
+              <p>Spotlight roxo segue o cursor. Aparece só no hover. Performance ótima — só atualiza CSS vars.</p>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx07-html">HTML</button>
+            <button class="fx-tab" data-target="fx07-css">CSS</button>
+            <button class="fx-tab" data-target="fx07-js">JS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx07-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-spot"</span> <span class="tk-attr">data-spotlight</span><span class="tk-tag">&gt;</span>...<span class="tk-tag">&lt;/div&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx07-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-spot</span> { position: relative; overflow: hidden; }
+<span class="tk-key">.fx-spot::before</span> {
+  content: <span class="tk-str">''</span>;
+  position: absolute; inset: <span class="tk-num">0</span>;
+  background: radial-gradient(circle at <span class="tk-num">var(--mx, 50%) var(--my, 50%)</span>,
+              rgba(<span class="tk-num">168,120,236,0.18</span>) <span class="tk-num">0%</span>, transparent <span class="tk-num">40%</span>);
+  opacity: <span class="tk-num">0</span>;
+  transition: opacity <span class="tk-num">300ms</span>;
+  pointer-events: none;
+}
+<span class="tk-key">.fx-spot:hover::before</span> { opacity: <span class="tk-num">1</span>; }</pre></div>
+          <div class="fx-panel" data-panel="fx07-js"><button class="fx-copy">Copiar</button><pre>document.querySelectorAll(<span class="tk-str">'[data-spotlight]'</span>).forEach(el =&gt; {
+  el.addEventListener(<span class="tk-str">'mousemove'</span>, e =&gt; {
+    <span class="tk-key">const</span> r = el.getBoundingClientRect();
+    el.style.setProperty(<span class="tk-str">'--mx'</span>, ((e.clientX - r.left) / r.width * <span class="tk-num">100</span>) + <span class="tk-str">'%'</span>);
+    el.style.setProperty(<span class="tk-str">'--my'</span>, ((e.clientY - r.top) / r.height * <span class="tk-num">100</span>) + <span class="tk-str">'%'</span>);
+  });
+});</pre></div>
+        </section>
+
+        <!-- ============ 08 SHIMMER ============ -->
+        <section class="fx-card" id="fx-08">
+          <header class="fx-head">
+            <span class="fx-num">08</span>
+            <span class="fx-title">Gradient text shimmer <em>· brilho circular</em></span>
+            <span class="fx-tag css">CSS</span>
+          </header>
+          <p class="fx-desc">Texto com gradiente animado em loop infinito. Use em palavras-chave do hero, manifesto, ou frases-âncora. <strong>Nunca</strong> em parágrafos longos — vira distração.</p>
+          <div class="fx-demo">
+            <span class="fx-shimmer">A travessia começa quando você <em>para de fingir.</em></span>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx08-html">HTML</button>
+            <button class="fx-tab" data-target="fx08-css">CSS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx08-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;span</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-shimmer"</span><span class="tk-tag">&gt;</span>Texto brilhante<span class="tk-tag">&lt;/span&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx08-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-shimmer</span> {
+  background: linear-gradient(<span class="tk-num">90deg</span>,
+    <span class="tk-str">#C9A7F4 0%</span>, <span class="tk-str">#fff 25%</span>,
+    <span class="tk-str">#FFB87A 50%</span>, <span class="tk-str">#fff 75%</span>,
+    <span class="tk-str">#C9A7F4 100%</span>);
+  background-size: <span class="tk-num">200% 100%</span>;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fx-shimmer-x <span class="tk-num">6s</span> linear infinite;
+}
+<span class="tk-key">@keyframes fx-shimmer-x</span> {
+  from { background-position: <span class="tk-num">200% 0</span>; }
+  to   { background-position: <span class="tk-num">-200% 0</span>; }
+}</pre></div>
+        </section>
+
+        <!-- ============ 09 UNDERLINE ============ -->
+        <section class="fx-card" id="fx-09">
+          <header class="fx-head">
+            <span class="fx-num">09</span>
+            <span class="fx-title">Underline reveal <em>· direção bidirecional</em></span>
+            <span class="fx-tag css">CSS</span>
+          </header>
+          <p class="fx-desc">Sublinhado que entra da direita e sai pela esquerda — sensação de <em>direção</em>, não de aparecer. Padrão Entrelaços para links inline e nav-items.</p>
+          <div class="fx-demo">
+            <div style="display: flex; gap: 32px; flex-wrap: wrap;">
+              <a href="#" class="fx-underline">Sobre</a>
+              <a href="#" class="fx-underline">Cohort</a>
+              <a href="#" class="fx-underline">Hub Aberto</a>
+              <a href="#" class="fx-underline">Contato</a>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx09-html">HTML</button>
+            <button class="fx-tab" data-target="fx09-css">CSS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx09-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;a</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-underline"</span><span class="tk-tag">&gt;</span>Link<span class="tk-tag">&lt;/a&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx09-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-underline</span> { position: relative; display: inline-block; padding-bottom: <span class="tk-num">4px</span>; }
+<span class="tk-key">.fx-underline::after</span> {
+  content: <span class="tk-str">''</span>;
+  position: absolute; left: <span class="tk-num">0</span>; bottom: <span class="tk-num">0</span>;
+  width: <span class="tk-num">100%</span>; height: <span class="tk-num">1px</span>;
+  background: <span class="tk-str">#A878EC</span>;
+  transform: scaleX(<span class="tk-num">0</span>);
+  transform-origin: right;
+  transition: transform <span class="tk-num">450ms</span> cubic-bezier(<span class="tk-num">0.22, 1, 0.36, 1</span>);
+}
+<span class="tk-key">.fx-underline:hover::after</span> { transform: scaleX(<span class="tk-num">1</span>); transform-origin: left; }</pre></div>
+        </section>
+
+        <!-- ============ 10 PRESS ============ -->
+        <section class="fx-card" id="fx-10">
+          <header class="fx-head">
+            <span class="fx-num">10</span>
+            <span class="fx-title">Button press <em>· o tato do clique</em></span>
+            <span class="fx-tag css">CSS</span>
+          </header>
+          <p class="fx-desc">Feedback tátil em CTAs. <strong>scale(0.96)</strong> em 150ms com curva spring. Faltar isso é o que separa um botão real de um botão SaaS.</p>
+          <div class="fx-demo">
+            <button class="e-btn e-btn-primary fx-press">Pressione (clique)</button>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx10-css">CSS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx10-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-press</span> {
+  transition: transform <span class="tk-num">150ms</span> cubic-bezier(<span class="tk-num">0.34, 1.56, 0.64, 1</span>);
+}
+<span class="tk-key">.fx-press:active</span> { transform: scale(<span class="tk-num">0.96</span>); }</pre></div>
+        </section>
+
+        <!-- ============ 11 TILT 3D ============ -->
+        <section class="fx-card" id="fx-11">
+          <header class="fx-head">
+            <span class="fx-num">11</span>
+            <span class="fx-title">Tilt 3D <em>· cartão respondendo</em></span>
+            <span class="fx-tag js">CSS+JS</span>
+          </header>
+          <p class="fx-desc">Card inclina-se no eixo X/Y conforme o mouse. <strong>Máximo 8°</strong> — mais que isso vira gimmick. Use em cards-destaque (membro, manifesto, oferta), nunca em grids inteiros.</p>
+          <div class="fx-demo tall">
+            <div class="fx-tilt" data-tilt="8">
+              <h6>Travessia</h6>
+              <p>Mova o mouse sobre este cartão para ver o efeito 3D Entrelaços.</p>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx11-html">HTML</button>
+            <button class="fx-tab" data-target="fx11-css">CSS</button>
+            <button class="fx-tab" data-target="fx11-js">JS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx11-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-tilt"</span> <span class="tk-attr">data-tilt</span>=<span class="tk-str">"8"</span><span class="tk-tag">&gt;</span>...<span class="tk-tag">&lt;/div&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx11-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-tilt</span> {
+  transition: transform <span class="tk-num">200ms</span> cubic-bezier(<span class="tk-num">0.22, 1, 0.36, 1</span>);
+  transform-style: preserve-3d;
+  will-change: transform;
+}</pre></div>
+          <div class="fx-panel" data-panel="fx11-js"><button class="fx-copy">Copiar</button><pre>document.querySelectorAll(<span class="tk-str">'[data-tilt]'</span>).forEach(card =&gt; {
+  <span class="tk-key">const</span> max = parseFloat(card.dataset.tilt) || <span class="tk-num">8</span>;
+  card.addEventListener(<span class="tk-str">'mousemove'</span>, e =&gt; {
+    <span class="tk-key">const</span> r = card.getBoundingClientRect();
+    <span class="tk-key">const</span> px = (e.clientX - r.left) / r.width - <span class="tk-num">0.5</span>;
+    <span class="tk-key">const</span> py = (e.clientY - r.top) / r.height - <span class="tk-num">0.5</span>;
+    card.style.transform = `perspective(900px) rotateY(${px*max}deg) rotateX(${-py*max}deg)`;
+  });
+  card.addEventListener(<span class="tk-str">'mouseleave'</span>, () =&gt; {
+    card.style.transform = <span class="tk-str">'perspective(900px) rotateY(0) rotateX(0)'</span>;
+  });
+});</pre></div>
+        </section>
+
+        <!-- ============ 12 RIPPLE ============ -->
+        <section class="fx-card" id="fx-12">
+          <header class="fx-head">
+            <span class="fx-num">12</span>
+            <span class="fx-title">Ripple click <em>· onda concêntrica</em></span>
+            <span class="fx-tag js">CSS+JS</span>
+          </header>
+          <p class="fx-desc">Onda que nasce no ponto de clique e se expande. <strong>Material Design</strong> reaproveitado com tokens Entrelaços. Bom em CTAs principais — reforça "algo aconteceu".</p>
+          <div class="fx-demo">
+            <button class="e-btn e-btn-primary fx-ripple-host" data-ripple style="position: relative; overflow: hidden;">Clique aqui</button>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx12-html">HTML</button>
+            <button class="fx-tab" data-target="fx12-css">CSS</button>
+            <button class="fx-tab" data-target="fx12-js">JS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx12-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;button</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-ripple-host"</span> <span class="tk-attr">data-ripple</span><span class="tk-tag">&gt;</span>Clique<span class="tk-tag">&lt;/button&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx12-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-ripple-host</span> { position: relative; overflow: hidden; isolation: isolate; }
+<span class="tk-key">.fx-ripple-wave</span> {
+  position: absolute;
+  border-radius: <span class="tk-num">50%</span>;
+  background: rgba(<span class="tk-num">255,255,255,0.35</span>);
+  transform: scale(<span class="tk-num">0</span>);
+  animation: fx-ripple <span class="tk-num">700ms</span> cubic-bezier(<span class="tk-num">0.22, 1, 0.36, 1</span>) forwards;
+  pointer-events: none;
+}
+<span class="tk-key">@keyframes fx-ripple</span> { to { transform: scale(<span class="tk-num">1</span>); opacity: <span class="tk-num">0</span>; } }</pre></div>
+          <div class="fx-panel" data-panel="fx12-js"><button class="fx-copy">Copiar</button><pre>document.querySelectorAll(<span class="tk-str">'[data-ripple]'</span>).forEach(btn =&gt; {
+  btn.addEventListener(<span class="tk-str">'click'</span>, e =&gt; {
+    <span class="tk-key">const</span> r = btn.getBoundingClientRect();
+    <span class="tk-key">const</span> ripple = document.createElement(<span class="tk-str">'span'</span>);
+    ripple.className = <span class="tk-str">'fx-ripple-wave'</span>;
+    <span class="tk-key">const</span> size = Math.max(r.width, r.height) * <span class="tk-num">2</span>;
+    ripple.style.width = ripple.style.height = size + <span class="tk-str">'px'</span>;
+    ripple.style.left = (e.clientX - r.left - size/<span class="tk-num">2</span>) + <span class="tk-str">'px'</span>;
+    ripple.style.top = (e.clientY - r.top - size/<span class="tk-num">2</span>) + <span class="tk-str">'px'</span>;
+    btn.appendChild(ripple);
+    setTimeout(() =&gt; ripple.remove(), <span class="tk-num">700</span>);
+  });
+});</pre></div>
+        </section>
+
+        <!-- ============ 13 SPLIT TEXT ============ -->
+        <section class="fx-card" id="fx-13">
+          <header class="fx-head">
+            <span class="fx-num">13</span>
+            <span class="fx-title">Split text <em>· letra por letra</em></span>
+            <span class="fx-tag js">CSS+JS</span>
+          </header>
+          <p class="fx-desc">Headline revela letra por letra. Use <strong>uma vez</strong> por página — no hero ou no manifesto. Repetir tira o impacto.</p>
+          <div class="fx-demo tall">
+            <h2 data-split style="font-family: var(--ff-sans); font-size: clamp(1.4rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -0.02em; color: var(--e-text); text-align: center; max-width: 540px;">A travessia começa aqui.</h2>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx13-html">HTML</button>
+            <button class="fx-tab" data-target="fx13-css">CSS</button>
+            <button class="fx-tab" data-target="fx13-js">JS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx13-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;h2</span> <span class="tk-attr">data-split</span><span class="tk-tag">&gt;</span>A travessia começa aqui.<span class="tk-tag">&lt;/h2&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx13-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-split-char</span> {
+  display: inline-block;
+  opacity: <span class="tk-num">0</span>;
+  transform: translateY(<span class="tk-num">0.4em</span>);
+  transition: opacity <span class="tk-num">600ms</span> cubic-bezier(<span class="tk-num">0.16, 1, 0.3, 1</span>),
+              transform <span class="tk-num">600ms</span> cubic-bezier(<span class="tk-num">0.16, 1, 0.3, 1</span>);
+}
+<span class="tk-key">[data-split].is-revealed .fx-split-char</span> { opacity: <span class="tk-num">1</span>; transform: translateY(<span class="tk-num">0</span>); }</pre></div>
+          <div class="fx-panel" data-panel="fx13-js"><button class="fx-copy">Copiar</button><pre>document.querySelectorAll(<span class="tk-str">'[data-split]'</span>).forEach(el =&gt; {
+  <span class="tk-key">const</span> text = el.textContent;
+  el.textContent = <span class="tk-str">''</span>;
+  [...text].forEach((ch, i) =&gt; {
+    <span class="tk-key">const</span> span = document.createElement(<span class="tk-str">'span'</span>);
+    span.className = <span class="tk-str">'fx-split-char'</span>;
+    span.textContent = ch === <span class="tk-str">' '</span> ? <span class="tk-str">'\u00A0'</span> : ch;
+    span.style.transitionDelay = (i * <span class="tk-num">25</span>) + <span class="tk-str">'ms'</span>;
+    el.appendChild(span);
+  });
+  <span class="tk-key">const</span> io = <span class="tk-key">new</span> IntersectionObserver(entries =&gt; {
+    entries.forEach(e =&gt; { <span class="tk-key">if</span> (e.isIntersecting) { e.target.classList.add(<span class="tk-str">'is-revealed'</span>); io.unobserve(e.target); } });
+  }, { threshold: <span class="tk-num">0.5</span> });
+  io.observe(el);
+});</pre></div>
+        </section>
+
+        <!-- ============ 14 ZOOM ============ -->
+        <section class="fx-card" id="fx-14">
+          <header class="fx-head">
+            <span class="fx-num">14</span>
+            <span class="fx-title">Image zoom <em>· slow-burn</em></span>
+            <span class="fx-tag css">CSS</span>
+          </header>
+          <p class="fx-desc">Imagem cresce lentamente no hover dentro de um container com <code class="bs-inline">overflow: hidden</code>. <strong>1200ms</strong> é proposital — sensação de cinema, não de SaaS.</p>
+          <div class="fx-demo">
+            <div class="fx-zoom">
+              <div class="fx-zoom-img"></div>
+              <span class="fx-zoom-cap">Comunidade · 2024</span>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx14-html">HTML</button>
+            <button class="fx-tab" data-target="fx14-css">CSS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx14-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-zoom"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;img</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-zoom-img"</span> <span class="tk-attr">src</span>=<span class="tk-str">"foto.jpg"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-zoom-cap"</span><span class="tk-tag">&gt;</span>Legenda<span class="tk-tag">&lt;/span&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx14-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-zoom</span> { overflow: hidden; position: relative; }
+<span class="tk-key">.fx-zoom-img</span> {
+  transition: transform <span class="tk-num">1200ms</span> cubic-bezier(<span class="tk-num">0.22, 1, 0.36, 1</span>);
+}
+<span class="tk-key">.fx-zoom:hover .fx-zoom-img</span> { transform: scale(<span class="tk-num">1.12</span>); }</pre></div>
+        </section>
+
+        <!-- ============ 15 PROGRESS BAR ============ -->
+        <section class="fx-card" id="fx-15">
+          <header class="fx-head">
+            <span class="fx-num">15</span>
+            <span class="fx-title">Scroll progress bar <em>· o quanto falta</em></span>
+            <span class="fx-tag js">CSS+JS</span>
+          </header>
+          <p class="fx-desc">Barra fina (3px) no topo da tela mostrando progresso da leitura. Útil em LPs longas e artigos. Demo abaixo mostra a barra com valor sintético — em produção é fixed top-0.</p>
+          <div class="fx-demo">
+            <div class="fx-progress"><div class="fx-progress-bar" id="fxDemoProgress" style="transform: scaleX(0.42);"></div></div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx15-html">HTML</button>
+            <button class="fx-tab" data-target="fx15-css">CSS</button>
+            <button class="fx-tab" data-target="fx15-js">JS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx15-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-progress"</span><span class="tk-tag">&gt;</span>
+  <span class="tk-tag">&lt;div</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-progress-bar"</span> <span class="tk-attr">data-scroll-progress</span><span class="tk-tag">&gt;&lt;/div&gt;</span>
+<span class="tk-tag">&lt;/div&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx15-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-progress</span> {
+  position: fixed; top: <span class="tk-num">0</span>; left: <span class="tk-num">0</span>; right: <span class="tk-num">0</span>;
+  height: <span class="tk-num">3px</span>;
+  background: rgba(<span class="tk-num">180,140,255,0.10</span>);
+  z-index: <span class="tk-num">200</span>;
+}
+<span class="tk-key">.fx-progress-bar</span> {
+  height: <span class="tk-num">100%</span>;
+  background: linear-gradient(<span class="tk-num">90deg</span>, <span class="tk-str">#7427d4</span>, <span class="tk-str">#ff8a1f</span>);
+  transform-origin: left;
+  transform: scaleX(<span class="tk-num">0</span>);
+  transition: transform <span class="tk-num">90ms</span> linear;
+}</pre></div>
+          <div class="fx-panel" data-panel="fx15-js"><button class="fx-copy">Copiar</button><pre><span class="tk-key">const</span> bar = document.querySelector(<span class="tk-str">'[data-scroll-progress]'</span>);
+<span class="tk-key">const</span> update = () =&gt; {
+  <span class="tk-key">const</span> h = document.documentElement;
+  <span class="tk-key">const</span> p = h.scrollTop / (h.scrollHeight - h.clientHeight);
+  bar.style.transform = `scaleX(${p})`;
+};
+document.addEventListener(<span class="tk-str">'scroll'</span>, update, { passive: <span class="tk-key">true</span> });
+update();</pre></div>
+        </section>
+
+        <!-- ============ 16 PARALLAX ============ -->
+        <section class="fx-card" id="fx-16">
+          <header class="fx-head">
+            <span class="fx-num">16</span>
+            <span class="fx-title">Parallax simples <em>· camadas profundas</em></span>
+            <span class="fx-tag js">JS</span>
+          </header>
+          <p class="fx-desc">Elementos se movem em velocidades diferentes durante o scroll. Use em <strong>backgrounds decorativos</strong> (uma palavra serif gigante atrás, por exemplo) — nunca em texto-âncora.</p>
+          <div class="fx-demo">
+            <div class="fx-parallax-stage">
+              <div class="fx-parallax-layer" data-parallax="0.4">Travessia</div>
+              <div class="fx-parallax-layer front">Comunidade</div>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx16-html">HTML</button>
+            <button class="fx-tab" data-target="fx16-js">JS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx16-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;div</span> <span class="tk-attr">data-parallax</span>=<span class="tk-str">"0.4"</span><span class="tk-tag">&gt;</span>Camada lenta<span class="tk-tag">&lt;/div&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx16-js"><button class="fx-copy">Copiar</button><pre><span class="tk-key">const</span> els = document.querySelectorAll(<span class="tk-str">'[data-parallax]'</span>);
+<span class="tk-key">const</span> update = () =&gt; {
+  els.forEach(el =&gt; {
+    <span class="tk-key">const</span> speed = parseFloat(el.dataset.parallax) || <span class="tk-num">0.3</span>;
+    <span class="tk-key">const</span> r = el.getBoundingClientRect();
+    <span class="tk-key">const</span> mid = window.innerHeight / <span class="tk-num">2</span>;
+    <span class="tk-key">const</span> offset = (r.top + r.height/<span class="tk-num">2</span> - mid) * -speed;
+    el.style.transform = `translateY(${offset}px)`;
+  });
+};
+document.addEventListener(<span class="tk-str">'scroll'</span>, update, { passive: <span class="tk-key">true</span> });
+update();</pre></div>
+        </section>
+
+        <!-- ============ 17 PULSE ============ -->
+        <section class="fx-card" id="fx-17">
+          <header class="fx-head">
+            <span class="fx-num">17</span>
+            <span class="fx-title">Pulse / live indicator <em>· "está acontecendo"</em></span>
+            <span class="fx-tag css">CSS</span>
+          </header>
+          <p class="fx-desc">Ponto pulsante para indicar status ao vivo, vagas abertas, urgência. <strong>Dois ::before/::after</strong> defasados criam ondas concêntricas.</p>
+          <div class="fx-demo">
+            <div style="display: inline-flex; align-items: center; gap: 14px; padding: 10px 18px; border-radius: 9999px; border: 1px solid var(--e-border); background: var(--e-bg-card); font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--e-text-secondary);">
+              <span class="fx-pulse"></span>
+              <span>Inscrições abertas</span>
+            </div>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx17-html">HTML</button>
+            <button class="fx-tab" data-target="fx17-css">CSS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx17-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;span</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-pulse"</span><span class="tk-tag">&gt;&lt;/span&gt;</span> <span class="tk-tag">&lt;span&gt;</span>Ao vivo<span class="tk-tag">&lt;/span&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx17-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-pulse</span> {
+  display: inline-block; width: <span class="tk-num">18px</span>; height: <span class="tk-num">18px</span>;
+  border-radius: <span class="tk-num">50%</span>; background: <span class="tk-str">#7427d4</span>;
+  position: relative;
+}
+<span class="tk-key">.fx-pulse::before, .fx-pulse::after</span> {
+  content: <span class="tk-str">''</span>;
+  position: absolute; inset: <span class="tk-num">0</span>;
+  border-radius: <span class="tk-num">50%</span>;
+  border: <span class="tk-num">1px</span> solid <span class="tk-str">#A878EC</span>;
+  animation: fx-pulse-out <span class="tk-num">2.4s</span> cubic-bezier(<span class="tk-num">0.16, 1, 0.3, 1</span>) infinite;
+}
+<span class="tk-key">.fx-pulse::after</span> { animation-delay: <span class="tk-num">1.2s</span>; }
+<span class="tk-key">@keyframes fx-pulse-out</span> {
+  <span class="tk-num">0%</span>   { transform: scale(<span class="tk-num">1</span>); opacity: <span class="tk-num">1</span>; }
+  <span class="tk-num">100%</span> { transform: scale(<span class="tk-num">2.6</span>); opacity: <span class="tk-num">0</span>; }
+}</pre></div>
+        </section>
+
+        <!-- ============ 18 BORDER DRAW ============ -->
+        <section class="fx-card" id="fx-18">
+          <header class="fx-head">
+            <span class="fx-num">18</span>
+            <span class="fx-title">Border draw <em>· bordas se desenham</em></span>
+            <span class="fx-tag css">CSS</span>
+          </header>
+          <p class="fx-desc">As 4 bordas se desenham em sequência no hover, dando sensação de "construindo". Caprichoso para CTAs ghost ou cards-âncora especiais. Não use mais que 1 ou 2 por página.</p>
+          <div class="fx-demo">
+            <button class="fx-border-draw">
+              Sobre o método
+              <span class="fx-bd-r"></span>
+              <span class="fx-bd-b"></span>
+            </button>
+          </div>
+          <div class="fx-tabs">
+            <button class="fx-tab is-active" data-target="fx18-html">HTML</button>
+            <button class="fx-tab" data-target="fx18-css">CSS</button>
+          </div>
+          <div class="fx-panel is-active" data-panel="fx18-html"><button class="fx-copy">Copiar</button><pre><span class="tk-tag">&lt;button</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-border-draw"</span><span class="tk-tag">&gt;</span>
+  Texto do botão
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-bd-r"</span><span class="tk-tag">&gt;&lt;/span&gt;</span>
+  <span class="tk-tag">&lt;span</span> <span class="tk-attr">class</span>=<span class="tk-str">"fx-bd-b"</span><span class="tk-tag">&gt;&lt;/span&gt;</span>
+<span class="tk-tag">&lt;/button&gt;</span></pre></div>
+          <div class="fx-panel" data-panel="fx18-css"><button class="fx-copy">Copiar</button><pre><span class="tk-key">.fx-border-draw</span> { position: relative; padding: <span class="tk-num">14px 24px</span>; background: transparent; border: <span class="tk-num">0</span>; cursor: pointer; }
+<span class="tk-key">.fx-border-draw::before</span> {
+  content: <span class="tk-str">''</span>; position: absolute; left: <span class="tk-num">0</span>; right: <span class="tk-num">0</span>; top: <span class="tk-num">0</span>; height: <span class="tk-num">1px</span>;
+  background: <span class="tk-str">#A878EC</span>;
+  transform: scaleX(<span class="tk-num">0</span>); transform-origin: left;
+  transition: transform <span class="tk-num">450ms</span> cubic-bezier(<span class="tk-num">0.22, 1, 0.36, 1</span>);
+}
+<span class="tk-key">.fx-bd-r</span> { right: <span class="tk-num">0</span>; top: <span class="tk-num">0</span>; width: <span class="tk-num">1px</span>; height: <span class="tk-num">100%</span>; transform: scaleY(<span class="tk-num">0</span>); transform-origin: top; }
+<span class="tk-key">.fx-bd-b</span> { left: <span class="tk-num">0</span>; bottom: <span class="tk-num">0</span>; right: <span class="tk-num">0</span>; height: <span class="tk-num">1px</span>; transform: scaleX(<span class="tk-num">0</span>); transform-origin: right; }
+<span class="tk-com">/* + ::after na borda left, com cascata de transition-delay */</span>
+<span class="tk-key">.fx-border-draw:hover::before</span> { transform: scaleX(<span class="tk-num">1</span>); }
+<span class="tk-key">.fx-border-draw:hover .fx-bd-r</span> { transform: scaleY(<span class="tk-num">1</span>); transition-delay: <span class="tk-num">250ms</span>; }
+<span class="tk-key">.fx-border-draw:hover .fx-bd-b</span> { transform: scaleX(<span class="tk-num">1</span>); transition-delay: <span class="tk-num">500ms</span>; transform-origin: left; }</pre></div>
+        </section>
+
+      </div><!-- /.fx-lib -->
+
+      <h3 style="margin-top: 80px;">Princípios de uso</h3>
+      <ul>
+        <li><strong>Um efeito-protagonista por dobra.</strong> Reveal e stagger são "respiros" — podem se repetir. Magnetic, tilt, split text, border-draw são <em>protagonistas</em> — só um por dobra.</li>
+        <li><strong>Curva única.</strong> Tudo respira em <code class="bs-inline">cubic-bezier(0.22, 1, 0.36, 1)</code> (default) ou <code class="bs-inline">(0.16, 1, 0.3, 1)</code> (reveals). Misturar curvas quebra a coerência sensorial.</li>
+        <li><strong>Cor da depth.</strong> Sombras sempre roxas/laranjas — nunca preto sólido. <code class="bs-inline">rgba(116,39,212,0.30)</code> é o ponto de partida.</li>
+        <li><strong>prefers-reduced-motion sempre respeitado.</strong> Marquee, parallax, shimmer e pulse devem desativar. O CSS no fim de <code class="bs-inline">motion-fx.css</code> mostra como.</li>
+        <li><strong>Performance.</strong> Use <code class="bs-inline">transform</code> e <code class="bs-inline">opacity</code> — evite animar <code class="bs-inline">width</code>, <code class="bs-inline">left</code>, <code class="bs-inline">background-color</code>.</li>
+      </ul>
+
+      <div class="bs-note warn"><strong>Anti-padrões:</strong> não anime tudo. Não use mais de 3 protagonistas em uma página inteira. Não animate cores roxa→laranja em loop infinito. Não combine parallax + tilt 3D + magnetic na mesma seção — vira parque de diversões.</div>
+
+    </div><!-- /.bs-body -->
+
+    <nav class="bs-pagenav">
+      <a href="motion.html" class="prev">
+        <span class="bs-pagenav-tag">← Voltar</span>
+        <span class="bs-pagenav-title"><span class="bs-pagenav-arrow">←</span> 09 · <em>Motion</em></span>
+      </a>
+      <a href="botoes.html" class="next">
+        <span class="bs-pagenav-tag">Próximo →</span>
+        <span class="bs-pagenav-title">10 · <em>Botões</em> <span class="bs-pagenav-arrow">→</span></span>
+      </a>
+    </nav>
+
+    <footer class="bs-footer">
+      Bíblia · Entrelaços <em>Psi</em> · v1 · A travessia começa quando você para de fingir.
+    </footer>
+
+  </main>
+</div>
+
+<script src="motion-fx.js"></script>
+<script>
+  // shrink header on scroll
+  document.addEventListener('scroll', () => {
+    const h = document.getElementById('bibliaHeader');
+    if (h) h.classList.toggle('is-scrolled', window.scrollY > 32);
+  }, { passive: true });
+</script>
+
+</body>
+</html>

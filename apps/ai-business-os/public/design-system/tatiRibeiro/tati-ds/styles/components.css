@@ -1,0 +1,430 @@
+/* ============================================================
+   TATI RIBEIRO · DESIGN SYSTEM
+   components.css — Componentes para web (sites, LPs, dashboards)
+   Depende de: tokens.css
+   ============================================================ */
+
+/* ============================================================
+   BUTTONS — .t-btn
+   ============================================================ */
+.t-btn {
+  font-family: var(--t-font-display);
+  font-size: var(--t-fs-sm);
+  font-weight: var(--t-fw-500);
+  letter-spacing: -0.005em;
+  padding: 10px 20px;
+  border-radius: var(--t-radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--t-dur-fast) var(--t-ease-out);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--t-space-sm);
+  text-decoration: none;
+  white-space: nowrap;
+  background: transparent;
+  color: var(--t-text);
+}
+
+.t-btn--primary {
+  background: var(--t-accent);
+  color: var(--t-pearl);
+  box-shadow: 0 2px 12px rgba(107,70,193,0.25);
+}
+.t-btn--primary:hover {
+  background: var(--t-accent-light);
+  box-shadow: 0 4px 20px rgba(107,70,193,0.4);
+  transform: translateY(-1px);
+}
+
+.t-btn--ghost {
+  background: transparent;
+  color: var(--t-text);
+  border: 1px solid var(--t-border-2);
+}
+.t-btn--ghost:hover {
+  border-color: var(--t-accent-light);
+  color: var(--t-accent-light);
+}
+
+.t-btn--mono {
+  background: transparent;
+  color: var(--t-accent-light);
+  font-family: var(--t-font-mono);
+  font-size: var(--t-fs-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: var(--t-space-sm) 0;
+  border-bottom: 1px solid var(--t-accent-light);
+  border-radius: 0;
+}
+.t-btn--mono:hover {
+  color: var(--t-accent-glow);
+  border-color: var(--t-accent-glow);
+}
+
+.t-btn--icon {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  background: var(--t-surface-2);
+  border: 1px solid var(--t-border-2);
+  color: var(--t-text);
+  border-radius: 50%;
+  justify-content: center;
+}
+.t-btn--icon:hover {
+  border-color: var(--t-accent-light);
+  color: var(--t-accent-light);
+}
+
+.t-btn--lg {
+  font-size: var(--t-fs-base);
+  padding: 14px 28px;
+}
+
+.t-btn--block {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+/* ============================================================
+   BADGES — .t-badge
+   ============================================================ */
+.t-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--t-radius-full);
+  font-family: var(--t-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: var(--t-fw-500);
+}
+.t-badge--accent {
+  background: var(--t-accent-bg);
+  border: 1px solid var(--t-accent-border);
+  color: var(--t-accent-light);
+}
+.t-badge--mono {
+  background: var(--t-surface-2);
+  border: 1px solid var(--t-border-2);
+  color: var(--t-text-2);
+}
+.t-badge--pulse {
+  background: var(--t-accent-bg);
+  border: 1px solid var(--t-accent-border);
+  color: var(--t-accent-light);
+}
+.t-badge--pulse::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--t-accent-light);
+  box-shadow: 0 0 8px var(--t-accent-light);
+  animation: t-pulse 2s ease-in-out infinite;
+}
+@keyframes t-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ============================================================
+   INPUTS — .t-input
+   ============================================================ */
+.t-input {
+  font-family: var(--t-font-body);
+  font-size: var(--t-fs-sm);
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--t-bg-1);
+  border: 1px solid var(--t-border-2);
+  border-radius: var(--t-radius-md);
+  color: var(--t-text);
+  transition: all var(--t-dur-fast) var(--t-ease);
+  outline: none;
+}
+.t-input:focus {
+  border-color: var(--t-accent-light);
+  box-shadow: 0 0 0 3px var(--t-accent-bg);
+}
+.t-input::placeholder { color: var(--t-text-mute); }
+
+.t-input--editorial {
+  font-family: var(--t-font-serif);
+  font-size: var(--t-fs-md);
+  font-style: italic;
+  font-weight: var(--t-fw-300);
+  width: 100%;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--t-border-2);
+  color: var(--t-text-strong);
+  outline: none;
+  border-radius: 0;
+  transition: border-color var(--t-dur-base) var(--t-ease);
+}
+.t-input--editorial:focus { border-color: var(--t-accent-light); }
+.t-input--editorial::placeholder {
+  color: var(--t-text-mute);
+  font-style: italic;
+}
+
+.t-label {
+  display: block;
+  font-family: var(--t-font-mono);
+  font-size: var(--t-fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--t-text-mute);
+  margin-bottom: var(--t-space-sm);
+}
+
+/* ============================================================
+   CARDS — .t-card
+   ============================================================ */
+.t-card {
+  padding: var(--t-space-lg);
+  background: var(--t-surface);
+  border: 1px solid var(--t-border);
+  border-radius: var(--t-radius-xl);
+  transition: all var(--t-dur-base) var(--t-ease-out);
+}
+.t-card:hover {
+  border-color: var(--t-accent-border);
+  transform: translateY(-2px);
+}
+
+.t-card__eyebrow {
+  font-family: var(--t-font-mono);
+  font-size: 9px;
+  color: var(--t-accent-light);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: var(--t-space-sm);
+}
+.t-card__title {
+  font-family: var(--t-font-display);
+  font-size: var(--t-fs-md);
+  font-weight: var(--t-fw-500);
+  letter-spacing: -0.015em;
+  color: var(--t-text-strong);
+  margin-bottom: var(--t-space-sm);
+}
+.t-card__body {
+  font-size: var(--t-fs-sm);
+  line-height: 1.6;
+  color: var(--t-text-2);
+}
+
+.t-card--accent {
+  background: linear-gradient(180deg, rgba(76,29,149,0.1), var(--t-surface));
+  border: 1px solid var(--t-accent-border);
+}
+
+.t-card--feature {
+  padding: var(--t-space-2xl);
+  position: relative;
+  overflow: hidden;
+}
+.t-card--feature::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(139,92,246,0.08), transparent 50%);
+  opacity: 0;
+  transition: opacity var(--t-dur-base) var(--t-ease);
+  pointer-events: none;
+}
+.t-card--feature:hover::before { opacity: 1; }
+
+/* ============================================================
+   STAT BLOCK — .t-stat
+   ============================================================ */
+.t-stat {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.t-stat__num {
+  font-family: var(--t-font-display);
+  font-size: var(--t-fs-3xl);
+  font-weight: var(--t-fw-200);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: var(--t-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.t-stat__label {
+  font-family: var(--t-font-mono);
+  font-size: 9px;
+  color: var(--t-text-mute);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   DIVIDER — .t-divider
+   ============================================================ */
+.t-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--t-space-sm);
+  font-family: var(--t-font-mono);
+  font-size: 10px;
+  color: var(--t-text-mute);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  width: 100%;
+}
+.t-divider::before,
+.t-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--t-border-2);
+}
+.t-divider__dot {
+  width: 4px;
+  height: 4px;
+  background: var(--t-accent-light);
+  border-radius: 50%;
+}
+
+/* ============================================================
+   NAVIGATION — .t-nav
+   ============================================================ */
+.t-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--t-space-md);
+  padding: 12px 16px;
+  background: var(--t-surface);
+  border: 1px solid var(--t-border);
+  border-radius: var(--t-radius-full);
+  justify-content: space-around;
+}
+.t-nav__item {
+  font-family: var(--t-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--t-text-2);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--t-radius-sm);
+  transition: all var(--t-dur-fast) var(--t-ease);
+  text-decoration: none;
+}
+.t-nav__item:hover,
+.t-nav__item--active {
+  color: var(--t-accent-light);
+  background: var(--t-accent-bg);
+}
+
+/* ============================================================
+   TOAST — .t-toast
+   ============================================================ */
+.t-toast {
+  display: flex;
+  align-items: center;
+  gap: var(--t-space-sm);
+  padding: 12px 16px;
+  background: var(--t-bg-2);
+  border: 1px solid var(--t-accent-border);
+  border-radius: var(--t-radius-md);
+  color: var(--t-text);
+  font-size: var(--t-fs-sm);
+  box-shadow: var(--t-shadow-lg);
+}
+.t-toast__icon {
+  width: 8px;
+  height: 8px;
+  background: var(--t-accent-light);
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--t-accent-light);
+}
+
+/* ============================================================
+   MANIFESTO SOURCE — selo de citação rastreável
+   ============================================================ */
+.t-manifesto-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  background: var(--t-accent-bg);
+  border: 1px solid var(--t-accent-border);
+  border-radius: var(--t-radius-full);
+  font-family: var(--t-font-mono);
+  font-size: 9px;
+  color: var(--t-accent-light);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.t-manifesto-source::before {
+  content: '◆';
+  font-size: 7px;
+}
+
+/* ============================================================
+   THESIS BAND — banda de tese
+   ============================================================ */
+.t-thesis {
+  padding: var(--t-space-3xl);
+  background: linear-gradient(135deg, rgba(76,29,149,0.18) 0%, rgba(10,10,10,0.4) 100%);
+  border: 1px solid var(--t-accent-border);
+  border-radius: var(--t-radius-2xl);
+  position: relative;
+  overflow: hidden;
+}
+[data-theme="light"] .t-thesis {
+  background: linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(255,255,255,0.4) 100%);
+}
+.t-thesis::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: var(--t-grad-glow);
+  filter: blur(80px);
+  pointer-events: none;
+}
+.t-thesis__label {
+  font-family: var(--t-font-mono);
+  font-size: 10px;
+  color: var(--t-accent-light);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: var(--t-space-md);
+  position: relative;
+}
+.t-thesis__statement {
+  font-family: var(--t-font-display);
+  font-size: clamp(24px, 2.8vw, 38px);
+  font-weight: var(--t-fw-200);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  max-width: 880px;
+  position: relative;
+  color: var(--t-text-strong);
+}
+.t-thesis__statement em {
+  font-family: var(--t-font-serif);
+  font-style: italic;
+  font-weight: var(--t-fw-400);
+  background: var(--t-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

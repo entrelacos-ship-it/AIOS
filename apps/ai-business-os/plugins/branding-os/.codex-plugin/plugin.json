@@ -1,0 +1,33 @@
+{
+  "name": "branding-os",
+  "version": "0.1.0",
+  "description": "BrandingOS skills for building HTML/CSS slide assets and related branded visual outputs inside EntrelacOS.",
+  "author": {
+    "name": "EntrelacOS"
+  },
+  "license": "UNLICENSED",
+  "keywords": [
+    "branding",
+    "slides",
+    "html",
+    "playwright",
+    "images"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "BrandingOS",
+    "shortDescription": "Create branded slide assets for BrandingOS.",
+    "longDescription": "Use BrandingOS to generate slide-based brand assets as self-contained HTML/CSS and render them into production-ready PNGs with strict viewport and typography rules.",
+    "developerName": "EntrelacOS",
+    "category": "Design",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Create branded slide assets for BrandingOS using HTML/CSS and render them to PNG."
+    ],
+    "screenshots": []
+  }
+}

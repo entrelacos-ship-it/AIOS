@@ -1,0 +1,167 @@
+/* ============================================================
+   TATI RIBEIRO · DESIGN SYSTEM
+   base.css — Reset moderno + estilos globais
+   Depende de: tokens.css
+   ============================================================ */
+
+/* ─── RESET ─── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--t-font-body);
+  font-size: var(--t-fs-base);
+  line-height: var(--t-leading-relaxed);
+  background: var(--t-bg);
+  color: var(--t-text);
+  font-feature-settings: 'kern', 'liga', 'ss01', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition:
+    background var(--t-dur-base) var(--t-ease),
+    color var(--t-dur-base) var(--t-ease);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--t-accent);
+  color: var(--t-pearl);
+}
+
+/* ─── ACESSIBILIDADE ─── */
+:focus-visible {
+  outline: 2px solid var(--t-accent-light);
+  outline-offset: 2px;
+  border-radius: var(--t-radius-xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--t-border-2);
+  border-radius: var(--t-radius-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--t-accent-border); }
+
+/* ─── ASSINATURA: GRID DE CIRCUITO (opcional) ─── */
+.t-circuit-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+  background-image:
+    linear-gradient(to right, rgba(139,92,246,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139,92,246,0.04) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+}
+[data-theme="light"] .t-circuit-bg {
+  opacity: 0.5;
+  background-image:
+    linear-gradient(to right, rgba(76,29,149,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(76,29,149,0.05) 1px, transparent 1px);
+}
+
+/* ─── LAYOUT UTIL ─── */
+.t-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--t-space-lg);
+}
+.t-container--narrow { max-width: 720px; }
+.t-container--wide   { max-width: 1440px; }
+
+.t-section {
+  padding: var(--t-space-5xl) 0;
+  border-bottom: 1px solid var(--t-border);
+}
+@media (max-width: 768px) {
+  .t-section { padding: var(--t-space-3xl) 0; }
+}
+
+/* ─── STACK & CLUSTER (lobotomized owl) ─── */
+.t-stack > * + * { margin-top: var(--t-space-md); }
+.t-stack-sm > * + * { margin-top: var(--t-space-sm); }
+.t-stack-lg > * + * { margin-top: var(--t-space-lg); }
+.t-stack-xl > * + * { margin-top: var(--t-space-2xl); }
+
+.t-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--t-space-sm);
+  align-items: center;
+}

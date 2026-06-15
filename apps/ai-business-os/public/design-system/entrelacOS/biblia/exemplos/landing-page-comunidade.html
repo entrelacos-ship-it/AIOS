@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrelaços Psicologia · Comunidade · Cohort Inverno 2026</title>
+<meta name="description" content="Reconstrua sua carreira com dignidade, autonomia e sustentabilidade. Comunidade, formações e mentorias para psicólogas que recusam a precarização.">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ==== ENTRELAÇOS DESIGN SYSTEM (tokens) ==== */
+  :root {
+    --e-purple-50:#F4EDFC; --e-purple-100:#E5D4FA; --e-purple-200:#C9A7F4; --e-purple-300:#A878EC;
+    --e-purple-400:#8B4FE0; --e-purple-500:#7427D4; --e-purple-600:#5C18B8; --e-purple-700:#470F94;
+    --e-purple-800:#340970; --e-purple-900:#220552; --e-purple-950:#11022B;
+    --e-bg:#0A0612; --e-bg-alt:#0F0820; --e-bg-deep:#050309; --e-bg-elev:#14092B;
+    --e-bg-card:linear-gradient(180deg, rgba(180,140,255,0.04), rgba(180,140,255,0.005));
+    --e-bg-card-hover:linear-gradient(180deg, rgba(180,140,255,0.08), rgba(180,140,255,0.015));
+    --e-glass-bg:rgba(15,8,32,0.72); --e-glass-border:rgba(180,140,255,0.14); --e-glass-blur:blur(20px) saturate(140%);
+    --e-cream:#F4EDF8; --e-cream-warm:#F3EEE6; --e-cream-ink:#11022B; --e-cream-accent:#470F94;
+    --e-text:#F0EAF8; --e-text-secondary:rgba(240,234,248,0.68); --e-text-muted:rgba(240,234,248,0.42); --e-text-faint:rgba(240,234,248,0.22);
+    --e-text-on-cream:#11022B; --e-text-on-cream-secondary:rgba(17,2,43,0.62); --e-text-on-cream-muted:rgba(17,2,43,0.40);
+    --e-border:rgba(180,140,255,0.10); --e-border-strong:rgba(180,140,255,0.20); --e-border-subtle:rgba(255,255,255,0.06);
+    --e-orange:#FF8A1F; --e-orange-soft:#FFB87A; --e-orange-glow:rgba(255,138,31,0.35);
+    --e-grad-purple:linear-gradient(135deg,#7427D4 0%,#470F94 100%);
+    --e-grad-deep:linear-gradient(180deg,#11022B 0%,#0A0612 50%,#050309 100%);
+    --e-grad-hero:radial-gradient(ellipse at 50% 0%, rgba(116,39,212,0.30) 0%, transparent 70%);
+    --e-grad-glow:radial-gradient(ellipse at center, rgba(168,120,236,0.18) 0%, transparent 60%);
+    --e-grad-butterfly:radial-gradient(ellipse at center, rgba(116,39,212,0.35) 0%, rgba(34,5,82,0.6) 40%, var(--e-bg-deep) 80%);
+    --e-section-y:100px; --e-maxw:1280px; --e-maxw-narrow:920px; --e-maxw-text:640px;
+    --e-r-sm:8px; --e-r-md:12px; --e-r-lg:16px; --e-r-xl:20px; --e-r-2xl:28px; --e-r-pill:9999px; --e-r-input:0px;
+    --e-sh-purple:0 4px 20px rgba(116,39,212,0.30);
+    --e-sh-glow:0 0 60px rgba(168,120,236,0.20);
+    --e-sh-cta:inset 0 0 0 1px rgba(255,255,255,0.15), 0 10px 40px rgba(116,39,212,0.30);
+    --e-sh-cta-hover:inset 0 0 0 1px rgba(255,255,255,0.20), 0 16px 50px rgba(116,39,212,0.45);
+    --e-sh-card-hover:0 20px 60px -20px rgba(116,39,212,0.30), inset 0 0 0 1px rgba(180,140,255,0.10);
+    --e-sh-nav:0 10px 40px rgba(0,0,0,0.40), inset 0 0 0 1px rgba(255,255,255,0.05);
+    --e-ease:cubic-bezier(0.22,1,0.36,1); --e-dur-fast:150ms; --e-dur-base:300ms; --e-dur-slow:600ms;
+    --ff-sans:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+    --ff-serif:'Instrument Serif','Times New Roman',serif;
+    --ff-mono:'JetBrains Mono',ui-monospace,'SF Mono',Consolas,monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--ff-sans); background: var(--e-bg); color: var(--e-text); line-height: 1.6; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .container { max-width: var(--e-maxw); margin: 0 auto; padding: 0 24px; }
+  .container-narrow { max-width: var(--e-maxw-narrow); margin: 0 auto; padding: 0 24px; }
+  .container-text { max-width: var(--e-maxw-text); margin: 0 auto; padding: 0 24px; }
+  section { padding: var(--e-section-y) 0; position: relative; }
+
+  /* === TIPOGRAFIA === */
+  .h-display { font-family: var(--ff-sans); font-weight: 500; font-size: clamp(3rem, 7vw, 6.2rem); line-height: 0.98; letter-spacing: -0.045em; color: var(--e-text); }
+  .h-display em { font-family: var(--ff-serif); font-weight: 400; font-style: italic; letter-spacing: -0.01em; }
+  .h-display em.protagonist { color: var(--e-orange); text-shadow: 0 0 40px rgba(255,138,31,0.35); }
+  .h-section { font-family: var(--ff-sans); font-weight: 500; font-size: clamp(2rem, 4.5vw, 3.6rem); line-height: 1.05; letter-spacing: -0.035em; color: var(--e-text); }
+  .h-section em { font-family: var(--ff-serif); font-style: italic; font-weight: 400; }
+  .h-card { font-family: var(--ff-sans); font-weight: 500; font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.2; letter-spacing: -0.02em; color: var(--e-text); }
+  .h-card em { font-family: var(--ff-serif); font-style: italic; font-weight: 400; }
+  .lead { font-family: var(--ff-sans); font-weight: 400; font-size: clamp(1rem, 1.4vw, 1.25rem); line-height: 1.55; color: var(--e-text-secondary); max-width: 640px; margin: 0 auto; }
+  .stat-num { font-family: var(--ff-mono); font-weight: 500; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.02em; color: var(--e-text); display: block; }
+  .stat-label { font-family: var(--ff-mono); font-weight: 400; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--e-text-muted); margin-top: 8px; }
+
+  /* === EYEBROWS === */
+  .e-eyebrow-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: var(--e-r-pill); border: 1px solid var(--e-border); background: rgba(180,140,255,0.04); font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.20em; text-transform: uppercase; color: var(--e-text-muted); }
+  .e-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--e-purple-500); box-shadow: 0 0 10px var(--e-purple-500); }
+  .e-eyebrow-dash { display: inline-flex; align-items: center; gap: 12px; font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.20em; text-transform: uppercase; color: var(--e-text-muted); }
+  .e-dash-line { width: 24px; height: 1px; background: var(--e-text-muted); }
+  .e-eyebrow-separator { display: inline-flex; align-items: center; gap: 16px; font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--e-text-muted); }
+  .e-sep-line { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, rgba(240,234,248,0.30), transparent); }
+
+  /* === BOTÕES === */
+  .e-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: var(--e-r-pill); font-family: var(--ff-mono); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.01em; cursor: pointer; transition: all var(--e-dur-base) var(--e-ease); border: 1px solid transparent; }
+  .e-btn-sm { padding: 8px 16px; font-size: 0.8rem; }
+  .e-btn-primary { background: var(--e-purple-600); color: #fff; box-shadow: var(--e-sh-cta); }
+  .e-btn-primary:hover { background: var(--e-purple-500); transform: translateY(-2px); box-shadow: var(--e-sh-cta-hover); }
+  .e-btn-ghost { background: rgba(180,140,255,0.06); color: var(--e-text); border-color: var(--e-border); }
+  .e-btn-ghost:hover { background: rgba(180,140,255,0.12); border-color: var(--e-border-strong); transform: translateY(-1px); }
+  .e-btn-link { background: transparent; color: var(--e-text-secondary); padding: 8px 0; }
+  .e-btn-link:hover { color: var(--e-text); }
+  .e-btn-on-cream { background: var(--e-purple-700); color: #fff; box-shadow: 0 8px 24px rgba(71,15,148,0.30); }
+  .e-btn-on-cream:hover { background: var(--e-purple-600); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(71,15,148,0.40); }
+
+  /* === BADGES === */
+  .e-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--e-r-pill); font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
+  .e-badge-orange { background: rgba(255,138,31,0.12); color: var(--e-orange); border: 1px solid rgba(255,138,31,0.30); box-shadow: 0 0 12px var(--e-orange-glow); }
+  .e-badge-orange::before { content:''; width: 6px; height: 6px; border-radius: 50%; background: var(--e-orange); box-shadow: 0 0 8px var(--e-orange); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: 0.4; } }
+
+  /* === CARDS === */
+  .e-card { position: relative; padding: 32px; border-radius: var(--e-r-xl); background: var(--e-bg-card); border: 1px solid var(--e-border); overflow: hidden; transition: all var(--e-dur-base) var(--e-ease); }
+  .e-card:hover { background: var(--e-bg-card-hover); border-color: var(--e-border-strong); transform: translateY(-2px); box-shadow: var(--e-sh-card-hover); }
+  .e-card-spot { position: absolute; inset: 0; background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(168,120,236,0.12) 0%, transparent 40%); opacity: 0; transition: opacity var(--e-dur-base); pointer-events: none; }
+  .e-card:hover .e-card-spot { opacity: 1; }
+  .e-card-idx { font-family: var(--ff-mono); font-size: 0.75rem; letter-spacing: 0.2em; color: var(--e-purple-300); }
+  .e-card-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; }
+  .e-card p { color: var(--e-text-secondary); }
+
+  /* === STATS === */
+  .e-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .e-stat { text-align: center; }
+  @media (max-width: 720px) { .e-stats { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+
+  /* === HEADER === */
+  .e-header { position: fixed; top: 16px; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; pointer-events: none; }
+  .e-header-pill { pointer-events: auto; display: flex; align-items: center; gap: 24px; padding: 10px 12px 10px 24px; border-radius: var(--e-r-pill); background: var(--e-glass-bg); border: 1px solid var(--e-glass-border); backdrop-filter: var(--e-glass-blur); -webkit-backdrop-filter: var(--e-glass-blur); box-shadow: var(--e-sh-nav); max-width: calc(100% - 32px); transition: all var(--e-dur-base) var(--e-ease); }
+  .e-header-pill.is-scrolled { padding: 8px 10px 8px 18px; gap: 18px; }
+  .e-brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--ff-sans); font-weight: 600; font-size: 0.95rem; color: var(--e-text); }
+  .e-brand em { font-family: var(--ff-serif); font-style: italic; font-weight: 400; color: var(--e-purple-300); }
+  .e-nav { display: flex; gap: 24px; }
+  .e-nav a { font-family: var(--ff-mono); font-size: 0.78rem; color: var(--e-text-secondary); transition: color var(--e-dur-fast); }
+  .e-nav a:hover { color: var(--e-text); }
+  .e-header-cta { display: flex; align-items: center; gap: 16px; }
+  .e-link-text { font-family: var(--ff-mono); font-size: 0.78rem; color: var(--e-text-secondary); }
+  .e-link-text:hover { color: var(--e-text); }
+  @media (max-width: 880px) {
+    .e-nav { display: none; }
+    .e-header-pill { gap: 12px; padding: 8px 10px 8px 16px; }
+  }
+
+  /* === REVEAL === */
+  .e-reveal { opacity: 0; transform: translateY(24px); transition: opacity 800ms var(--e-ease), transform 800ms var(--e-ease); }
+  .e-reveal.is-visible { opacity: 1; transform: none; }
+  .e-delay-1 { transition-delay: 100ms; } .e-delay-2 { transition-delay: 200ms; } .e-delay-3 { transition-delay: 300ms; } .e-delay-4 { transition-delay: 400ms; }
+
+  /* === DOBRA 1: HERO COM CANVAS INTERATIVO === */
+  .hero { padding: 200px 0 80px; text-align: center; position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; cursor: crosshair; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: var(--e-grad-hero); pointer-events: none; z-index: 1; }
+  .hero-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .hero > .container { position: relative; z-index: 2; }
+  .hero h1 { margin: 32px auto 24px; max-width: 980px; }
+  .hero .cta-row { margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero .e-stats { margin-top: 64px; }
+  .scroll-indicator { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 64px; opacity: 0.5; animation: bob 2.4s ease-in-out infinite; font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.25em; color: var(--e-text-muted); }
+  .scroll-line { width: 1px; height: 32px; background: var(--e-text-muted); }
+  @keyframes bob { 50% { transform: translateY(8px); opacity: 0.25; } }
+  .hero-hint { position: absolute; bottom: 200px; left: 50%; transform: translateX(-50%); font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.25em; color: var(--e-text-faint); text-transform: uppercase; pointer-events: none; opacity: 0.7; z-index: 2; }
+  @media (max-width: 720px) { .hero-hint { display: none; } }
+
+  /* === DOBRA 2: TRUST STRIP === */
+  .trust { padding: 60px 0; background: var(--e-bg-deep); border-top: 1px solid var(--e-border-subtle); border-bottom: 1px solid var(--e-border-subtle); }
+  .trust-eyebrow { text-align: center; margin-bottom: 32px; }
+  .e-marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .e-marquee-track { display: inline-flex; gap: 80px; animation: marquee 45s linear infinite; white-space: nowrap; align-items: center; }
+  .e-marquee-track span { font-family: var(--ff-mono); font-size: 1.1rem; font-weight: 500; color: var(--e-text-faint); letter-spacing: 0.05em; }
+  .e-marquee-track span::after { content: '·'; margin-left: 80px; color: var(--e-purple-500); }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* === DOBRA 3: MANIFESTO (CREAM) === */
+  .manifesto { background: var(--e-cream); color: var(--e-text-on-cream); padding: 140px 0; text-align: center; }
+  .manifesto .e-eyebrow-chip { color: var(--e-text-on-cream-muted); border-color: rgba(17,2,43,0.15); background: rgba(17,2,43,0.04); margin-bottom: 48px; }
+  .manifesto .e-eyebrow-dot { background: var(--e-purple-700); box-shadow: 0 0 10px var(--e-purple-700); }
+  .manifesto-text { font-family: var(--ff-sans); font-weight: 400; font-size: clamp(1.4rem, 2.5vw, 2.4rem); line-height: 1.35; letter-spacing: -0.025em; color: var(--e-text-on-cream); max-width: 920px; margin: 0 auto; }
+  .manifesto-text .dim { color: var(--e-text-on-cream-muted); }
+  .manifesto-text em { font-family: var(--ff-serif); font-style: italic; font-weight: 400; color: var(--e-purple-700); }
+  .manifesto-sig { display: inline-flex; align-items: center; gap: 12px; margin-top: 56px; font-family: var(--ff-mono); font-size: 0.75rem; letter-spacing: 0.15em; color: var(--e-text-on-cream-secondary); }
+  .manifesto-sig span:first-child { width: 32px; height: 1px; background: currentColor; }
+
+  /* === DOBRA 4: WHY (BENTO) === */
+  .why-head { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: end; margin-bottom: 48px; }
+  @media (max-width: 880px) { .why-head { grid-template-columns: 1fr; } }
+  .why-bento { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; gap: 24px; }
+  @media (max-width: 880px) { .why-bento { grid-template-columns: 1fr; } }
+  .why-card-big { grid-row: span 2; min-height: 420px; }
+  .why-card { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+  .why-mini-stats { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; }
+  .why-mini-stats .mini { font-family: var(--ff-mono); }
+  .why-mini-stats .mini-num { font-size: 1.25rem; color: var(--e-purple-200); display: block; }
+  .why-mini-stats .mini-label { font-size: 0.65rem; letter-spacing: 0.18em; color: var(--e-text-muted); text-transform: uppercase; margin-top: 4px; }
+
+  /* === DOBRA 5: PROGRAMS === */
+  .programs { background: var(--e-bg-deep); }
+  .programs-head { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: end; margin-bottom: 56px; }
+  @media (max-width: 880px) { .programs-head { grid-template-columns: 1fr; } }
+  .program-stack { display: flex; flex-direction: column; gap: 20px; }
+  .program {
+    display: grid; grid-template-columns: 80px 1fr auto; gap: 32px; align-items: center;
+    padding: 40px 32px; border-radius: var(--e-r-xl);
+    background: var(--e-bg-card); border: 1px solid var(--e-border);
+    transition: all var(--e-dur-base) var(--e-ease);
+    text-decoration: none; color: inherit; position: relative; overflow: hidden;
+  }
+  .program:hover { background: var(--e-bg-card-hover); border-color: var(--e-border-strong); transform: translateY(-2px); box-shadow: var(--e-sh-card-hover); }
+  .program-num { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .program-num-val { font-family: var(--ff-mono); font-size: 2rem; font-weight: 500; color: var(--e-purple-300); }
+  .program-num-line { width: 40px; height: 1px; background: var(--e-border-strong); }
+  .program-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+  .program-tag { display: inline-flex; padding: 4px 10px; border-radius: var(--e-r-pill); border: 1px solid var(--e-border); font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.15em; color: var(--e-text-muted); text-transform: uppercase; }
+  .program h3 { margin-bottom: 12px; }
+  .program p { color: var(--e-text-secondary); margin-bottom: 16px; max-width: 640px; }
+  .program-bullets { display: flex; flex-wrap: wrap; gap: 16px; font-family: var(--ff-mono); font-size: 0.8rem; color: var(--e-text-muted); }
+  .program-bullets li { list-style: none; padding-left: 14px; position: relative; }
+  .program-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--e-purple-400); }
+  .program-cta { white-space: nowrap; }
+  @media (max-width: 720px) {
+    .program { grid-template-columns: 1fr; gap: 16px; }
+    .program-num { flex-direction: row; align-items: center; }
+    .program-cta { align-self: start; }
+  }
+
+  /* === DOBRA 6: PROOFS (CARROSSEL ANIMADO) === */
+  .proofs-head { text-align: center; margin-bottom: 64px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .proofs-carousel { position: relative; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); margin-bottom: 64px; }
+  .proofs-carousel-track {
+    display: flex; gap: 24px;
+    animation: proofs-slide 40s linear infinite;
+    width: max-content;
+  }
+  .proofs-carousel:hover .proofs-carousel-track { animation-play-state: paused; }
+  @keyframes proofs-slide { to { transform: translateX(-50%); } }
+  .proof-card {
+    flex: 0 0 280px; aspect-ratio: 4/5;
+    background: var(--e-bg-elev); border-radius: var(--e-r-xl);
+    border: 1px solid var(--e-border);
+    position: relative; display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 24px;
+    cursor: pointer; transition: all var(--e-dur-base) var(--e-ease);
+    overflow: hidden;
+  }
+  .proof-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--e-purple-900), var(--e-purple-700)); opacity: 0.6; }
+  .proof-card::after { content: '▸'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; border-radius: 50%; background: var(--e-purple-600); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; box-shadow: var(--e-sh-cta); transition: all var(--e-dur-base); }
+  .proof-card:hover { transform: translateY(-4px); border-color: var(--e-border-strong); }
+  .proof-card:hover::after { transform: translate(-50%, -50%) scale(1.1); box-shadow: var(--e-sh-cta-hover); }
+  .proof-card-info { position: relative; z-index: 2; }
+  .proof-name { font-family: var(--ff-sans); font-weight: 500; font-size: 1rem; color: var(--e-text); }
+  .proof-role { font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--e-text-muted); margin-top: 4px; }
+  .proof-quote { font-family: var(--ff-serif); font-style: italic; font-size: 0.9rem; color: rgba(240,234,248,0.85); margin-bottom: 16px; line-height: 1.4; }
+
+  /* === DOBRA 6.5: EFEITO BORBOLETA === */
+  .butterfly { background: var(--e-bg-deep); padding: 160px 0; position: relative; overflow: hidden; }
+  .butterfly::before { content: ''; position: absolute; inset: 0; background: var(--e-grad-butterfly); pointer-events: none; }
+  .butterfly > .container { position: relative; z-index: 2; }
+  .butterfly-head { text-align: center; margin-bottom: 80px; display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 920px; margin-left: auto; margin-right: auto; }
+  .butterfly-head .lead { font-family: var(--ff-sans); font-size: clamp(1.05rem, 1.4vw, 1.2rem); }
+  .butterfly-head .lead em { font-family: var(--ff-serif); font-style: italic; color: var(--e-purple-200); }
+  .butterfly-stage { position: relative; width: 100%; max-width: 1100px; margin: 0 auto; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
+  @media (max-width: 720px) { .butterfly-stage { aspect-ratio: 4/5; } }
+  
+  /* Ondas concêntricas */
+  .butterfly-wave { position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid rgba(168,120,236,0.30); animation: wave-pulse 5s ease-out infinite; pointer-events: none; }
+  .butterfly-wave:nth-child(2) { animation-delay: 1.3s; }
+  .butterfly-wave:nth-child(3) { animation-delay: 2.6s; }
+  .butterfly-wave:nth-child(4) { animation-delay: 3.9s; }
+  @keyframes wave-pulse {
+    0% { transform: scale(0.4); opacity: 0; border-color: rgba(168,120,236,0.55); }
+    20% { opacity: 0.7; }
+    100% { transform: scale(2.4); opacity: 0; border-color: rgba(168,120,236,0); }
+  }
+  
+  
+  
+  
+  
+  
+  /* 3 níveis de impacto multiplicador */
+  .butterfly-impact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 80px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+  @media (max-width: 720px) { .butterfly-impact { grid-template-columns: 1fr; gap: 24px; } }
+  .impact-card {
+    text-align: center; padding: 40px 24px;
+    border-radius: var(--e-r-xl);
+    background: linear-gradient(180deg, rgba(180,140,255,0.06), rgba(180,140,255,0.01));
+    border: 1px solid var(--e-border);
+    position: relative; overflow: hidden;
+    transition: all var(--e-dur-base) var(--e-ease);
+  }
+  .impact-card:hover { border-color: var(--e-border-strong); transform: translateY(-4px); box-shadow: 0 24px 60px -20px rgba(116,39,212,0.40); }
+  .impact-card::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, var(--e-purple-400), transparent); }
+  .impact-arrow { position: absolute; top: 50%; right: -20px; transform: translateY(-50%); font-family: var(--ff-mono); font-size: 1.25rem; color: var(--e-purple-400); opacity: 0.4; z-index: 2; }
+  .impact-card:nth-child(3) .impact-arrow { display: none; }
+  @media (max-width: 720px) { .impact-arrow { display: none; } }
+  .impact-num { font-family: var(--ff-mono); font-weight: 500; font-size: clamp(2.5rem, 5vw, 3.5rem); letter-spacing: -0.03em; color: var(--e-text); display: block; line-height: 1; }
+  .impact-num em { font-family: var(--ff-serif); font-style: italic; color: var(--e-purple-200); font-weight: 400; }
+  .impact-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--e-text-muted); margin: 16px 0 12px; }
+  .impact-desc { font-size: 0.92rem; color: var(--e-text-secondary); line-height: 1.5; }
+  /* Frase âncora final + CTA */
+  .butterfly-anchor { text-align: center; margin-top: 80px; max-width: 720px; margin-left: auto; margin-right: auto; }
+  .butterfly-anchor .quote { font-family: var(--ff-serif); font-style: italic; font-size: clamp(1.4rem, 2.5vw, 2.1rem); line-height: 1.3; color: var(--e-text); margin-bottom: 16px; letter-spacing: -0.01em; }
+  .butterfly-anchor .quote-meta { font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--e-text-muted); text-transform: uppercase; margin-bottom: 32px; }
+  .butterfly-citation { display: inline-flex; align-items: center; gap: 10px; padding: 6px 16px; border-radius: var(--e-r-pill); border: 1px solid var(--e-border); background: rgba(180,140,255,0.04); font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--e-text-muted); margin-top: 32px; text-transform: uppercase; }
+  .butterfly-citation::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--e-orange); box-shadow: 0 0 8px var(--e-orange-glow); }
+
+  /* === DOBRA 7: COMUNIDADE === */
+  .community { background: var(--e-bg-deep); padding-bottom: 60px; }
+  .community-head { text-align: center; max-width: 920px; margin: 0 auto 48px; }
+  .community-head .lead { margin: 16px auto 0; }
+  .community .e-stats { margin-bottom: 64px; }
+  .city-marquee { padding: 32px 0; border-block: 1px solid var(--e-border); margin-bottom: 64px; }
+  .city-marquee .e-marquee-track span { font-family: var(--ff-sans); font-weight: 500; font-size: 1.5rem; color: var(--e-purple-300); letter-spacing: 0.1em; }
+  .city-marquee .e-marquee-track span::after { color: var(--e-purple-700); }
+  .community-cta-row { text-align: center; margin-bottom: 64px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .community-bottom { display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; }
+  @media (max-width: 880px) { .community-bottom { grid-template-columns: 1fr; } }
+  .imersao-card { padding: 40px; border-radius: var(--e-r-xl); background: var(--e-bg-card); border: 1px solid var(--e-border); display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; }
+  .imersao-card h3 { margin: 16px 0 12px; }
+  .imersao-meta { display: flex; gap: 16px; margin-top: 16px; font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--e-text-muted); text-transform: uppercase; }
+  .open-hub-card { padding: 40px; border-radius: var(--e-r-xl); background: var(--e-bg-card); border: 1px solid var(--e-border); display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+  .open-hub-card h3 em { font-family: var(--ff-serif); font-style: italic; font-weight: 400; color: var(--e-purple-300); }
+  @media (max-width: 720px) { .imersao-card { grid-template-columns: 1fr; } }
+
+  /* === DOBRA 8: CO-FUNDAÇÃO === */
+  .cofounders { padding: 120px 0; }
+  .cofounders-head { text-align: center; max-width: 920px; margin: 0 auto 64px; display: flex; flex-direction: column; align-items: center; }
+  .cofounders-head .e-eyebrow-dash { margin: 0 auto 16px; }
+  .cofounders-head .lead { margin: 0 auto; }
+  .cofounders-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-bottom: 64px; }
+  @media (max-width: 880px) { .cofounders-grid { grid-template-columns: 1fr; } }
+  .cofounder-card { position: relative; padding: 0; border-radius: var(--e-r-xl); background: var(--e-bg-card); border: 1px solid var(--e-border); overflow: hidden; transition: all var(--e-dur-base) var(--e-ease); display: grid; grid-template-rows: auto 1fr; }
+  .cofounder-card:hover { background: var(--e-bg-card-hover); border-color: var(--e-border-strong); transform: translateY(-4px); box-shadow: var(--e-sh-card-hover); }
+  .cofounder-photo { position: relative; aspect-ratio: 21/9; background: linear-gradient(135deg, var(--e-purple-700) 0%, var(--e-purple-900) 100%); border-bottom: 1px solid var(--e-border); display: flex; align-items: flex-end; justify-content: flex-start; padding: 32px; overflow: hidden; }
+  .cofounder-photo-r { background: linear-gradient(135deg, var(--e-purple-800) 0%, var(--e-purple-950) 100%); }
+  .cofounder-initials { position: absolute; right: 32px; top: 50%; transform: translateY(-50%); font-family: var(--ff-serif); font-style: italic; font-size: 8rem; color: rgba(240,234,248,0.10); letter-spacing: -0.05em; line-height: 1; }
+  .cofounder-photo-meta { position: relative; z-index: 1; font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.18em; color: rgba(240,234,248,0.7); text-transform: uppercase; }
+  .cofounder-photo-meta strong { display: block; font-family: var(--ff-sans); font-weight: 500; font-size: 1.4rem; letter-spacing: -0.02em; color: #fff; margin-bottom: 4px; text-transform: none; }
+  .cofounder-body { padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .cofounder-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cofounder-crp { display: inline-flex; padding: 6px 12px; border-radius: var(--e-r-pill); background: rgba(255,138,31,0.10); border: 1px solid rgba(255,138,31,0.25); font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--e-orange); text-transform: uppercase; }
+  .cofounder-name { margin: 4px 0; font-size: clamp(1.5rem, 2.5vw, 2rem); }
+  .cofounder-name em { color: var(--e-purple-200); }
+  .cofounder-name em.protagonist { color: var(--e-orange); text-shadow: 0 0 32px rgba(255,138,31,0.30); }
+  .cofounder-card p { color: var(--e-text-secondary); flex: 1; }
+  .cofounder-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 20px 0 0; border-top: 1px solid var(--e-border); }
+  .cofounder-stats .stat-num { font-size: 1.75rem; }
+  .cofounder-stats .stat-label { text-align: left; }
+  .cofounder-stats > div { text-align: left; }
+  .cofounder-subtitle { font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--e-orange); margin-bottom: -4px; padding-bottom: 4px; border-bottom: 1px solid rgba(255,138,31,0.18); }
+  .stat-num-text { font-family: var(--ff-serif); font-style: italic; font-size: clamp(1.6rem, 2.6vw, 2.2rem); color: var(--e-text); display: block; line-height: 1; letter-spacing: -0.02em; }
+    .cofounders-mídia { padding-top: 32px; border-top: 1px solid var(--e-border); text-align: center; }
+  .founder-tag { display: inline-flex; padding: 6px 14px; border-radius: var(--e-r-pill); background: rgba(180,140,255,0.06); border: 1px solid var(--e-border); font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--e-text-secondary); text-transform: uppercase; }
+  .founder-mídia-label { font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--e-text-muted); text-transform: uppercase; margin-bottom: 16px; }
+  .founder-mídia-logos { display: flex; gap: 32px; flex-wrap: wrap; align-items: center; justify-content: center; }
+  .founder-mídia-logos span { font-family: var(--ff-serif); font-size: 1.1rem; color: var(--e-text-faint); letter-spacing: 0.05em; transition: color var(--e-dur-fast); }
+  .founder-mídia-logos span:hover { color: var(--e-text-secondary); }
+
+  /* === DOBRA 9: NEWSLETTER === */
+  .newsletter { background: var(--e-bg-deep); padding: 140px 0; text-align: center; position: relative; }
+  .newsletter::before { content: ''; position: absolute; inset: 0; background: var(--e-grad-glow); pointer-events: none; }
+  .newsletter > .container { position: relative; z-index: 1; }
+  .newsletter h2 { margin: 32px auto 24px; max-width: 720px; }
+  .newsletter .lead { margin: 0 auto 40px; }
+  .newsletter-form { display: inline-flex; gap: 8px; padding: 8px; border-radius: var(--e-r-pill); background: var(--e-glass-bg); border: 1px solid var(--e-glass-border); backdrop-filter: var(--e-glass-blur); -webkit-backdrop-filter: var(--e-glass-blur); max-width: 100%; flex-wrap: wrap; }
+  .newsletter-form input { background: transparent; border: 0; color: var(--e-text); padding: 12px 18px; font-family: var(--ff-sans); font-size: 0.95rem; min-width: 280px; outline: none; }
+  .newsletter-form input::placeholder { color: var(--e-text-faint); }
+  .newsletter-tagline { margin-top: 20px; font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--e-text-muted); text-transform: uppercase; }
+
+  /* === DOBRA 10: FOOTER === */
+  footer { padding: 80px 0 40px; background: var(--e-bg-deep); border-top: 1px solid var(--e-border-subtle); }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 48px; margin-bottom: 48px; }
+  @media (max-width: 880px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+  .footer-brand p { color: var(--e-text-muted); font-size: 0.9rem; margin-top: 16px; max-width: 320px; }
+  .footer-brand .footer-mini-stats { font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--e-text-muted); margin-top: 16px; }
+  .footer-col h4 { font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--e-text-muted); text-transform: uppercase; margin-bottom: 16px; }
+  .footer-col a { display: block; padding: 4px 0; color: var(--e-text-secondary); font-size: 0.875rem; transition: color var(--e-dur-fast); }
+  .footer-col a:hover { color: var(--e-text); }
+  .footer-bottom { padding-top: 32px; border-top: 1px solid var(--e-border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-legal { font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--e-text-muted); }
+  .footer-legal a { color: var(--e-text-muted); }
+  .footer-legal a:hover { color: var(--e-text-secondary); }
+
+  /* === ATRATOR DE LORENZ (v1.4 — denso + breathe) === */
+  .lorenz-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .lorenz-canvas {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    background: transparent;
+    transform-origin: center center;
+    will-change: transform, filter;
+    animation: lorenz-breathe 22s ease-in-out infinite, lorenz-pulse 9s ease-in-out infinite;
+  }
+  .lorenz-comet {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+    transform-origin: center center;
+    will-change: transform;
+    /* mesma animação breathe (sem o pulse pra não perder visibilidade dos cometas) */
+    animation: lorenz-breathe 22s ease-in-out infinite;
+  }
+  @keyframes lorenz-breathe {
+    0%, 100% { transform: rotate(-1.4deg) scale(1); }
+    50%      { transform: rotate(1.4deg) scale(1.025); }
+  }
+  @keyframes lorenz-pulse {
+    0%, 100% { filter: brightness(1) saturate(1.05); }
+    50%      { filter: brightness(1.18) saturate(1.35); }
+  }
+  .lorenz-eq {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--ff-mono);
+    font-size: 0.65rem;
+    color: var(--e-text-faint);
+    letter-spacing: 0.05em;
+    pointer-events: none;
+    z-index: 4;
+    text-shadow: 0 0 10px rgba(10,6,18,0.8);
+  }
+  .lorenz-eq code { font-family: var(--ff-mono); color: var(--e-text-muted); }
+  .lorenz-eq-meta { color: var(--e-purple-300); margin-top: 4px; letter-spacing: 0.1em; }
+  @media (max-width: 720px) { .lorenz-eq { display: none; } }
+
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER PILL
+     ============================================================ -->
+<header class="e-header">
+  <div class="e-header-pill" id="navPill">
+    <a class="e-brand" href="#top">
+      <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
+        <defs><linearGradient id="bGrad" x1="0" y1="0" x2="100" y2="100"><stop offset="0" stop-color="#7427D4"/><stop offset="1" stop-color="#470F94"/></linearGradient></defs>
+        <path d="M30 20 Q50 35 50 50 Q50 35 70 20 Q85 35 70 50 Q85 65 70 80 Q50 65 50 50 Q50 65 30 80 Q15 65 30 50 Q15 35 30 20 Z" fill="url(#bGrad)"/>
+        <circle cx="50" cy="38" r="4" fill="#FF8A1F"/>
+      </svg>
+      <span>Entrelaços<em>Psi</em></span>
+    </a>
+    <nav class="e-nav">
+      <a href="#manifesto">Manifesto</a>
+      <a href="#por-que">Por que</a>
+      <a href="#programas">Programas</a>
+      <a href="#efeito-borboleta">Efeito</a>
+      <a href="#fundadora">Quem somos</a>
+    </nav>
+    <div class="e-header-cta">
+      <a href="#" class="e-link-text">Entrar</a>
+      <a href="#newsletter" class="e-btn e-btn-primary e-btn-sm">Comunidade →</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     DOBRA 1 — HERO COM CANVAS INTERATIVO
+     ============================================================ -->
+<section class="hero" id="top">
+  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="container">
+    <div class="e-reveal">
+      <div class="e-eyebrow-chip"><span class="e-eyebrow-dot"></span><span>COHORT INVERNO 2026 · INSCRIÇÕES ABERTAS</span></div>
+    </div>
+    <h1 class="h-display e-reveal e-delay-1">A profissão muda no dia<br>em que você se torna <em class="protagonist">protagonista</em> dela.</h1>
+    <p class="lead e-reveal e-delay-2">3.000+ psicólogas em formação contínua, reposicionando carreira com dignidade, autonomia e estrutura — sem trair a profundidade clínica.</p>
+    <div class="cta-row e-reveal e-delay-3">
+      <a href="#newsletter" class="e-btn e-btn-primary">Quero entrar para a Entrelaços <span>→</span></a>
+      <a href="#programas" class="e-btn e-btn-ghost">Conhecer programas</a>
+    </div>
+    <div class="e-stats e-reveal e-delay-4">
+      <div class="e-stat"><span class="stat-num" data-count="11">0</span><div class="stat-label">ANOS DE CLÍNICA</div></div>
+      <div class="e-stat"><span class="stat-num" data-count="3000" data-suffix="+">0</span><div class="stat-label">PSICÓLOGAS IMPACTADAS</div></div>
+      <div class="e-stat"><span class="stat-num" data-count="98" data-suffix="%">0</span><div class="stat-label">PERTENCIMENTO</div></div>
+      <div class="e-stat"><span class="stat-num" data-count="15">0</span><div class="stat-label">ANOS EM GESTÃO</div></div>
+    </div>
+    <div class="scroll-indicator"><div class="scroll-line"></div><span>ROLAR</span></div>
+  </div>
+  <div class="hero-hint">MOVA O CURSOR PARA SENTIR A REDE</div>
+</section>
+
+<!-- ============================================================
+     DOBRA 2 — TRUST STRIP
+     ============================================================ -->
+<section class="trust">
+  <div class="trust-eyebrow">
+    <div class="e-eyebrow-separator"><span class="e-sep-line"></span><span>INSTITUIÇÕES &amp; PARCEIRAS QUE CAMINHAM CONOSCO</span><span class="e-sep-line"></span></div>
+  </div>
+  <div class="e-marquee">
+    <div class="e-marquee-track">
+      <span>CRP</span><span>USP</span><span>PUC-SP</span><span>UNIFESP</span><span>FGV</span><span>SBPSP</span><span>SEDES SAPIENTIAE</span><span>INSPER</span><span>SBP</span>
+      <span>CRP</span><span>USP</span><span>PUC-SP</span><span>UNIFESP</span><span>FGV</span><span>SBPSP</span><span>SEDES SAPIENTIAE</span><span>INSPER</span><span>SBP</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DOBRA 3 — MANIFESTO (cream inversão)
+     ============================================================ -->
+<section class="manifesto" id="manifesto">
+  <div class="container-narrow">
+    <div class="e-eyebrow-chip e-reveal"><span class="e-eyebrow-dot"></span><span>MANIFESTO</span></div>
+    <p class="manifesto-text e-reveal e-delay-1">Tem psicóloga estruturando consultório autoral, cobrando com dignidade, vivendo da própria voz. <span class="dim">Tem psicóloga que ainda acredita que ética é sinônimo de escassez.</span> Em qual lado você quer estar? <span class="dim">A precarização já foi normalizada por tempo demais</span> — a única pergunta é se você vai <em>reposicionar sua carreira</em> ou esperar mais cinco anos para descobrir que ninguém vai fazer isso por você.</p>
+    <div class="manifesto-sig e-reveal e-delay-2"><span></span><span>TATI RIBEIRO · FUNDADORA</span></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DOBRA 4 — POR QUE EXISTIMOS (BENTO)
+     ============================================================ -->
+<section id="por-que">
+  <div class="container">
+    <div class="why-head">
+      <div>
+        <div class="e-eyebrow-dash e-reveal" style="margin-bottom: 16px;"><span class="e-dash-line"></span><span>POR QUE EXISTIMOS</span></div>
+        <h2 class="h-section e-reveal e-delay-1">Nós não <em>ensinamos</em> psicologia.<br>Nós <em>reconstruímos</em> sua carreira.</h2>
+      </div>
+      <p class="lead e-reveal e-delay-2" style="text-align: right;">Aqui ninguém assiste aula e vai embora. Aqui você nomeia o que te aprisiona, reorganiza estrutura, cobra com critério e constrói uma prática que sustenta a vida — com 3 mil mulheres fazendo o mesmo, ao mesmo tempo.</p>
+    </div>
+
+    <div class="why-bento">
+      <article class="e-card why-card-big e-reveal e-delay-1" data-spotlight>
+        <div class="e-card-spot"></div>
+        <div>
+          <div class="e-card-head"><span class="e-card-idx">01</span><h3 class="h-card">A escuta entrelaçada</h3></div>
+          <p>Quem já reposicionou a própria carreira não está em curso aleatório — está aqui. Mulheres que já entenderam que precarização não é destino, que cobrar com dignidade não é traição, que estrutura também é cuidado. Trocam playbooks reais. Compartilham o que quebrou às 3 da manhã. Estão esperando por você.</p>
+        </div>
+      </article>
+      <article class="e-card why-card e-reveal e-delay-2" data-spotlight>
+        <div class="e-card-spot"></div>
+        <div class="e-card-head"><span class="e-card-idx">02</span><h3 class="h-card">Nossa missão</h3></div>
+        <div>
+          <div class="why-mini-stats">
+            <div class="mini"><span class="mini-num">11+</span><div class="mini-label">Anos clínicos</div></div>
+            <div class="mini"><span class="mini-num">15+</span><div class="mini-label">Anos em gestão</div></div>
+            <div class="mini"><span class="mini-num">3K+</span><div class="mini-label">Psicólogas</div></div>
+          </div>
+          <p style="margin-top: 16px;">Capacitar, conectar e evoluir continuamente a prática da psicologia — por meio de tecnologia, comunidade e formação séria.</p>
+        </div>
+      </article>
+      <article class="e-card why-card e-reveal e-delay-3" data-spotlight>
+        <div class="e-card-spot"></div>
+        <div class="e-card-head"><span class="e-card-idx">03</span><h3 class="h-card">Por que existimos</h3></div>
+        <p>O mercado da psicologia precisa de menos ruído e mais reposicionamento. Existimos para que você deixe de apenas sobreviver dentro da profissão e comece a ocupá-la com valor, clareza, protagonismo e dignidade.</p>
+      </article>
+      <article class="e-card why-card e-reveal e-delay-4" data-spotlight style="grid-column: span 2;">
+        <div class="e-card-spot"></div>
+        <div class="e-card-head"><span class="e-card-idx">04</span><h3 class="h-card">Maior que qualquer carreira individual</h3></div>
+        <p>Quando psicólogas reconstroem suas práticas com critério ético, a profissão inteira sobe de patamar. O que uma descobre em supervisão, outra aplica no consultório no mesmo mês. Conhecimento sem isolamento. Dignidade sem solidão.</p>
+        <a href="#newsletter" class="e-btn e-btn-link" style="margin-top: 16px; align-self: flex-start;">Entrar para a Entrelaços →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DOBRA 5 — PROGRAMAS
+     ============================================================ -->
+<section class="programs" id="programas">
+  <div class="container">
+    <div class="programs-head">
+      <div>
+        <div class="e-eyebrow-dash e-reveal" style="margin-bottom: 16px;"><span class="e-dash-line"></span><span>PROGRAMAS</span></div>
+        <h2 class="h-section e-reveal e-delay-1">Do primeiro <em>passo</em><br><em>ao consultório completo.</em></h2>
+      </div>
+      <p class="lead e-reveal e-delay-2" style="text-align: right;">Três programas. Um caminho de reposicionamento. Você decide a velocidade — nós garantimos a estrutura, a comunidade e a profundidade.</p>
+    </div>
+
+    <div class="program-stack">
+      <a class="program e-reveal e-delay-1" href="#" data-spotlight>
+        <div class="e-card-spot"></div>
+        <div class="program-num"><span class="program-num-val">01</span><span class="program-num-line"></span></div>
+        <div>
+          <div class="program-meta"><span class="program-tag">ALWAYS-ON</span><span class="program-tag">RECORRÊNCIA MENSAL</span></div>
+          <h3 class="h-card">Comunidade <em>Entrelaços</em></h3>
+          <p>O ponto de entrada. Pertencimento ativo, supervisões coletivas, mentorias mensais com a Tati e biblioteca de conteúdos exclusivos. Para quem cansou de estudar sozinha e quer voltar a se reconhecer na profissão.</p>
+          <ul class="program-bullets"><li>Supervisões coletivas semanais</li><li>Mentorias mensais ao vivo</li><li>Acervo exclusivo de conteúdos</li></ul>
+        </div>
+        <span class="e-btn e-btn-primary e-btn-sm program-cta">Fazer parte →</span>
+      </a>
+
+      <a class="program e-reveal e-delay-2" href="#" data-spotlight>
+        <div class="e-card-spot"></div>
+        <div class="program-num"><span class="program-num-val">02</span><span class="program-num-line"></span></div>
+        <div>
+          <div class="program-meta"><span class="program-tag">12 SEMANAS</span><span class="program-tag">COHORT</span></div>
+          <h3 class="h-card">Cohort <em>Estruturação</em></h3>
+          <p>Reconstrua sua prática do zero — posicionamento ético, precificação com critério, comunicação autoral, autonomia financeira sem trair a profundidade clínica. Não importa se você nunca cobrou direito; importa que você quer dignidade real.</p>
+          <ul class="program-bullets"><li>12 encontros ao vivo com a Tati</li><li>Modelo de precificação ética</li><li>Plano de comunicação autoral</li></ul>
+        </div>
+        <span class="e-btn e-btn-primary e-btn-sm program-cta">Iniciar travessia →</span>
+      </a>
+
+      <a class="program e-reveal e-delay-3" href="#" data-spotlight>
+        <div class="e-card-spot"></div>
+        <div class="program-num"><span class="program-num-val">03</span><span class="program-num-line"></span></div>
+        <div>
+          <div class="program-meta"><span class="program-tag">PREMIUM · 1:1</span><span class="program-tag">VAGAS LIMITADAS</span></div>
+          <h3 class="h-card">Mentoria <em>Reposicionamento</em></h3>
+          <p>Travessia individual com Tati Ribeiro, para psicólogas que querem mudar de patamar com profundidade preservada. 4 turmas por ano, fechadas para garantir presença real. O equivalente a um conselho que normalmente custaria fortunas — sob seu comando.</p>
+          <ul class="program-bullets"><li>Mentoria 1:1 quinzenal</li><li>Acesso direto via WhatsApp</li><li>Plano personalizado 6 meses</li></ul>
+        </div>
+        <span class="e-btn e-btn-primary e-btn-sm program-cta">Aplicar para mentoria →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DOBRA 6 — PROVAS SOCIAIS (CARROSSEL ANIMADO)
+     ============================================================ -->
+<section id="provas">
+  <div class="container">
+    <div class="proofs-head">
+      <div class="e-eyebrow-chip e-reveal"><span class="e-eyebrow-dot"></span><span>PROVAS SOCIAIS · DEPOIMENTOS REAIS</span></div>
+      <h2 class="h-section e-reveal e-delay-1">Histórias de quem<br><em>já está reconstruindo.</em></h2>
+      <p class="lead e-reveal e-delay-2">Não são depoimentos ensaiados. São psicólogas reais mostrando, na prática, o que mudou depois que entraram. Passe o cursor para pausar.</p>
+    </div>
+  </div>
+
+  <div class="proofs-carousel" id="proofsCarousel">
+    <div class="proofs-carousel-track">
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Voltei a sentir orgulho de cobrar pelo meu trabalho."</p><div class="proof-name">Marina <span class="t-orange">Vasconcelos</span>, 31</div><div class="proof-role">PSICANALISTA · SP</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Saí do convênio. Triplicou o meu valor por sessão."</p><div class="proof-name">Carolina <span class="t-orange">Pacheco</span>, 38</div><div class="proof-role">CLÍNICA · RJ</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Recém-formada com agenda própria em 4 meses."</p><div class="proof-name">Bianca <span class="t-orange">Coutinho</span>, 29</div><div class="proof-role">RECÉM-FORMADA · MG</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"A supervisão da Tati reorganizou minha clínica inteira."</p><div class="proof-name">Júlia <span class="t-orange">Albuquerque</span>, 42</div><div class="proof-role">SUPERVISORA · POA</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Pela primeira vez sinto que não estou sozinha."</p><div class="proof-name">Renata <span class="t-orange">Schmidt</span>, 34</div><div class="proof-role">PSICÓLOGA · BSB</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"O método mudou minha relação com dinheiro e ética."</p><div class="proof-name">Larissa <span class="t-orange">Tavares</span>, 36</div><div class="proof-role">PSICANALISTA · CTBA</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Faturei o dobro sem aumentar a carga horária."</p><div class="proof-name">Ana <span class="t-orange">Marques</span>, 40</div><div class="proof-role">CLÍNICA · FOR</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Aprendi a falar do meu trabalho sem me diminuir."</p><div class="proof-name">Daniela <span class="t-orange">Ferraz</span>, 33</div><div class="proof-role">PSICÓLOGA · REC</div></div></article>
+      <!-- duplicado para loop infinito -->
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Voltei a sentir orgulho de cobrar pelo meu trabalho."</p><div class="proof-name">Marina <span class="t-orange">Vasconcelos</span>, 31</div><div class="proof-role">PSICANALISTA · SP</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Saí do convênio. Triplicou o meu valor por sessão."</p><div class="proof-name">Carolina <span class="t-orange">Pacheco</span>, 38</div><div class="proof-role">CLÍNICA · RJ</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Recém-formada com agenda própria em 4 meses."</p><div class="proof-name">Bianca <span class="t-orange">Coutinho</span>, 29</div><div class="proof-role">RECÉM-FORMADA · MG</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"A supervisão da Tati reorganizou minha clínica inteira."</p><div class="proof-name">Júlia <span class="t-orange">Albuquerque</span>, 42</div><div class="proof-role">SUPERVISORA · POA</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Pela primeira vez sinto que não estou sozinha."</p><div class="proof-name">Renata <span class="t-orange">Schmidt</span>, 34</div><div class="proof-role">PSICÓLOGA · BSB</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"O método mudou minha relação com dinheiro e ética."</p><div class="proof-name">Larissa <span class="t-orange">Tavares</span>, 36</div><div class="proof-role">PSICANALISTA · CTBA</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Faturei o dobro sem aumentar a carga horária."</p><div class="proof-name">Ana <span class="t-orange">Marques</span>, 40</div><div class="proof-role">CLÍNICA · FOR</div></div></article>
+      <article class="proof-card"><div class="proof-card-info"><p class="proof-quote">"Aprendi a falar do meu trabalho sem me diminuir."</p><div class="proof-name">Daniela <span class="t-orange">Ferraz</span>, 33</div><div class="proof-role">PSICÓLOGA · REC</div></div></article>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="e-stats e-reveal">
+      <div class="e-stat"><span class="stat-num" data-count="49" data-decimal="true">0</span><div class="stat-label">⭐ AVALIAÇÃO MÉDIA · /5</div></div>
+      <div class="e-stat"><span class="stat-num" data-count="92" data-suffix="%">0</span><div class="stat-label">RENOVAM A PARTICIPAÇÃO</div></div>
+      <div class="e-stat"><span class="stat-num" data-count="3000" data-suffix="+">0</span><div class="stat-label">PSICÓLOGAS ATIVAS</div></div>
+      <div class="e-stat"><span class="stat-num" data-count="22">0</span><div class="stat-label">ESTADOS BRASILEIROS</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DOBRA 6.5 — EFEITO BORBOLETA (TEORIA DO CAOS)
+     ============================================================ -->
+<section class="butterfly" id="efeito-borboleta">
+  <div class="container">
+    <div class="butterfly-head">
+      <div class="e-eyebrow-chip e-reveal"><span class="e-eyebrow-dot"></span><span>EFEITO BORBOLETA · TEORIA DO CAOS</span></div>
+      <h2 class="h-section e-reveal e-delay-1">Cada psicóloga que <em>se reposiciona</em><br>desloca <em>um sistema inteiro.</em></h2>
+      <p class="lead e-reveal e-delay-2">Em 1969, o meteorologista <em>Edward Lorenz</em> descobriu que o bater de asas de uma borboleta no Brasil pode, em tese, alterar o clima do outro lado do mundo. A psicologia opera na mesma lógica: pequenos atos coletivos viram movimento — e movimento, com método, vira <em>transformação irreversível.</em></p>
+    </div>
+
+    <div class="butterfly-stage e-reveal e-delay-3">
+      <div class="lorenz-wrap">
+        <canvas class="lorenz-canvas" id="lorenzCanvas" aria-label="Atrator de Lorenz — sistema dinâmico caótico de 1963"></canvas>
+        <canvas class="lorenz-comet" id="lorenzCometCanvas" aria-hidden="true"></canvas>
+        <div class="lorenz-eq">
+          <code>dx/dt = σ(y − x)</code>
+          <code>dy/dt = x(ρ − z) − y</code>
+          <code>dz/dt = xy − βz</code>
+          <span class="lorenz-eq-meta">σ = 10 · ρ = 28 · β = 8/3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="butterfly-impact">
+      <div class="impact-card e-reveal e-delay-1">
+        <span class="impact-num"><span data-count="1">0</span></span>
+        <div class="impact-label">PSICÓLOGA · A CONDIÇÃO INICIAL</div>
+        <p class="impact-desc">Você reconstrói a própria carreira com dignidade. Define preço com critério. Para de carregar a precarização como destino.</p>
+        <span class="impact-arrow">→</span>
+      </div>
+      <div class="impact-card e-reveal e-delay-2">
+        <span class="impact-num"><span data-count="100">0</span><em>+</em></span>
+        <div class="impact-label">PACIENTES · A PRIMEIRA ONDA</div>
+        <p class="impact-desc">Cada paciente sente outra qualidade de escuta, outra continuidade, outra presença. A clínica que sustenta a vida da psicóloga sustenta a vida deles.</p>
+        <span class="impact-arrow">→</span>
+      </div>
+      <div class="impact-card e-reveal e-delay-3">
+        <span class="impact-num"><span data-count="10000">0</span><em>+</em></span>
+        <div class="impact-label">VIDAS · O FURACÃO ÉTICO</div>
+        <p class="impact-desc">A profissão inteira sobe de patamar. Outras psicólogas se inspiram. Outros pacientes encontram acolhimento sério. O sistema se desloca.</p>
+        <span class="impact-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="butterfly-anchor e-reveal">
+      <p class="quote">"<em>Sem uma vida profissional sustentável,</em> você não tem fôlego para ser canal de transformação. Reposicionar a sua carreira não é egoísmo — é a <em>condição inicial</em> de tudo o que você vai gerar no mundo."</p>
+      <p class="quote-meta">— TATI RIBEIRO · O EFEITO BORBOLETA DA ENTRELAÇOS</p>
+      <a href="#newsletter" class="e-btn e-btn-primary">Ser parte do efeito →</a>
+      <div><span class="butterfly-citation">LORENZ, E. · 1969 · MIT METEOROLOGY</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DOBRA 7 — COMUNIDADE
+     ============================================================ -->
+<section class="community" id="comunidade">
+  <div class="container">
+    <div class="community-head">
+      <div class="e-eyebrow-chip e-reveal" style="margin-bottom: 24px;"><span class="e-eyebrow-dot"></span><span>COMUNIDADE ENTRELAÇOS</span></div>
+      <h2 class="h-section e-reveal e-delay-1">O encontro <em>acontece em rede.</em></h2>
+      <p class="lead e-reveal e-delay-2">A comunidade vive online — mas a transformação acontece quando psicólogas se olham nos olhos e se reconhecem. Encontros presenciais em estados, supervisões ao vivo e imersões anuais.</p>
+    </div>
+
+    <div class="e-stats e-reveal">
+      <div class="e-stat"><span class="stat-num" data-count="22">0</span><div class="stat-label">ESTADOS ATIVOS</div></div>
+      <div class="e-stat"><span class="stat-num" data-count="3000" data-suffix="+">0</span><div class="stat-label">MEMBROS CONECTADAS</div></div>
+      <div class="e-stat"><span class="stat-num" data-count="6">0</span><div class="stat-label">ENCONTROS POR MÊS</div></div>
+      <div class="e-stat"><span class="stat-num" data-count="4">0</span><div class="stat-label">IMERSÕES ANUAIS</div></div>
+    </div>
+  </div>
+
+  <div class="city-marquee">
+    <div class="e-marquee">
+      <div class="e-marquee-track">
+        <span>SÃO PAULO</span><span>RIO DE JANEIRO</span><span>BELO HORIZONTE</span><span>CURITIBA</span><span>FLORIANÓPOLIS</span><span>PORTO ALEGRE</span><span>RECIFE</span><span>SALVADOR</span><span>FORTALEZA</span><span>BRASÍLIA</span><span>MANAUS</span><span>BELÉM</span>
+        <span>SÃO PAULO</span><span>RIO DE JANEIRO</span><span>BELO HORIZONTE</span><span>CURITIBA</span><span>FLORIANÓPOLIS</span><span>PORTO ALEGRE</span><span>RECIFE</span><span>SALVADOR</span><span>FORTALEZA</span><span>BRASÍLIA</span><span>MANAUS</span><span>BELÉM</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="community-cta-row">
+      <a href="#" class="e-btn e-btn-primary">Entrar para a comunidade →</a>
+      <a href="#" class="e-btn e-btn-ghost">Tornar-se polo regional</a>
+    </div>
+
+    <div class="community-bottom">
+      <div class="imersao-card e-reveal" data-spotlight>
+        <div class="e-card-spot"></div>
+        <div>
+          <div class="e-eyebrow-chip"><span class="e-eyebrow-dot"></span><span>EVENTO · IMERSÃO ANUAL</span></div>
+          <h3 class="h-card">Imersão <em>Reposicionamento</em></h3>
+          <p style="color: var(--e-text-secondary); margin-top: 12px;">3 dias de imersão presencial em São Paulo, com cohort fechado de 30 psicólogas. Travessia profunda em posicionamento, comunicação e sustentabilidade da prática.</p>
+          <div class="imersao-meta"><span>30 VAGAS</span><span>·</span><span>3 DIAS</span><span>·</span><span>SÃO PAULO</span><span>·</span><span>EDIÇÃO 04</span></div>
+        </div>
+        <a class="e-btn e-btn-primary e-btn-sm">Lista de espera →</a>
+      </div>
+      <div class="open-hub-card e-reveal e-delay-1" data-spotlight>
+        <div class="e-card-spot"></div>
+        <div>
+          <div class="e-eyebrow-dash"><span class="e-dash-line"></span><span>SEM POLO NA SUA CIDADE?</span></div>
+          <h3 class="h-card" style="margin-top: 16px;"><em>Abra o seu.</em></h3>
+          <p style="color: var(--e-text-secondary); margin-top: 12px;">Se você é membra ativa e quer puxar o encontro local, a gente te dá estrutura, identidade e suporte para começar.</p>
+        </div>
+        <a class="e-btn e-btn-ghost e-btn-sm" style="align-self: flex-start;">Solicitar polo →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DOBRA 8 — CO-FUNDAÇÃO (TATI + ROBERTA)
+     ============================================================ -->
+<section class="cofounders" id="fundadora">
+  <div class="container">
+    <div class="cofounders-head">
+      <div class="e-eyebrow-dash e-reveal" style="margin-bottom: 16px;"><span class="e-dash-line"></span><span>QUEM ESTÁ POR TRÁS DO MÉTODO</span></div>
+      <h2 class="h-section e-reveal e-delay-1">Duas mulheres. Uma <em>convicção:</em><br>psicóloga merece <em>protagonismo.</em></h2>
+      <p class="lead e-reveal e-delay-2" style="margin-top: 24px;">A Entrelaços Psicologia é um ecossistema de aprendizagem e inovação que capacita psicólogas(os), psicanalistas e estudantes de psicologia <strong style="color: var(--e-text);">há mais de 5 anos</strong>.</p>
+    </div>
+
+    <div class="cofounders-grid">
+      <article class="cofounder-card e-reveal e-delay-1" data-spotlight>
+        <div class="e-card-spot"></div>
+        <div class="cofounder-photo">
+          <span class="cofounder-initials">TR</span>
+          <div class="cofounder-photo-meta">
+            <strong>TATI RIBEIRO</strong>
+            <span>CEO &amp; FUNDADORA · A MENTE ESTRATÉGICA</span>
+          </div>
+        </div>
+        <div class="cofounder-body">
+          <div class="cofounder-subtitle">A MENTE ESTRATÉGICA</div>
+          <div class="cofounder-tags">
+            <span class="founder-tag">Psicóloga</span>
+            <span class="founder-tag">Psicanalista</span>
+            <span class="founder-tag">CEO Entrelaços</span>
+            <span class="founder-tag">MBA Gestão</span>
+            <span class="founder-tag">Criadora método FAC</span>
+            <span class="cofounder-crp">CRP 06/117883</span>
+          </div>
+          <h3 class="h-card cofounder-name">Tatiana <em class="protagonist">Ribeiro</em></h3>
+          <p>12+ anos como Psicóloga e Psicanalista, 15+ anos em Gestão de Projetos, MBA em Gerenciamento de Projetos. Criadora do <strong style="color: var(--e-text);">método FAC</strong> — Fundação, Atração e Conexão. Tati é a CEO da Entrelaços e a ponte que traduz o <em style="font-family: var(--ff-serif); color: var(--e-purple-200);">"psicologuês"</em> para negócios sustentáveis. Ela vai te ensinar o como: processos, gestão de negócios, IAs para Psis e captação de pacientes.</p>
+          <div class="cofounder-stats">
+            <div><span class="stat-num" data-count="12" data-suffix="+">0</span><div class="stat-label">ANOS PSI &amp; PSICANÁLISE</div></div>
+            <div><span class="stat-num" data-count="15" data-suffix="+">0</span><div class="stat-label">ANOS DE GESTÃO</div></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="cofounder-card e-reveal e-delay-2" data-spotlight>
+        <div class="e-card-spot"></div>
+        <div class="cofounder-photo cofounder-photo-r">
+          <span class="cofounder-initials">RO</span>
+          <div class="cofounder-photo-meta">
+            <strong>ROBERTA OLIVEIRA</strong>
+            <span>COO &amp; CO-FUNDADORA · A PROFUNDIDADE CLÍNICA</span>
+          </div>
+        </div>
+        <div class="cofounder-body">
+          <div class="cofounder-subtitle">A PROFUNDIDADE CLÍNICA</div>
+          <div class="cofounder-tags">
+            <span class="founder-tag">Psicanalista</span>
+            <span class="founder-tag">Mestra USP</span>
+            <span class="founder-tag">Doutora USP</span>
+            <span class="founder-tag">14+ anos docência</span>
+            <span class="cofounder-crp">CRP 06/77114</span>
+          </div>
+          <h3 class="h-card cofounder-name">Roberta <em class="protagonist">Oliveira</em></h3>
+          <p>Psicanalista, Mestra e Doutora em <strong style="color: var(--e-text);">Psicologia Social pela USP</strong> e docente há mais de 14 anos. Roberta é a co-fundadora e trará a <em style="font-family: var(--ff-serif); color: var(--e-purple-200);">densidade teórica</em> e a <em style="font-family: var(--ff-serif); color: var(--e-purple-200);">segurança ética</em> para sua atuação, garantindo que seu trabalho tenha impacto real e transformador.</p>
+          <div class="cofounder-stats">
+            <div><span class="stat-num-text">USP</span><div class="stat-label">MESTRA · DOUTORA</div></div>
+            <div><span class="stat-num" data-count="14" data-suffix="+">0</span><div class="stat-label">ANOS DE DOCÊNCIA</div></div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="cofounders-mídia e-reveal">
+      <div class="founder-mídia-label">RECONHECIMENTOS &amp; PARTICIPAÇÕES</div>
+      <div class="founder-mídia-logos">
+        <span>USP</span><span>CRP-SP</span><span>Receita Federal</span><span>Avon</span><span>Claro</span><span>Scania</span><span>LG</span><span>ADM Brasil</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DOBRA 9 — NEWSLETTER CTA
+     ============================================================ -->
+<section class="newsletter" id="newsletter">
+  <div class="container-narrow">
+    <div class="e-eyebrow-chip e-reveal"><span class="e-eyebrow-dot"></span><span>ECOSSISTEMA ENTRELAÇOS · CONVITE ABERTO</span></div>
+    <h2 class="h-section e-reveal e-delay-1">Receba o que <em>realmente</em><br>está reposicionando carreiras.</h2>
+    <p class="lead e-reveal e-delay-2">Toda semana, Tati compartilha frameworks, leituras críticas, casos reais do ecossistema e reflexões que abrem caminho. 3 mil psicólogas já recebem. Gratuito. Direto. Sem enrolação.</p>
+    <form class="newsletter-form e-reveal e-delay-3" onsubmit="event.preventDefault(); alert('Inscrição confirmada — verifique seu e-mail.')">
+      <input type="email" placeholder="seu@email.com.br" required>
+      <button type="submit" class="e-btn e-btn-primary">Receber a newsletter →</button>
+    </form>
+    <p class="newsletter-tagline e-reveal e-delay-4">SEM SPAM · CANCELE QUANDO QUISER · LGPD-READY</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     DOBRA 10 — FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="e-brand" href="#top">
+          <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
+            <defs><linearGradient id="bGrad2" x1="0" y1="0" x2="100" y2="100"><stop offset="0" stop-color="#7427D4"/><stop offset="1" stop-color="#470F94"/></linearGradient></defs>
+            <path d="M30 20 Q50 35 50 50 Q50 35 70 20 Q85 35 70 50 Q85 65 70 80 Q50 65 50 50 Q50 65 30 80 Q15 65 30 50 Q15 35 30 20 Z" fill="url(#bGrad2)"/>
+            <circle cx="50" cy="38" r="4" fill="#FF8A1F"/>
+          </svg>
+          <span>Entrelaços<em>Psi</em></span>
+        </a>
+        <p>Ecossistema de educação, comunidade e tecnologia para psicólogas que recusam a precarização.</p>
+        <div class="footer-mini-stats">3K+ PSICÓLOGAS · 22 ESTADOS · 11 ANOS · UM MOVIMENTO</div>
+      </div>
+      <div class="footer-col">
+        <h4>Mapa</h4>
+        <a href="#top">Home</a>
+        <a href="#manifesto">Manifesto</a>
+        <a href="#por-que">Por que existimos</a>
+        <a href="#programas">Programas</a>
+        <a href="#provas">Provas</a>
+        <a href="#efeito-borboleta">Efeito Borboleta</a>
+        <a href="#fundadora">Quem somos</a>
+      </div>
+      <div class="footer-col">
+        <h4>Programas</h4>
+        <a href="#">Comunidade Entrelaços</a>
+        <a href="#">Cohort Estruturação</a>
+        <a href="#">Mentoria Reposicionamento</a>
+        <a href="#">Supervisão Clínica</a>
+        <a href="#">Sessões com Tati</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ecossistema</h4>
+        <a href="#">ELOS Compliance™</a>
+        <a href="#">Academia Lendária™</a>
+        <a href="#">PsiContent AI™</a>
+        <a href="#">Plataforma Comunidade™</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <a href="mailto:entrelacos@entrelacospsicologia.com.br">entrelacos@entrelacospsicologia.com.br</a>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">YouTube</a>
+        <a href="#">Spotify</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="#">Termos de Uso</a> · <a href="#">Política de Privacidade</a> · <a href="#">Política de Cookies</a> · CNPJ: XX.XXX.XXX/0001-XX
+      </div>
+      <div class="footer-legal">© 2026 Entrelaços Psicologia · Reconstruindo a psicologia desde 2014</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // === REVEAL ON SCROLL ===
+  const ioReveal = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && (e.target.classList.add('is-visible'), ioReveal.unobserve(e.target))), { threshold: 0.12 });
+  document.querySelectorAll('.e-reveal').forEach(el => ioReveal.observe(el));
+
+  // === COUNTER ===
+  const animateCount = (el) => {
+    let target = parseInt(el.dataset.count); const suffix = el.dataset.suffix || ''; const isDecimal = el.dataset.decimal === 'true'; const duration = 1800; const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      let val = Math.round(target * eased);
+      if (isDecimal) { el.textContent = (val / 10).toFixed(1) + suffix; }
+      else if (target >= 1000) { el.textContent = val.toLocaleString('pt-BR') + suffix; }
+      else { el.textContent = val + suffix; }
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const ioCounter = new IntersectionObserver(es => es.forEach(en => en.isIntersecting && (animateCount(en.target), ioCounter.unobserve(en.target))));
+  document.querySelectorAll('[data-count]').forEach(el => ioCounter.observe(el));
+
+  // === SPOTLIGHT ===
+  document.querySelectorAll('[data-spotlight]').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
+      card.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
+    });
+  });
+
+  // === HEADER PILL SHRINK ===
+  const navPill = document.getElementById('navPill');
+  window.addEventListener('scroll', () => navPill.classList.toggle('is-scrolled', window.scrollY > 32));
+
+  // ============================================================
+  // HERO CANVAS — CONSTELLATION INTERATIVA
+  // pontos laranja-soft que reagem ao mouse com linhas dinâmicas
+  // ============================================================
+  (function heroConstellation() {
+    const canvas = document.getElementById('heroCanvas');
+    const hero = canvas.parentElement;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W = 0, H = 0, dpr = window.devicePixelRatio || 1;
+    let points = [];
+    let mouse = { x: -9999, y: -9999, active: false };
+    const N = window.matchMedia('(max-width: 720px)').matches ? 32 : 60;
+    const LINK_DIST = 95;      // distância para conectar pontos entre si
+    const MOUSE_RADIUS = 150;  // raio de influência do mouse
+    const ORANGE = '255,184,122';   // --e-orange-soft
+    const PURPLE = '168,120,236';   // --e-purple-300
+
+    function resize() {
+      const rect = hero.getBoundingClientRect();
+      W = rect.width; H = rect.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // re-spread points within new bounds
+      points = Array.from({ length: N }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        r: 0.7 + Math.random() * 1.6,
+      }));
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+      // 1. desenhar linhas entre pontos próximos (intensidade modulada por proximidade do mouse)
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        // movimento sutil
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        for (let j = i + 1; j < points.length; j++) {
+          const q = points[j];
+          const dx = p.x - q.x, dy = p.y - q.y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < LINK_DIST) {
+            // checa proximidade ao mouse
+            const mid = { x: (p.x + q.x) / 2, y: (p.y + q.y) / 2 };
+            const md = mouse.active ? Math.hypot(mid.x - mouse.x, mid.y - mouse.y) : Infinity;
+            const mouseInfluence = mouse.active && md < MOUSE_RADIUS ? (1 - md / MOUSE_RADIUS) : 0;
+            const baseOpacity = (1 - d / LINK_DIST) * 0.045;
+            const finalOpacity = baseOpacity + mouseInfluence * 0.16;
+            const color = mouseInfluence > 0.3 ? ORANGE : PURPLE;
+            ctx.strokeStyle = `rgba(${color},${finalOpacity})`;
+            ctx.lineWidth = 0.6 + mouseInfluence * 0.6;
+            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+          }
+        }
+      }
+      // 2. desenhar linha do mouse para pontos próximos
+      if (mouse.active) {
+        for (const p of points) {
+          const dx = p.x - mouse.x, dy = p.y - mouse.y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < MOUSE_RADIUS) {
+            const intensity = 1 - d / MOUSE_RADIUS;
+            ctx.strokeStyle = `rgba(${ORANGE},${intensity * 0.20})`;
+            ctx.lineWidth = 0.5 + intensity * 0.6;
+            ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+          }
+        }
+      }
+      // 3. desenhar pontos
+      for (const p of points) {
+        const dToMouse = mouse.active ? Math.hypot(p.x - mouse.x, p.y - mouse.y) : Infinity;
+        const intensity = mouse.active && dToMouse < MOUSE_RADIUS ? (1 - dToMouse / MOUSE_RADIUS) : 0;
+        const color = intensity > 0.2 ? ORANGE : PURPLE;
+        const radius = p.r + intensity * 1.2;
+        const alpha = 0.18 + intensity * 0.28;
+        // halo
+        if (intensity > 0.4) {
+          ctx.fillStyle = `rgba(${ORANGE},${intensity * 0.07})`;
+          ctx.beginPath(); ctx.arc(p.x, p.y, radius * 3, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.fillStyle = `rgba(${color},${alpha})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, radius, 0, Math.PI * 2); ctx.fill();
+      }
+      requestAnimationFrame(loop);
+    }
+
+    hero.addEventListener('mousemove', e => {
+      const rect = hero.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+    });
+    hero.addEventListener('mouseleave', () => { mouse.active = false; });
+    hero.addEventListener('touchmove', e => {
+      const rect = hero.getBoundingClientRect();
+      const t = e.touches[0];
+      if (t) { mouse.x = t.clientX - rect.left; mouse.y = t.clientY - rect.top; mouse.active = true; }
+    }, { passive: true });
+    hero.addEventListener('touchend', () => { mouse.active = false; });
+
+    window.addEventListener('resize', resize);
+    resize();
+    loop();
+  })();
+
+
+  // ============================================================
+  // LORENZ SCENE v1.5 — atrator denso + 3 cometas viajando pela trajetória
+  // ============================================================
+  (function lorenzScene() {
+    const staticCanvas = document.getElementById('lorenzCanvas');
+    const cometCanvas  = document.getElementById('lorenzCometCanvas');
+    if (!staticCanvas || !cometCanvas) return;
+
+    const sctx = staticCanvas.getContext('2d');
+    const cctx = cometCanvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    let W = 0, H = 0;
+    let pointsCache = null, bounds = null, transform = null;
+
+    // --- Pré-cálculo do sistema de Lorenz ---
+    function compute() {
+      const sigma = 10, rho = 28, beta = 8/3;
+      const dt = 0.004;
+      const SKIP = 800;
+      const N = 100000;
+      let x = 0.1, y = 0, z = 0;
+      for (let i = 0; i < SKIP; i++) {
+        x += sigma*(y-x)*dt;
+        y += (x*(rho-z)-y)*dt;
+        z += (x*y-beta*z)*dt;
+      }
+      const arr = new Float32Array(N * 2);
+      let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      for (let i = 0; i < N; i++) {
+        const dx = sigma*(y-x), dy = x*(rho-z)-y, dz = x*y-beta*z;
+        x += dx*dt; y += dy*dt; z += dz*dt;
+        arr[i*2] = x; arr[i*2+1] = z;
+        if (x < minX) minX = x; if (x > maxX) maxX = x;
+        if (z < minZ) minZ = z; if (z > maxZ) maxZ = z;
+      }
+      pointsCache = arr;
+      bounds = { minX, maxX, minZ, maxZ, N };
+    }
+
+    function recomputeTransform() {
+      const { minX, maxX, minZ, maxZ } = bounds;
+      const rangeX = maxX - minX, rangeZ = maxZ - minZ;
+      const padX = W * 0.06, padY = H * 0.06;
+      const sc = Math.min((W - padX*2) / rangeX, (H - padY*2) / rangeZ);
+      const offX = (W - rangeX*sc) / 2 - minX*sc;
+      const offY = (H - rangeZ*sc) / 2 - minZ*sc;
+      transform = { sc, offX, offY };
+    }
+
+    function projectIdx(i) {
+      const { sc, offX, offY } = transform;
+      const x = offX + pointsCache[i*2] * sc;
+      const y = H - (offY + pointsCache[i*2+1] * sc);
+      return [x, y];
+    }
+
+    // --- Render do atrator denso (uma vez) ---
+    function renderStatic() {
+      sctx.clearRect(0, 0, W, H);
+      sctx.globalCompositeOperation = 'lighter';
+      sctx.lineWidth = 0.4;
+      const palette = [
+        'rgba(90, 30, 180, 0.05)',
+        'rgba(120, 35, 200, 0.05)',
+        'rgba(160, 45, 210, 0.05)',
+        'rgba(180, 40, 180, 0.05)',
+        'rgba(200, 50, 160, 0.05)',
+      ];
+      const N = bounds.N;
+      const batches = 5, bs = Math.floor(N / batches);
+      for (let b = 0; b < batches; b++) {
+        sctx.strokeStyle = palette[b];
+        sctx.beginPath();
+        const start = b * bs;
+        const end = (b === batches - 1) ? N : (b + 1) * bs;
+        const [px0, py0] = projectIdx(start);
+        sctx.moveTo(px0, py0);
+        for (let i = start + 1; i < end; i++) {
+          const [px, py] = projectIdx(i);
+          sctx.lineTo(px, py);
+        }
+        sctx.stroke();
+      }
+      sctx.globalCompositeOperation = 'source-over';
+    }
+
+    // --- Loop dos cometas (3 partículas viajando pela trajetória) ---
+    let cometRaf = null, cometFrame = 0;
+    const TRAIL_LEN = 280;
+    const SPEED = 5;        // pontos por frame — contemplativo
+    let comets = null;
+
+    function initComets() {
+      const N = bounds.N;
+      comets = [
+        { offset: 0,                         color: [255, 138, 31]  },  // laranja sólido
+        { offset: Math.floor(N * 0.33),      color: [255, 184, 122] },  // laranja-soft
+        { offset: Math.floor(N * 0.66),      color: [255, 108, 184] },  // magenta-rosa
+      ];
+    }
+
+    function loopComets() {
+      cctx.clearRect(0, 0, W, H);
+      cctx.globalCompositeOperation = 'lighter';
+      const N = bounds.N;
+
+      for (const p of comets) {
+        const headIdx = (p.offset + cometFrame * SPEED) % N;
+        // Trail (últimos TRAIL_LEN pontos com fade exponencial)
+        for (let i = TRAIL_LEN; i >= 1; i--) {
+          const idx = (headIdx - i + N) % N;
+          const t = i / TRAIL_LEN;
+          const alpha = Math.pow(1 - t, 2.6) * 0.55;
+          if (alpha < 0.005) continue;
+          const [px, py] = projectIdx(idx);
+          // Cauda: pontos pequenos com glow
+          cctx.fillStyle = `rgba(${p.color[0]}, ${p.color[1]}, ${p.color[2]}, ${alpha})`;
+          cctx.beginPath();
+          cctx.arc(px, py, 1.0 + (1 - t) * 1.4, 0, Math.PI * 2);
+          cctx.fill();
+        }
+        // Head (a partícula em si): halo grande + halo médio + núcleo branco
+        const [hx, hy] = projectIdx(headIdx);
+        cctx.fillStyle = `rgba(${p.color[0]}, ${p.color[1]}, ${p.color[2]}, 0.16)`;
+        cctx.beginPath(); cctx.arc(hx, hy, 16, 0, Math.PI * 2); cctx.fill();
+        cctx.fillStyle = `rgba(${p.color[0]}, ${p.color[1]}, ${p.color[2]}, 0.45)`;
+        cctx.beginPath(); cctx.arc(hx, hy, 5, 0, Math.PI * 2); cctx.fill();
+        cctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+        cctx.beginPath(); cctx.arc(hx, hy, 1.6, 0, Math.PI * 2); cctx.fill();
+      }
+
+      cctx.globalCompositeOperation = 'source-over';
+      cometFrame++;
+      cometRaf = requestAnimationFrame(loopComets);
+    }
+
+    function setupCanvas(canvas, ctx) {
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function setup() {
+      const r = staticCanvas.parentElement.getBoundingClientRect();
+      W = r.width; H = r.height;
+      if (W === 0 || H === 0) return;
+      setupCanvas(staticCanvas, sctx);
+      setupCanvas(cometCanvas, cctx);
+      recomputeTransform();
+      renderStatic();
+      if (!comets) initComets();
+      if (cometRaf) cancelAnimationFrame(cometRaf);
+      loopComets();
+    }
+
+    // Lazy compute via IntersectionObserver
+    let computed = false;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !computed) {
+          computed = true;
+          compute();
+          setup();
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+    io.observe(staticCanvas);
+
+    // Pause cometas quando fora do viewport pra economizar bateria
+    const visIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!computed) return;
+        if (e.isIntersecting) {
+          if (!cometRaf) loopComets();
+        } else {
+          if (cometRaf) { cancelAnimationFrame(cometRaf); cometRaf = null; }
+        }
+      });
+    }, { threshold: 0.05 });
+    visIo.observe(staticCanvas);
+
+    let resizeRaf;
+    window.addEventListener('resize', () => {
+      if (!computed) return;
+      cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(setup);
+    });
+  })();
+
+</script>
+</body>
+</html>

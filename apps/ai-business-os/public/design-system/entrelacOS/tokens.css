@@ -1,0 +1,112 @@
+/* ============================================================
+   ENTRELAÇOS DESIGN SYSTEM — Tokens (v1.5 · Lendária Edition)
+   Fonte única da verdade. Importar antes de qualquer outro CSS.
+   ============================================================ */
+:root {
+  /* === ROXO DENSO ENTRELAÇOS === */
+  --e-purple-50:  #F4EDFC;
+  --e-purple-100: #E5D4FA;
+  --e-purple-200: #C9A7F4;
+  --e-purple-300: #A878EC;
+  --e-purple-400: #8B4FE0;
+  --e-purple-500: #7427D4;
+  --e-purple-600: #5C18B8;   /* primário CTAs */
+  --e-purple-700: #470F94;
+  --e-purple-800: #340970;
+  --e-purple-900: #220552;
+  --e-purple-950: #11022B;
+
+  /* === FUNDOS DARK === */
+  --e-bg:      #0A0612;
+  --e-bg-alt:  #0F0820;
+  --e-bg-deep: #050309;
+  --e-bg-elev: #14092B;
+  --e-bg-card: linear-gradient(180deg, rgba(180,140,255,0.04), rgba(180,140,255,0.005));
+  --e-bg-card-hover: linear-gradient(180deg, rgba(180,140,255,0.08), rgba(180,140,255,0.015));
+
+  /* === GLASS === */
+  --e-glass-bg: rgba(15,8,32,0.72);
+  --e-glass-border: rgba(180,140,255,0.14);
+  --e-glass-blur: blur(20px) saturate(140%);
+
+  /* === CREAM (inversão) === */
+  --e-cream:        #F4EDF8;
+  --e-cream-warm:   #F3EEE6;
+  --e-cream-ink:    #11022B;
+  --e-cream-accent: #470F94;
+
+  /* === TEXTO === */
+  --e-text:           #F0EAF8;
+  --e-text-secondary: rgba(240,234,248,0.68);
+  --e-text-muted:     rgba(240,234,248,0.42);
+  --e-text-faint:     rgba(240,234,248,0.22);
+  --e-text-on-cream:  #11022B;
+  --e-text-on-cream-secondary: rgba(17,2,43,0.62);
+  --e-text-on-cream-muted: rgba(17,2,43,0.40);
+
+  /* === BORDAS === */
+  --e-border:         rgba(180,140,255,0.10);
+  --e-border-strong:  rgba(180,140,255,0.20);
+  --e-border-subtle:  rgba(255,255,255,0.06);
+  --e-border-cream:   rgba(17,2,43,0.10);
+
+  /* === ACENTO LARANJA — uso máximo 3x por página === */
+  --e-orange:       #FF8A1F;
+  --e-orange-soft:  #FFB87A;
+  --e-orange-glow:  rgba(255,138,31,0.35);
+
+  /* === SEMÂNTICAS === */
+  --e-success: #10B981;
+  --e-warning: #F59E0B;
+  --e-error:   #EF4444;
+
+  /* === GRADIENTES === */
+  --e-grad-purple:    linear-gradient(135deg, #7427D4 0%, #470F94 100%);
+  --e-grad-deep:      linear-gradient(180deg, #11022B 0%, #0A0612 50%, #050309 100%);
+  --e-grad-hero:      radial-gradient(ellipse at 50% 0%, rgba(116,39,212,0.30) 0%, transparent 70%);
+  --e-grad-glow:      radial-gradient(ellipse at center, rgba(168,120,236,0.18) 0%, transparent 60%);
+  --e-grad-cream:     linear-gradient(180deg, #F4EDF8 0%, #ECE0F5 100%);
+  --e-grad-butterfly: radial-gradient(ellipse at center, rgba(116,39,212,0.35) 0%, rgba(34,5,82,0.6) 40%, var(--e-bg-deep) 80%);
+
+  /* === SPACING (escala de 4px) === */
+  --e-s-1:4px; --e-s-2:8px; --e-s-3:12px; --e-s-4:16px; --e-s-5:20px;
+  --e-s-6:24px; --e-s-8:32px; --e-s-10:40px; --e-s-12:48px; --e-s-16:64px;
+  --e-s-20:80px; --e-s-24:96px; --e-s-32:128px;
+  --e-section-y: 100px;
+  --e-section-y-sm: 64px;
+  --e-section-y-lg: 140px;
+
+  /* === CONTAINER === */
+  --e-maxw: 1280px;
+  --e-maxw-narrow: 920px;
+  --e-maxw-text: 640px;
+
+  /* === RAIO (geometria por família) === */
+  --e-r-sm: 8px; --e-r-md: 12px; --e-r-lg: 16px; --e-r-xl: 20px;
+  --e-r-2xl: 28px; --e-r-pill: 9999px; --e-r-input: 0px;
+
+  /* === SOMBRAS — depth é cor, não preto === */
+  --e-sh-sm: 0 2px 8px rgba(0,0,0,0.20);
+  --e-sh-md: 0 8px 24px rgba(0,0,0,0.30);
+  --e-sh-lg: 0 16px 48px rgba(0,0,0,0.40);
+  --e-sh-purple:    0 4px 20px rgba(116,39,212,0.30);
+  --e-sh-purple-lg: 0 16px 50px rgba(116,39,212,0.45);
+  --e-sh-glow:      0 0 60px rgba(168,120,236,0.20);
+  --e-sh-cta:       inset 0 0 0 1px rgba(255,255,255,0.15), 0 10px 40px rgba(116,39,212,0.30);
+  --e-sh-cta-hover: inset 0 0 0 1px rgba(255,255,255,0.20), 0 16px 50px rgba(116,39,212,0.45);
+  --e-sh-card-hover:0 20px 60px -20px rgba(116,39,212,0.30), inset 0 0 0 1px rgba(180,140,255,0.10);
+  --e-sh-nav:       0 10px 40px rgba(0,0,0,0.40), inset 0 0 0 1px rgba(255,255,255,0.05);
+
+  /* === MOTION === */
+  --e-ease:        cubic-bezier(0.22, 1, 0.36, 1);
+  --e-ease-in-out: cubic-bezier(0.40, 0, 0.20, 1);
+  --e-dur-fast:    150ms;
+  --e-dur-base:    300ms;
+  --e-dur-slow:    600ms;
+  --e-dur-xslow:   1200ms;
+
+  /* === FONTES === */
+  --ff-sans:  'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ff-serif: 'Instrument Serif', 'Times New Roman', serif;
+  --ff-mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+}

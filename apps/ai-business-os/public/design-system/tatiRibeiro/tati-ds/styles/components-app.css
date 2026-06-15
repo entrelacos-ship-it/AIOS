@@ -1,0 +1,277 @@
+/* ============================================================
+   TATI RIBEIRO · DESIGN SYSTEM
+   components-app.css — Componentes mobile-first (apps de IA, mentoria, supervisão)
+   Depende de: tokens.css
+   ============================================================ */
+
+/* ─── APP FRAME (preview do device) ─── */
+.t-app-frame {
+  width: 320px;
+  margin: 0 auto;
+  background: var(--t-bg-1);
+  border: 1px solid var(--t-border-2);
+  border-radius: 36px;
+  padding: 14px 10px;
+  position: relative;
+}
+.t-app-frame::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--t-border-2);
+  border-radius: 2px;
+}
+.t-app-screen {
+  background: var(--t-bg);
+  border-radius: 26px;
+  padding: var(--t-space-md);
+  min-height: 540px;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--t-space-md);
+  position: relative;
+}
+
+/* ─── HEADER ─── */
+.t-app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--t-space-sm);
+  border-bottom: 1px solid var(--t-border);
+}
+.t-app-title {
+  font-family: var(--t-font-display);
+  font-size: 18px;
+  font-weight: var(--t-fw-500);
+  letter-spacing: -0.02em;
+  color: var(--t-text-strong);
+}
+.t-app-eyebrow {
+  font-family: var(--t-font-mono);
+  font-size: 9px;
+  color: var(--t-accent-light);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* ─── LIST ITEM ─── */
+.t-app-list-item {
+  padding: 12px;
+  background: var(--t-surface);
+  border: 1px solid var(--t-border);
+  border-radius: var(--t-radius-md);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.t-app-list-item__icon {
+  width: 36px;
+  height: 36px;
+  background: var(--t-accent-bg);
+  border: 1px solid var(--t-accent-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--t-accent-light);
+  font-family: var(--t-font-mono);
+  font-size: 11px;
+  font-weight: var(--t-fw-600);
+  flex-shrink: 0;
+}
+.t-app-list-item__content { flex: 1; min-width: 0; }
+.t-app-list-item__title {
+  font-size: 13px;
+  font-weight: var(--t-fw-500);
+  color: var(--t-text-strong);
+  margin-bottom: 2px;
+}
+.t-app-list-item__meta {
+  font-family: var(--t-font-mono);
+  font-size: 9px;
+  color: var(--t-text-mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ─── TABS PÍLULA ─── */
+.t-app-tabs {
+  display: flex;
+  background: var(--t-surface);
+  border: 1px solid var(--t-border);
+  border-radius: var(--t-radius-full);
+  padding: 4px;
+  gap: 4px;
+}
+.t-app-tab {
+  flex: 1;
+  padding: 8px;
+  font-family: var(--t-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--t-text-2);
+  border: none;
+  background: transparent;
+  border-radius: var(--t-radius-full);
+  cursor: pointer;
+  transition: all var(--t-dur-fast) var(--t-ease);
+}
+.t-app-tab--active {
+  background: var(--t-accent);
+  color: var(--t-pearl);
+}
+
+/* ─── BOTTOM NAV ─── */
+.t-app-bottom-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 12px 8px 8px;
+  background: var(--t-bg-1);
+  border-top: 1px solid var(--t-border);
+  border-radius: 0 0 26px 26px;
+  margin: auto -16px -16px;
+}
+.t-app-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  cursor: pointer;
+}
+.t-app-nav-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--t-text-mute);
+  opacity: 0.5;
+  transition: all var(--t-dur-fast) var(--t-ease);
+}
+.t-app-nav-item--active .t-app-nav-icon {
+  background: var(--t-accent-light);
+  opacity: 1;
+  box-shadow: 0 0 12px var(--t-accent-light);
+}
+.t-app-nav-label {
+  font-family: var(--t-font-mono);
+  font-size: 8px;
+  color: var(--t-text-mute);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.t-app-nav-item--active .t-app-nav-label { color: var(--t-accent-light); }
+
+/* ─── FAB ─── */
+.t-app-fab {
+  position: absolute;
+  bottom: 80px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  background: var(--t-accent);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--t-pearl);
+  font-size: 20px;
+  font-weight: var(--t-fw-200);
+  box-shadow: 0 4px 24px rgba(107,70,193,0.5);
+  transition: all var(--t-dur-fast) var(--t-ease-out);
+}
+.t-app-fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 32px rgba(107,70,193,0.7);
+}
+
+/* ─── PROMPT BAR (IA) ─── */
+.t-app-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--t-bg-1);
+  border: 1px solid var(--t-border-2);
+  border-radius: var(--t-radius-full);
+}
+.t-app-prompt__icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--t-accent-light);
+}
+.t-app-prompt__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--t-text);
+  font-size: 13px;
+  outline: none;
+}
+.t-app-prompt__input::placeholder {
+  color: var(--t-text-mute);
+  font-style: italic;
+}
+.t-app-prompt__send {
+  width: 28px;
+  height: 28px;
+  background: var(--t-accent);
+  border: none;
+  border-radius: 50%;
+  color: var(--t-pearl);
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── MESSAGE BUBBLES ─── */
+.t-app-message {
+  padding: 10px 14px;
+  border-radius: var(--t-radius-lg);
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 85%;
+}
+.t-app-message--ai {
+  background: var(--t-surface-2);
+  border: 1px solid var(--t-border);
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+  color: var(--t-text);
+}
+.t-app-message--user {
+  background: var(--t-accent);
+  border-bottom-right-radius: 4px;
+  align-self: flex-end;
+  color: var(--t-pearl);
+}
+
+/* ─── PROGRESS BAR ─── */
+.t-app-progress {
+  width: 100%;
+  height: 6px;
+  background: var(--t-surface-2);
+  border-radius: var(--t-radius-full);
+  overflow: hidden;
+}
+.t-app-progress__bar {
+  height: 100%;
+  background: var(--t-grad-accent);
+  border-radius: var(--t-radius-full);
+  box-shadow: 0 0 12px rgba(139,92,246,0.5);
+  transition: width var(--t-dur-slow) var(--t-ease-out);
+}

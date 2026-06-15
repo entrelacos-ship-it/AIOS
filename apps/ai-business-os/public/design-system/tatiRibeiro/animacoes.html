@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animações para LPs · Tati Ribeiro</title>
+
+<link rel="stylesheet" href="tati-ds/tokens/tokens.css">
+<link rel="stylesheet" href="tati-ds/styles/base.css">
+<link rel="stylesheet" href="tati-ds/styles/typography.css">
+<link rel="stylesheet" href="tati-ds/styles/components.css">
+<link rel="stylesheet" href="tati-ds/styles/motion.css">
+
+<style>
+  body { padding: 0; }
+
+  /* SHELL */
+  .anim-shell { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+  @media (max-width: 960px){ .anim-shell{grid-template-columns:1fr;} }
+
+  /* SIDEBAR */
+  .anim-side {
+    border-right: 1px solid var(--t-border);
+    background: var(--t-bg-1);
+    padding: var(--t-space-xl) var(--t-space-lg);
+    position: sticky; top: 0; align-self: start;
+    height: 100vh; overflow-y: auto;
+  }
+  @media (max-width:960px){ .anim-side{position:static;height:auto;border-right:none;border-bottom:1px solid var(--t-border);} }
+  .anim-side__brand { display:flex; align-items:center; gap:12px; padding-bottom:var(--t-space-lg); border-bottom:1px solid var(--t-border); margin-bottom:var(--t-space-lg);}
+  .anim-side__mark { width:36px;height:36px;border-radius:50%;border:1px solid var(--t-accent-border);display:flex;align-items:center;justify-content:center;color:var(--t-accent-light);font-family:var(--t-font-serif);font-style:italic;font-weight:300;font-size:18px; }
+  .anim-side__brand-text { font-family:var(--t-font-serif);font-style:italic;font-weight:300;font-size:17px;color:var(--t-text-strong);letter-spacing:-0.02em;line-height:1.1; }
+  .anim-side__brand-text small { display:block;font-family:var(--t-font-mono);font-size:9px;color:var(--t-accent-light);letter-spacing:0.22em;text-transform:uppercase;font-style:normal;margin-top:4px; }
+  .anim-side__group { margin-bottom: var(--t-space-md); }
+  .anim-side__label { font-family: var(--t-font-mono); font-size: 9px; color: var(--t-text-mute); letter-spacing: 0.28em; text-transform: uppercase; padding: 4px 10px; margin-bottom: 4px; }
+  .anim-toc { list-style: none; }
+  .anim-toc a { display: flex; gap: 12px; padding: 7px 10px; border-radius: var(--t-radius-md); font-family: var(--t-font-display); font-size: 13px; font-weight: 400; color: var(--t-text-2); transition: all var(--t-dur-fast) var(--t-ease); }
+  .anim-toc__num { font-family: var(--t-font-mono); font-size: 10px; color: var(--t-text-mute); letter-spacing: 0.1em; flex-shrink: 0; padding-top: 2px; min-width: 26px; }
+  .anim-toc a:hover, .anim-toc a.is-active { background: var(--t-accent-bg); color: var(--t-accent-light); }
+  .anim-toc a:hover .anim-toc__num, .anim-toc a.is-active .anim-toc__num { color: var(--t-accent-light); }
+
+  /* CONTENT */
+  .anim-content { padding: var(--t-space-3xl) var(--t-space-2xl); max-width: 1080px; }
+  @media (max-width:600px){ .anim-content{padding:var(--t-space-xl) var(--t-space-md);} }
+
+  /* COVER */
+  .anim-cover { padding: var(--t-space-3xl) 0 var(--t-space-2xl); border-bottom: 1px solid var(--t-border); margin-bottom: var(--t-space-2xl); }
+  .anim-cover__id { display:inline-flex; align-items:center; gap:12px; font-family:var(--t-font-mono); font-size:10px; color:var(--t-accent-light); letter-spacing:0.3em; text-transform:uppercase; margin-bottom:var(--t-space-lg); }
+  .anim-cover__id::before { content:''; width:36px; height:1px; background:var(--t-accent-light); }
+  .anim-cover__title { font-family:var(--t-font-display); font-size:clamp(40px,7vw,88px); font-weight:200; line-height:0.98; letter-spacing:-0.045em; color:var(--t-text-strong); }
+  .anim-cover__title em { font-family:var(--t-font-serif); font-style:italic; font-weight:300; background:var(--t-grad-text); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .anim-cover__sub { margin-top:var(--t-space-md); font-family:var(--t-font-serif); font-style:italic; font-weight:300; font-size:var(--t-fs-md); color:var(--t-text-2); max-width:640px; line-height:1.55; }
+
+  /* PART HEADER */
+  .anim-part { margin: var(--t-space-2xl) 0 var(--t-space-xl); padding-top: var(--t-space-lg); border-top: 1px solid var(--t-border-2); display: flex; align-items: baseline; gap: var(--t-space-md); }
+  .anim-part__num { font-family: var(--t-font-mono); font-size: 11px; color: var(--t-accent-light); letter-spacing: 0.3em; text-transform: uppercase; }
+  .anim-part__name { font-family: var(--t-font-display); font-size: 24px; font-weight: 300; letter-spacing: -0.025em; color: var(--t-text-strong); }
+
+  /* DEMO BLOCK */
+  .demo {
+    margin: var(--t-space-lg) 0 var(--t-space-2xl);
+    border: 1px solid var(--t-border);
+    border-radius: var(--t-radius-xl);
+    overflow: hidden;
+    background: var(--t-bg-1);
+  }
+  .demo__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--t-space-md) var(--t-space-lg);
+    border-bottom: 1px solid var(--t-border);
+    gap: var(--t-space-md); flex-wrap: wrap;
+  }
+  .demo__title { font-family: var(--t-font-display); font-size: 17px; font-weight: 500; letter-spacing: -0.015em; color: var(--t-text-strong); }
+  .demo__title small { font-family: var(--t-font-mono); font-size: 10px; color: var(--t-accent-light); letter-spacing: 0.2em; text-transform: uppercase; margin-right: 10px; font-weight: 400; }
+  .demo__desc { font-family: var(--t-font-body); font-size: 13px; color: var(--t-text-2); line-height: 1.55; max-width: 60ch; margin-top: 4px; }
+  .demo__class { font-family: var(--t-font-mono); font-size: 10px; color: var(--t-text-mute); letter-spacing: 0.1em; padding: 4px 10px; background: var(--t-surface); border: 1px solid var(--t-border); border-radius: var(--t-radius-full); }
+  .demo__stage {
+    position: relative; min-height: 280px; padding: var(--t-space-2xl);
+    display: flex; align-items: center; justify-content: center;
+    background: var(--t-bg);
+    overflow: hidden;
+  }
+
+  .demo__hint {
+    position: absolute; bottom: 12px; right: 16px;
+    font-family: var(--t-font-mono); font-size: 9px;
+    color: var(--t-text-mute); letter-spacing: 0.2em; text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  /* ============ ANIMAÇÕES — BACKGROUNDS ============ */
+
+  /* 24.1 Aurora — gradient blobs flutuando */
+  .bg-aurora { position: absolute; inset: 0; overflow: hidden; }
+  .bg-aurora__blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.55; mix-blend-mode: screen; }
+  .bg-aurora__blob:nth-child(1) { width: 360px; height: 360px; background: #6B46C1; top: -80px; left: -60px; animation: aurora-1 18s ease-in-out infinite; }
+  .bg-aurora__blob:nth-child(2) { width: 280px; height: 280px; background: #8B5CF6; bottom: -60px; right: -40px; animation: aurora-2 22s ease-in-out infinite; }
+  .bg-aurora__blob:nth-child(3) { width: 220px; height: 220px; background: #4C1D95; top: 40%; left: 50%; animation: aurora-3 26s ease-in-out infinite; }
+  @keyframes aurora-1 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(40px,30px) scale(1.15);} }
+  @keyframes aurora-2 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-50px,-20px) scale(0.9);} }
+  @keyframes aurora-3 { 0%,100%{transform:translate(-50%,-50%) scale(1);} 50%{transform:translate(-30%,-70%) scale(1.2);} }
+  [data-theme="light"] .bg-aurora__blob { opacity: 0.25; mix-blend-mode: multiply; }
+
+  /* 24.2 Constellation — pontos conectados */
+  .bg-constellation { position: absolute; inset: 0; }
+  .bg-constellation canvas { width: 100%; height: 100%; display: block; }
+
+  /* 24.3 Soft grid breathe */
+  .bg-grid-breathe { position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(139,92,246,0.10) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(139,92,246,0.10) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+    animation: grid-breathe 6s ease-in-out infinite;
+  }
+  @keyframes grid-breathe { 0%,100%{opacity:0.6; background-size:64px 64px;} 50%{opacity:1; background-size:68px 68px;} }
+
+  /* 24.4 Particle drift — pontos lentos */
+  .bg-drift { position: absolute; inset: 0; overflow: hidden; }
+  .bg-drift span {
+    position: absolute; width: 3px; height: 3px; border-radius: 50%;
+    background: var(--t-accent-light); opacity: 0.5;
+    box-shadow: 0 0 6px var(--t-accent-light);
+    animation: drift-up 14s linear infinite;
+  }
+  @keyframes drift-up { 0%{transform:translateY(110%);opacity:0;} 8%{opacity:0.6;} 92%{opacity:0.6;} 100%{transform:translateY(-20%);opacity:0;} }
+
+  /* 24.5 Noise — film grain */
+  .bg-noise { position: absolute; inset: 0; pointer-events: none; opacity: 0.06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.9'/></svg>");
+    animation: noise-shift 0.6s steps(4) infinite;
+  }
+  @keyframes noise-shift { 0%{transform:translate(0,0);} 25%{transform:translate(-3%,2%);} 50%{transform:translate(2%,-2%);} 75%{transform:translate(-1%,1%);} 100%{transform:translate(0,0);} }
+
+  /* 24.6 Beam — linha vertical varrendo */
+  .bg-beam { position: absolute; inset: 0; overflow: hidden; }
+  .bg-beam::before { content:''; position:absolute; top:0; bottom:0; width:200px;
+    background: linear-gradient(to right, transparent, rgba(139,92,246,0.18), transparent);
+    animation: beam-x 8s ease-in-out infinite;
+  }
+  @keyframes beam-x { 0%{left:-220px;} 50%{left:calc(100% + 20px);} 100%{left:-220px;} }
+
+  /* stage center label */
+  .stage-label {
+    position: relative; z-index: 1;
+    font-family: var(--t-font-display); font-size: clamp(22px, 3vw, 32px);
+    font-weight: 200; letter-spacing: -0.03em; color: var(--t-text-strong);
+    text-align: center; max-width: 480px;
+  }
+  .stage-label em { font-family: var(--t-font-serif); font-style: italic; font-weight: 300; background: var(--t-grad-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .stage-mono { position: relative; z-index: 1; font-family: var(--t-font-mono); font-size: 11px; color: var(--t-accent-light); letter-spacing: 0.3em; text-transform: uppercase; }
+
+  /* ============ ANIMAÇÕES — CURSOR ============ */
+  /* AUTO-DEMO — animação automática quando o cursor não interage */
+  @keyframes auto-orbit {
+    0%   { --mx: 22%; --my: 30%; }
+    25%  { --mx: 78%; --my: 28%; }
+    50%  { --mx: 80%; --my: 72%; }
+    75%  { --mx: 24%; --my: 70%; }
+    100% { --mx: 22%; --my: 30%; }
+  }
+  @property --mx { syntax: '<percentage>'; inherits: true; initial-value: 50%; }
+  @property --my { syntax: '<percentage>'; inherits: true; initial-value: 50%; }
+
+  /* 24.7 Spotlight follow — cursor revela área */
+  .cursor-spotlight { position: relative; min-height: 280px; cursor: none; overflow: hidden; animation: auto-orbit 12s ease-in-out infinite; }
+  .cursor-spotlight[data-active="1"] { animation: none; }
+  .cursor-spotlight__layer { position: absolute; inset: 0; background: radial-gradient(circle 200px at var(--mx, 50%) var(--my, 50%), transparent 0%, rgba(10,10,10,0.92) 60%); pointer-events: none; transition: background 0.05s linear; }
+  [data-theme="light"] .cursor-spotlight__layer { background: radial-gradient(circle 200px at var(--mx,50%) var(--my,50%), transparent 0%, rgba(245,244,240,0.92) 60%); }
+  .cursor-spotlight__dot { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--t-accent-light); box-shadow: 0 0 16px var(--t-accent-light); transform: translate(-50%, -50%); pointer-events: none; transition: transform 0.08s var(--t-ease); top: var(--my,50%); left: var(--mx,50%); }
+  .cursor-spotlight__bg { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(4, 1fr); padding: 24px; gap: 8px; }
+  .cursor-spotlight__cell { border: 1px solid var(--t-border); border-radius: 4px; }
+
+  /* 24.8 Magnetic button — botão "puxa" o cursor */
+  .cursor-magnet-grid { position: relative; z-index: 1; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .cursor-magnet { transition: transform 0.25s var(--t-ease); will-change: transform; }
+
+  /* 24.9 Trail — rastro suave */
+  .cursor-trail { position: relative; min-height: 280px; cursor: none; overflow: hidden; }
+  .cursor-trail__dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--t-accent-light); box-shadow: 0 0 10px var(--t-accent-light); pointer-events: none; transform: translate(-50%, -50%); }
+  .cursor-trail__ghost { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--t-accent-light); box-shadow: 0 0 12px var(--t-accent-light); transform: translate(-50%,-50%); pointer-events: none; top: var(--my,50%); left: var(--mx,50%); transition: top 0.05s linear, left 0.05s linear; }
+
+  /* 24.10 Halo — anel grande seguindo */
+  .cursor-halo { position: relative; min-height: 280px; cursor: none; overflow: hidden; animation: auto-orbit 12s ease-in-out infinite; }
+  .cursor-halo[data-active="1"] { animation: none; }
+  .cursor-halo__ring { position: absolute; width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--t-accent-light); transform: translate(-50%, -50%); pointer-events: none; transition: transform 0.18s var(--t-ease-out), width 0.25s var(--t-ease), height 0.25s var(--t-ease), border-color 0.25s var(--t-ease); top: var(--my,50%); left: var(--mx,50%); mix-blend-mode: screen; }
+  .cursor-halo__dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--t-accent-light); transform: translate(-50%, -50%); pointer-events: none; top: var(--my,50%); left: var(--mx,50%); transition: top 0.04s linear, left 0.04s linear; }
+  .cursor-halo[data-hover="1"] .cursor-halo__ring { width: 96px; height: 96px; border-color: var(--t-accent-glow); }
+  .cursor-halo__hint { position: relative; z-index: 1; pointer-events: auto; }
+  .cursor-halo a { padding: 14px 28px; border-radius: var(--t-radius-full); border: 1px solid var(--t-border-strong); font-family: var(--t-font-mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--t-text-strong); }
+
+  /* ============ ANIMAÇÕES — CARROSSEL ============ */
+  /* 24.11 Marquee — fluxo infinito */
+  .marquee { position: relative; overflow: hidden; padding: var(--t-space-md) 0; }
+  .marquee__track { display: flex; gap: 16px; width: max-content; animation: marquee-x 32s linear infinite; }
+  .marquee:hover .marquee__track { animation-play-state: paused; }
+  .marquee__edge { position: absolute; top: 0; bottom: 0; width: 80px; pointer-events: none; z-index: 2; }
+  .marquee__edge--l { left: 0; background: linear-gradient(to right, var(--t-bg), transparent); }
+  .marquee__edge--r { right: 0; background: linear-gradient(to left, var(--t-bg), transparent); }
+  @keyframes marquee-x { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+  .marquee--reverse .marquee__track { animation-direction: reverse; }
+  .marquee__chip { padding: 10px 18px; border-radius: var(--t-radius-full); border: 1px solid var(--t-border); background: var(--t-surface); font-family: var(--t-font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--t-text-2); white-space: nowrap; flex-shrink: 0; }
+  .marquee__chip--accent { color: var(--t-accent-light); border-color: var(--t-accent-border); background: var(--t-accent-bg); }
+
+  /* 24.12 Snap carousel — scroll snap horizontal */
+  .snap-carousel { display: grid; grid-auto-flow: column; grid-auto-columns: 280px; gap: 16px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 4px 4px 24px; scrollbar-width: thin; }
+  .snap-carousel::-webkit-scrollbar { height: 6px; }
+  .snap-carousel::-webkit-scrollbar-track { background: var(--t-surface); border-radius: 3px; }
+  .snap-carousel::-webkit-scrollbar-thumb { background: var(--t-accent); border-radius: 3px; }
+  .snap-card { scroll-snap-align: start; padding: var(--t-space-lg); background: var(--t-surface); border: 1px solid var(--t-border); border-radius: var(--t-radius-xl); transition: transform 0.4s var(--t-ease), border-color 0.4s var(--t-ease); }
+  .snap-card:hover { transform: translateY(-2px); border-color: var(--t-border-strong); }
+  .snap-card__num { font-family: var(--t-font-mono); font-size: 10px; letter-spacing: 0.25em; color: var(--t-accent-light); margin-bottom: 16px; }
+  .snap-card__title { font-family: var(--t-font-display); font-size: 19px; font-weight: 300; letter-spacing: -0.02em; color: var(--t-text-strong); margin-bottom: 8px; line-height: 1.2; }
+  .snap-card__title em { font-family: var(--t-font-serif); font-style: italic; font-weight: 300; color: var(--t-accent-light); }
+  .snap-card__body { font-family: var(--t-font-body); font-size: 13px; line-height: 1.55; color: var(--t-text-2); }
+
+  /* 24.13 Stack carousel — controle por botão, peek no fundo */
+  .stack { position: relative; height: 320px; max-width: 480px; margin: 0 auto; perspective: 1200px; }
+  .stack__deck { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .stack__card { position: absolute; inset: 0; background: var(--t-surface); border: 1px solid var(--t-border); border-radius: var(--t-radius-xl); padding: var(--t-space-xl); display: flex; flex-direction: column; justify-content: space-between; transition: all 0.6s var(--t-ease); backface-visibility: hidden; }
+  .stack__card[data-idx="0"] { transform: translate3d(0,0,0); opacity: 1; z-index: 4; box-shadow: var(--t-shadow-md); }
+  .stack__card[data-idx="1"] { transform: translate3d(0,18px,-60px) scale(0.95); opacity: 0.85; z-index: 3; }
+  .stack__card[data-idx="2"] { transform: translate3d(0,32px,-120px) scale(0.9); opacity: 0.6; z-index: 2; }
+  .stack__card[data-idx="3"] { transform: translate3d(0,44px,-180px) scale(0.85); opacity: 0.3; z-index: 1; }
+  .stack__nav { position: relative; z-index: 5; display: flex; gap: 12px; justify-content: center; margin-top: var(--t-space-md); }
+  .stack__nav button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--t-border); background: var(--t-surface); color: var(--t-text-strong); font-family: var(--t-font-mono); font-size: 14px; cursor: pointer; transition: all 0.2s var(--t-ease); }
+  .stack__nav button:hover { border-color: var(--t-accent-border); color: var(--t-accent-light); }
+  .stack__num { font-family: var(--t-font-mono); font-size: 10px; letter-spacing: 0.25em; color: var(--t-accent-light); }
+  .stack__quote { font-family: var(--t-font-serif); font-style: italic; font-weight: 300; font-size: 21px; line-height: 1.4; color: var(--t-text-strong); }
+  .stack__author { font-family: var(--t-font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--t-text-mute); }
+
+  /* 24.14 Logo grid scroll — colunas verticais opostas */
+  .logorails { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; height: 320px; overflow: hidden; }
+  @media (max-width:600px){ .logorails{grid-template-columns:1fr 1fr;} .logorails > div:nth-child(3){display:none;} }
+  .logorail { display: flex; flex-direction: column; gap: 12px; }
+  .logorail--up { animation: rail-up 24s linear infinite; }
+  .logorail--down { animation: rail-down 28s linear infinite; }
+  @keyframes rail-up { 0%{transform:translateY(0);} 100%{transform:translateY(-50%);} }
+  @keyframes rail-down { 0%{transform:translateY(-50%);} 100%{transform:translateY(0);} }
+  .logorail__cell { flex-shrink: 0; height: 80px; border: 1px solid var(--t-border); border-radius: var(--t-radius-lg); display: flex; align-items: center; justify-content: center; background: var(--t-surface); font-family: var(--t-font-serif); font-style: italic; font-weight: 300; font-size: 18px; color: var(--t-text-2); letter-spacing: -0.02em; }
+  .logorail__cell--accent { color: var(--t-accent-light); border-color: var(--t-accent-border); background: var(--t-accent-bg); }
+
+  /* ============ REVEAL ON SCROLL ============ */
+  .reveal-stage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width:720px){ .reveal-stage{grid-template-columns:1fr;} }
+  .reveal-card { padding: var(--t-space-lg); background: var(--t-surface); border: 1px solid var(--t-border); border-radius: var(--t-radius-xl); opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--t-ease), transform 0.7s var(--t-ease); }
+  .reveal-card.in { opacity: 1; transform: translateY(0); }
+  .reveal-card__num { font-family: var(--t-font-mono); font-size: 10px; letter-spacing: 0.25em; color: var(--t-accent-light); margin-bottom: 12px; }
+  .reveal-card__t { font-family: var(--t-font-display); font-size: 17px; font-weight: 400; color: var(--t-text-strong); letter-spacing: -0.015em; }
+  .reveal-card__b { font-family: var(--t-font-body); font-size: 13px; color: var(--t-text-2); margin-top: 8px; line-height: 1.55; }
+
+  .text-split { position: relative; }
+  .text-split__word { display: inline-block; opacity: 0; transform: translateY(0.3em); transition: opacity 0.5s var(--t-ease), transform 0.5s var(--t-ease); padding: 0.05em 0.04em; line-height: 1.15; }
+  .text-split.in .text-split__word { opacity: 1; transform: translateY(0); }
+
+  /* ============ DOCS ============ */
+  .doc { font-family: var(--t-font-body); font-size: 14px; line-height: 1.7; color: var(--t-text); padding: var(--t-space-md) var(--t-space-lg); border-top: 1px solid var(--t-border); background: var(--t-bg-1); }
+  .doc strong { color: var(--t-text-strong); font-weight: 500; }
+  .doc code { font-family: var(--t-font-mono); font-size: 0.86em; color: var(--t-accent-light); padding: 2px 6px; background: var(--t-surface-2); border-radius: 3px; }
+  .doc__row { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 6px 0; border-bottom: 1px dashed var(--t-border); }
+  .doc__row:last-child { border-bottom: none; }
+  .doc__k { font-family: var(--t-font-mono); font-size: 10px; color: var(--t-text-mute); letter-spacing: 0.2em; text-transform: uppercase; padding-top: 4px; }
+  .doc__v { font-family: var(--t-font-body); font-size: 13px; color: var(--t-text); }
+
+  .anim-end { text-align: center; margin: var(--t-space-2xl) 0; font-family: var(--t-font-mono); font-size: 10px; color: var(--t-text-mute); letter-spacing: 0.3em; }
+  .anim-end::before { content: '◆ ◆ ◆'; }
+
+  .progress { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: var(--t-grad-accent); z-index: var(--t-z-toast); transition: width 0.1s linear; }
+
+  .anim-side__theme { margin-top: var(--t-space-md); display: flex; background: var(--t-surface); border: 1px solid var(--t-border); border-radius: var(--t-radius-full); padding: 3px; }
+  .anim-side__theme button { flex:1; font-family:var(--t-font-mono); font-size:9px; letter-spacing:0.18em; padding:6px 10px; border-radius:var(--t-radius-full); color:var(--t-text-2); text-transform:uppercase; }
+  .anim-side__theme button.is-active { background: var(--t-accent); color: var(--t-pearl); }
+
+  .back-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--t-font-mono); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--t-accent-light); margin-bottom: var(--t-space-md); }
+
+  /* ===== EXTRAS ===== */
+  /* 24.17 Blur reveal */
+  .blur-reveal { filter: blur(14px); opacity: 0; transition: filter 1.2s var(--t-ease), opacity 1.2s var(--t-ease); }
+  .blur-reveal.in { filter: blur(0); opacity: 1; }
+
+  /* 24.19 Ripple */
+  .ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.5); pointer-events: none; transform: translate(-50%,-50%) scale(0); animation: ripple 0.6s ease-out forwards; }
+  @keyframes ripple { to { transform: translate(-50%,-50%) scale(8); opacity: 0; } }
+
+  /* 24.20 Orb */
+  .orb { width: 200px; height: 200px; border-radius: 50%; background: conic-gradient(from 0deg, #2E1065, #6B46C1, #A78BFA, #4C1D95, #2E1065); animation: orb-spin 12s linear infinite; box-shadow: 0 0 60px rgba(139,92,246,0.4); position: relative; }
+  .orb::before { content:''; position:absolute; inset: 8px; border-radius: 50%; background: var(--t-bg); }
+  .orb::after { content:''; position:absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 50%); }
+  @keyframes orb-spin { to { transform: rotate(360deg); } }
+
+  /* 24.21 Tilt */
+  .tilt-card { transition: transform 0.3s var(--t-ease); transform-style: preserve-3d; will-change: transform; }
+  @keyframes tilt-pulse { 0%,100%{transform: rotateX(0) rotateY(0);} 25%{transform: rotateX(-4deg) rotateY(6deg);} 75%{transform: rotateX(3deg) rotateY(-5deg);} }
+
+  /* 24.22 Accordion */
+  .acc details { border-bottom: 1px solid var(--t-border); }
+  .acc details:first-child { border-top: 1px solid var(--t-border); }
+  .acc summary { list-style: none; cursor: pointer; padding: 18px 0; display: grid; grid-template-columns: 60px 1fr; gap: 16px; align-items: baseline; font-family: var(--t-font-display); font-size: 17px; font-weight: 400; color: var(--t-text-strong); letter-spacing: -0.015em; transition: color 0.3s var(--t-ease); }
+  .acc summary::-webkit-details-marker { display: none; }
+  .acc summary:hover { color: var(--t-accent-light); }
+  .acc__num { font-family: var(--t-font-mono); font-size: 11px; color: var(--t-accent-light); letter-spacing: 0.18em; }
+  .acc__body { padding: 0 0 18px 76px; font-family: var(--t-font-body); font-size: 14px; line-height: 1.7; color: var(--t-text-2); max-width: 60ch; }
+
+  /* 24.23 Vertical marquee */
+  .vmarquee { display: flex; flex-direction: column; gap: 12px; }
+  @keyframes vm-up { 0%{transform:translateY(0);} 100%{transform:translateY(-50%);} }
+  @keyframes vm-down { 0%{transform:translateY(-50%);} 100%{transform:translateY(0);} }
+  .vm-card { flex-shrink: 0; padding: 16px 20px; background: var(--t-surface); border: 1px solid var(--t-border); border-radius: var(--t-radius-lg); font-family: var(--t-font-serif); font-style: italic; font-weight: 300; font-size: 15px; line-height: 1.4; color: var(--t-text); }
+
+  /* 24.24 Sticky scale */
+  @keyframes scale-loop { 0%,100%{transform:scale(0.85);} 50%{transform:scale(1);} }
+</style>
+</head>
+
+<body>
+<div class="t-circuit-bg"></div>
+<div class="progress" id="progress"></div>
+
+<div class="anim-shell">
+
+  <aside class="anim-side">
+    <div class="anim-side__brand">
+      <span class="anim-side__mark">tr</span>
+      <div class="anim-side__brand-text">
+        animações
+        <small>lp lab · v1</small>
+      </div>
+    </div>
+
+    <div class="anim-side__group">
+      <div class="anim-side__label">Background</div>
+      <ol class="anim-toc">
+        <li><a href="#a01"><span class="anim-toc__num">24.1</span>Aurora blobs</a></li>
+        <li><a href="#a02"><span class="anim-toc__num">24.2</span>Constelação</a></li>
+        <li><a href="#a03"><span class="anim-toc__num">24.3</span>Grid breathe</a></li>
+        <li><a href="#a04"><span class="anim-toc__num">24.4</span>Particle drift</a></li>
+        <li><a href="#a05"><span class="anim-toc__num">24.5</span>Film grain</a></li>
+        <li><a href="#a06"><span class="anim-toc__num">24.6</span>Beam sweep</a></li>
+      </ol>
+    </div>
+
+    <div class="anim-side__group">
+      <div class="anim-side__label">Cursor</div>
+      <ol class="anim-toc">
+        <li><a href="#a07"><span class="anim-toc__num">24.7</span>Spotlight</a></li>
+        <li><a href="#a08"><span class="anim-toc__num">24.8</span>Magnetic</a></li>
+        <li><a href="#a09"><span class="anim-toc__num">24.9</span>Trail</a></li>
+        <li><a href="#a10"><span class="anim-toc__num">24.10</span>Halo + dot</a></li>
+      </ol>
+    </div>
+
+    <div class="anim-side__group">
+      <div class="anim-side__label">Carrossel</div>
+      <ol class="anim-toc">
+        <li><a href="#a11"><span class="anim-toc__num">24.11</span>Marquee</a></li>
+        <li><a href="#a12"><span class="anim-toc__num">24.12</span>Snap carousel</a></li>
+        <li><a href="#a13"><span class="anim-toc__num">24.13</span>Stack 3D</a></li>
+        <li><a href="#a14"><span class="anim-toc__num">24.14</span>Logo rails</a></li>
+      </ol>
+    </div>
+
+    <div class="anim-side__group">
+      <div class="anim-side__label">Reveal</div>
+      <ol class="anim-toc">
+        <li><a href="#a15"><span class="anim-toc__num">24.15</span>Cards fade-up</a></li>
+        <li><a href="#a16"><span class="anim-toc__num">24.16</span>Text split</a></li>
+        <li><a href="#a17"><span class="anim-toc__num">24.17</span>Blur reveal</a></li>
+        <li><a href="#a18"><span class="anim-toc__num">24.18</span>Counter contagem</a></li>
+      </ol>
+    </div>
+
+    <div class="anim-side__group">
+      <div class="anim-side__label">Extras</div>
+      <ol class="anim-toc">
+        <li><a href="#a19"><span class="anim-toc__num">24.19</span>Ripple click</a></li>
+        <li><a href="#a20"><span class="anim-toc__num">24.20</span>Gradient orb</a></li>
+        <li><a href="#a21"><span class="anim-toc__num">24.21</span>Tilt 3D card</a></li>
+        <li><a href="#a22"><span class="anim-toc__num">24.22</span>Accordion</a></li>
+        <li><a href="#a23"><span class="anim-toc__num">24.23</span>Marquee vertical</a></li>
+        <li><a href="#a24"><span class="anim-toc__num">24.24</span>Sticky scale</a></li>
+      </ol>
+    </div>
+
+    <div class="anim-side__theme">
+      <button data-theme-set="dark" class="is-active">Dark</button>
+      <button data-theme-set="light">Light</button>
+    </div>
+  </aside>
+
+  <main class="anim-content">
+
+    <a href="Bíblia do Design System.html" class="back-link">← bíblia · capítulos 01–23</a>
+
+    <section class="anim-cover">
+      <div class="anim-cover__id">DS · CAP 24 · ANIMAÇÕES PARA LPS</div>
+      <h1 class="anim-cover__title">animações<br>para <em>landing pages</em>.</h1>
+      <p class="anim-cover__sub">
+        16 padrões de movimento prontos para usar. Cada um vem com demo ao vivo,
+        descrição de quando usar e código pronto. Background, cursor, carrossel
+        e reveal — alinhados ao tom sóbrio da marca.
+      </p>
+    </section>
+
+    <!-- ============ BACKGROUND ============ -->
+    <div class="anim-part"><div class="anim-part__num">24.1 — 24.6</div><div class="anim-part__name">Background</div></div>
+
+    <!-- 24.1 AURORA -->
+    <article class="demo" id="a01">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.1</small>Aurora <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">blobs</em></div>
+          <div class="demo__desc">Manchas roxas borradas flutuando lentamente. Atmosfera de página inteira.</div>
+        </div>
+        <span class="demo__class">.bg-aurora</span>
+      </header>
+      <div class="demo__stage">
+        <div class="bg-aurora">
+          <span class="bg-aurora__blob"></span>
+          <span class="bg-aurora__blob"></span>
+          <span class="bg-aurora__blob"></span>
+        </div>
+        <div class="stage-label">a página <em>respira</em>.</div>
+        <div class="demo__hint">loop · 18–26s</div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Hero da landing, fundo de seção de manifesto. Nunca atrás de texto longo.</span></div>
+        <div class="doc__row"><span class="doc__k">Performance</span><span class="doc__v">3 blobs com <code>filter: blur</code>. Use <code>will-change: transform</code> em mobile.</span></div>
+        <div class="doc__row"><span class="doc__k">Acessibilidade</span><span class="doc__v">Pausa automática em <code>prefers-reduced-motion</code> via reset global.</span></div>
+      </div>
+    </article>
+
+    <!-- 24.2 CONSTELLATION -->
+    <article class="demo" id="a02">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.2</small>Constelação</div>
+          <div class="demo__desc">Pontos roxos lentos com linhas conectando os mais próximos. Canvas 2D.</div>
+        </div>
+        <span class="demo__class">canvas#stars</span>
+      </header>
+      <div class="demo__stage">
+        <div class="bg-constellation"><canvas id="stars"></canvas></div>
+        <div class="stage-mono">— rede de afinidade</div>
+        <div class="demo__hint">canvas · ~40 nós</div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Seção sobre IA, dados, comunidade. Substitui ilustração técnica.</span></div>
+        <div class="doc__row"><span class="doc__k">Custo</span><span class="doc__v">~40 partículas + linhas de proximidade. Frame ~1ms em desktop.</span></div>
+      </div>
+    </article>
+
+    <!-- 24.3 GRID BREATHE -->
+    <article class="demo" id="a03">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.3</small>Grid <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">breathe</em></div>
+          <div class="demo__desc">A grade-circuito da marca pulsando sutilmente. Quase imperceptível, mas dá vida.</div>
+        </div>
+        <span class="demo__class">.bg-grid-breathe</span>
+      </header>
+      <div class="demo__stage">
+        <div class="bg-grid-breathe"></div>
+        <div class="stage-label">silêncio<br><em>habitado</em>.</div>
+        <div class="demo__hint">opacity 0.6 → 1.0 · 6s</div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Substitui <code>.t-circuit-bg</code> em páginas onde se quer mais presença.</span></div>
+        <div class="doc__row"><span class="doc__k">Cuidado</span><span class="doc__v">Não usar em página com aurora — duplicaria atmosfera roxa.</span></div>
+      </div>
+    </article>
+
+    <!-- 24.4 PARTICLE DRIFT -->
+    <article class="demo" id="a04">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.4</small>Particle drift</div>
+          <div class="demo__desc">Pontos brilhantes subindo lentamente. Funciona como "respiração de cima para baixo".</div>
+        </div>
+        <span class="demo__class">.bg-drift</span>
+      </header>
+      <div class="demo__stage">
+        <div class="bg-drift" id="drift-stage"></div>
+        <div class="stage-label">o que <em>se eleva</em>.</div>
+        <div class="demo__hint">25 partículas · 14s loop</div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Hero de mentoria/produto. Não usar em página de clínica (vibração errada).</span></div>
+      </div>
+    </article>
+
+    <!-- 24.5 NOISE -->
+    <article class="demo" id="a05">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.5</small>Film <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">grain</em></div>
+          <div class="demo__desc">Ruído de filme animado em cima de qualquer fundo. Dá textura editorial, sem cor própria.</div>
+        </div>
+        <span class="demo__class">.bg-noise</span>
+      </header>
+      <div class="demo__stage" style="background: linear-gradient(135deg, var(--t-bg-2), var(--t-onyx));">
+        <div class="bg-noise"></div>
+        <div class="stage-label">a <em>matéria</em> da página.</div>
+        <div class="demo__hint">opacity 0.06 · steps(4)</div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Por cima de qualquer outro background, como camada final. Eleva a marca de "limpa demais" para "editorial".</span></div>
+        <div class="doc__row"><span class="doc__k">Combina com</span><span class="doc__v">Aurora (24.1), Beam (24.6), Grid breathe (24.3).</span></div>
+      </div>
+    </article>
+
+    <!-- 24.6 BEAM -->
+    <article class="demo" id="a06">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.6</small>Beam sweep</div>
+          <div class="demo__desc">Faixa vertical translúcida varrendo o fundo. Marca o tempo da página.</div>
+        </div>
+        <span class="demo__class">.bg-beam</span>
+      </header>
+      <div class="demo__stage">
+        <div class="bg-beam"></div>
+        <div class="stage-label">um <em>fio</em> que atravessa.</div>
+        <div class="demo__hint">200px · 8s loop</div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Seções de "linha do tempo", "processo", "método". O beam reforça a noção de progresso.</span></div>
+      </div>
+    </article>
+
+    <!-- ============ CURSOR ============ -->
+    <div class="anim-part"><div class="anim-part__num">24.7 — 24.10</div><div class="anim-part__name">Cursor</div></div>
+
+    <!-- 24.7 SPOTLIGHT -->
+    <article class="demo" id="a07">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.7</small>Spotlight follow</div>
+          <div class="demo__desc">O cursor revela uma área iluminada. Usado em hero "interativo".</div>
+        </div>
+        <span class="demo__class">.cursor-spotlight</span>
+      </header>
+      <div class="demo__stage cursor-spotlight" id="spot-stage" style="padding:0;">
+        <div class="cursor-spotlight__bg">
+          <div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div>
+          <div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div>
+          <div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div>
+          <div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div>
+          <div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div>
+          <div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div>
+          <div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div>
+          <div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div><div class="cursor-spotlight__cell"></div>
+        </div>
+        <div class="cursor-spotlight__layer"></div>
+        <div class="cursor-spotlight__dot"></div>
+        <div class="stage-mono" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">→ mova o mouse</div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Hero de produto digital. Cria sensação de descoberta sem dispersar.</span></div>
+        <div class="doc__row"><span class="doc__k">Mobile</span><span class="doc__v">Em touch devices, esconder o overlay. O efeito é exclusivo de cursor.</span></div>
+      </div>
+    </article>
+
+    <!-- 24.8 MAGNETIC -->
+    <article class="demo" id="a08">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.8</small>Magnetic <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">button</em></div>
+          <div class="demo__desc">O CTA "puxa" o cursor quando ele se aproxima. Sutil e premium.</div>
+        </div>
+        <span class="demo__class">.cursor-magnet</span>
+      </header>
+      <div class="demo__stage">
+        <div class="cursor-magnet-grid">
+          <button class="t-btn t-btn--primary cursor-magnet" data-magnet>marcar sessão</button>
+          <button class="t-btn t-btn--ghost cursor-magnet" data-magnet>saber mais</button>
+          <button class="t-btn t-btn--outline cursor-magnet" data-magnet>manifesto</button>
+        </div>
+        <div class="demo__hint">→ aproxime do botão</div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Apenas no CTA primary do hero. Em todos os botões fica brega.</span></div>
+        <div class="doc__row"><span class="doc__k">Intensidade</span><span class="doc__v">Translação máxima de 8–12px. Mais que isso e o botão "foge".</span></div>
+      </div>
+    </article>
+
+    <!-- 24.9 TRAIL -->
+    <article class="demo" id="a09">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.9</small>Trail</div>
+          <div class="demo__desc">Rastro de pontos que se dissolvem atrás do cursor. Romântico e contido.</div>
+        </div>
+        <span class="demo__class">.cursor-trail</span>
+      </header>
+      <div class="demo__stage cursor-trail" id="trail-stage" style="padding:0; animation: auto-orbit 14s ease-in-out infinite;">
+        <div class="stage-label" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;">desenhe sua <em>linha</em>.</div>
+        <div class="cursor-trail__ghost" id="trail-ghost"></div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Página de manifesto, página de obra. Evitar em UI funcional.</span></div>
+        <div class="doc__row"><span class="doc__k">Limite</span><span class="doc__v">Máximo 12 dots ativos. Cada um com TTL de 600ms.</span></div>
+      </div>
+    </article>
+
+    <!-- 24.10 HALO -->
+    <article class="demo" id="a10">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.10</small>Halo &amp; dot</div>
+          <div class="demo__desc">Anel grande seguindo lento + ponto pequeno preciso. Cresce ao passar sobre interativos.</div>
+        </div>
+        <span class="demo__class">.cursor-halo</span>
+      </header>
+      <div class="demo__stage cursor-halo" id="halo-stage" style="padding:0;">
+        <div class="cursor-halo__hint">
+          <a href="#" data-halo-hover>passe aqui</a>
+        </div>
+        <div class="cursor-halo__ring"></div>
+        <div class="cursor-halo__dot"></div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Páginas inteiras com cursor próprio (manifesto longo, portfólio). Substitui cursor padrão.</span></div>
+        <div class="doc__row"><span class="doc__k">Atenção</span><span class="doc__v">Sempre manter cursor padrão como fallback (campos de texto, links).</span></div>
+      </div>
+    </article>
+
+    <!-- ============ CARROSSEL ============ -->
+    <div class="anim-part"><div class="anim-part__num">24.11 — 24.14</div><div class="anim-part__name">Carrossel</div></div>
+
+    <!-- 24.11 MARQUEE -->
+    <article class="demo" id="a11">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.11</small>Marquee infinito</div>
+          <div class="demo__desc">Fluxo horizontal contínuo de chips. Pausa no hover. Duas direções para criar tensão.</div>
+        </div>
+        <span class="demo__class">.marquee</span>
+      </header>
+      <div class="demo__stage" style="padding:32px 0; align-items: stretch;">
+        <div style="width:100%; display:flex; flex-direction:column; gap: 12px;">
+          <div class="marquee">
+            <span class="marquee__edge marquee__edge--l"></span>
+            <span class="marquee__edge marquee__edge--r"></span>
+            <div class="marquee__track">
+              <span class="marquee__chip marquee__chip--accent">◆ psicanálise clínica</span>
+              <span class="marquee__chip">supervisão de casos</span>
+              <span class="marquee__chip">escrita clínica</span>
+              <span class="marquee__chip marquee__chip--accent">◆ IA aplicada</span>
+              <span class="marquee__chip">mentoria 1:1</span>
+              <span class="marquee__chip">formação continuada</span>
+              <span class="marquee__chip marquee__chip--accent">◆ pesquisa</span>
+              <span class="marquee__chip">cartas mensais</span>
+              <!-- duplicado para loop -->
+              <span class="marquee__chip marquee__chip--accent">◆ psicanálise clínica</span>
+              <span class="marquee__chip">supervisão de casos</span>
+              <span class="marquee__chip">escrita clínica</span>
+              <span class="marquee__chip marquee__chip--accent">◆ IA aplicada</span>
+              <span class="marquee__chip">mentoria 1:1</span>
+              <span class="marquee__chip">formação continuada</span>
+              <span class="marquee__chip marquee__chip--accent">◆ pesquisa</span>
+              <span class="marquee__chip">cartas mensais</span>
+            </div>
+          </div>
+          <div class="marquee marquee--reverse">
+            <span class="marquee__edge marquee__edge--l"></span>
+            <span class="marquee__edge marquee__edge--r"></span>
+            <div class="marquee__track">
+              <span class="marquee__chip">— sessão 042</span>
+              <span class="marquee__chip">— manifesto v1</span>
+              <span class="marquee__chip marquee__chip--accent">◆ turma 03 · 2026</span>
+              <span class="marquee__chip">— bíblia v2</span>
+              <span class="marquee__chip">— carta nº 18</span>
+              <span class="marquee__chip marquee__chip--accent">◆ ao vivo</span>
+              <span class="marquee__chip">— ensaio 07</span>
+              <span class="marquee__chip">— spec 0x4C</span>
+              <span class="marquee__chip">— sessão 042</span>
+              <span class="marquee__chip">— manifesto v1</span>
+              <span class="marquee__chip marquee__chip--accent">◆ turma 03 · 2026</span>
+              <span class="marquee__chip">— bíblia v2</span>
+              <span class="marquee__chip">— carta nº 18</span>
+              <span class="marquee__chip marquee__chip--accent">◆ ao vivo</span>
+              <span class="marquee__chip">— ensaio 07</span>
+              <span class="marquee__chip">— spec 0x4C</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Seção "tópicos abordados", "logos de prova", "tags de conteúdo". Nunca como navegação.</span></div>
+        <div class="doc__row"><span class="doc__k">Truque</span><span class="doc__v">Conteúdo duplicado no track + <code>translateX(-50%)</code> = loop perfeito sem salto.</span></div>
+      </div>
+    </article>
+
+    <!-- 24.12 SNAP CAROUSEL -->
+    <article class="demo" id="a12">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.12</small>Snap <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">carousel</em></div>
+          <div class="demo__desc">Cards horizontais com scroll-snap CSS puro. Sem JS. Touch nativo no mobile.</div>
+        </div>
+        <span class="demo__class">.snap-carousel</span>
+      </header>
+      <div class="demo__stage" style="padding: 24px; display:block;">
+        <div class="snap-carousel">
+          <article class="snap-card">
+            <div class="snap-card__num">01.</div>
+            <h4 class="snap-card__title">o que se <em>diz</em></h4>
+            <p class="snap-card__body">Antes da técnica, escutar o que está sendo dito de verdade. Sem interpretar.</p>
+          </article>
+          <article class="snap-card">
+            <div class="snap-card__num">02.</div>
+            <h4 class="snap-card__title">o que se <em>cala</em></h4>
+            <p class="snap-card__body">O que o sintoma protege. O que o sujeito não quer ver, mas sabe que sabe.</p>
+          </article>
+          <article class="snap-card">
+            <div class="snap-card__num">03.</div>
+            <h4 class="snap-card__title">o que <em>insiste</em></h4>
+            <p class="snap-card__body">A repetição que o sujeito traz sessão após sessão. Ali mora a pergunta.</p>
+          </article>
+          <article class="snap-card">
+            <div class="snap-card__num">04.</div>
+            <h4 class="snap-card__title">o que <em>desliza</em></h4>
+            <p class="snap-card__body">Lapsos, atos falhos, sonhos. A linguagem mostrando onde a fenda se abre.</p>
+          </article>
+          <article class="snap-card">
+            <div class="snap-card__num">05.</div>
+            <h4 class="snap-card__title">o que <em>retorna</em></h4>
+            <p class="snap-card__body">O retorno do recalcado. Aquilo que volta porque não foi inteiramente nomeado.</p>
+          </article>
+        </div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Listas de mentoria, módulos do curso, etapas do processo. Funciona em qualquer largura.</span></div>
+        <div class="doc__row"><span class="doc__k">Tecnologia</span><span class="doc__v">CSS puro: <code>scroll-snap-type</code> + <code>scroll-snap-align</code>. Zero JS.</span></div>
+      </div>
+    </article>
+
+    <!-- 24.13 STACK -->
+    <article class="demo" id="a13">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.13</small>Stack 3D</div>
+          <div class="demo__desc">Cards empilhados em profundidade. Próximo card "espia" atrás. Navegação por botão.</div>
+        </div>
+        <span class="demo__class">.stack</span>
+      </header>
+      <div class="demo__stage" style="padding: 32px 24px 24px; display:block;">
+        <div class="stack" id="stack">
+          <div class="stack__deck">
+            <article class="stack__card" data-idx="0">
+              <div class="stack__num">01 / 04</div>
+              <p class="stack__quote">talvez não seja falta de força. talvez seja excesso de silêncio.</p>
+              <div class="stack__author">— manifesto · v1</div>
+            </article>
+            <article class="stack__card" data-idx="1">
+              <div class="stack__num">02 / 04</div>
+              <p class="stack__quote">o sintoma fala uma língua que ninguém ensinou.</p>
+              <div class="stack__author">— ensaio 07</div>
+            </article>
+            <article class="stack__card" data-idx="2">
+              <div class="stack__num">03 / 04</div>
+              <p class="stack__quote">a clínica não é onde o sintoma se cura. é onde ele aprende a falar.</p>
+              <div class="stack__author">— sessão 042</div>
+            </article>
+            <article class="stack__card" data-idx="3">
+              <div class="stack__num">04 / 04</div>
+              <p class="stack__quote">escrever é onde a sessão continua acontecendo.</p>
+              <div class="stack__author">— turma 03</div>
+            </article>
+          </div>
+        </div>
+        <div class="stack__nav">
+          <button id="stack-prev" aria-label="Anterior">←</button>
+          <button id="stack-next" aria-label="Próximo">→</button>
+        </div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Citações, depoimentos, teses. Quando cada item merece um momento isolado.</span></div>
+        <div class="doc__row"><span class="doc__k">Limite</span><span class="doc__v">3 a 5 cards. Mais e a pilha vira bagunça.</span></div>
+      </div>
+    </article>
+
+    <!-- 24.14 LOGO RAILS -->
+    <article class="demo" id="a14">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.14</small>Logo rails</div>
+          <div class="demo__desc">Três colunas verticais, direções alternadas. Para "onde fui citada / publiquei / formei".</div>
+        </div>
+        <span class="demo__class">.logorails</span>
+      </header>
+      <div class="demo__stage" style="padding: 24px; display:block;">
+        <div class="logorails">
+          <div class="logorail logorail--up">
+            <div class="logorail__cell">divã digital</div>
+            <div class="logorail__cell logorail__cell--accent">entrelaços</div>
+            <div class="logorail__cell">clínica viva</div>
+            <div class="logorail__cell">escola lacaniana</div>
+            <div class="logorail__cell logorail__cell--accent">cartel 12</div>
+            <div class="logorail__cell">divã digital</div>
+            <div class="logorail__cell logorail__cell--accent">entrelaços</div>
+            <div class="logorail__cell">clínica viva</div>
+            <div class="logorail__cell">escola lacaniana</div>
+            <div class="logorail__cell logorail__cell--accent">cartel 12</div>
+          </div>
+          <div class="logorail logorail--down">
+            <div class="logorail__cell">revista psy</div>
+            <div class="logorail__cell">jornada lacan</div>
+            <div class="logorail__cell logorail__cell--accent">manifesto</div>
+            <div class="logorail__cell">grupo de estudos</div>
+            <div class="logorail__cell">supervisão sp</div>
+            <div class="logorail__cell">revista psy</div>
+            <div class="logorail__cell">jornada lacan</div>
+            <div class="logorail__cell logorail__cell--accent">manifesto</div>
+            <div class="logorail__cell">grupo de estudos</div>
+            <div class="logorail__cell">supervisão sp</div>
+          </div>
+          <div class="logorail logorail--up">
+            <div class="logorail__cell logorail__cell--accent">turma 02</div>
+            <div class="logorail__cell">centro psy</div>
+            <div class="logorail__cell">colóquio rj</div>
+            <div class="logorail__cell">cartas mensais</div>
+            <div class="logorail__cell logorail__cell--accent">bíblia v2</div>
+            <div class="logorail__cell logorail__cell--accent">turma 02</div>
+            <div class="logorail__cell">centro psy</div>
+            <div class="logorail__cell">colóquio rj</div>
+            <div class="logorail__cell">cartas mensais</div>
+            <div class="logorail__cell logorail__cell--accent">bíblia v2</div>
+          </div>
+        </div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Seção "onde estive", "publicações", "formações". Substitui logo grid estática.</span></div>
+        <div class="doc__row"><span class="doc__k">Detalhe</span><span class="doc__v">Direções alternadas dão sensação de profundidade. Mesma direção é monótono.</span></div>
+      </div>
+    </article>
+
+    <!-- ============ REVEAL ============ -->
+    <div class="anim-part"><div class="anim-part__num">24.15 — 24.16</div><div class="anim-part__name">Reveal on scroll</div></div>
+
+    <!-- 24.15 CARDS -->
+    <article class="demo" id="a15">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.15</small>Cards fade-up</div>
+          <div class="demo__desc">Cards aparecem de baixo com stagger. Acionado por <code>IntersectionObserver</code>.</div>
+        </div>
+        <span class="demo__class">.reveal-card</span>
+      </header>
+      <div class="demo__stage" style="padding: 32px 24px; display:block;" id="reveal-stage-1">
+        <div class="reveal-stage">
+          <article class="reveal-card" style="--d:0ms;"><div class="reveal-card__num">01.</div><div class="reveal-card__t">Diagnóstico</div><p class="reveal-card__b">Nomear o problema antes de oferecer caminho.</p></article>
+          <article class="reveal-card" style="--d:120ms;"><div class="reveal-card__num">02.</div><div class="reveal-card__t">Reformulação</div><p class="reveal-card__b">"Talvez não seja A. Talvez seja B."</p></article>
+          <article class="reveal-card" style="--d:240ms;"><div class="reveal-card__num">03.</div><div class="reveal-card__t">Método</div><p class="reveal-card__b">O caminho concreto, em três passos.</p></article>
+          <article class="reveal-card" style="--d:360ms;"><div class="reveal-card__num">04.</div><div class="reveal-card__t">Assinatura</div><p class="reveal-card__b">A carta termina como começou: em primeira pessoa.</p></article>
+        </div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Stagger</span><span class="doc__v">120ms entre cards. Mais que isso parece preguiça; menos parece flash.</span></div>
+        <div class="doc__row"><span class="doc__k">Threshold</span><span class="doc__v"><code>IntersectionObserver</code> com 0.15. Aciona quando 15% do card aparece.</span></div>
+      </div>
+    </article>
+
+    <!-- 24.16 TEXT SPLIT -->
+    <article class="demo" id="a16">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.16</small>Text split <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">reveal</em></div>
+          <div class="demo__desc">Frase principal aparece palavra por palavra. Reservado para frase âncora do hero.</div>
+        </div>
+        <span class="demo__class">.text-split</span>
+      </header>
+      <div class="demo__stage" style="padding: 64px 24px;">
+        <h2 class="text-split" id="split-1" style="font-family:var(--t-font-display);font-size:clamp(28px,5vw,56px);font-weight:200;line-height:1.05;letter-spacing:-0.04em;color:var(--t-text-strong);text-align:center;max-width:720px;">
+          <span class="text-split__word" style="--d:0ms;">talvez</span>
+          <span class="text-split__word" style="--d:80ms;">não</span>
+          <span class="text-split__word" style="--d:160ms;">seja</span>
+          <span class="text-split__word" style="--d:240ms;font-family:var(--t-font-serif);font-style:italic;font-weight:300;background:var(--t-grad-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">falta</span>
+          <span class="text-split__word" style="--d:320ms;">de</span>
+          <span class="text-split__word" style="--d:400ms;font-family:var(--t-font-serif);font-style:italic;font-weight:300;background:var(--t-grad-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">força</span>.
+        </h2>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Uso</span><span class="doc__v">Apenas <strong>uma vez por página</strong>. Reservado para a frase principal.</span></div>
+        <div class="doc__row"><span class="doc__k">Cuidado</span><span class="doc__v">Não animar texto longo letra por letra. Cansa, atrapalha leitura.</span></div>
+      </div>
+    </article>
+
+    <!-- ============ REVEAL EXTRAS ============ -->
+
+    <article class="demo" id="a17">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.17</small>Blur <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">reveal</em></div>
+          <div class="demo__desc">Texto entra desfocado e ganha foco. Ar de revelação editorial.</div>
+        </div>
+        <span class="demo__class">.blur-reveal</span>
+      </header>
+      <div class="demo__stage" style="padding: 64px 24px;">
+        <h3 class="blur-reveal" id="blur-1" style="font-family:var(--t-font-display);font-size:clamp(28px,5vw,52px);font-weight:200;line-height:1.1;letter-spacing:-0.04em;color:var(--t-text-strong);text-align:center;max-width:680px;">o que <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;background:var(--t-grad-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">aparece</em> quando o ruído se cala.</h3>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Frase de manifesto, citação forte. <strong>Uma vez por página.</strong></span></div>
+      </div>
+    </article>
+
+    <article class="demo" id="a18">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.18</small>Counter contagem</div>
+          <div class="demo__desc">Números sobem suavemente até o valor final. Acionado em viewport.</div>
+        </div>
+        <span class="demo__class">.counter</span>
+      </header>
+      <div class="demo__stage" style="padding: 48px 24px; gap: 64px;">
+        <div style="text-align:left;">
+          <div class="counter" data-target="12" style="font-family:var(--t-font-display);font-size:80px;font-weight:200;letter-spacing:-0.05em;color:var(--t-text-strong);line-height:0.9;">0<span style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">y</span></div>
+          <div class="t-eyebrow t-eyebrow--mute" style="margin-top:8px;">— anos de clínica</div>
+        </div>
+        <div style="text-align:left;">
+          <div class="counter" data-target="120" style="font-family:var(--t-font-display);font-size:80px;font-weight:200;letter-spacing:-0.05em;color:var(--t-text-strong);line-height:0.9;">0<span style="font-family:var(--t-font-mono);font-size:24px;color:var(--t-accent-light);vertical-align:super;">+</span></div>
+          <div class="t-eyebrow t-eyebrow--mute" style="margin-top:8px;">— mentorados</div>
+        </div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Atenção</span><span class="doc__v">A Bíblia veta esse efeito como decoração (cap. 13). Usar apenas em dashboard interno ou pitch deck — nunca em LP pública.</span></div>
+      </div>
+    </article>
+
+    <!-- ============ EXTRAS ============ -->
+    <div class="anim-part"><div class="anim-part__num">24.19 — 24.24</div><div class="anim-part__name">Extras</div></div>
+
+    <article class="demo" id="a19">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.19</small>Ripple click</div>
+          <div class="demo__desc">Onda concentrada irradia do ponto de clique. Feedback tátil em botões.</div>
+        </div>
+        <span class="demo__class">[data-ripple]</span>
+      </header>
+      <div class="demo__stage">
+        <button class="t-btn t-btn--primary" data-ripple style="position:relative;overflow:hidden;">clique aqui</button>
+        <button class="t-btn t-btn--ghost" data-ripple style="position:relative;overflow:hidden;">e aqui</button>
+        <div class="demo__hint">→ clique nos botões</div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">CTAs primários em produto digital. Em LP editorial, dispensável.</span></div>
+      </div>
+    </article>
+
+    <article class="demo" id="a20">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.20</small>Gradient <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">orb</em></div>
+          <div class="demo__desc">Esfera com gradient cônico girando lentamente. Substitui imagem de hero.</div>
+        </div>
+        <span class="demo__class">.orb</span>
+      </header>
+      <div class="demo__stage" style="padding: 32px;">
+        <div class="orb"></div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Hero de produto digital, página de IA. Como objeto central.</span></div>
+      </div>
+    </article>
+
+    <article class="demo" id="a21">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.21</small>Tilt 3D card</div>
+          <div class="demo__desc">Card inclina conforme posição do mouse. Auto-demonstra com pulse leve.</div>
+        </div>
+        <span class="demo__class">[data-tilt]</span>
+      </header>
+      <div class="demo__stage" style="padding: 48px; perspective: 1000px;">
+        <article class="t-card tilt-card" data-tilt style="max-width:340px;width:100%;animation: tilt-pulse 5s ease-in-out infinite;">
+          <div class="t-eyebrow t-eyebrow--accent" style="margin-bottom:12px;">◆ Tese 02</div>
+          <h3 style="font-family:var(--t-font-display);font-size:20px;font-weight:400;letter-spacing:-0.02em;color:var(--t-text-strong);margin-bottom:8px;">a sessão como cena</h3>
+          <p style="font-family:var(--t-font-body);font-size:14px;line-height:1.6;color:var(--t-text-2);">A clínica não tem protôtipo. Cada sujeito é sua própria gramática.</p>
+        </article>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Cards de destaque. Nunca em grid grande — cansa.</span></div>
+      </div>
+    </article>
+
+    <article class="demo" id="a22">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.22</small>Accordion editorial</div>
+          <div class="demo__desc">Linhas que expandem para FAQ. Sem chevron, divisor sutil.</div>
+        </div>
+        <span class="demo__class">.acc</span>
+      </header>
+      <div class="demo__stage" style="padding: 24px; display:block;">
+        <div class="acc">
+          <details open>
+            <summary><span class="acc__num">01.</span><span>preciso ter formação em psicanálise?</span></summary>
+            <div class="acc__body">Não. A mentoria recebe pessoas em formação, em supervisão, ou em escrita própria.</div>
+          </details>
+          <details>
+            <summary><span class="acc__num">02.</span><span>como funciona o ritmo dos encontros?</span></summary>
+            <div class="acc__body">Doze encontros quinzenais, cada um com leitura prévia e escrita posterior.</div>
+          </details>
+          <details>
+            <summary><span class="acc__num">03.</span><span>e se eu não entregar uma carta?</span></summary>
+            <div class="acc__body">Você continua na turma. A entrega é contrato consigo, não comigo.</div>
+          </details>
+        </div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Dobra 09 do arc canal (FAQ).</span></div>
+      </div>
+    </article>
+
+    <article class="demo" id="a23">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.23</small>Marquee vertical</div>
+          <div class="demo__desc">Fluxo contínuo na vertical. Para depoimentos lado a lado de hero.</div>
+        </div>
+        <span class="demo__class">.vmarquee</span>
+      </header>
+      <div class="demo__stage" style="padding:24px;display:block;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;height:320px;overflow:hidden;">
+          <div class="vmarquee" style="animation: vm-up 22s linear infinite;">
+            <div class="vm-card">“a turma me deu nome para o que eu vivia.”</div>
+            <div class="vm-card">“escrever virou parte da escuta.”</div>
+            <div class="vm-card">“não sabia que era possível.”</div>
+            <div class="vm-card">“a turma me deu nome para o que eu vivia.”</div>
+            <div class="vm-card">“escrever virou parte da escuta.”</div>
+            <div class="vm-card">“não sabia que era possível.”</div>
+          </div>
+          <div class="vmarquee" style="animation: vm-down 26s linear infinite;">
+            <div class="vm-card">“retomei a escrita clínica.”</div>
+            <div class="vm-card">“a supervisão virou outro lugar.”</div>
+            <div class="vm-card">“descobri minha própria voz.”</div>
+            <div class="vm-card">“retomei a escrita clínica.”</div>
+            <div class="vm-card">“a supervisão virou outro lugar.”</div>
+            <div class="vm-card">“descobri minha própria voz.”</div>
+          </div>
+        </div>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Dobra 08 (prova). Substitui carrossel de depoimentos.</span></div>
+      </div>
+    </article>
+
+    <article class="demo" id="a24">
+      <header class="demo__head">
+        <div>
+          <div class="demo__title"><small>24.24</small>Sticky <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;color:var(--t-accent-light);">scale</em></div>
+          <div class="demo__desc">Frase grande que escala conforme o scroll. Demo simulada com loop.</div>
+        </div>
+        <span class="demo__class">.sticky-scale</span>
+      </header>
+      <div class="demo__stage" style="padding: 64px 24px;">
+        <h3 class="sticky-scale" style="font-family:var(--t-font-display);font-size:clamp(32px,6vw,72px);font-weight:200;line-height:1;letter-spacing:-0.05em;color:var(--t-text-strong);text-align:center;animation: scale-loop 6s ease-in-out infinite;">a <em style="font-family:var(--t-font-serif);font-style:italic;font-weight:300;background:var(--t-grad-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">marca</em> respira.</h3>
+      </div>
+      <div class="doc">
+        <div class="doc__row"><span class="doc__k">Onde usar</span><span class="doc__v">Frase âncora em scroll longo. Implementar com <code>scroll-timeline</code> ou IO.</span></div>
+      </div>
+    </article>
+
+    <div class="anim-end"></div>
+
+  </main>
+</div>
+
+<script>
+  // delay per element via --d
+  document.querySelectorAll('.reveal-card, .text-split__word').forEach(el => {
+    const d = el.style.getPropertyValue('--d');
+    if (d) el.style.transitionDelay = d;
+  });
+
+  // theme toggle
+  document.querySelectorAll('[data-theme-set]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.documentElement.dataset.theme = btn.dataset.themeSet;
+      document.querySelectorAll('[data-theme-set]').forEach(b => b.classList.toggle('is-active', b === btn));
+    });
+  });
+
+  // progress bar + active toc
+  const progress = document.getElementById('progress');
+  const tocLinks = document.querySelectorAll('.anim-toc a');
+  const demos = [...document.querySelectorAll('.demo')];
+  function onScroll() {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = ((window.scrollY / h) * 100) + '%';
+    const top = window.scrollY + 200;
+    let active = demos[0]?.id;
+    demos.forEach(c => { if (c.offsetTop <= top) active = c.id; });
+    tocLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + active));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ===== 24.2 Constellation =====
+  (function constellation(){
+    const cv = document.getElementById('stars');
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    let w, h, dpr = window.devicePixelRatio || 1;
+    let pts = [];
+    function resize() {
+      const rect = cv.getBoundingClientRect();
+      w = rect.width; h = rect.height;
+      cv.width = w * dpr; cv.height = h * dpr;
+      ctx.scale(dpr, dpr);
+      pts = Array.from({length: 36}, () => ({
+        x: Math.random()*w, y: Math.random()*h,
+        vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25
+      }));
+    }
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      pts.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        ctx.fillStyle = 'rgba(167,139,250,0.6)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, Math.PI*2); ctx.fill();
+      });
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i+1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if (d < 110) {
+            ctx.strokeStyle = 'rgba(139,92,246,' + (0.18 * (1 - d/110)) + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+    resize(); tick();
+    window.addEventListener('resize', resize);
+  })();
+
+  // ===== 24.4 Particle drift — generate spans =====
+  (function drift(){
+    const stage = document.getElementById('drift-stage');
+    if (!stage) return;
+    for (let i = 0; i < 25; i++) {
+      const s = document.createElement('span');
+      s.style.left = (Math.random() * 100) + '%';
+      s.style.animationDelay = (Math.random() * 14) + 's';
+      s.style.animationDuration = (10 + Math.random() * 8) + 's';
+      s.style.opacity = (0.3 + Math.random() * 0.4);
+      stage.appendChild(s);
+    }
+  })();
+
+  // ===== 24.7 Spotlight =====
+  (function spot(){
+    const el = document.getElementById('spot-stage');
+    if (!el) return;
+    let timer;
+    el.addEventListener('mousemove', e => {
+      el.dataset.active = '1';
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      clearTimeout(timer);
+      timer = setTimeout(() => { el.dataset.active = ''; el.style.removeProperty('--mx'); el.style.removeProperty('--my'); }, 1800);
+    });
+  })();
+
+  // ===== 24.8 Magnetic + auto-demo pulse =====
+  document.querySelectorAll('[data-magnet]').forEach((el, i) => {
+    let userActive = false, timer;
+    el.addEventListener('mousemove', e => {
+      userActive = true;
+      el.style.animation = 'none';
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - (r.left + r.width/2);
+      const y = e.clientY - (r.top + r.height/2);
+      el.style.transform = `translate(${x*0.25}px, ${y*0.35}px)`;
+      clearTimeout(timer);
+      timer = setTimeout(() => { userActive = false; el.style.animation = ''; el.style.transform = ''; }, 1500);
+    });
+    el.addEventListener('mouseleave', () => { if (!userActive) el.style.transform = ''; });
+    // auto pulse
+    el.style.animation = `magnet-pulse 3.2s ease-in-out ${i * 0.3}s infinite`;
+  });
+  // inject magnet-pulse keyframes
+  (function(){
+    const s = document.createElement('style');
+    s.textContent = '@keyframes magnet-pulse { 0%,100%{transform:translate(0,0);} 50%{transform:translate(0,-4px);} }';
+    document.head.appendChild(s);
+  })();
+
+  // ===== 24.9 Trail =====
+  (function trail(){
+    const stage = document.getElementById('trail-stage');
+    const ghost = document.getElementById('trail-ghost');
+    if (!stage) return;
+    let last = 0, lastX = 0, lastY = 0;
+    function spawn(x, y) {
+      const dot = document.createElement('span');
+      dot.className = 'cursor-trail__dot';
+      dot.style.left = x + 'px';
+      dot.style.top = y + 'px';
+      stage.appendChild(dot);
+      requestAnimationFrame(() => {
+        dot.style.transition = 'opacity 0.6s var(--t-ease), transform 0.6s var(--t-ease)';
+        dot.style.opacity = '0';
+        dot.style.transform = 'translate(-50%,-50%) scale(2.5)';
+      });
+      setTimeout(() => dot.remove(), 700);
+    }
+    stage.addEventListener('mousemove', e => {
+      const now = Date.now();
+      if (now - last < 30) return;
+      last = now;
+      const r = stage.getBoundingClientRect();
+      spawn(e.clientX - r.left, e.clientY - r.top);
+    });
+    // auto-demo: usa o ghost que segue --mx/--my via auto-orbit do parent
+    setInterval(() => {
+      if (!ghost) return;
+      const r = stage.getBoundingClientRect();
+      const cs = getComputedStyle(stage);
+      const mx = parseFloat(cs.getPropertyValue('--mx')) || 50;
+      const my = parseFloat(cs.getPropertyValue('--my')) || 50;
+      const x = (mx/100) * r.width;
+      const y = (my/100) * r.height;
+      if (Math.abs(x - lastX) + Math.abs(y - lastY) > 2) {
+        spawn(x, y);
+        lastX = x; lastY = y;
+      }
+    }, 60);
+  })();
+
+  // ===== 24.10 Halo =====
+  (function halo(){
+    const el = document.getElementById('halo-stage');
+    if (!el) return;
+    let timer;
+    el.addEventListener('mousemove', e => {
+      el.dataset.active = '1';
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      clearTimeout(timer);
+      timer = setTimeout(() => { el.dataset.active = ''; el.style.removeProperty('--mx'); el.style.removeProperty('--my'); }, 1800);
+    });
+    el.querySelectorAll('[data-halo-hover]').forEach(a => {
+      a.addEventListener('mouseenter', () => el.dataset.hover = '1');
+      a.addEventListener('mouseleave', () => el.dataset.hover = '');
+    });
+  })();
+
+  // ===== 24.13 Stack =====
+  (function stack(){
+    const cards = document.querySelectorAll('#stack .stack__card');
+    const prev = document.getElementById('stack-prev');
+    const next = document.getElementById('stack-next');
+    if (!cards.length) return;
+    const total = cards.length;
+    let active = 0;
+    function update() {
+      cards.forEach((c, i) => {
+        const offset = (i - active + total) % total;
+        c.dataset.idx = offset;
+      });
+    }
+    next.addEventListener('click', () => { active = (active + 1) % total; update(); });
+    prev.addEventListener('click', () => { active = (active - 1 + total) % total; update(); });
+    update();
+  })();
+
+  // ===== 24.15 / 24.16 IntersectionObserver =====
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('in');
+        if (en.target.classList.contains('text-split')) return;
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal-card, .text-split, .blur-reveal').forEach(el => io.observe(el));
+
+  // ===== 24.18 Counter =====
+  const counterIO = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting || en.target.dataset.done) return;
+      en.target.dataset.done = '1';
+      const el = en.target;
+      const target = parseInt(el.dataset.target, 10);
+      const sufSpan = el.querySelector('span');
+      const suf = sufSpan ? sufSpan.outerHTML : '';
+      let n = 0;
+      const step = Math.max(1, Math.floor(target / 40));
+      const t = setInterval(() => {
+        n += step;
+        if (n >= target) { n = target; clearInterval(t); }
+        el.innerHTML = n + suf;
+      }, 30);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => counterIO.observe(el));
+
+  // ===== 24.19 Ripple =====
+  document.querySelectorAll('[data-ripple]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const r = btn.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.left = (e.clientX - r.left) + 'px';
+      ripple.style.top = (e.clientY - r.top) + 'px';
+      ripple.style.width = ripple.style.height = '20px';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 700);
+    });
+  });
+
+  // ===== 24.21 Tilt =====
+  document.querySelectorAll('[data-tilt]').forEach(card => {
+    let timer;
+    card.addEventListener('mousemove', e => {
+      card.style.animation = 'none';
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `rotateY(${px*12}deg) rotateX(${-py*12}deg)`;
+      clearTimeout(timer);
+      timer = setTimeout(() => { card.style.animation = ''; card.style.transform = ''; }, 1500);
+    });
+    card.addEventListener('mouseleave', () => card.style.transform = '');
+  });
+</script>
+</body>
+</html>

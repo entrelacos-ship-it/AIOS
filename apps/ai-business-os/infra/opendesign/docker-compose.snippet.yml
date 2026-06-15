@@ -1,0 +1,29 @@
+# Snippet — service block para mesclar em /etc/docker/entrelacOS/docker-compose.yml
+# Domínio: opendesign.entrelacospsicologia.com.br
+# DNS: A record opendesign → 62.171.164.66 (necessário antes do certresolver)
+#
+# Append este bloco ao final do compose existente (mesma chave services:):
+
+  opendesign:
+    build:
+      context: ./opendesign
+      dockerfile: Dockerfile
+      args:
+        OPEN_DESIGN_REF: main
+    image: open-design:latest
+    container_name: open-design
+    restart: unless-stopped
+    networks:
+      - web
+    volumes:
+      - ./opendesign-data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.opendesign-http.rule=Host(`opendesign.entrelacospsicologia.com.br`)"
+      - "traefik.http.routers.opendesign-http.entrypoints=web"
+      - "traefik.http.routers.opendesign-http.service=opendesign"
+      - "traefik.http.routers.opendesign.rule=Host(`opendesign.entrelacospsicologia.com.br`)"
+      - "traefik.http.routers.opendesign.entrypoints=websecure"
+      - "traefik.http.routers.opendesign.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.opendesign.service=opendesign"
+      - "traefik.http.services.opendesign.loadbalancer.server.port=7456"

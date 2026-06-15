@@ -1,0 +1,4 @@
+interface:
+  display_name: "BrandingOS Slide Creator"
+  short_description: "Create BrandingOS slides via HTML/CSS render."
+  default_prompt: "Use $slide-creator to create branded slides in HTML/CSS and render them with Playwright."

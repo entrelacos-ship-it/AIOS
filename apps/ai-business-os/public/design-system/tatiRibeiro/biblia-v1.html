@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bíblia do Design System · Tati Ribeiro</title>
+
+<link rel="stylesheet" href="tati-ds/tokens/tokens.css">
+<link rel="stylesheet" href="tati-ds/styles/base.css">
+<link rel="stylesheet" href="tati-ds/styles/typography.css">
+<link rel="stylesheet" href="tati-ds/styles/components.css">
+<link rel="stylesheet" href="tati-ds/styles/motion.css">
+
+<style>
+  /* ============================================================
+     BÍBLIA · estrutura editorial (não faz parte do DS exportável)
+     ============================================================ */
+  body { padding-bottom: 0; }
+
+  .bb-shell {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+  }
+  @media (max-width: 960px) {
+    .bb-shell { grid-template-columns: 1fr; }
+  }
+
+  /* ─── SIDEBAR ─── */
+  .bb-side {
+    border-right: 1px solid var(--t-border);
+    background: var(--t-bg-1);
+    padding: var(--t-space-xl) var(--t-space-lg);
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  @media (max-width: 960px) {
+    .bb-side { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--t-border); }
+  }
+
+  .bb-side__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: var(--t-space-lg);
+    border-bottom: 1px solid var(--t-border);
+    margin-bottom: var(--t-space-lg);
+  }
+  .bb-side__mark {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--t-accent-border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--t-accent-light);
+    font-family: var(--t-font-serif);
+    font-style: italic; font-weight: 300;
+    font-size: 18px;
+  }
+  .bb-side__brand-text {
+    font-family: var(--t-font-serif);
+    font-style: italic; font-weight: 300;
+    font-size: 17px;
+    color: var(--t-text-strong);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .bb-side__brand-text small {
+    display: block;
+    font-family: var(--t-font-mono);
+    font-size: 9px;
+    color: var(--t-accent-light);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-style: normal;
+    margin-top: 4px;
+  }
+
+  .bb-side__label {
+    font-family: var(--t-font-mono);
+    font-size: 9px;
+    color: var(--t-text-mute);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin: var(--t-space-md) 0 var(--t-space-sm);
+  }
+
+  .bb-toc {
+    list-style: none;
+    counter-reset: ch;
+  }
+  .bb-toc li {
+    counter-increment: ch;
+  }
+  .bb-toc a {
+    display: flex;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: var(--t-radius-md);
+    font-family: var(--t-font-display);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--t-text-2);
+    transition: all var(--t-dur-fast) var(--t-ease);
+  }
+  .bb-toc a::before {
+    content: counter(ch, decimal-leading-zero);
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    color: var(--t-text-mute);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .bb-toc a:hover, .bb-toc a.is-active {
+    background: var(--t-accent-bg);
+    color: var(--t-accent-light);
+  }
+  .bb-toc a:hover::before, .bb-toc a.is-active::before {
+    color: var(--t-accent-light);
+  }
+
+  .bb-side__theme {
+    margin-top: var(--t-space-lg);
+    padding-top: var(--t-space-lg);
+    border-top: 1px solid var(--t-border);
+    display: flex;
+    background: var(--t-surface);
+    border: 1px solid var(--t-border);
+    border-radius: var(--t-radius-full);
+    padding: 3px;
+  }
+  .bb-side__theme button {
+    flex: 1;
+    font-family: var(--t-font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    padding: 6px 10px;
+    border-radius: var(--t-radius-full);
+    color: var(--t-text-2);
+    text-transform: uppercase;
+  }
+  .bb-side__theme button.is-active {
+    background: var(--t-accent);
+    color: var(--t-pearl);
+  }
+
+  /* ─── CONTENT ─── */
+  .bb-content {
+    padding: var(--t-space-3xl) var(--t-space-2xl);
+    max-width: 980px;
+  }
+  @media (max-width: 600px) { .bb-content { padding: var(--t-space-xl) var(--t-space-md); } }
+
+  .bb-cover {
+    padding: var(--t-space-4xl) 0 var(--t-space-3xl);
+    border-bottom: 1px solid var(--t-border);
+    margin-bottom: var(--t-space-3xl);
+  }
+  .bb-cover__id {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    color: var(--t-accent-light);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: var(--t-space-lg);
+  }
+  .bb-cover__id::before {
+    content: '';
+    width: 36px; height: 1px;
+    background: var(--t-accent-light);
+  }
+  .bb-cover__title {
+    font-family: var(--t-font-display);
+    font-size: clamp(48px, 8vw, 112px);
+    font-weight: 200;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    color: var(--t-text-strong);
+  }
+  .bb-cover__title em {
+    font-family: var(--t-font-serif);
+    font-style: italic;
+    font-weight: 300;
+    background: var(--t-grad-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .bb-cover__sub {
+    margin-top: var(--t-space-lg);
+    font-family: var(--t-font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--t-fs-lg);
+    color: var(--t-text-2);
+    max-width: 640px;
+    line-height: 1.55;
+  }
+  .bb-cover__meta {
+    margin-top: var(--t-space-xl);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--t-space-md);
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    color: var(--t-text-mute);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .bb-cover__meta span { display: flex; align-items: center; gap: 8px; }
+  .bb-cover__meta span::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--t-accent-light);
+  }
+
+  /* Chapter */
+  .bb-ch {
+    padding: var(--t-space-3xl) 0;
+    border-bottom: 1px solid var(--t-border);
+  }
+  .bb-ch:last-child { border-bottom: none; }
+
+  .bb-ch__head {
+    margin-bottom: var(--t-space-2xl);
+  }
+  .bb-ch__num {
+    font-family: var(--t-font-mono);
+    font-size: 11px;
+    color: var(--t-accent-light);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: var(--t-space-md);
+  }
+  .bb-ch__title {
+    font-family: var(--t-font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 200;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--t-text-strong);
+  }
+  .bb-ch__title em {
+    font-family: var(--t-font-serif);
+    font-style: italic;
+    font-weight: 300;
+    background: var(--t-grad-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .bb-ch__lead {
+    margin-top: var(--t-space-md);
+    font-family: var(--t-font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--t-fs-lg);
+    color: var(--t-text-2);
+    max-width: 640px;
+    line-height: 1.55;
+  }
+
+  .bb-ch h3 {
+    font-family: var(--t-font-display);
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--t-text-strong);
+    margin: var(--t-space-2xl) 0 var(--t-space-md);
+  }
+  .bb-ch h4 {
+    font-family: var(--t-font-display);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--t-text-strong);
+    margin: var(--t-space-lg) 0 var(--t-space-sm);
+  }
+
+  .bb-ch p {
+    font-family: var(--t-font-body);
+    font-size: var(--t-fs-base);
+    line-height: 1.75;
+    color: var(--t-text);
+    max-width: 68ch;
+    margin-bottom: var(--t-space-md);
+  }
+  .bb-ch p strong { color: var(--t-text-strong); font-weight: 500; }
+
+  .bb-ch ul {
+    list-style: none;
+    margin: var(--t-space-md) 0;
+    max-width: 68ch;
+  }
+  .bb-ch ul li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    font-family: var(--t-font-body);
+    font-size: var(--t-fs-base);
+    line-height: 1.65;
+    color: var(--t-text);
+  }
+  .bb-ch ul li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    font-size: 7px;
+    color: var(--t-accent-light);
+  }
+
+  .bb-callout {
+    margin: var(--t-space-xl) 0;
+    padding: var(--t-space-lg);
+    background: var(--t-accent-bg);
+    border: 1px solid var(--t-accent-border);
+    border-radius: var(--t-radius-xl);
+    border-left: 3px solid var(--t-accent-light);
+  }
+  .bb-callout__label {
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    color: var(--t-accent-light);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: var(--t-space-sm);
+  }
+  .bb-callout p {
+    font-family: var(--t-font-serif);
+    font-style: italic;
+    font-size: var(--t-fs-md);
+    line-height: 1.55;
+    color: var(--t-text-strong);
+    margin: 0;
+    max-width: none;
+  }
+
+  .bb-do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--t-space-md);
+    margin: var(--t-space-lg) 0;
+  }
+  @media (max-width: 720px) { .bb-do-dont { grid-template-columns: 1fr; } }
+  .bb-card {
+    padding: var(--t-space-lg);
+    border-radius: var(--t-radius-lg);
+    border: 1px solid var(--t-border);
+    background: var(--t-surface);
+  }
+  .bb-card--do { border-color: var(--t-accent-border); background: var(--t-accent-bg); }
+  .bb-card__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--t-text-mute);
+  }
+  .bb-card--do .bb-card__tag { color: var(--t-accent-light); }
+  .bb-card__tag::before {
+    content: '×';
+    font-family: var(--t-font-display);
+    font-size: 14px;
+    line-height: 1;
+  }
+  .bb-card--do .bb-card__tag::before {
+    content: '✓';
+  }
+  .bb-card p {
+    font-family: var(--t-font-body);
+    font-size: var(--t-fs-sm);
+    line-height: 1.55;
+    color: var(--t-text);
+    margin: 0;
+  }
+
+  /* swatches */
+  .bb-swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+    margin: var(--t-space-md) 0;
+  }
+  .bb-swatch {
+    aspect-ratio: 1.3/1;
+    border-radius: var(--t-radius-md);
+    border: 1px solid var(--t-border);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+  .bb-swatch__name { text-transform: uppercase; }
+  .bb-swatch__hex { opacity: 0.7; }
+
+  /* type spec table */
+  .bb-spec {
+    border: 1px solid var(--t-border);
+    border-radius: var(--t-radius-lg);
+    overflow: hidden;
+    margin: var(--t-space-md) 0;
+  }
+  .bb-spec__row {
+    display: grid;
+    grid-template-columns: 140px 1fr 220px;
+    border-bottom: 1px solid var(--t-border);
+    padding: 14px var(--t-space-md);
+    align-items: center;
+  }
+  .bb-spec__row:last-child { border-bottom: none; }
+  @media (max-width: 720px) {
+    .bb-spec__row { grid-template-columns: 1fr; gap: 6px; }
+  }
+  .bb-spec__name {
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    color: var(--t-accent-light);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .bb-spec__sample {
+    color: var(--t-text-strong);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .bb-spec__meta {
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    color: var(--t-text-mute);
+    letter-spacing: 0.1em;
+    text-align: right;
+  }
+  @media (max-width: 720px) { .bb-spec__meta { text-align: left; } }
+
+  /* spacing scale viz */
+  .bb-spaces {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: var(--t-space-md) 0;
+  }
+  .bb-space-row {
+    display: grid;
+    grid-template-columns: 80px 60px 1fr;
+    align-items: center;
+    gap: var(--t-space-md);
+    font-family: var(--t-font-mono);
+    font-size: 11px;
+  }
+  .bb-space-row__name { color: var(--t-accent-light); letter-spacing: 0.15em; text-transform: uppercase; }
+  .bb-space-row__val { color: var(--t-text-mute); }
+  .bb-space-row__bar {
+    height: 14px;
+    background: var(--t-grad-accent);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(139,92,246,0.3);
+  }
+
+  /* code-like block for tokens */
+  .bb-code {
+    margin: var(--t-space-md) 0;
+    padding: var(--t-space-lg);
+    background: var(--t-bg);
+    border: 1px solid var(--t-border-2);
+    border-radius: var(--t-radius-lg);
+    font-family: var(--t-font-mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--t-text-2);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .bb-code .k { color: var(--t-accent-light); }
+  .bb-code .v { color: var(--t-text-strong); }
+  .bb-code .c { color: var(--t-text-mute); font-style: italic; }
+
+  /* component preview */
+  .bb-preview {
+    margin: var(--t-space-md) 0;
+    padding: var(--t-space-2xl);
+    background: var(--t-bg-1);
+    border: 1px solid var(--t-border);
+    border-radius: var(--t-radius-xl);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--t-space-md);
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+  }
+  .bb-preview--col { flex-direction: column; align-items: stretch; }
+
+  /* end-of-chapter mark */
+  .bb-end {
+    text-align: center;
+    margin-top: var(--t-space-2xl);
+    font-family: var(--t-font-mono);
+    font-size: 10px;
+    color: var(--t-text-mute);
+    letter-spacing: 0.3em;
+  }
+  .bb-end::before { content: '◆ ◆ ◆'; }
+
+  /* progress bar */
+  .bb-progress {
+    position: fixed;
+    top: 0; left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--t-grad-accent);
+    z-index: var(--t-z-toast);
+    transition: width 0.1s linear;
+  }
+</style>
+</head>
+
+<body>
+<div class="t-circuit-bg"></div>
+<div class="bb-progress" id="progress"></div>
+
+<div class="bb-shell">
+
+  <!-- ─── SIDEBAR ─── -->
+  <aside class="bb-side">
+    <div class="bb-side__brand">
+      <span class="bb-side__mark">tr</span>
+      <div class="bb-side__brand-text">
+        bíblia
+        <small>design system v1.0</small>
+      </div>
+    </div>
+
+    <div class="bb-side__label">Capítulos</div>
+    <ol class="bb-toc" id="toc">
+      <li><a href="#cap-1">Filosofia</a></li>
+      <li><a href="#cap-2">Cor</a></li>
+      <li><a href="#cap-3">Tipografia</a></li>
+      <li><a href="#cap-4">Espaço & layout</a></li>
+      <li><a href="#cap-5">Componentes web</a></li>
+      <li><a href="#cap-6">Mobile / IA</a></li>
+      <li><a href="#cap-7">Movimento</a></li>
+      <li><a href="#cap-8">Voz & copy</a></li>
+      <li><a href="#cap-9">Ética & aplicação</a></li>
+      <li><a href="#cap-10">Referência técnica</a></li>
+    </ol>
+
+    <div class="bb-side__theme">
+      <button data-theme-set="dark" class="is-active">Dark</button>
+      <button data-theme-set="light">Light</button>
+    </div>
+  </aside>
+
+  <!-- ─── CONTENT ─── -->
+  <main class="bb-content">
+
+    <!-- COVER -->
+    <section class="bb-cover">
+      <div class="bb-cover__id">DS · BÍBLIA · V1.0 · 2026</div>
+      <h1 class="bb-cover__title">a <em>bíblia</em><br>do design.</h1>
+      <p class="bb-cover__sub">
+        Documento canônico do design system Tati Ribeiro.
+        Cada decisão visual, cada token e cada regra que faz a marca ser
+        ela mesma — em qualquer superfície, em qualquer escala.
+      </p>
+      <div class="bb-cover__meta">
+        <span>10 capítulos</span>
+        <span>~25 min de leitura</span>
+        <span>versão 1.0 · 2026</span>
+      </div>
+    </section>
+
+    <!-- ───────────── CAP 1 ───────────── -->
+    <section class="bb-ch" id="cap-1">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 01</div>
+        <h2 class="bb-ch__title"><em>Filosofia</em><br>do sistema.</h2>
+        <p class="bb-ch__lead">
+          Antes da cor e da tipografia vem a tese. Um sistema de design só
+          é consistente quando se sabe exatamente o que está sendo defendido.
+        </p>
+      </header>
+
+      <h3>O que estamos construindo</h3>
+      <p>
+        O design system Tati Ribeiro é a infraestrutura visual de uma marca pessoal
+        que opera em três frentes: <strong>clínica psicanalítica</strong>,
+        <strong>mentoria/supervisão</strong> e <strong>produtos digitais com IA</strong>.
+        O sistema precisa servir, com coerência, a três tons: acolhedor, técnico e editorial.
+      </p>
+
+      <h3>Os cinco princípios</h3>
+      <p><strong>01. Restrição inteligente.</strong> Identidade não é ornamento — é o que se decide <em>não</em> fazer. Uma única cor de acento, três famílias tipográficas, escala de espaçamento curta.</p>
+      <p><strong>02. Monocromático com 1 acento.</strong> Tudo é cinza ou roxo. Nenhuma terceira cor. O roxo herdado do Entrelaços é a única ponte cromática entre passado e futuro da marca.</p>
+      <p><strong>03. Tipografia como protagonista.</strong> Sem ilustrações decorativas. A página é construída pela escrita: Inter (estrutura), Source Serif italic (alma), JetBrains Mono (sistema).</p>
+      <p><strong>04. Espaço primeiro.</strong> Densidade baixa. O espaço entre elementos é o material principal, não o preenchimento. Cada bloco respira.</p>
+      <p><strong>05. Movimento contido.</strong> Animação serve à legibilidade, nunca ao espetáculo. Easing precisos, durações curtas, nunca bouncy gratuito.</p>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Tese central</div>
+        <p>
+          Identidade não é ornamento — é restrição inteligente.
+          Quanto menos decisões cada peça precisa tomar,
+          mais consistente é o sistema inteiro.
+        </p>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ───────────── CAP 2 ───────────── -->
+    <section class="bb-ch" id="cap-2">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 02</div>
+        <h2 class="bb-ch__title">A regra <em>da cor</em>.</h2>
+        <p class="bb-ch__lead">
+          Uma única cor decide tudo. Tudo o mais é graduação de cinza.
+        </p>
+      </header>
+
+      <h3>Acento — herança Entrelaços</h3>
+      <p>
+        O roxo é a única cor não-neutra do sistema. Ele carrega a herança
+        do projeto Entrelaços e marca <em>aquilo que importa</em>: CTAs, links ativos,
+        estado de foco, dado de destaque, citação. Nunca é decoração.
+      </p>
+      <div class="bb-swatches">
+        <div class="bb-swatch" style="background:#2E1065; color:#fff;">
+          <div class="bb-swatch__name">Purple deep</div><div class="bb-swatch__hex">#2E1065</div>
+        </div>
+        <div class="bb-swatch" style="background:#4C1D95; color:#fff;">
+          <div class="bb-swatch__name">Purple circuit</div><div class="bb-swatch__hex">#4C1D95</div>
+        </div>
+        <div class="bb-swatch" style="background:#6B46C1; color:#fff;">
+          <div class="bb-swatch__name">Accent</div><div class="bb-swatch__hex">#6B46C1</div>
+        </div>
+        <div class="bb-swatch" style="background:#8B5CF6; color:#fff;">
+          <div class="bb-swatch__name">Light</div><div class="bb-swatch__hex">#8B5CF6</div>
+        </div>
+        <div class="bb-swatch" style="background:#A78BFA; color:#1a1a1a;">
+          <div class="bb-swatch__name">Glow</div><div class="bb-swatch__hex">#A78BFA</div>
+        </div>
+      </div>
+
+      <h3>Escala monocromática (15 níveis)</h3>
+      <p>
+        Quinze tons entre o preto absoluto (<code>#050505</code>) e o branco
+        pérola (<code>#FFFFFE</code>). Cada nível tem um nome editorial — <em>void, charcoal, stone, fog, paper, bone, ivory</em> — para conversar como matéria, não como variável.
+      </p>
+      <div class="bb-swatches">
+        <div class="bb-swatch" style="background:#050505; color:#C4C4CC; border-color:#1C1C25;"><div class="bb-swatch__name">Void</div><div class="bb-swatch__hex">#050505</div></div>
+        <div class="bb-swatch" style="background:#0F0F14; color:#C4C4CC; border-color:#1C1C25;"><div class="bb-swatch__name">Onyx</div><div class="bb-swatch__hex">#0F0F14</div></div>
+        <div class="bb-swatch" style="background:#14141A; color:#C4C4CC; border-color:#262631;"><div class="bb-swatch__name">Charcoal</div><div class="bb-swatch__hex">#14141A</div></div>
+        <div class="bb-swatch" style="background:#262631; color:#E0E0E5;"><div class="bb-swatch__name">Stone</div><div class="bb-swatch__hex">#262631</div></div>
+        <div class="bb-swatch" style="background:#45454F; color:#FAFAF7;"><div class="bb-swatch__name">Ash</div><div class="bb-swatch__hex">#45454F</div></div>
+        <div class="bb-swatch" style="background:#6B6B7A; color:#FAFAF7;"><div class="bb-swatch__name">Fog</div><div class="bb-swatch__hex">#6B6B7A</div></div>
+        <div class="bb-swatch" style="background:#C4C4CC; color:#14141A;"><div class="bb-swatch__name">Paper</div><div class="bb-swatch__hex">#C4C4CC</div></div>
+        <div class="bb-swatch" style="background:#E0E0E5; color:#14141A;"><div class="bb-swatch__name">Bone</div><div class="bb-swatch__hex">#E0E0E5</div></div>
+        <div class="bb-swatch" style="background:#F5F4F0; color:#14141A;"><div class="bb-swatch__name">Warm white</div><div class="bb-swatch__hex">#F5F4F0</div></div>
+        <div class="bb-swatch" style="background:#FFFFFE; color:#14141A;"><div class="bb-swatch__name">Pearl</div><div class="bb-swatch__hex">#FFFFFE</div></div>
+      </div>
+
+      <h3>Como aplicar</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card bb-card--do">
+          <div class="bb-card__tag">Faça</div>
+          <p>Use roxo apenas para o que precisa de atenção: CTA principal, link ativo, focus ring, dado relevante, citação curta.</p>
+        </div>
+        <div class="bb-card">
+          <div class="bb-card__tag">Não faça</div>
+          <p>Não pinte fundos inteiros de roxo, não use roxo em parágrafos longos, não introduza um segundo acento (azul, verde, laranja).</p>
+        </div>
+        <div class="bb-card bb-card--do">
+          <div class="bb-card__tag">Faça</div>
+          <p>Trate gradiente como assinatura editorial — só em palavras-chave dentro de títulos, nunca em parágrafos.</p>
+        </div>
+        <div class="bb-card">
+          <div class="bb-card__tag">Não faça</div>
+          <p>Não aplique gradiente em botões, ícones decorativos ou áreas grandes. Quebra a sobriedade do sistema.</p>
+        </div>
+      </div>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Regra dos 5%</div>
+        <p>O roxo deve ocupar, no máximo, 5% da área total da peça. Se passar disso, ele deixa de ser acento e vira cor dominante — quebrando a hierarquia.</p>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ───────────── CAP 3 ───────────── -->
+    <section class="bb-ch" id="cap-3">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 03</div>
+        <h2 class="bb-ch__title">As três <em>vozes</em>.</h2>
+        <p class="bb-ch__lead">
+          Estrutura, alma e sistema. Três famílias, três funções claras.
+          Nada é decorativo.
+        </p>
+      </header>
+
+      <h3>As três famílias</h3>
+      <p><strong>Inter</strong> — pesos 200, 300, 400, 500. É a estrutura do texto: títulos em peso fino (200/300) carregam autoridade silenciosa; corpo em 400 com line-height generoso (1.7).</p>
+      <p><strong>Source Serif 4 Italic</strong> — pesos 300, 400. É a alma: leads, citações, palavras destacadas dentro de títulos via gradient text. Sempre em itálico — o serif romano nunca aparece no sistema.</p>
+      <p><strong>JetBrains Mono</strong> — pesos 400, 500. É o sistema: etiquetas técnicas, eyebrows, marginália, números. Sempre uppercase com tracking generoso (0.18–0.30em).</p>
+
+      <h3>Escala</h3>
+      <div class="bb-spec">
+        <div class="bb-spec__row">
+          <span class="bb-spec__name">Display</span>
+          <span class="bb-spec__sample" style="font-family:var(--t-font-display); font-size:36px; font-weight:200; letter-spacing:-0.05em;">a palavra certa</span>
+          <span class="bb-spec__meta">clamp 64–152 / 200 / -0.05em</span>
+        </div>
+        <div class="bb-spec__row">
+          <span class="bb-spec__name">H1</span>
+          <span class="bb-spec__sample" style="font-family:var(--t-font-display); font-size:30px; font-weight:200; letter-spacing:-0.04em;">não é só uma página</span>
+          <span class="bb-spec__meta">clamp 40–76 / 200 / -0.04em</span>
+        </div>
+        <div class="bb-spec__row">
+          <span class="bb-spec__name">H2</span>
+          <span class="bb-spec__sample" style="font-family:var(--t-font-display); font-size:24px; font-weight:300; letter-spacing:-0.03em;">o que muda quando</span>
+          <span class="bb-spec__meta">32px / 300 / -0.03em</span>
+        </div>
+        <div class="bb-spec__row">
+          <span class="bb-spec__name">H3</span>
+          <span class="bb-spec__sample" style="font-family:var(--t-font-display); font-size:21px; font-weight:500; letter-spacing:-0.02em;">subtítulos diretos</span>
+          <span class="bb-spec__meta">26px / 500 / -0.02em</span>
+        </div>
+        <div class="bb-spec__row">
+          <span class="bb-spec__name">Lead</span>
+          <span class="bb-spec__sample" style="font-family:var(--t-font-serif); font-style:italic; font-size:19px; font-weight:300;">a entrada é editorial</span>
+          <span class="bb-spec__meta">21px / serif italic 300</span>
+        </div>
+        <div class="bb-spec__row">
+          <span class="bb-spec__name">Body</span>
+          <span class="bb-spec__sample" style="font-family:var(--t-font-body); font-size:15px; font-weight:400;">Inter 400 com 1.7 de line-height</span>
+          <span class="bb-spec__meta">15px / 400 / 1.7</span>
+        </div>
+        <div class="bb-spec__row">
+          <span class="bb-spec__name">Eyebrow</span>
+          <span class="bb-spec__sample" style="font-family:var(--t-font-mono); font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--t-accent-light);">manifesto · v1</span>
+          <span class="bb-spec__meta">11px / mono / 0.3em</span>
+        </div>
+        <div class="bb-spec__row">
+          <span class="bb-spec__name">Mono</span>
+          <span class="bb-spec__sample" style="font-family:var(--t-font-mono); font-size:13px; color:var(--t-accent-light);">node_id: 0x4C1D95</span>
+          <span class="bb-spec__meta">13px / mono / -0.005em</span>
+        </div>
+      </div>
+
+      <h3>Regras</h3>
+      <ul>
+        <li>Toda peça tem <strong>uma única</strong> tipografia display gigante. Nunca duas Display competindo.</li>
+        <li>Italic serif só aparece <strong>para emoção</strong>: leads, citações, palavras-chave em títulos. Nunca em corpo de texto longo.</li>
+        <li>JetBrains Mono é sempre <strong>uppercase</strong>, com tracking entre 0.18em e 0.30em. Nunca em peso bold.</li>
+        <li>Eyebrows recebem cor de acento (<code>--t-accent-light</code>); o resto da família mono fica em texto neutro.</li>
+        <li><strong>Nunca</strong> sublinhar texto. Para link, use cor de acento + hover sutil.</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ───────────── CAP 4 ───────────── -->
+    <section class="bb-ch" id="cap-4">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 04</div>
+        <h2 class="bb-ch__title"><em>Espaço</em><br>como matéria.</h2>
+        <p class="bb-ch__lead">
+          O ritmo da página vem da escala de espaçamento, não dos elementos.
+          Doze valores. Sem improviso.
+        </p>
+      </header>
+
+      <h3>Escala harmônica</h3>
+      <div class="bb-spaces">
+        <div class="bb-space-row"><span class="bb-space-row__name">2xs</span><span class="bb-space-row__val">2px</span><div class="bb-space-row__bar" style="width:2px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">xs</span><span class="bb-space-row__val">4px</span><div class="bb-space-row__bar" style="width:4px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">sm</span><span class="bb-space-row__val">8px</span><div class="bb-space-row__bar" style="width:8px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">md</span><span class="bb-space-row__val">16px</span><div class="bb-space-row__bar" style="width:16px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">lg</span><span class="bb-space-row__val">24px</span><div class="bb-space-row__bar" style="width:24px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">xl</span><span class="bb-space-row__val">32px</span><div class="bb-space-row__bar" style="width:32px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">2xl</span><span class="bb-space-row__val">48px</span><div class="bb-space-row__bar" style="width:48px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">3xl</span><span class="bb-space-row__val">64px</span><div class="bb-space-row__bar" style="width:64px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">4xl</span><span class="bb-space-row__val">96px</span><div class="bb-space-row__bar" style="width:96px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">5xl</span><span class="bb-space-row__val">128px</span><div class="bb-space-row__bar" style="width:128px;"></div></div>
+        <div class="bb-space-row"><span class="bb-space-row__name">6xl</span><span class="bb-space-row__val">192px</span><div class="bb-space-row__bar" style="width:192px;"></div></div>
+      </div>
+
+      <h3>Regras de aplicação</h3>
+      <ul>
+        <li><strong>Dentro de um componente</strong> (card, botão, input): use <code>sm</code>, <code>md</code>, <code>lg</code>.</li>
+        <li><strong>Entre componentes</strong> (lista, grid): use <code>md</code>, <code>lg</code>, <code>xl</code>.</li>
+        <li><strong>Entre seções</strong>: use <code>3xl</code>, <code>4xl</code>, <code>5xl</code>.</li>
+        <li>Padding lateral de container: <code>lg</code> em mobile, <code>xl</code> em desktop.</li>
+        <li>Raio dos cards: <code>md</code> (8px) para chips, <code>lg</code> (12px) para inputs, <code>xl</code> (16px) para cards, <code>2xl</code> (24px) para painéis grandes.</li>
+      </ul>
+
+      <h3>Layouts canônicos</h3>
+      <p>
+        Container padrão tem <strong>1280px de largura máxima</strong>.
+        Coluna de leitura (artigo, manifesto) tem <strong>720px</strong>.
+        Grid de cards trabalha com 2, 3 ou 4 colunas — nunca 5.
+        Mobile colapsa em 1 ou 2 colunas conforme densidade.
+      </p>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ───────────── CAP 5 ───────────── -->
+    <section class="bb-ch" id="cap-5">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 05</div>
+        <h2 class="bb-ch__title">Componentes <em>web</em>.</h2>
+        <p class="bb-ch__lead">
+          Cada componente é uma decisão tomada uma vez, repetida em todo lugar.
+        </p>
+      </header>
+
+      <h3>Botões</h3>
+      <div class="bb-preview">
+        <button class="t-btn t-btn--primary">Continuar</button>
+        <button class="t-btn t-btn--ghost">Saiba mais</button>
+        <button class="t-btn t-btn--mono">Read manifesto →</button>
+        <button class="t-btn t-btn--icon">→</button>
+      </div>
+      <ul>
+        <li><strong>Primary</strong> — apenas <em>uma</em> instância visível por tela. É o CTA principal.</li>
+        <li><strong>Ghost</strong> — ações secundárias. Borda 1px, sem preenchimento.</li>
+        <li><strong>Mono</strong> — links editoriais que parecem links de manifesto. Sublinhado fino.</li>
+        <li><strong>Icon</strong> — ações repetidas, navegação, fechar.</li>
+      </ul>
+
+      <h3>Inputs</h3>
+      <div class="bb-preview bb-preview--col">
+        <div>
+          <div style="font-family:var(--t-font-mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--t-text-mute); margin-bottom:8px;">Email</div>
+          <input class="t-input" placeholder="seu@email.com">
+        </div>
+        <div>
+          <div style="font-family:var(--t-font-mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--t-text-mute); margin-bottom:8px;">Pergunta editorial</div>
+          <input class="t-input--editorial" placeholder="o que você está construindo agora?">
+        </div>
+      </div>
+
+      <h3>Cards & badges</h3>
+      <div class="bb-preview">
+        <div class="t-card" style="max-width:280px;">
+          <div class="t-card__eyebrow">Mentoria</div>
+          <h3 class="t-card__title">Cena clínica</h3>
+          <p class="t-card__body">Quatro encontros para olhar uma cena específica do seu trabalho.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+          <span class="t-badge t-badge--accent">novo</span>
+          <span class="t-badge t-badge--pulse">ao vivo</span>
+          <span class="t-badge t-badge--mono">v1.0</span>
+          <span class="t-manifesto-source">manifesto · §3</span>
+        </div>
+      </div>
+
+      <h3>Quando criar um componente novo</h3>
+      <ul>
+        <li>Quando o padrão se repete em <strong>3 ou mais</strong> lugares.</li>
+        <li>Quando uma variação não pode ser feita só com tokens existentes.</li>
+        <li>Quando o componente atual exigiria mais de 2 modificadores para servir.</li>
+      </ul>
+      <p>Se nenhum desses critérios é satisfeito, prefira compor com tokens diretamente. Não inflar o sistema.</p>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ───────────── CAP 6 ───────────── -->
+    <section class="bb-ch" id="cap-6">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 06</div>
+        <h2 class="bb-ch__title">Mobile & <em>IA</em>.</h2>
+        <p class="bb-ch__lead">
+          Apps de supervisão e produtos com IA são parte central do território.
+          Recebem regras próprias.
+        </p>
+      </header>
+
+      <h3>Princípios mobile</h3>
+      <ul>
+        <li>Bordas sempre <strong>arredondadas em 12–16px</strong>. Cantos vivos só em divisores.</li>
+        <li>Hit-target mínimo de <strong>44px</strong>. Nada abaixo disso.</li>
+        <li>Bottom-nav usa ícones quadrados 18px com label mono em 8px uppercase. Estado ativo recebe glow roxo.</li>
+        <li>FAB é exclusividade da ação criadora principal (nova cena, nova nota, nova sessão).</li>
+      </ul>
+
+      <h3>Identidade visual de IA</h3>
+      <p>
+        IA na marca tem assinatura discreta: ícone <strong>spark</strong> (estrela de quatro pontas),
+        cor roxa, mensagens em bubble cinza-acolhedor, prompt bar com input em italic placeholder
+        — sugerindo conversa, não comando.
+      </p>
+      <ul>
+        <li>Mensagem do usuário: bubble roxa, canto inferior-direito reto.</li>
+        <li>Mensagem da IA: bubble cinza translúcida, canto inferior-esquerdo reto, com 1px de border.</li>
+        <li>Estado "pensando" usa o token <code>.t-shimmer</code> em barra de 4px de altura.</li>
+      </ul>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Regra do silêncio</div>
+        <p>
+          A IA não é assistente performática. Não usa emojis, exclamações, nem expressões prontas.
+          Responde em frases curtas, em itálico quando provoca, em direto quando informa.
+        </p>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ───────────── CAP 7 ───────────── -->
+    <section class="bb-ch" id="cap-7">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 07</div>
+        <h2 class="bb-ch__title">O <em>movimento</em>.</h2>
+        <p class="bb-ch__lead">
+          Animação não é espetáculo. É a diferença entre um elemento que aparece e um elemento que respira.
+        </p>
+      </header>
+
+      <h3>Easing</h3>
+      <ul>
+        <li><code>--t-ease</code> — propósito geral. Hover, focus, transições rápidas.</li>
+        <li><code>--t-ease-out</code> — entrada de elementos (fade-up). Termina suave.</li>
+        <li><code>--t-ease-precise</code> — transições de página, modal abrindo.</li>
+        <li><code>--t-ease-spring</code> — usado com extrema parcimônia. Apenas micro-celebrações (toggle ligado, item adicionado).</li>
+      </ul>
+
+      <h3>Duração</h3>
+      <ul>
+        <li><strong>150ms</strong> (instant) — hover, focus, mudança de estado em UI.</li>
+        <li><strong>250ms</strong> (fast) — toggles, troca de tema.</li>
+        <li><strong>400ms</strong> (base) — entrada de elementos, fade-up.</li>
+        <li><strong>600ms</strong> (slow) — reveal de seção em scroll.</li>
+        <li><strong>1000ms</strong> (slower) — apenas para narrativa (loading hero, intro de slide).</li>
+      </ul>
+
+      <h3>Animações canônicas</h3>
+      <ul>
+        <li><code>.t-anim-fade-up</code> — entrada de blocos editoriais. Stagger entre 100–200ms.</li>
+        <li><code>.t-anim-glow</code> — pulso de status "online" / "ao vivo". Loop 3s.</li>
+        <li><code>.t-anim-float</code> — flutuação leve de elementos centrais. Loop 4s.</li>
+        <li><code>.t-shimmer</code> — placeholder de carregamento.</li>
+        <li><code>.t-cursor</code> — cursor piscando para escrita / IA digitando.</li>
+      </ul>
+
+      <h3>O que evitar</h3>
+      <div class="bb-do-dont">
+        <div class="bb-card">
+          <div class="bb-card__tag">Não faça</div>
+          <p>Bounce excessivo (overshoot &gt; 5%). Quebra a sobriedade do sistema.</p>
+        </div>
+        <div class="bb-card">
+          <div class="bb-card__tag">Não faça</div>
+          <p>Parallax pesado em scroll. Distrai e gera ansiedade — oposto da marca.</p>
+        </div>
+        <div class="bb-card">
+          <div class="bb-card__tag">Não faça</div>
+          <p>Animação infinita em texto. Letra animada nunca em corpo, só em cursor.</p>
+        </div>
+        <div class="bb-card bb-card--do">
+          <div class="bb-card__tag">Faça</div>
+          <p>Respeite <code>prefers-reduced-motion</code>. O reset já está no <code>base.css</code>.</p>
+        </div>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ───────────── CAP 8 ───────────── -->
+    <section class="bb-ch" id="cap-8">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 08</div>
+        <h2 class="bb-ch__title">A <em>voz</em> da marca.</h2>
+        <p class="bb-ch__lead">
+          Identidade visual sem voz consistente é apenas estilo. A copy é parte do design.
+        </p>
+      </header>
+
+      <h3>Tom geral</h3>
+      <p>
+        Editorial. Lúcido. Direto, sem ser frio. Acolhedor, sem ser performático.
+        A voz da Tati Ribeiro fala como quem escreve um manifesto e atende uma sessão clínica
+        no mesmo dia: rigor + cuidado.
+      </p>
+
+      <h3>Regras práticas</h3>
+      <ul>
+        <li><strong>Sem clichês de copy.</strong> Não usar: "transforme sua vida", "desbloqueie seu potencial", "jornada incrível".</li>
+        <li><strong>Sem exclamação.</strong> Ponto final basta. A marca não grita.</li>
+        <li><strong>Sem emoji.</strong> Em nenhuma superfície oficial.</li>
+        <li><strong>Verbos no presente.</strong> "Você se reconhece" > "Você vai se reconhecer".</li>
+        <li><strong>Frases curtas para emoção, longas para argumento.</strong> Alternar é o ritmo.</li>
+        <li><strong>Itálico</strong> dentro do texto carrega ênfase emocional, não estilística.</li>
+      </ul>
+
+      <h3>Estrutura editorial recorrente</h3>
+      <p>
+        Toda peça importante segue uma micro-estrutura: <strong>diagnóstico → virada → proposta</strong>.
+        Primeiro nomeia o problema com precisão, depois oferece uma releitura
+        ("talvez não seja X, talvez seja Y"), depois apresenta o caminho.
+      </p>
+
+      <div class="bb-callout">
+        <div class="bb-callout__label">◆ Frase-modelo</div>
+        <p>
+          "Talvez não seja falta de força. Talvez seja excesso de silêncio."
+          Esse padrão "não é A, é B" é a assinatura retórica da marca.
+        </p>
+      </div>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ───────────── CAP 9 ───────────── -->
+    <section class="bb-ch" id="cap-9">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 09</div>
+        <h2 class="bb-ch__title"><em>Ética</em> & aplicação.</h2>
+        <p class="bb-ch__lead">
+          O design serve à marca, mas a marca serve a uma profissão regulamentada.
+          Há fronteiras éticas claras.
+        </p>
+      </header>
+
+      <h3>Compromissos</h3>
+      <ul>
+        <li><strong>Sem promessa de cura.</strong> Nenhuma peça pode prometer alívio garantido, "transformação" rápida ou resolução em N sessões.</li>
+        <li><strong>CRP sempre visível.</strong> Toda comunicação institucional traz "CRP 06/10108-J".</li>
+        <li><strong>Sem testemunhos com identificação.</strong> O Código de Ética do Psicólogo veda usar caso clínico como prova social.</li>
+        <li><strong>Linguagem inclusiva discreta.</strong> "(a)" em fim de palavra quando aplicável; nunca uso forçado.</li>
+        <li><strong>Sigilo é parte do design.</strong> Em mockups e exemplos, nomes de pacientes são iniciais (M., L., R.) — nunca nomes completos.</li>
+      </ul>
+
+      <h3>Aplicação em superfícies</h3>
+      <p><strong>Site público</strong> — tom mais editorial, manifesto curto, foco em diagnóstico de dor + convite ao processo.</p>
+      <p><strong>Apps internos</strong> (supervisão, IA) — tom mais técnico, mono mais presente, micro-instruções diretas.</p>
+      <p><strong>Mentoria & cursos</strong> — equilíbrio entre os dois. Pode usar referências de manifesto e seções acadêmicas com igual peso.</p>
+
+      <h3>Pedidos comuns que devem ser <em>recusados</em></h3>
+      <ul>
+        <li>Adicionar ilustrações de pessoas em estilo flat — quebra a sobriedade.</li>
+        <li>Usar uma segunda cor "para variar" em uma peça pontual — abre precedente.</li>
+        <li>Aceitar foto de paciente, mesmo com permissão — risco ético.</li>
+        <li>Trocar fonte por moda — o sistema é estável por anos, não por trimestre.</li>
+      </ul>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <!-- ───────────── CAP 10 ───────────── -->
+    <section class="bb-ch" id="cap-10">
+      <header class="bb-ch__head">
+        <div class="bb-ch__num">Capítulo 10</div>
+        <h2 class="bb-ch__title">Referência <em>técnica</em>.</h2>
+        <p class="bb-ch__lead">
+          Onde encontrar cada arquivo, qual token usar, como importar.
+        </p>
+      </header>
+
+      <h3>Estrutura de arquivos</h3>
+      <pre class="bb-code"><span class="c">tati-ds/</span>
+├── <span class="k">tokens/</span>
+│   ├── tokens.css         <span class="c">— custom properties (vanilla)</span>
+│   ├── tokens.json        <span class="c">— fonte de verdade neutral</span>
+│   ├── tokens.js          <span class="c">— export para React/Vue</span>
+│   └── tailwind.config.js <span class="c">— preset Tailwind</span>
+├── <span class="k">styles/</span>
+│   ├── base.css           <span class="c">— reset + globais</span>
+│   ├── typography.css     <span class="c">— escala tipográfica</span>
+│   ├── components.css     <span class="c">— buttons, cards, inputs, badges, nav…</span>
+│   ├── components-app.css <span class="c">— mobile / IA / supervisão</span>
+│   └── motion.css         <span class="c">— animações reutilizáveis</span>
+└── <span class="k">brand/</span>
+    └── brand-sprite.svg   <span class="c">— monograma + ícones</span></pre>
+
+      <h3>Como importar</h3>
+      <pre class="bb-code"><span class="k">&lt;link</span> <span class="v">rel=</span><span class="c">"stylesheet"</span> <span class="v">href=</span><span class="c">"tati-ds/tokens/tokens.css"</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> <span class="v">rel=</span><span class="c">"stylesheet"</span> <span class="v">href=</span><span class="c">"tati-ds/styles/base.css"</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> <span class="v">rel=</span><span class="c">"stylesheet"</span> <span class="v">href=</span><span class="c">"tati-ds/styles/typography.css"</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> <span class="v">rel=</span><span class="c">"stylesheet"</span> <span class="v">href=</span><span class="c">"tati-ds/styles/components.css"</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> <span class="v">rel=</span><span class="c">"stylesheet"</span> <span class="v">href=</span><span class="c">"tati-ds/styles/motion.css"</span><span class="k">&gt;</span>
+
+<span class="c">/* tema é controlado em &lt;html data-theme="dark|light"&gt; */</span></pre>
+
+      <h3>Tokens essenciais (cheat sheet)</h3>
+      <pre class="bb-code"><span class="c">/* COR */</span>
+<span class="k">--t-accent</span>        <span class="v">#6B46C1</span>   <span class="c">/* CTA, link ativo, foco */</span>
+<span class="k">--t-accent-light</span>  <span class="v">#8B5CF6</span>   <span class="c">/* eyebrow, ênfase */</span>
+<span class="k">--t-accent-glow</span>   <span class="v">#A78BFA</span>   <span class="c">/* gradient stop superior */</span>
+<span class="k">--t-bg</span>            <span class="v">var(--t-void)</span>  <span class="c">/* dark default */</span>
+<span class="k">--t-text</span>          <span class="v">var(--t-bone)</span>
+<span class="k">--t-text-strong</span>   <span class="v">var(--t-pearl)</span>
+
+<span class="c">/* TIPO */</span>
+<span class="k">--t-font-display</span>  Inter
+<span class="k">--t-font-serif</span>    Source Serif 4 italic
+<span class="k">--t-font-mono</span>     JetBrains Mono
+
+<span class="c">/* ESPAÇO */</span>
+<span class="k">--t-space-md</span>      16px   <span class="c">/* padrão dentro de componente */</span>
+<span class="k">--t-space-2xl</span>     48px   <span class="c">/* entre cards de uma grade */</span>
+<span class="k">--t-space-5xl</span>     128px  <span class="c">/* entre grandes seções */</span>
+
+<span class="c">/* MOTION */</span>
+<span class="k">--t-ease-out</span>      cubic-bezier(0.16, 1, 0.3, 1)
+<span class="k">--t-dur-base</span>      400ms</pre>
+
+      <h3>Versão & manutenção</h3>
+      <p>
+        <strong>v1.0 — abril 2026.</strong> Sistema considerado estável.
+        Mudanças nos tokens devem passar pela bíblia primeiro: documentar a regra
+        antes de alterar o código. Componentes novos exigem aprovação contra os
+        critérios do Capítulo 05.
+      </p>
+
+      <p>
+        Esta bíblia é viva — não no sentido de ser frequentemente reescrita, mas
+        no sentido de ser <em>consultada</em>. Sempre que uma decisão visual
+        precisar ser tomada, comece por aqui.
+      </p>
+
+      <div class="bb-end"></div>
+    </section>
+
+    <footer style="padding: var(--t-space-2xl) 0 var(--t-space-3xl); text-align:center;">
+      <div class="t-eyebrow" style="margin-bottom:var(--t-space-md);">Bíblia · v1.0 · 2026</div>
+      <p class="t-h2" style="font-size:24px;">Fim. <em>Não esquecer.</em></p>
+      <p style="font-family:var(--t-font-mono); font-size:10px; color:var(--t-text-mute); letter-spacing:0.2em; text-transform:uppercase; margin-top:var(--t-space-md);">
+        © Tati Ribeiro · entrelaçospsicologia.com.br
+      </p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // theme toggle
+  document.querySelectorAll('[data-theme-set]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.documentElement.dataset.theme = btn.dataset.themeSet;
+      document.querySelectorAll('[data-theme-set]').forEach(b => b.classList.toggle('is-active', b === btn));
+    });
+  });
+
+  // progress bar + active TOC
+  const progress = document.getElementById('progress');
+  const tocLinks = document.querySelectorAll('.bb-toc a');
+  const chapters = [...document.querySelectorAll('.bb-ch')];
+
+  function onScroll() {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const p = (window.scrollY / h) * 100;
+    progress.style.width = p + '%';
+
+    // active chapter detection
+    const top = window.scrollY + 200;
+    let active = chapters[0]?.id;
+    chapters.forEach(c => { if (c.offsetTop <= top) active = c.id; });
+    tocLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + active));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+</body>
+</html>

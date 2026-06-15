@@ -1,0 +1,181 @@
+/* ============================================================
+   TATI RIBEIRO · DESIGN SYSTEM
+   typography.css — Sistema tipográfico
+   Depende de: tokens.css
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200;0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+/* ============================================================
+   ESCALA TIPOGRÁFICA — classes utilitárias
+   ============================================================ */
+
+/* DISPLAY — hero gigante, 1 por página */
+.t-display {
+  font-family: var(--t-font-display);
+  font-size: var(--t-fs-display);
+  font-weight: var(--t-fw-200);
+  line-height: 0.94;
+  letter-spacing: var(--t-tracking-tighter);
+  color: var(--t-text-strong);
+}
+.t-display em {
+  font-family: var(--t-font-serif);
+  font-style: italic;
+  font-weight: var(--t-fw-300);
+  background: var(--t-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* H1 — título de seção */
+.t-h1, h1.t-typo {
+  font-family: var(--t-font-display);
+  font-size: clamp(40px, 6vw, 76px);
+  font-weight: var(--t-fw-200);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--t-text-strong);
+  max-width: 1080px;
+}
+.t-h1 em, h1.t-typo em {
+  font-family: var(--t-font-serif);
+  font-style: italic;
+  font-weight: var(--t-fw-300);
+  background: var(--t-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* H2 — headline interno */
+.t-h2, h2.t-typo {
+  font-family: var(--t-font-display);
+  font-size: var(--t-fs-2xl);
+  font-weight: var(--t-fw-300);
+  line-height: var(--t-leading-tight);
+  letter-spacing: var(--t-tracking-tight);
+  color: var(--t-text-strong);
+}
+.t-h2 em, h2.t-typo em {
+  font-family: var(--t-font-serif);
+  font-style: italic;
+  font-weight: var(--t-fw-400);
+}
+
+/* H3 — subhead */
+.t-h3, h3.t-typo {
+  font-family: var(--t-font-display);
+  font-size: var(--t-fs-xl);
+  font-weight: var(--t-fw-500);
+  line-height: var(--t-leading-snug);
+  letter-spacing: -0.02em;
+  color: var(--t-text-strong);
+}
+
+/* LEAD — frase de abertura editorial (italic serif) */
+.t-lead {
+  font-family: var(--t-font-serif);
+  font-size: var(--t-fs-lg);
+  font-style: italic;
+  font-weight: var(--t-fw-300);
+  line-height: var(--t-leading-relaxed);
+  letter-spacing: -0.005em;
+  color: var(--t-text-2);
+  max-width: 720px;
+}
+.t-lead strong {
+  font-style: normal;
+  font-weight: var(--t-fw-500);
+  color: var(--t-text-strong);
+}
+
+/* BODY */
+.t-body {
+  font-family: var(--t-font-body);
+  font-size: var(--t-fs-base);
+  font-weight: var(--t-fw-400);
+  line-height: var(--t-leading-loose);
+  color: var(--t-text-2);
+  max-width: 65ch;
+}
+.t-body strong {
+  font-weight: var(--t-fw-500);
+  color: var(--t-text-strong);
+}
+
+/* SMALL */
+.t-small {
+  font-family: var(--t-font-body);
+  font-size: var(--t-fs-sm);
+  line-height: var(--t-leading-relaxed);
+  color: var(--t-text-2);
+}
+
+/* EYEBROW — etiqueta acima de títulos */
+.t-eyebrow {
+  font-family: var(--t-font-mono);
+  font-size: var(--t-fs-xs);
+  font-weight: var(--t-fw-400);
+  letter-spacing: var(--t-tracking-widest);
+  text-transform: uppercase;
+  color: var(--t-accent-light);
+  display: inline-block;
+}
+
+/* MONO — código, números, marginália */
+.t-mono {
+  font-family: var(--t-font-mono);
+  font-size: var(--t-fs-sm);
+  font-weight: var(--t-fw-500);
+  color: var(--t-accent-light);
+  letter-spacing: -0.005em;
+}
+
+/* META — info técnica em mono pequeno */
+.t-meta {
+  font-family: var(--t-font-mono);
+  font-size: 10px;
+  letter-spacing: var(--t-tracking-wider);
+  text-transform: uppercase;
+  color: var(--t-text-mute);
+}
+
+/* QUOTE editorial */
+.t-quote {
+  font-family: var(--t-font-serif);
+  font-size: var(--t-fs-md);
+  font-style: italic;
+  font-weight: var(--t-fw-300);
+  line-height: var(--t-leading-normal);
+  color: var(--t-text-strong);
+  padding-left: var(--t-space-md);
+  border-left: 2px solid var(--t-accent-light);
+}
+
+/* GRADIENT TEXT — para palavras destacadas */
+.t-grad-text {
+  background: var(--t-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: var(--t-font-serif);
+  font-style: italic;
+}
+
+/* ============================================================
+   MODIFIERS
+   ============================================================ */
+.t-italic   { font-style: italic; }
+.t-uppercase { text-transform: uppercase; letter-spacing: var(--t-tracking-wider); }
+
+.t-w-200 { font-weight: 200; }
+.t-w-300 { font-weight: 300; }
+.t-w-400 { font-weight: 400; }
+.t-w-500 { font-weight: 500; }
+.t-w-600 { font-weight: 600; }
+
+.t-text-strong { color: var(--t-text-strong); }
+.t-text-mute   { color: var(--t-text-mute); }
+.t-text-accent { color: var(--t-accent-light); }

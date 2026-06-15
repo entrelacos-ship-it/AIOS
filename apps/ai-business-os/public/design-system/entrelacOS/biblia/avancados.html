@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avançados · Bíblia · Entrelaços</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="site.css">
+
+<link rel="icon" href="../assets/favicon.ico">
+<link rel="icon" type="image/png" href="../assets/borboleta.png">
+</head>
+<body>
+<header class="e-header">
+  <div class="e-header-pill" id="bibliaHeader">
+    <a class="e-brand" href="../index.html">
+      <img class="e-logo-img" src="../assets/borboleta.png" alt="" aria-hidden="true">
+      <span>Entrelaços<em>Psi</em></span>
+    </a>
+    <nav class="e-nav">
+      <a href="../index.html#fundamentos">Fundamentos</a>
+      <a href="../index.html#tokens">Tokens</a>
+      <a href="../index.html#componentes">Componentes</a>
+      <a href="../index.html#padroes">Padrões</a>
+      <a href="../index.html#regras">Regras</a>
+    </nav>
+    <div class="e-header-cta">
+      <a href="../index.html" class="e-btn e-btn-primary e-btn-sm">Sumário →</a>
+    </div>
+  </div>
+</header><div class="bs-shell"><aside class="bs-toc"><nav><h4>Fundamentos</h4><a href="filosofia.html" class=""><span class="bs-toc-num">01</span><span>Filosofia</span></a><a href="identidade.html" class=""><span class="bs-toc-num">02</span><span>Identidade visual</span></a><a href="voz.html" class=""><span class="bs-toc-num">03</span><span>Voz da marca</span></a><h4>Tokens</h4><a href="cores.html" class=""><span class="bs-toc-num">04</span><span>Paleta & cores</span></a><a href="tipografia.html" class=""><span class="bs-toc-num">05</span><span>Tipografia</span></a><a href="espaco.html" class=""><span class="bs-toc-num">06</span><span>Espaçamento</span></a><a href="raio.html" class=""><span class="bs-toc-num">07</span><span>Raio & geometria</span></a><a href="sombra.html" class=""><span class="bs-toc-num">08</span><span>Sombras & depth</span></a><a href="motion.html" class=""><span class="bs-toc-num">09</span><span>Motion</span></a><a href="motion-effects.html" class=""><span class="bs-toc-num">09+</span><span>Motion FX library</span></a><h4>Componentes</h4><a href="botoes.html" class=""><span class="bs-toc-num">10</span><span>Botões</span></a><a href="eyebrows.html" class=""><span class="bs-toc-num">11</span><span>Eyebrows</span></a><a href="cards.html" class=""><span class="bs-toc-num">12</span><span>Cards</span></a><a href="stats.html" class=""><span class="bs-toc-num">13</span><span>Stats</span></a><a href="inputs.html" class=""><span class="bs-toc-num">14</span><span>Inputs & forms</span></a><a href="badges.html" class=""><span class="bs-toc-num">15</span><span>Badges</span></a><a href="header.html" class=""><span class="bs-toc-num">16</span><span>Header pill</span></a><a href="avancados.html" class="is-active"><span class="bs-toc-num">17</span><span>Avançados</span></a><h4>Padrões</h4><a href="dobras.html" class=""><span class="bs-toc-num">18</span><span>11 dobras canônicas</span></a><a href="copy.html" class=""><span class="bs-toc-num">19</span><span>Copy & CTAs</span></a><a href="marketing.html" class=""><span class="bs-toc-num">20</span><span>Marketing arc</span></a><h4>Regras</h4><a href="regras.html" class=""><span class="bs-toc-num">21</span><span>Faça / não faça</span></a><a href="acessibilidade.html" class=""><span class="bs-toc-num">22</span><span>Acessibilidade</span></a><a href="quickstart.html" class=""><span class="bs-toc-num">23</span><span>Quickstart</span></a><h4>Exemplos</h4><a href="exemplos.html"><span class="bs-toc-num">★</span><span>LP Comunidade</span></a></nav></aside><main class="bs-main">
+      <div class="bs-crumbs">
+        <a href="../index.html">Bíblia</a>
+        <span class="sep">/</span>
+        <a href="../index.html#componentes">Componentes</a>
+        <span class="sep">/</span>
+        <span class="current">17 · Avançados</span>
+      </div>
+      <header class="bs-pghead">
+        <div class="bs-pghead-num"><span>17</span><span class="dot"></span><span class="group-tag">Componentes</span></div>
+        <h1>Constellation. Atrator de Lorenz. <em>Cometas.</em></h1>
+        <p class="bs-pghead-lead">Os componentes assinatura da marca — onde a metáfora vira interação. Use com parcimônia: no máximo um por página, sempre na dobra adequada.</p>
+      </header>
+      
+<div class="bs-body">
+  <h3>Constellation hero (interativa)</h3>
+  <p><strong>Mova o cursor pelo canvas abaixo</strong> — pontos próximos viram laranja-soft e ganham linhas dinâmicas. A Entrelaços é uma rede que reage à presença.</p>
+  <div class="const-frame">
+    <canvas id="heroCanvas"></canvas>
+    <div class="const-hint">MOVA O CURSOR PARA SENTIR A REDE</div>
+  </div>
+  <p class="bs-caption">~90 pontos no desktop, raio de influência 220px, ~45 pontos no mobile.</p>
+
+  <h3>Atrator de Lorenz (Efeito Borboleta)</h3>
+  <p>100k pontos pré-calculados via Euler com burn-in. Cores se SOMAM (composite <code class="bs-inline">lighter</code>) — centros dos lóbulos saturam para magenta naturalmente. Três cometas viajam pela trajetória em fases diferentes.</p>
+  <div class="lorenz-frame">
+    <canvas id="lorenzCanvas"></canvas>
+    <canvas id="lorenzCometCanvas"></canvas>
+    <div class="lorenz-eq">
+      dx/dt = σ(y − x)<br>
+      dy/dt = x(ρ − z) − y<br>
+      dz/dt = xy − βz<br>
+      <span style="color: var(--e-purple-300);">σ=10 · ρ=28 · β=8/3</span>
+    </div>
+  </div>
+  <p class="bs-caption">A trajetória nunca passa duas vezes pelo mesmo ponto — mas sempre desenha a mesma forma de borboleta. É a metáfora da reposição de carreira: cada psicóloga é única, o movimento coletivo é o mesmo.</p>
+
+  <div class="bs-note"><strong>Quando usar.</strong> Constellation: <em>somente</em> hero da home. Lorenz: dobra "Efeito Borboleta" (06.5) — entre Provas e Comunidade. Nunca usar mais de um por página, nunca em background de outro conteúdo.</div>
+</div>
+
+<script>
+// === CONSTELLATION ===
+(function() {
+  const cnv = document.getElementById('heroCanvas');
+  if (!cnv) return;
+  const ctx = cnv.getContext('2d');
+  let W, H, dpr, points, mouse = { x: -9999, y: -9999, active: false };
+  const COUNT = window.innerWidth < 720 ? 32 : 60;
+  const RADIUS = 150;
+  function resize() { dpr = window.devicePixelRatio || 1; const r = cnv.getBoundingClientRect(); W = r.width; H = r.height; cnv.width = W*dpr; cnv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  function init() { resize(); points = Array.from({length: COUNT}, () => ({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-0.5)*0.2, vy: (Math.random()-0.5)*0.2, r: 1.2 + Math.random()*1.6 })); }
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    points.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x<0||p.x>W) p.vx*=-1; if (p.y<0||p.y>H) p.vy*=-1;
+      const dx = p.x-mouse.x, dy = p.y-mouse.y, d = Math.sqrt(dx*dx+dy*dy);
+      const near = mouse.active && d < RADIUS;
+      if (near) {
+        const t = 1 - d/RADIUS;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r + 1.2*t, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(255,184,122,' + (0.18 + t*0.28) + ')';
+        ctx.shadowBlur = 6; ctx.shadowColor = 'rgba(255,184,122,0.35)'; ctx.fill(); ctx.shadowBlur = 0;
+        ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(p.x, p.y);
+        ctx.strokeStyle = 'rgba(255,184,122,' + (t*0.18) + ')'; ctx.lineWidth = 0.5; ctx.stroke();
+      } else {
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(168,120,236,0.18)'; ctx.fill();
+      }
+    });
+    for (let i=0;i<points.length;i++) for (let j=i+1;j<points.length;j++) {
+      const a=points[i], b=points[j], dx=a.x-b.x, dy=a.y-b.y, d=Math.sqrt(dx*dx+dy*dy);
+      if (d<90) { ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.strokeStyle='rgba(168,120,236,'+((1-d/90)*0.045)+')'; ctx.lineWidth=0.5; ctx.stroke(); }
+    }
+    requestAnimationFrame(draw);
+  }
+  cnv.addEventListener('mousemove', e => { const r = cnv.getBoundingClientRect(); mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top; mouse.active = true; });
+  cnv.addEventListener('mouseleave', () => { mouse.active = false; });
+  window.addEventListener('resize', resize);
+  init(); draw();
+})();
+
+// === LORENZ ===
+(function() {
+  const baseCnv = document.getElementById('lorenzCanvas');
+  const cometCnv = document.getElementById('lorenzCometCanvas');
+  if (!baseCnv || !cometCnv) return;
+  const ctx = baseCnv.getContext('2d'), cctx = cometCnv.getContext('2d');
+  const SIGMA=10, RHO=28, BETA=8/3, dt=0.004, N=100000, BURN=800;
+  const xs = new Float32Array(N), ys = new Float32Array(N);
+  let W, H, dpr, scale, cx, cy, rendered=false, bounds;
+  function precompute() {
+    let x=0.01, y=0, z=0;
+    for (let i=0;i<BURN;i++) { const dx=SIGMA*(y-x), dy=x*(RHO-z)-y, dz=x*y-BETA*z; x+=dx*dt; y+=dy*dt; z+=dz*dt; }
+    let xmin=Infinity, xmax=-Infinity, zmin=Infinity, zmax=-Infinity;
+    for (let i=0;i<N;i++) { const dx=SIGMA*(y-x), dy=x*(RHO-z)-y, dz=x*y-BETA*z; x+=dx*dt; y+=dy*dt; z+=dz*dt; xs[i]=x; ys[i]=z; if(x<xmin)xmin=x; if(x>xmax)xmax=x; if(z<zmin)zmin=z; if(z>zmax)zmax=z; }
+    return { xmin, xmax, zmin, zmax };
+  }
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    const r = baseCnv.getBoundingClientRect(); W=r.width; H=r.height;
+    [baseCnv,cometCnv].forEach(c=>{c.width=W*dpr; c.height=H*dpr;});
+    ctx.setTransform(dpr,0,0,dpr,0,0); cctx.setTransform(dpr,0,0,dpr,0,0);
+    if (bounds) project();
+  }
+  function project() {
+    const padX=40, padY=40, bw=bounds.xmax-bounds.xmin, bh=bounds.zmax-bounds.zmin;
+    const sx=(W-padX*2)/bw, sy=(H-padY*2)/bh;
+    scale = Math.min(sx, sy);
+    cx = padX + (W-padX*2-bw*scale)/2 - bounds.xmin*scale;
+    cy = padY + (H-padY*2-bh*scale)/2 - bounds.zmin*scale;
+  }
+  function pt(i) { return [xs[i]*scale+cx, H - (ys[i]*scale+cy)]; }
+  function renderAttractor() {
+    ctx.clearRect(0,0,W,H);
+    ctx.globalCompositeOperation = 'lighter';
+    const palette=['rgba(90,30,180,0.05)','rgba(120,35,200,0.05)','rgba(160,45,210,0.05)','rgba(180,40,180,0.05)','rgba(200,50,160,0.05)'];
+    for (let p=0;p<palette.length;p++) {
+      ctx.strokeStyle = palette[p]; ctx.lineWidth=0.6; ctx.beginPath();
+      const start=Math.floor(N*(p/palette.length)), end=Math.floor(N*((p+1)/palette.length));
+      const [x0,y0]=pt(start); ctx.moveTo(x0,y0);
+      for (let i=start+1;i<end;i++) { const [px,py]=pt(i); ctx.lineTo(px,py); }
+      ctx.stroke();
+    }
+    ctx.globalCompositeOperation='source-over';
+  }
+  const COMETS = [{offset:0,color:[255,138,31]},{offset:N*0.33,color:[255,184,122]},{offset:N*0.66,color:[255,108,184]}];
+  const TRAIL=280, SPEED=5;
+  let running=false, startT=null;
+  function drawComets(elapsed) {
+    cctx.clearRect(0,0,W,H);
+    cctx.globalCompositeOperation='lighter';
+    const head = (Math.floor(elapsed/16.67) * SPEED);
+    COMETS.forEach(({offset,color}) => {
+      const tip = (offset+head) % N;
+      for (let k=TRAIL; k>0; k--) {
+        const i = (tip-k+N) % N; const [px,py] = pt(i);
+        const t = k/TRAIL, a = Math.pow(1-t,2.6)*0.55;
+        cctx.fillStyle='rgba('+color[0]+','+color[1]+','+color[2]+','+a+')';
+        cctx.beginPath(); cctx.arc(px,py,1.2,0,Math.PI*2); cctx.fill();
+      }
+      const [px,py] = pt(Math.floor(tip));
+      cctx.fillStyle='rgba('+color[0]+','+color[1]+','+color[2]+',0.16)'; cctx.beginPath(); cctx.arc(px,py,16,0,Math.PI*2); cctx.fill();
+      cctx.fillStyle='rgba('+color[0]+','+color[1]+','+color[2]+',0.45)'; cctx.beginPath(); cctx.arc(px,py,5,0,Math.PI*2); cctx.fill();
+      cctx.fillStyle='rgba(255,255,255,0.92)'; cctx.beginPath(); cctx.arc(px,py,1.6,0,Math.PI*2); cctx.fill();
+    });
+    cctx.globalCompositeOperation='source-over';
+  }
+  function loop(now) { if (!running) return; if (startT===null) startT=now; drawComets(now-startT); requestAnimationFrame(loop); }
+  const obs = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) {
+      if (!rendered) { bounds=precompute(); resize(); renderAttractor(); rendered=true; }
+      if (!running) { running=true; requestAnimationFrame(loop); }
+    } else { running=false; }
+  }), { threshold: 0.1 });
+  obs.observe(baseCnv);
+  window.addEventListener('resize', () => { if (rendered) { resize(); renderAttractor(); } });
+})();
+</script>
+      <nav class="bs-pagenav"><a href="header.html" class="prev"><span class="bs-pagenav-tag">← 16 · Anterior</span><span class="bs-pagenav-title"><span class="bs-pagenav-arrow">←</span> Header pill</span></a><a href="dobras.html" class="next"><span class="bs-pagenav-tag">Próxima · 18 →</span><span class="bs-pagenav-title">11 dobras canônicas <span class="bs-pagenav-arrow">→</span></span></a></nav>
+      <div class="bs-footer">
+  <span>BÍBLIA · DESIGN SYSTEM · ENTRELAÇOS PSICOLOGIA · v1.6 · LENDÁRIA EDITION</span>
+  <br><br>
+  <em>"Cada psicóloga que se reposiciona desloca um sistema inteiro."</em>
+</div>
+    </main></div><script>
+// Header shrink on scroll
+const headerPill = document.getElementById('bibliaHeader');
+if (headerPill) {
+  window.addEventListener('scroll', () => {
+    headerPill.classList.toggle('is-scrolled', window.scrollY > 32);
+  });
+}
+
+// Card spotlight
+document.querySelectorAll('[data-spotlight]').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+// Reveal
+const ioReveal = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && (e.target.classList.add('is-visible'), ioReveal.unobserve(e.target))), { threshold: 0.15 });
+document.querySelectorAll('.e-reveal').forEach(el => ioReveal.observe(el));
+
+// Stat counter
+const animateCount = (el) => {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const dur = 1800;
+  const start = performance.now();
+  const tick = (now) => {
+    const t = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const v = Math.round(target * eased);
+    el.textContent = (target >= 1000 ? v.toLocaleString('pt-BR') : v) + suffix;
+    if (t < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+const ioCounter = new IntersectionObserver(es => es.forEach(en => en.isIntersecting && (animateCount(en.target), ioCounter.unobserve(en.target))), { threshold: 0.4 });
+document.querySelectorAll('[data-count]').forEach(el => ioCounter.observe(el));
+</script></body></html>

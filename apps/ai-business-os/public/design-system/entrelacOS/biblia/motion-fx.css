@@ -1,0 +1,351 @@
+/* =================================================================
+   biblia/motion-fx.css — Estilos para a biblioteca de efeitos
+   ================================================================= */
+
+/* --- 01 Reveal on scroll --- */
+.fx-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fx-reveal.is-revealed { opacity: 1; transform: translateY(0); }
+
+/* --- 02 Stagger children --- */
+.fx-stagger-item {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fx-stagger-item.is-revealed { opacity: 1; transform: translateY(0); }
+
+/* --- 04 Marquee --- */
+.fx-marquee {
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.fx-marquee-track {
+  display: flex;
+  gap: 48px;
+  width: max-content;
+  animation: fx-marquee-x 24s linear infinite;
+}
+.fx-marquee:hover .fx-marquee-track { animation-play-state: paused; }
+.fx-marquee-item {
+  font-family: var(--ff-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--e-text-secondary);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.fx-marquee-item::after {
+  content: '✦';
+  color: var(--e-purple-400);
+  margin-left: 48px;
+}
+@keyframes fx-marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* --- 05 Hover lift card --- */
+.fx-lift {
+  padding: 22px 24px;
+  border-radius: var(--e-r-lg);
+  border: 1px solid var(--e-border);
+  background: var(--e-bg-card);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 300ms,
+              box-shadow 300ms;
+  width: 220px;
+}
+.fx-lift:hover {
+  transform: translateY(-4px);
+  border-color: var(--e-purple-400);
+  box-shadow: 0 12px 30px rgba(116,39,212,0.30);
+}
+.fx-lift h6 {
+  font-family: var(--ff-sans);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.fx-lift p { font-size: 0.85rem; color: var(--e-text-secondary); }
+
+/* --- 06 Magnetic button --- */
+.fx-magnetic-wrap {
+  display: inline-block;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- 07 Spotlight cursor card --- */
+.fx-spot {
+  position: relative;
+  width: 320px;
+  padding: 32px 28px;
+  border-radius: var(--e-r-xl);
+  border: 1px solid var(--e-border);
+  background: var(--e-bg-card);
+  overflow: hidden;
+}
+.fx-spot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(168,120,236,0.18) 0%, transparent 40%);
+  opacity: 0;
+  transition: opacity 300ms;
+  pointer-events: none;
+}
+.fx-spot:hover::before { opacity: 1; }
+.fx-spot h6 { font-family: var(--ff-sans); font-weight: 500; margin-bottom: 8px; position: relative; }
+.fx-spot p  { font-size: 0.9rem; color: var(--e-text-secondary); position: relative; }
+
+/* --- 08 Gradient text shimmer --- */
+.fx-shimmer {
+  background: linear-gradient(90deg,
+    var(--e-purple-200) 0%,
+    #fff 25%,
+    var(--e-orange-soft) 50%,
+    #fff 75%,
+    var(--e-purple-200) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fx-shimmer-x 6s linear infinite;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+}
+@keyframes fx-shimmer-x {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* --- 09 Underline reveal --- */
+.fx-underline {
+  position: relative;
+  display: inline-block;
+  font-family: var(--ff-sans);
+  font-weight: 500;
+  color: var(--e-text);
+  font-size: 1.1rem;
+  padding-bottom: 4px;
+  cursor: pointer;
+}
+.fx-underline::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: var(--e-purple-400);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fx-underline:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* --- 10 Button press --- */
+.fx-press {
+  transition: transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fx-press:active { transform: scale(0.96); }
+
+/* --- 11 Tilt 3D --- */
+.fx-tilt {
+  width: 260px;
+  padding: 32px 28px;
+  border-radius: var(--e-r-xl);
+  border: 1px solid var(--e-border);
+  background: linear-gradient(135deg, var(--e-purple-800), var(--e-purple-950));
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.fx-tilt h6 { font-family: var(--ff-serif); font-style: italic; font-size: 1.4rem; margin-bottom: 8px; }
+.fx-tilt p  { font-size: 0.88rem; color: var(--e-text-secondary); }
+
+/* --- 12 Ripple click --- */
+.fx-ripple-host {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.fx-ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  transform: scale(0);
+  animation: fx-ripple 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+@keyframes fx-ripple {
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* --- 13 Split text --- */
+.fx-split-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.is-revealed > .fx-split-char,
+[data-split].is-revealed .fx-split-char { opacity: 1; transform: translateY(0); }
+
+/* --- 14 Image zoom --- */
+.fx-zoom {
+  width: 280px; aspect-ratio: 4/3;
+  border-radius: var(--e-r-xl);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--e-border);
+  background: linear-gradient(135deg, var(--e-purple-700), var(--e-purple-900));
+}
+.fx-zoom-img {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #7427d4, #ff8a1f 80%);
+  transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fx-zoom-img::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(116,39,212,0.5), transparent 50%);
+}
+.fx-zoom-cap {
+  position: absolute; left: 16px; bottom: 14px; z-index: 2;
+  font-family: var(--ff-mono); font-size: 0.7rem;
+  letter-spacing: 0.2em; color: #fff; text-transform: uppercase;
+}
+.fx-zoom:hover .fx-zoom-img { transform: scale(1.12); }
+
+/* --- 15 Scroll progress bar --- */
+.fx-progress {
+  position: relative;
+  height: 3px;
+  background: rgba(180,140,255,0.10);
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 420px;
+}
+.fx-progress-bar {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, var(--e-purple-500), var(--e-orange));
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 90ms linear;
+}
+
+/* --- 16 Parallax --- */
+.fx-parallax-stage {
+  position: relative;
+  height: 240px;
+  border-radius: var(--e-r-lg);
+  overflow: hidden;
+  background: var(--e-bg);
+  width: 100%;
+}
+.fx-parallax-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 4rem;
+  color: rgba(180,140,255,0.16);
+  pointer-events: none;
+  will-change: transform;
+}
+.fx-parallax-layer.front { color: var(--e-text); font-size: 2rem; }
+
+/* --- 17 Glow pulse --- */
+.fx-pulse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--e-purple-500);
+  position: relative;
+}
+.fx-pulse::before, .fx-pulse::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--e-purple-400);
+  animation: fx-pulse-out 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+.fx-pulse::after { animation-delay: 1.2s; }
+@keyframes fx-pulse-out {
+  0%   { transform: scale(1);   opacity: 1; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* --- 18 Border draw --- */
+.fx-border-draw {
+  position: relative;
+  display: inline-block;
+  padding: 14px 24px;
+  font-family: var(--ff-mono);
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+  color: var(--e-text);
+  background: transparent;
+  cursor: pointer;
+  border: 0;
+}
+.fx-border-draw::before, .fx-border-draw::after {
+  content: '';
+  position: absolute;
+  background: var(--e-purple-400);
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fx-border-draw::before {
+  left: 0; right: 0; top: 0; height: 1px;
+  transform: scaleX(0); transform-origin: left;
+}
+.fx-border-draw::after {
+  left: 0; bottom: 0; width: 1px; height: 100%;
+  transform: scaleY(0); transform-origin: top;
+}
+.fx-border-draw > .fx-bd-r,
+.fx-border-draw > .fx-bd-b {
+  position: absolute;
+  background: var(--e-purple-400);
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+}
+.fx-border-draw > .fx-bd-r {
+  right: 0; top: 0; width: 1px; height: 100%;
+  transform: scaleY(0); transform-origin: top;
+}
+.fx-border-draw > .fx-bd-b {
+  left: 0; bottom: 0; right: 0; height: 1px;
+  transform: scaleX(0); transform-origin: right;
+}
+.fx-border-draw:hover::before { transform: scaleX(1); }
+.fx-border-draw:hover > .fx-bd-r { transform: scaleY(1); transition-delay: 250ms; }
+.fx-border-draw:hover > .fx-bd-b { transform: scaleX(1); transition-delay: 500ms; transform-origin: left; }
+.fx-border-draw:hover::after { transform: scaleY(1); transition-delay: 750ms; transform-origin: bottom; }
+
+/* --- prefers-reduced-motion safety --- */
+@media (prefers-reduced-motion: reduce) {
+  .fx-marquee-track,
+  .fx-shimmer,
+  .fx-pulse::before,
+  .fx-pulse::after { animation: none !important; }
+  .fx-reveal,
+  .fx-stagger-item,
+  .fx-split-char { opacity: 1 !important; transform: none !important; }
+}
