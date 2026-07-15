@@ -792,18 +792,39 @@ export const BrandingOS: React.FC<BrandingOSProps> = ({ view = View.BRANDING_OS_
         setCalendarCardGenerationMode('manual');
     }, []);
 
-    // Sync View Prop with Internal Step
+    // Sync View Prop with Internal Step.
+    // These two effects mirror each other (view -> step, step -> view). Without
+    // the syncSourceRef guard, one effect's update triggers the other, which
+    // triggers the first again — an infinite ping-pong that also re-fires every
+    // effect keyed on currentStep (e.g. loadCarouselDrafts below), exhausting
+    // the browser's connection pool (ERR_INSUFFICIENT_RESOURCES).
+    const stepViewSyncSourceRef = useRef<'view' | 'step' | null>(null);
+
     useEffect(() => {
-        setCurrentStep(resolveBrandingStepFromView(view));
+        if (stepViewSyncSourceRef.current === 'step') {
+            stepViewSyncSourceRef.current = null;
+            return;
+        }
+        const nextStep = resolveBrandingStepFromView(view);
+        setCurrentStep((prev) => {
+            if (prev === nextStep) return prev;
+            stepViewSyncSourceRef.current = 'view';
+            return nextStep;
+        });
     }, [view]);
 
     useEffect(() => {
         if (!onViewChange) {
             return;
         }
+        if (stepViewSyncSourceRef.current === 'view') {
+            stepViewSyncSourceRef.current = null;
+            return;
+        }
 
         const nextView = resolveBrandingViewFromStep(currentStep);
         if (nextView !== view) {
+            stepViewSyncSourceRef.current = 'step';
             onViewChange(nextView);
         }
     }, [currentStep, onViewChange, view]);
@@ -950,10 +971,12 @@ export const BrandingOS: React.FC<BrandingOSProps> = ({ view = View.BRANDING_OS_
             return;
         }
 
+        const controller = new AbortController();
+
         const loadCarouselDrafts = async () => {
             setIsLoadingCarouselDrafts(true);
             try {
-                const response = await fetch('/api/branding/carousel-drafts');
+                const response = await fetch('/api/branding/carousel-drafts', { signal: controller.signal });
                 const payload = await response.json();
 
                 if (!response.ok) {
@@ -962,14 +985,16 @@ export const BrandingOS: React.FC<BrandingOSProps> = ({ view = View.BRANDING_OS_
 
                 setSavedCarouselDrafts(Array.isArray(payload?.drafts) ? payload.drafts as CarouselDraftRecord[] : []);
             } catch (error) {
+                if (controller.signal.aborted) return;
                 console.error('Failed to load carousel drafts', error);
                 setCarouselDraftError(error instanceof Error ? error.message : 'Erro ao carregar drafts do carrossel.');
             } finally {
-                setIsLoadingCarouselDrafts(false);
+                if (!controller.signal.aborted) setIsLoadingCarouselDrafts(false);
             }
         };
 
         loadCarouselDrafts();
+        return () => controller.abort();
     }, [currentStep]);
 
     const getCalendarScope = useCallback((
