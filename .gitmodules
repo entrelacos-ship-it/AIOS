@@ -3,3 +3,6 @@
 	url = https://github.com/SynkraAI/aiox-pro.git
 	branch = main
 	ignore = dirty
+[submodule "apps/open-slide"]
+	path = apps/open-slide
+	url = https://github.com/1weiho/open-slide.git
