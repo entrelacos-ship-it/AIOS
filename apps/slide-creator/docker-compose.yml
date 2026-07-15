@@ -1,12 +1,32 @@
+networks:
+  infra-net:
+    external: true
+
 services:
   slide-creator:
     build: .
+    container_name: slide-creator
     ports:
       - "3002:3000"
     env_file: .env
     environment:
       - SKILL_PATH=/skill/SKILL.md
+      - CAROUSEL_HISTORY_ROOT=/carousel-history
     volumes:
       - ./skill:/skill:ro
+      - ${CAROUSEL_HISTORY_HOST_PATH:-./carousel-history}:/carousel-history:ro
       - /root/.claude:/root/.claude:rw
+      - /root/.claude.json:/root/.claude.json:rw
+    networks:
+      - infra-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.slide-creator.rule=Host(`os.entrelacospsicologia.com.br`) && PathPrefix(`/slides`)"
+      - "traefik.http.routers.slide-creator.entrypoints=websecure"
+      - "traefik.http.routers.slide-creator.tls=true"
+      - "traefik.http.routers.slide-creator.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.slide-creator.priority=10"
+      - "traefik.http.routers.slide-creator.middlewares=slide-strip"
+      - "traefik.http.middlewares.slide-strip.stripprefix.prefixes=/slides"
+      - "traefik.http.services.slide-creator.loadbalancer.server.port=3000"
     restart: unless-stopped

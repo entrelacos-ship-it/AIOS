@@ -1,0 +1,24 @@
+http:
+  routers:
+    slide-creator:
+      rule: "Host(`os.entrelacospsicologia.com.br`) && PathPrefix(`/slides`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - slide-strip
+      service: slide-creator
+      priority: 10
+      tls:
+        certResolver: letsencrypt
+
+  middlewares:
+    slide-strip:
+      stripPrefix:
+        prefixes:
+          - /slides
+
+  services:
+    slide-creator:
+      loadBalancer:
+        servers:
+          - url: "http://slide-creator:3000"

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/slides/">
+  <title>Carrosséis | Entrelaços OS</title>
+  <meta
+    name="description"
+    content="Histórico dos carrosséis cinematográficos criados para a Entrelaços Psicologia."
+  >
+  <link rel="stylesheet" href="/slides/styles.css?v=20260607-01">
+</head>
+<body data-page="carousels">
+  <div class="shell">
+    <header class="topbar" aria-label="Cabecalho">
+      <a class="brand" href="/slides/" aria-label="Entrelaços OS">
+        <span class="brand-mark" aria-hidden="true">OS</span>
+        <span>
+          <strong>Entrelaços OS</strong>
+          <small>Squad Carrossel</small>
+        </span>
+      </a>
+      <nav class="topnav" aria-label="Navegacao principal">
+        <a href="/slides/">Slides</a>
+        <a class="is-active" href="/slides/carrosseis">Carrosséis</a>
+      </nav>
+    </header>
+
+    <main class="workspace carousel-workspace">
+      <section class="intro carousel-intro" aria-labelledby="page-title">
+        <p class="eyebrow">Squad Carrossel Entrelaços Cinematográfico</p>
+        <h1 id="page-title">Biblioteca viva dos carrosséis criados.</h1>
+        <p class="lead">
+          Veja capas, imagens, briefings, prompts e manifestos sem sair do OS. Aqui o histórico deixa de
+          ficar espalhado em pastas técnicas e vira acervo operacional.
+        </p>
+      </section>
+
+      <section class="history-stats" aria-label="Resumo do histórico">
+        <div>
+          <strong id="total-items">0</strong>
+          <span>criações</span>
+        </div>
+        <div>
+          <strong id="total-slides">0</strong>
+          <span>imagens</span>
+        </div>
+        <div>
+          <strong id="generated-items">0</strong>
+          <span>novos carrosséis</span>
+        </div>
+      </section>
+
+      <section class="history-toolbar" aria-label="Ações e filtros">
+        <label class="search-field" for="history-search">
+          <span>Buscar no acervo</span>
+          <input id="history-search" type="search" placeholder="Tema, data, tag ou status">
+        </label>
+        <div class="toolbar-note">
+          <strong id="history-updated">Carregando histórico...</strong>
+          <span id="history-source"></span>
+        </div>
+      </section>
+
+      <section id="history-error" class="error hidden" role="alert"></section>
+      <section id="history-empty" class="empty-state hidden">
+        <h2>Nenhum carrossel indexado ainda</h2>
+        <p>Rode o indexador do acervo para preencher esta tela do OS.</p>
+      </section>
+      <section id="history-grid" class="history-grid" aria-label="Carrosséis salvos"></section>
+    </main>
+  </div>
+
+  <script src="/slides/carrosseis.js?v=20260607-01"></script>
+</body>
+</html>

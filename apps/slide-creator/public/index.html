@@ -3,46 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Slide Creator</title>
+  <base href="/slides/">
+  <title>Slide Creator | Entrelaços OS</title>
+  <meta
+    name="description"
+    content="Crie roteiros de apresentações profissionais com IA para aulas, mentorias, masterclasses e treinamentos."
+  >
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/slides/styles.css?v=20260524-03">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Slide Creator</h1>
-      <p class="subtitle">Crie apresentações profissionais com IA</p>
+  <div class="shell">
+    <header class="topbar" aria-label="Cabecalho">
+      <a class="brand" href="/slides/" aria-label="Slide Creator">
+        <span class="brand-mark" aria-hidden="true">SC</span>
+        <span>
+          <strong>Slide Creator</strong>
+          <small>Entrelaços OS</small>
+        </span>
+      </a>
+      <div class="status-pill" id="status-pill">
+        <span class="status-dot" aria-hidden="true"></span>
+        Pronto para criar
+      </div>
+      <nav class="topnav" aria-label="Navegacao principal">
+        <a class="is-active" href="/slides/">Slides</a>
+        <a href="/slides/carrosseis">Carrosséis</a>
+      </nav>
     </header>
 
-    <main>
-      <form id="slide-form">
-        <label for="briefing">Briefing da apresentação</label>
-        <textarea
-          id="briefing"
-          name="briefing"
-          rows="8"
-          placeholder="Descreva sua apresentação: audiência, objetivo, contexto, número de slides, tom desejado..."
-          required
-        ></textarea>
-        <button type="submit" id="submit-btn">Gerar Deck</button>
-      </form>
+    <main class="workspace">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Gerador de apresentações com IA</p>
+        <h1 id="page-title">Transforme um briefing solto em uma narrativa de slides estruturada.</h1>
+        <p class="lead">
+          Descreva publico, objetivo, contexto e tom. O sistema organiza a mensagem em um deck claro,
+          com sequencia, argumento e direcao para apresentacao.
+        </p>
+      </section>
 
-      <div id="loading" class="loading hidden">
-        <div class="spinner"></div>
-        <p>Gerando deck... isso pode levar até 2 minutos.</p>
-      </div>
+      <section class="composer" aria-label="Criar apresentacao">
+        <form id="slide-form" class="briefing-panel">
+          <div class="field-head">
+            <div>
+              <label for="briefing">Briefing da apresentacao</label>
+              <p>Inclua audiencia, tema, promessa, numero de slides e o tipo de entrega.</p>
+            </div>
+            <output id="briefing-count" for="briefing">0 caracteres</output>
+          </div>
 
-      <div id="result" class="result hidden">
-        <div class="result-header">
-          <h2>Deck Gerado</h2>
-          <button id="copy-btn" class="copy-btn">Copiar Markdown</button>
+          <textarea
+            id="briefing"
+            name="briefing"
+            rows="12"
+            placeholder="Ex.: Masterclass para psicologas sobre captacao etica. Objetivo: mostrar como construir previsibilidade sem depender de indicacoes. Tom: profundo, estrategico e acolhedor. 12 slides."
+            required
+          ></textarea>
+
+          <div class="design-field">
+            <label for="design-system">Design system base</label>
+            <select id="design-system" name="design-system">
+              <option value="auto">Auto - usar todas as referências</option>
+              <option value="entrelacos">Entrelaços Psicologia</option>
+              <option value="editorial">Editorial premium</option>
+              <option value="redpine">Redpine Editorial Precision</option>
+              <option value="aiox">AIOX Brandbook Cockpit</option>
+              <option value="webinar">Webinar Flow</option>
+              <option value="proof">Proof Stack</option>
+              <option value="minimal">Minimal didático</option>
+              <option value="dark">Dark strategy</option>
+            </select>
+          </div>
+
+          <div class="quick-prompts" aria-label="Modelos rapidos">
+            <button type="button" data-template="masterclass">Masterclass</button>
+            <button type="button" data-template="aula">Aula</button>
+            <button type="button" data-template="mentoria">Mentoria</button>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="submit-btn" class="primary-btn">
+              <span>Gerar deck</span>
+              <span aria-hidden="true">-></span>
+            </button>
+          </div>
+        </form>
+
+        <aside class="context-panel" aria-label="Parametros sugeridos">
+          <div>
+            <span class="panel-kicker">Checklist</span>
+            <h2>Um bom briefing acelera a qualidade do deck.</h2>
+          </div>
+          <ul>
+            <li>Para quem esta apresentacao sera entregue?</li>
+            <li>Qual decisao ou percepcao precisa mudar?</li>
+            <li>Quantos slides voce quer gerar?</li>
+            <li>Qual tom deve conduzir a narrativa?</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="loading" class="loading hidden" aria-live="polite">
+        <div class="progress-ring" aria-hidden="true"></div>
+        <div>
+          <strong>Gerando o deck</strong>
+          <p>Organizando narrativa, HTML e slides navegaveis. Isso pode levar alguns minutos.</p>
         </div>
-        <div id="result-content" class="result-content"></div>
-      </div>
+      </section>
 
-      <div id="error" class="error hidden"></div>
+      <section id="error" class="error hidden" role="alert"></section>
+
+      <section id="result" class="result hidden" aria-labelledby="result-title">
+        <div class="result-header">
+          <div>
+            <p class="eyebrow">Resultado</p>
+            <h2 id="result-title">Deck gerado</h2>
+          </div>
+          <div class="result-actions">
+            <button id="open-html-btn" class="secondary-btn" type="button">Abrir HTML</button>
+            <button id="download-html-btn" class="secondary-btn" type="button">Baixar HTML</button>
+            <button id="copy-btn" class="secondary-btn" type="button">Copiar markdown</button>
+          </div>
+        </div>
+        <div class="artifact-preview">
+          <iframe id="html-preview" title="Previa HTML do deck"></iframe>
+        </div>
+        <article id="result-content" class="result-content"></article>
+      </section>
     </main>
   </div>
-  <script src="app.js"></script>
+
+  <script src="/slides/app.js?v=20260524-03"></script>
 </body>
 </html>
