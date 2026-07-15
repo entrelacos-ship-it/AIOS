@@ -126,6 +126,9 @@ export enum View {
   SLIDES_STUDIO_NEW = 'SLIDES_STUDIO_NEW',
   SLIDES_STUDIO_VIEWER = 'SLIDES_STUDIO_VIEWER',
 
+  // Open Slide — decks agent-authored (open-slide framework), viewer/present mode embutido
+  OPEN_SLIDE = 'OPEN_SLIDE',
+
   // Carousel Studio — CRUD + preview + export de carrosséis
   CAROUSEL_STUDIO = 'CAROUSEL_STUDIO',
   CAROUSEL_STUDIO_DASHBOARD = 'CAROUSEL_STUDIO_DASHBOARD',

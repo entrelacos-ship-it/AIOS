@@ -77,6 +77,9 @@ const SlidesStudio = lazyRetry(() =>
 const CarouselStudio = lazyRetry(() =>
   import('./views/CarouselStudio').then((module) => ({ default: module.CarouselStudio as React.ComponentType<unknown> })),
 );
+const OpenSlide = lazyRetry(() =>
+  import('./views/OpenSlide').then((module) => ({ default: module.OpenSlide as React.ComponentType<unknown> })),
+);
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.COURSE_CREATOR_DASHBOARD);
@@ -158,6 +161,11 @@ const App: React.FC = () => {
     // Carousel Studio
     if (currentView.startsWith('CAROUSEL_STUDIO')) {
       return <CarouselStudio view={currentView} onViewChange={setCurrentView} />;
+    }
+
+    // Open Slide
+    if (currentView === View.OPEN_SLIDE) {
+      return <OpenSlide />;
     }
 
     // Route all Design System views to DesignSystem component

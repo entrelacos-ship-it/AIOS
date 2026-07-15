@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { createServer as createViteServer } from 'vite';
 import type { Server } from 'node:http';
+import http from 'node:http';
 import fs from 'fs';
 import path from 'path';
 import multer from 'multer';
@@ -3309,6 +3310,32 @@ Retorne APENAS o JSON:`;
       res.setHeader('Content-Disposition', `attachment; filename="${p.title}_captions.srt"`);
       fs.createReadStream(p.captionsPath).pipe(res);
     } catch (e) { res.status(500).json({ error: e instanceof Error ? e.message : 'Failed.' }); }
+  });
+
+  // Open Slide — reverse proxy to the persistent open-slide dev server so it can
+  // be embedded via iframe under the app's own origin (avoids CORS/frame issues).
+  // No WebSocket/HMR forwarding: the iframe shows the deck, live-reload just needs
+  // a manual refresh after an agent edits the workspace.
+  const OPEN_SLIDE_TARGET = process.env.OPEN_SLIDE_URL || 'http://localhost:4100';
+  app.use('/open-slide', (req, res) => {
+    const target = new URL(OPEN_SLIDE_TARGET);
+    const proxyReq = http.request({
+      host: target.hostname,
+      port: target.port,
+      // originalUrl keeps the /open-slide prefix — the target's own base is
+      // configured as '/open-slide/' (see open-slide.config.ts) to match.
+      path: req.originalUrl,
+      method: req.method,
+      headers: { ...req.headers, host: target.host },
+    }, (proxyRes) => {
+      res.writeHead(proxyRes.statusCode || 502, proxyRes.headers);
+      proxyRes.pipe(res);
+    });
+    proxyReq.on('error', () => {
+      res.writeHead(502, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Open Slide service unavailable.' }));
+    });
+    req.pipe(proxyReq);
   });
 
   // Vite middleware for development

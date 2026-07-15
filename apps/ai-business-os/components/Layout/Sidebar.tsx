@@ -585,6 +585,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
               )}
             </div>
 
+            {/* Open Slide */}
+            <button
+              onClick={() => onNavigate(View.OPEN_SLIDE)}
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                currentView === View.OPEN_SLIDE
+                  ? 'text-violet-400 bg-violet-500/10'
+                  : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
+              }`}
+            >
+              <Presentation size={16} className={currentView === View.OPEN_SLIDE ? 'text-violet-400' : ''} />
+              <span className="flex-1 text-left">Open Slide</span>
+            </button>
+
             {/* Carousel Studio */}
             <button
               onClick={() => onNavigate(View.CAROUSEL_STUDIO_DASHBOARD)}
