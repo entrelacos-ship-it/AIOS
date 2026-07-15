@@ -22,6 +22,10 @@ module.exports = [
       '**/.next/**',
       // Dashboard has its own ESLint config
       'apps/dashboard/**',
+      // ai-business-os has its own ESLint config (browser/react globals)
+      'apps/ai-business-os/**',
+      // Git submodule (open-slide) — vendored, own lint/build pipeline
+      'apps/open-slide/**',
       '**/.aiox-core/_legacy-v4.31.0/**',
       '**/web-bundles/**',
       '**/*.min.js',
@@ -171,6 +175,20 @@ module.exports = [
     rules: {
       'no-unused-vars': 'off',
       'no-undef': 'off', // Jest globals
+    },
+  },
+
+  // Client-side (browser) JS served to the browser, not Node.
+  // slide-creator's public/*.js files declare their own globals via
+  // `/* global ... */` pragmas — only branding-os-showcase needs this here.
+  {
+    files: ['apps/branding-os-showcase/app.js'],
+    languageOptions: {
+      globals: {
+        document: 'readonly',
+        window: 'readonly',
+        getComputedStyle: 'readonly',
+      },
     },
   },
 ];
