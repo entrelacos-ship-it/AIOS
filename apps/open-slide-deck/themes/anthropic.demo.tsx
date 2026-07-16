@@ -1,4 +1,4 @@
-import { type Page, useSlidePageNumber } from '@open-slide/core';
+import { type Page } from '@open-slide/core';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <h1
@@ -16,8 +16,7 @@ const Title = ({ children }: { children: React.ReactNode }) => (
   </h1>
 );
 
-const Footer = () => {
-  const { current, total } = useSlidePageNumber();
+const Footer = ({ page }: { page: string }) => {
   return (
     <div
       style={{
@@ -33,7 +32,7 @@ const Footer = () => {
       }}
     >
       <span>ANTHROPIC</span>
-      <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+      <span>{page}</span>
     </div>
   );
 };
@@ -101,7 +100,7 @@ const Cover: Page = () => (
     <div style={{ marginTop: 40 }}>
       <Button>Talk to Claude</Button>
     </div>
-    <Footer />
+    <Footer page="01 / 03" />
   </div>
 );
 
@@ -113,7 +112,7 @@ const Cards: Page = () => (
       <Card title="Alignment" body="Steering capable systems toward human intent." />
       <Card title="Policy" body="Shaping safe deployment at the frontier." />
     </div>
-    <Footer />
+    <Footer page="02 / 03" />
   </div>
 );
 
@@ -133,7 +132,7 @@ const Closer: Page = () => (
       Read the research.
     </h1>
     <p style={{ fontFamily: '"Anthropic Serif", Georgia, serif', fontSize: 34, color: '#d97757', marginTop: 32 }}>anthropic.com →</p>
-    <Footer />
+    <Footer page="03 / 03" />
   </div>
 );
 

@@ -1,4 +1,4 @@
-import { type Page, useSlidePageNumber } from '@open-slide/core';
+import { type Page } from '@open-slide/core';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <h1
@@ -16,8 +16,7 @@ const Title = ({ children }: { children: React.ReactNode }) => (
   </h1>
 );
 
-const Footer = () => {
-  const { current, total } = useSlidePageNumber();
+const Footer = ({ page }: { page: string }) => {
   return (
     <div
       style={{
@@ -34,7 +33,7 @@ const Footer = () => {
       }}
     >
       <span>RAYCAST</span>
-      <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+      <span>{page}</span>
     </div>
   );
 };
@@ -122,7 +121,7 @@ const Cover: Page = () => (
     <div style={{ marginTop: 40 }}>
       <PillButton>Download for Mac</PillButton>
     </div>
-    <Footer />
+    <Footer page="01 / 03" />
   </div>
 );
 
@@ -138,7 +137,7 @@ const ShortcutSlide: Page = () => (
         </span>
       </div>
     </Card>
-    <Footer />
+    <Footer page="02 / 03" />
   </div>
 );
 
@@ -146,7 +145,7 @@ const Closer: Page = () => (
   <div style={{ ...fill, background: '#07080a', color: '#f9f9f9', padding: 130, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
     <Title>Get started free.</Title>
     <p style={{ fontSize: 32, color: '#55b3ff', marginTop: 32, letterSpacing: '0.4px' }}>raycast.com →</p>
-    <Footer />
+    <Footer page="03 / 03" />
   </div>
 );
 

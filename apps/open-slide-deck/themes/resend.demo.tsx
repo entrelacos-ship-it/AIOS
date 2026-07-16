@@ -1,4 +1,4 @@
-import { type Page, useSlidePageNumber } from '@open-slide/core';
+import { type Page } from '@open-slide/core';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <h1
@@ -16,8 +16,7 @@ const Title = ({ children }: { children: React.ReactNode }) => (
   </h1>
 );
 
-const Footer = () => {
-  const { current, total } = useSlidePageNumber();
+const Footer = ({ page }: { page: string }) => {
   return (
     <div
       style={{
@@ -33,7 +32,7 @@ const Footer = () => {
       }}
     >
       <span>RESEND</span>
-      <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+      <span>{page}</span>
     </div>
   );
 };
@@ -83,7 +82,7 @@ const Cover: Page = () => (
     <p style={{ fontSize: 34, color: '#666666', maxWidth: 1200, marginTop: 32 }}>
       The best way to reach humans instead of spam folders.
     </p>
-    <Footer />
+    <Footer page="01 / 03" />
   </div>
 );
 
@@ -106,7 +105,7 @@ const CodeSlide: Page = () => (
     <CodeBlock>
       {'await resend.emails.send({\n  from: "you@example.com",\n  to: "user@example.com",\n});'}
     </CodeBlock>
-    <Footer />
+    <Footer page="02 / 03" />
   </div>
 );
 
@@ -114,7 +113,7 @@ const Closer: Page = () => (
   <div style={{ ...fill, background: '#fdfdfd', color: '#000000', padding: 130, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
     <Title>Start sending.</Title>
     <p style={{ fontSize: 34, color: '#ff801f', marginTop: 32 }}>resend.com →</p>
-    <Footer />
+    <Footer page="03 / 03" />
   </div>
 );
 

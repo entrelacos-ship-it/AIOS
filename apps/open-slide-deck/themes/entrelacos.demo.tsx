@@ -1,4 +1,4 @@
-import { type Page, useSlidePageNumber } from '@open-slide/core';
+import { type Page } from '@open-slide/core';
 
 const Title = ({ children, highlight }: { children: React.ReactNode; highlight?: string }) => (
   <h1
@@ -21,8 +21,7 @@ const Title = ({ children, highlight }: { children: React.ReactNode; highlight?:
   </h1>
 );
 
-const Footer = () => {
-  const { current, total } = useSlidePageNumber();
+const Footer = ({ page }: { page: string }) => {
   return (
     <div
       style={{
@@ -40,7 +39,7 @@ const Footer = () => {
       }}
     >
       <span>ENTRELAÇOS</span>
-      <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+      <span>{page}</span>
     </div>
   );
 };
@@ -111,7 +110,7 @@ const Cover: Page = () => (
     <div style={{ marginTop: 40 }}>
       <Button>Começar agora</Button>
     </div>
-    <Footer />
+    <Footer page="01 / 03" />
   </div>
 );
 
@@ -124,7 +123,7 @@ const StatsSlide: Page = () => (
       <Stat value="12" label="Programas" />
       <Stat value="5x" label="Crescimento" />
     </div>
-    <Footer />
+    <Footer page="02 / 03" />
   </div>
 );
 
@@ -134,7 +133,7 @@ const Closer: Page = () => (
     <div style={{ marginTop: 40 }}>
       <Button>entrelacospsicologia.com.br</Button>
     </div>
-    <Footer />
+    <Footer page="03 / 03" />
   </div>
 );
 

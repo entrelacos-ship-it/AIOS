@@ -1,4 +1,4 @@
-import { type Page, useSlidePageNumber } from '@open-slide/core';
+import { type Page } from '@open-slide/core';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <h1
@@ -17,8 +17,7 @@ const Title = ({ children }: { children: React.ReactNode }) => (
   </h1>
 );
 
-const Footer = () => {
-  const { current, total } = useSlidePageNumber();
+const Footer = ({ page }: { page: string }) => {
   return (
     <div
       style={{
@@ -37,7 +36,7 @@ const Footer = () => {
       }}
     >
       <span>ACADEMIA LENDÁRIA</span>
-      <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+      <span>{page}</span>
     </div>
   );
 };
@@ -101,7 +100,7 @@ const Cover: Page = () => (
     <div style={{ marginTop: 40 }}>
       <PillButton>Entrar na jornada</PillButton>
     </div>
-    <Footer />
+    <Footer page="01 / 03" />
   </div>
 );
 
@@ -113,7 +112,7 @@ const StatsSlide: Page = () => (
       <Stat value="15K+" label="Formados" />
       <Stat value="4.9" label="Avaliação média" />
     </div>
-    <Footer />
+    <Footer page="02 / 03" />
   </div>
 );
 
@@ -123,7 +122,7 @@ const Closer: Page = () => (
     <div style={{ marginTop: 40 }}>
       <PillButton>academialendaria.com</PillButton>
     </div>
-    <Footer />
+    <Footer page="03 / 03" />
   </div>
 );
 

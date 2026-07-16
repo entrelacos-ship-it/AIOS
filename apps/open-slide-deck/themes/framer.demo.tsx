@@ -1,4 +1,4 @@
-import { type Page, useSlidePageNumber } from '@open-slide/core';
+import { type Page } from '@open-slide/core';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <h1
@@ -16,8 +16,7 @@ const Title = ({ children }: { children: React.ReactNode }) => (
   </h1>
 );
 
-const Footer = () => {
-  const { current, total } = useSlidePageNumber();
+const Footer = ({ page }: { page: string }) => {
   return (
     <div
       style={{
@@ -35,7 +34,7 @@ const Footer = () => {
       }}
     >
       <span>FRAMER</span>
-      <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+      <span>{page}</span>
     </div>
   );
 };
@@ -116,7 +115,7 @@ const Cover: Page = () => (
     <div style={{ marginTop: 48 }}>
       <PillButton>Get started for free</PillButton>
     </div>
-    <Footer />
+    <Footer page="01 / 03" />
   </div>
 );
 
@@ -145,7 +144,7 @@ const Showcase: Page = () => (
         <div style={{ fontSize: 34, fontWeight: 400, letterSpacing: '-0.2px' }}>Ship instantly</div>
       </SpotlightCard>
     </div>
-    <Footer />
+    <Footer page="02 / 03" />
   </div>
 );
 
@@ -155,7 +154,7 @@ const Closer: Page = () => (
     <div style={{ marginTop: 48 }}>
       <PillButton>framer.com</PillButton>
     </div>
-    <Footer />
+    <Footer page="03 / 03" />
   </div>
 );
 

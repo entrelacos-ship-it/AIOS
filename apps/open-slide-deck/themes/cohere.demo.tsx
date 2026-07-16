@@ -1,4 +1,4 @@
-import { type Page, useSlidePageNumber } from '@open-slide/core';
+import { type Page } from '@open-slide/core';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <h1
@@ -16,8 +16,7 @@ const Title = ({ children }: { children: React.ReactNode }) => (
   </h1>
 );
 
-const Footer = () => {
-  const { current, total } = useSlidePageNumber();
+const Footer = ({ page }: { page: string }) => {
   return (
     <div
       style={{
@@ -35,7 +34,7 @@ const Footer = () => {
       }}
     >
       <span>COHERE</span>
-      <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+      <span>{page}</span>
     </div>
   );
 };
@@ -109,7 +108,7 @@ const Cover: Page = () => (
       <Chip>Product</Chip>
       <Chip>Security</Chip>
     </div>
-    <Footer />
+    <Footer page="01 / 03" />
   </div>
 );
 
@@ -131,7 +130,7 @@ const FeatureBand: Page = () => (
       >
         Deployed where your data already lives.
       </h2>
-      <Footer />
+      <Footer page="02 / 03" />
     </div>
   </DarkBand>
 );
@@ -140,7 +139,7 @@ const Closer: Page = () => (
   <div style={{ ...fill, background: '#ffffff', color: '#212121', padding: 130, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
     <Title>Talk to us.</Title>
     <p style={{ fontSize: 28, color: '#1863dc', marginTop: 32 }}>cohere.com →</p>
-    <Footer />
+    <Footer page="03 / 03" />
   </div>
 );
 

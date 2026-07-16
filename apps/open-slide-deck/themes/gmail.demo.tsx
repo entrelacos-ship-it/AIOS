@@ -1,4 +1,4 @@
-import { type Page, useSlidePageNumber } from '@open-slide/core';
+import { type Page } from '@open-slide/core';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <h1
@@ -16,8 +16,7 @@ const Title = ({ children }: { children: React.ReactNode }) => (
   </h1>
 );
 
-const Footer = () => {
-  const { current, total } = useSlidePageNumber();
+const Footer = ({ page }: { page: string }) => {
   return (
     <div
       style={{
@@ -33,7 +32,7 @@ const Footer = () => {
       }}
     >
       <span>GMAIL</span>
-      <span>{current} / {total}</span>
+      <span>{page}</span>
     </div>
   );
 };
@@ -119,7 +118,7 @@ const Cover: Page = () => (
     <div style={{ marginTop: 36 }}>
       <ComposePill>✎ Compose</ComposePill>
     </div>
-    <Footer />
+    <Footer page="01 / 03" />
   </div>
 );
 
@@ -138,7 +137,7 @@ const InboxSlide: Page = () => (
       <InboxRow sender="Design Team" subject="Weekly sync notes" date="1:12 PM" selected />
       <InboxRow sender="Notifications" subject="Your export is ready" date="11:04 AM" />
     </div>
-    <Footer />
+    <Footer page="02 / 03" />
   </div>
 );
 
@@ -146,7 +145,7 @@ const Closer: Page = () => (
   <div style={{ ...fill, background: '#F6F8FC', color: '#1F1F1F', padding: 120, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
     <Title>Start mailing.</Title>
     <p style={{ fontSize: 30, color: '#0B57D0', marginTop: 32 }}>gmail.com →</p>
-    <Footer />
+    <Footer page="03 / 03" />
   </div>
 );
 

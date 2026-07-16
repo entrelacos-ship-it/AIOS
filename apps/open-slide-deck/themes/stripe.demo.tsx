@@ -1,4 +1,4 @@
-import { type Page, useSlidePageNumber } from '@open-slide/core';
+import { type Page } from '@open-slide/core';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <h1
@@ -16,8 +16,7 @@ const Title = ({ children }: { children: React.ReactNode }) => (
   </h1>
 );
 
-const Footer = () => {
-  const { current, total } = useSlidePageNumber();
+const Footer = ({ page }: { page: string }) => {
   return (
     <div
       style={{
@@ -33,7 +32,7 @@ const Footer = () => {
       }}
     >
       <span>STRIPE</span>
-      <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+      <span>{page}</span>
     </div>
   );
 };
@@ -98,7 +97,7 @@ const Cover: Page = () => (
     <div style={{ marginTop: 40 }}>
       <Button>Comece já</Button>
     </div>
-    <Footer />
+    <Footer page="01 / 03" />
   </div>
 );
 
@@ -117,7 +116,7 @@ const PanelSlide: Page = () => (
         </div>
       </div>
     </div>
-    <Footer />
+    <Footer page="02 / 03" />
   </div>
 );
 
@@ -125,7 +124,7 @@ const Closer: Page = () => (
   <div style={{ ...fill, background: '#ffffff', color: '#061b31', padding: 130, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
     <Title>Fale com a gente.</Title>
     <p style={{ fontSize: 34, color: '#533afd', marginTop: 32, fontFamily: '"sohne-var", Arial, sans-serif' }}>stripe.com →</p>
-    <Footer />
+    <Footer page="03 / 03" />
   </div>
 );
 

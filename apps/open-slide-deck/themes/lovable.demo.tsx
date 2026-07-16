@@ -1,4 +1,4 @@
-import { type Page, useSlidePageNumber } from '@open-slide/core';
+import { type Page } from '@open-slide/core';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <h1
@@ -16,8 +16,7 @@ const Title = ({ children }: { children: React.ReactNode }) => (
   </h1>
 );
 
-const Footer = () => {
-  const { current, total } = useSlidePageNumber();
+const Footer = ({ page }: { page: string }) => {
   return (
     <div
       style={{
@@ -33,7 +32,7 @@ const Footer = () => {
       }}
     >
       <span>LOVABLE</span>
-      <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+      <span>{page}</span>
     </div>
   );
 };
@@ -100,7 +99,7 @@ const Cover: Page = () => (
     <div style={{ marginTop: 40 }}>
       <PillButton>Start building</PillButton>
     </div>
-    <Footer />
+    <Footer page="01 / 03" />
   </div>
 );
 
@@ -112,7 +111,7 @@ const Stats: Page = () => (
       <Card label="Prompts to launch" value="3" />
       <Card label="Builders" value="2M+" />
     </div>
-    <Footer />
+    <Footer page="02 / 03" />
   </div>
 );
 
@@ -122,7 +121,7 @@ const Closer: Page = () => (
     <div style={{ marginTop: 40 }}>
       <PillButton>lovable.dev</PillButton>
     </div>
-    <Footer />
+    <Footer page="03 / 03" />
   </div>
 );
 
