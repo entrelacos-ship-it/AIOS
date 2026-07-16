@@ -198,7 +198,17 @@ export async function createApp(options: StartServerOptions = {}) {
 
   app.use(cors());
 
-  app.use(express.json({ limit: '25mb' }));
+  // Skip JSON body-parsing for paths proxied to open-slide-dev: express.json()
+  // would drain the request stream before our raw req.pipe(proxyReq) proxy
+  // (registered further below) gets a chance to forward it, breaking every
+  // POST/PUT/PATCH to the open-slide API (e.g. /__folders) with a 404/hang.
+  const jsonBodyParser = express.json({ limit: '25mb' });
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/open-slide') || req.path.startsWith('/__')) {
+      return next();
+    }
+    return jsonBodyParser(req, res, next);
+  });
   const editAIMediaDir = path.join(process.cwd(), 'outputs', 'editai');
   app.use('/__editai_media', express.static(editAIMediaDir, {
     acceptRanges: true,
@@ -3321,7 +3331,7 @@ Retorne APENAS o JSON:`;
   // `base` rewriting doesn't touch (only static imports get base-prefixed,
   // not runtime fetch() strings) — so those must be proxied unprefixed too.
   const OPEN_SLIDE_TARGET = process.env.OPEN_SLIDE_URL || 'http://localhost:4100';
-  app.use(['/open-slide', /^\/__/], (req, res) => {
+  const proxyToOpenSlide = (req: express.Request, res: express.Response) => {
     const target = new URL(OPEN_SLIDE_TARGET);
     const proxyReq = http.request({
       host: target.hostname,
@@ -3343,6 +3353,16 @@ Retorne APENAS o JSON:`;
       res.end(JSON.stringify({ error: 'Open Slide service unavailable.' }));
     });
     req.pipe(proxyReq);
+  };
+  // Express 5's path-to-regexp v8 doesn't match a bare RegExp path (or a
+  // mixed string+RegExp array) the way Express 4 did — route matching
+  // silently no-ops instead of throwing. Match manually inside an
+  // unscoped middleware instead of relying on the path argument.
+  app.use((req, res, next) => {
+    if (req.path === '/open-slide' || req.path.startsWith('/open-slide/') || req.path.startsWith('/__')) {
+      return proxyToOpenSlide(req, res);
+    }
+    next();
   });
 
   // Vite middleware for development
