@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"Test-Path \\\"C:\\\\Users\\\\tatik\\\\.bun\\\\bin\\\\bun.exe\\\" ; Test-Path \\\"C:\\\\Users\\\\tatik\\\\.claude\\\\plugins\\\\cache\\\\claude-pulse\\\\claude-pulse\\\\1.1.0\\\\src\\\\index.ts\\\"\",\"description\":\"Verify bun an...",
+  "error": "Exit code 127\n/usr/bin/bash: line 1: Test-Path: command not found\n/usr/bin/bash: line 1: Test-Path: command not found",
+  "timestamp": "2026-05-23T23:42:35.611Z",
+  "retry_count": 1
+}

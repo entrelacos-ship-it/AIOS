@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrandingOS Showcase</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="mode-elevation">
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">EntrelacOS / BrandingOS</p>
+          <h1>EDS Interactive Showcase</h1>
+          <p class="subtitle">
+            Um ambiente visual para explorar a linguagem do Entrelaços Design
+            System em tempo real.
+          </p>
+        </div>
+        <div class="control-cluster">
+          <div class="toggle-group" aria-label="Tema">
+            <button class="toggle is-active" data-theme-option="dark">Dark</button>
+            <button class="toggle" data-theme-option="light">Light</button>
+          </div>
+          <div class="toggle-group" aria-label="Expressao">
+            <button class="toggle" data-mode-option="care">Acolhimento</button>
+            <button class="toggle is-active" data-mode-option="elevation">
+              Elevacao
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="hero-panel card">
+          <div class="hero-copy">
+            <p class="section-label">Modo ativo</p>
+            <h2 id="hero-title">Posicionamento e Elevacao</h2>
+            <p id="hero-description">
+              Autoridade, contraste e energia controlada para interfaces premium
+              e paginas de impacto.
+            </p>
+            <div class="hero-actions">
+              <button class="eds-button eds-button--primary" id="open-modal">
+                Ver CTA principal
+              </button>
+              <button class="eds-button eds-button--secondary">
+                Ler fundamentos
+              </button>
+            </div>
+          </div>
+
+          <div class="signal-panel">
+            <div class="metric-stack">
+              <article class="metric-card">
+                <span class="metric-label">Accent budget</span>
+                <strong id="accent-budget">8%</strong>
+                <span class="metric-note">violet + orange + teal</span>
+              </article>
+              <article class="metric-card">
+                <span class="metric-label">Canal</span>
+                <strong id="channel-name">Dashboard premium</strong>
+                <span class="metric-note" id="channel-note"
+                  >Dark mode como modo hero</span
+                >
+              </article>
+            </div>
+            <div class="accent-meter" aria-hidden="true">
+              <div class="accent-meter__neutral"></div>
+              <div class="accent-meter__violet"></div>
+              <div class="accent-meter__orange"></div>
+              <div class="accent-meter__teal"></div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="sidebar card">
+          <div class="sidebar-block">
+            <p class="section-label">Receita</p>
+            <label class="field-label" for="channel-select">Canal</label>
+            <select id="channel-select" class="field-control">
+              <option value="dashboard">Dashboard premium</option>
+              <option value="members">Area de membros</option>
+              <option value="lp">Landing page premium</option>
+              <option value="slides">Slides premium</option>
+              <option value="social">Social premium</option>
+            </select>
+          </div>
+
+          <div class="sidebar-block">
+            <p class="section-label">Tema em uso</p>
+            <div class="token-list">
+              <div class="token-row">
+                <span>Surface</span>
+                <code id="token-surface"></code>
+              </div>
+              <div class="token-row">
+                <span>Text</span>
+                <code id="token-text"></code>
+              </div>
+              <div class="token-row">
+                <span>Primary action</span>
+                <code id="token-action"></code>
+              </div>
+              <div class="token-row">
+                <span>Focus ring</span>
+                <code id="token-focus"></code>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-block">
+            <p class="section-label">Filtro QA</p>
+            <ul class="qa-list">
+              <li>Um foco principal por bloco</li>
+              <li>Cor trabalhando, nao decorando</li>
+              <li>Tipografia dominando o layout</li>
+              <li>Respiracao generosa entre secoes</li>
+            </ul>
+          </div>
+        </aside>
+
+        <section class="preview-grid">
+          <article class="card recipe-card">
+            <div class="recipe-card__header">
+              <p class="section-label">Preview de produto</p>
+              <span class="badge badge--teal">System</span>
+            </div>
+            <div class="dashboard-shell">
+              <div class="dashboard-shell__sidebar">
+                <span class="nav-pill is-active">Overview</span>
+                <span class="nav-pill">Members</span>
+                <span class="nav-pill">Signals</span>
+              </div>
+              <div class="dashboard-shell__main">
+                <div class="mini-metrics">
+                  <div class="mini-metric">
+                    <span>MRR</span>
+                    <strong>R$ 42k</strong>
+                  </div>
+                  <div class="mini-metric">
+                    <span>Retencao</span>
+                    <strong>91%</strong>
+                  </div>
+                </div>
+                <div class="chart-placeholder">
+                  <span class="chart-line chart-line--violet"></span>
+                  <span class="chart-line chart-line--teal"></span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card type-ramp">
+            <p class="section-label">Tipografia</p>
+            <div class="type-line type-display">Design e infraestrutura</div>
+            <div class="type-line type-h2">Premium sem ruido visual</div>
+            <div class="type-line type-body-lg">
+              Neutros, estrutura e contraste sustentam a percepcao de valor.
+            </div>
+            <div class="type-line type-caption">
+              Tokens, componentes e receitas em um unico sistema.
+            </div>
+          </article>
+
+          <article class="card component-lab">
+            <p class="section-label">Componentes</p>
+            <div class="button-row">
+              <button class="eds-button eds-button--primary">CTA principal</button>
+              <button class="eds-button eds-button--secondary">Secundario</button>
+              <button class="eds-button eds-button--ghost">Ghost</button>
+            </div>
+            <div class="field-stack">
+              <label class="field-label" for="name-field">Nome da experiencia</label>
+              <input
+                id="name-field"
+                class="field-control"
+                type="text"
+                placeholder="Ex.: Dashboard premium"
+              />
+            </div>
+            <div class="tag-row">
+              <span class="badge">Core</span>
+              <span class="badge badge--teal">IA</span>
+              <span class="badge badge--warning">CTA</span>
+            </div>
+          </article>
+
+          <article class="card recipe-card">
+            <div class="recipe-card__header">
+              <p class="section-label">Layouts guiados</p>
+              <span class="badge">Blueprint</span>
+            </div>
+            <div class="layout-stack" id="layout-stack">
+              <div class="layout-block layout-block--hero"></div>
+              <div class="layout-block layout-block--content"></div>
+              <div class="layout-block layout-block--content short"></div>
+              <div class="layout-block layout-block--cta"></div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="modal-backdrop" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <p class="section-label">Modal preview</p>
+        <h3 id="modal-title">CTA principal em contexto premium</h3>
+        <p>
+          O botao principal deve existir sozinho no contexto dominante e sempre
+          carregar a maior temperatura de conversao.
+        </p>
+        <div class="hero-actions">
+          <button class="eds-button eds-button--primary">Continuar</button>
+          <button class="eds-button eds-button--ghost" id="close-modal">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

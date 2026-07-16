@@ -1,0 +1,148 @@
+version: 1
+source_principle: "Selection rules follow ppt-master grammar: Pick for content shape. Skip if another visual fits better."
+visual_templates:
+  - id: kpi_cards
+    category: chart
+    pick_when: ["4-8 standalone numeric metrics need an executive overview."]
+    skip_when: ["Metrics have explicit targets; use bullet_chart.", "Only one hero metric exists; use gauge_chart."]
+    data_shape: {metrics: "4-8", series: 1, target_required: false}
+    constraints: {max_cards: 8, require_unit: true, require_delta_label: true}
+    compatible_slide_functions: [executive_summary, proof, answer_first]
+    absorbed_from: [ppt-master]
+  - id: horizontal_bar_chart
+    category: chart
+    pick_when: ["Rank 5-12 items, especially with long labels."]
+    skip_when: ["Few short labels; use bar_chart.", "Target versus actual; use bullet_chart."]
+    data_shape: {items: "5-12", label_length: "medium-long"}
+    constraints: {sort: descending, max_items: 12}
+    compatible_slide_functions: [comparison, proof, prioritization]
+    absorbed_from: [ppt-master]
+  - id: line_chart
+    category: chart
+    pick_when: ["1-3 time series show direction over time."]
+    skip_when: ["Different units; use dual_axis_line_chart.", "Composition matters; use stacked_area_chart."]
+    data_shape: {series: "1-3", x_axis: time}
+    constraints: {max_series: 3, annotate_inflections: true}
+    compatible_slide_functions: [proof, trend, financial_update]
+    absorbed_from: [ppt-master]
+  - id: waterfall_chart
+    category: chart
+    pick_when: ["Explain additive/subtractive movement from starting value to ending value."]
+    skip_when: ["No running total exists; use bar_chart."]
+    data_shape: {start: 1, changes: "3-8", end: 1}
+    constraints: {require_start_end: true, show_running_total: true}
+    compatible_slide_functions: [explanation, financial_variance, proof]
+    absorbed_from: [ppt-master]
+  - id: bullet_chart
+    category: chart
+    pick_when: ["3-7 KPIs each have target and actual."]
+    skip_when: ["No target baseline; use progress_bar_chart."]
+    data_shape: {items: "3-7", target: true, actual: true}
+    constraints: {max_items: 7, target_marker_required: true}
+    compatible_slide_functions: [board_update, executive_summary, proof]
+    absorbed_from: [ppt-master]
+  - id: matrix_2x2
+    category: strategic_framework
+    pick_when: ["Prioritize items across two axes such as impact and effort."]
+    skip_when: ["Quadrants hold text blocks; use quadrant_text_bullets.", "Bubble size matters; use quadrant_bubble_scatter."]
+    data_shape: {axes: 2, items: "4-20"}
+    constraints: {axis_labels_required: true, max_items: 20}
+    compatible_slide_functions: [decision, prioritization, risk]
+    absorbed_from: [ppt-master]
+  - id: quadrant_text_bullets
+    category: strategic_framework
+    pick_when: ["A named 2x2 framework needs titled bullet content in each quadrant."]
+    skip_when: ["Items are plotted as points; use matrix_2x2."]
+    data_shape: {quadrants: 4, bullets_per_quadrant: "2-5"}
+    constraints: {max_bullets_per_quadrant: 5}
+    compatible_slide_functions: [segmentation, comparison, nuance]
+    absorbed_from: [ppt-master]
+  - id: harvey_balls_table
+    category: matrix
+    pick_when: ["Qualitative score grid uses 0-100% coverage or maturity."]
+    skip_when: ["Binary checkmarks; use feature_matrix_table.", "Raw numbers; use basic_table."]
+    data_shape: {rows: "4-40", columns: "3-12", score_type: qualitative}
+    constraints: {avoid_repeated_cell_copy: true, side_panel_for_detail: true}
+    compatible_slide_functions: [comparison, benchmark_matrix, capability_map]
+    absorbed_from: [ppt-master, presentation-ai]
+  - id: feature_matrix_table
+    category: matrix
+    pick_when: ["Products or plans are compared by feature availability."]
+    skip_when: ["Qualitative scores; use harvey_balls_table."]
+    data_shape: {rows: "5-30", columns: "2-8", value_type: boolean}
+    constraints: {group_rows: true, sticky_header_recommended: true}
+    compatible_slide_functions: [comparison, product_analysis]
+    absorbed_from: [ppt-master]
+  - id: process_flow
+    category: diagram
+    pick_when: ["3-8 sequential steps connected by simple arrows."]
+    skip_when: ["Cycle repeats; use circular_stages.", "Stages produce named outputs; use pipeline_with_stages."]
+    data_shape: {steps: "3-8", branching: false}
+    constraints: {max_steps: 8, arrow_labels_optional: true}
+    compatible_slide_functions: [method, plan, explanation]
+    absorbed_from: [ppt-master, presentation-ai]
+  - id: pipeline_with_stages
+    category: diagram
+    pick_when: ["Each stage has an output artifact."]
+    skip_when: ["No output artifact per stage; use process_flow."]
+    data_shape: {stages: "3-5", output_required: true}
+    constraints: {max_stages: 5, output_label_required: true}
+    compatible_slide_functions: [implementation, mechanism, runtime]
+    absorbed_from: [ppt-master]
+  - id: layered_architecture
+    category: diagram
+    pick_when: ["3-4 horizontal system layers contain modules with short descriptions."]
+    skip_when: ["No per-module description; use icon_grid.", "Not a layered system; use module_composition."]
+    data_shape: {layers: "3-4", modules_per_layer: "2-4"}
+    constraints: {description_required: true, max_layers: 4}
+    compatible_slide_functions: [mechanism, architecture, product_strategy]
+    absorbed_from: [ppt-master, Presenton]
+  - id: module_composition
+    category: diagram
+    pick_when: ["One parent system contains multiple child modules with descriptions."]
+    skip_when: ["Only labels exist; use icon_grid or numbered_steps."]
+    data_shape: {parent: 1, modules: "3-9"}
+    constraints: {module_description_required: true}
+    compatible_slide_functions: [mechanism, product_overview, offer]
+    absorbed_from: [ppt-master, Presenton]
+  - id: hub_spoke
+    category: diagram
+    pick_when: ["One core capability radiates into 4-8 surrounding capabilities."]
+    skip_when: ["Forces point inward; use hub_inward_arrows."]
+    data_shape: {center: 1, spokes: "4-8"}
+    constraints: {center_label_required: true, max_spokes: 8}
+    compatible_slide_functions: [mechanism, ecosystem, positioning]
+    absorbed_from: [ppt-master]
+  - id: journey_map
+    category: experience
+    pick_when: ["Customer experience needs phases, actions, emotion, and pain points."]
+    skip_when: ["Simple conversion funnel; use funnel_chart."]
+    data_shape: {phases: "4-7", lanes: "3-5"}
+    constraints: {emotion_lane_required: true, pain_lane_required: true}
+    compatible_slide_functions: [diagnosis, customer_gap, product_strategy]
+    absorbed_from: [ppt-master]
+  - id: before_after
+    category: proof
+    pick_when: ["A concrete state change is the message."]
+    skip_when: ["Many items change over time; use dumbbell_chart or line_chart."]
+    data_shape: {states: 2}
+    constraints: {same_metric_or_view_required: true}
+    compatible_slide_functions: [proof, demo, transformation]
+    absorbed_from: [banana-slides, slide-deck-ai]
+  - id: offer_stack
+    category: conversion
+    pick_when: ["Offer components, bonuses, value, and next step need one legible slide."]
+    skip_when: ["No commercial CTA exists."]
+    data_shape: {components: "3-8", cta: true}
+    constraints: {cta_required: true, outcome_label_required: true}
+    compatible_slide_functions: [conversion, cta, sales]
+    absorbed_from: [presentation-ai, banana-slides]
+  - id: decision_card
+    category: decision
+    pick_when: ["A recommendation must be clear and defended by tradeoffs."]
+    skip_when: ["Audience only needs a neutral comparison."]
+    data_shape: {recommendation: 1, alternatives: "1-3"}
+    constraints: {recommendation_required: true, tradeoff_required: true}
+    compatible_slide_functions: [decision, executive_summary]
+    absorbed_from: [powerpoint-skill, ppt-master]
+

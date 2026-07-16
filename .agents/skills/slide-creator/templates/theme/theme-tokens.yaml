@@ -1,0 +1,94 @@
+version: 1
+theme_profiles:
+  - id: sinkra_observatory_dark
+    pick_when:
+      - Benchmark, observatory, technical strategy, or competitive intelligence deck.
+    tokens:
+      colors:
+        background: "#050505"
+        panel: "#111111"
+        panel_alt: "#171717"
+        text: "#F5F5EF"
+        muted: "#9A9A92"
+        border: "#2A2A2A"
+        accent: "#D7FF3F"
+        warning: "#F0B35A"
+      typography:
+        heading: "Inter Tight"
+        body: "Inter"
+        mono: "IBM Plex Mono"
+      spacing:
+        canvas: "16:9"
+        margin_px: 48
+        grid_columns: 12
+      chart:
+        grid: "#2A2A2A"
+        neutral: "#777777"
+        highlight: "#D7FF3F"
+    constraints:
+      no_gradient_orbs: true
+      max_accent_area_percent: 18
+      high_contrast_required: true
+    absorbed_from: [presentation-ai, ppt-master, current_sinkra_bench]
+
+  - id: executive_clean
+    pick_when:
+      - Board, finance, investor, or operating review.
+    tokens:
+      colors:
+        background: "#FAFAF7"
+        panel: "#FFFFFF"
+        text: "#151515"
+        muted: "#666666"
+        border: "#D9D9D2"
+        accent: "#2347FF"
+        positive: "#168A4A"
+        negative: "#B42318"
+      typography:
+        heading: "Inter"
+        body: "Inter"
+        mono: "IBM Plex Mono"
+      spacing:
+        canvas: "16:9"
+        margin_px: 56
+        grid_columns: 12
+      chart:
+        grid: "#E6E6E0"
+        neutral: "#7A7A72"
+        highlight: "#2347FF"
+    constraints:
+      chart_labels_required: true
+      avoid_decorative_cards: true
+      min_body_px: 18
+    absorbed_from: [ppt-master, powerpoint-skill]
+
+  - id: editorial_webinar
+    pick_when:
+      - Webinar, masterclass, persuasive training, or sales education.
+    tokens:
+      colors:
+        background: "#101010"
+        panel: "#181818"
+        text: "#F7F3EA"
+        muted: "#B3ACA1"
+        border: "#32302C"
+        accent: "#FFB84D"
+        secondary: "#7DD3C7"
+      typography:
+        heading: "Sora"
+        body: "Inter"
+        mono: "IBM Plex Mono"
+      spacing:
+        canvas: "16:9"
+        margin_px: 52
+        grid_columns: 12
+      chart:
+        grid: "#35322D"
+        neutral: "#8A8378"
+        highlight: "#FFB84D"
+    constraints:
+      max_visible_words: 70
+      every_section_needs_visual: true
+      avoid_motivational_filler: true
+    absorbed_from: [presentation-ai, slide-deck-ai]
+

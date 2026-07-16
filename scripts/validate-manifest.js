@@ -17,8 +17,56 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const crypto = require('crypto');
 const yaml = require('js-yaml');
-const { hashFile } = require('../packages/installer/src/installer/file-hasher');
+
+// Inlined from packages/installer/src/installer/file-hasher.js (package removed from repo).
+const BINARY_EXTENSIONS = [
+  '.png', '.jpg', '.jpeg', '.gif', '.ico', '.webp', '.svg',
+  '.pdf', '.zip', '.tar', '.gz', '.7z',
+  '.woff', '.woff2', '.ttf', '.eot',
+  '.mp3', '.mp4', '.wav', '.avi',
+  '.exe', '.dll', '.so', '.dylib',
+];
+
+function isBinaryFile(filePath) {
+  return BINARY_EXTENSIONS.includes(path.extname(filePath).toLowerCase());
+}
+
+function normalizeLineEndings(content) {
+  return content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+}
+
+function removeBOM(content) {
+  if (content.charCodeAt(0) === 0xFEFF) {
+    return content.slice(1);
+  }
+  return content;
+}
+
+function hashFile(filePath) {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`File not found: ${filePath}`);
+  }
+
+  const stats = fs.statSync(filePath);
+  if (stats.isDirectory()) {
+    throw new Error(`Cannot hash directory: ${filePath}`);
+  }
+
+  let content;
+  if (isBinaryFile(filePath)) {
+    content = fs.readFileSync(filePath);
+  } else {
+    const rawContent = fs.readFileSync(filePath, 'utf8');
+    const withoutBOM = removeBOM(rawContent);
+    const normalized = normalizeLineEndings(withoutBOM);
+    content = Buffer.from(normalized, 'utf8');
+  }
+
+  return crypto.createHash('sha256').update(content).digest('hex');
+}
+
 const {
   scanDirectory,
   FOLDERS_TO_COPY,

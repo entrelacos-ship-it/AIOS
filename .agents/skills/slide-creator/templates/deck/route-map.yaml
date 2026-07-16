@@ -1,0 +1,232 @@
+version: 1
+deck_templates:
+  - id: research_benchmark
+    name: Research Benchmark
+    job: Compare players and convert findings into product/design decisions.
+    audience: [founders, product_leads, technical_leads, strategy_team]
+    pick_when:
+      - The deck compares tools, competitors, repos, skills, agents, or products.
+      - The user needs a decision, absorption map, or roadmap from research.
+    skip_when:
+      - The goal is only a feature list with no decision.
+      - The evidence base is too weak to rank; use discovery_report first.
+    default_slide_count: {min: 12, ideal: 18, max: 28}
+    narrative_arc:
+      - why_the_benchmark_exists
+      - evaluation_frame
+      - category_split
+      - matrix
+      - unfair_advantages
+      - absorption_map
+      - product_implications
+      - roadmap
+      - decision
+    slide_sequence:
+      - {slot: cover, function: hook, required: true, visual_family: hero_claim}
+      - {slot: context, function: reframe, required: true, visual_family: contrast}
+      - {slot: scope, function: evaluation_frame, required: true, visual_family: layered_architecture}
+      - {slot: category_split, function: segmentation, required: true, visual_family: matrix_2x2}
+      - {slot: score_summary, function: proof, required: true, visual_family: horizontal_bar_chart}
+      - {slot: matrix, function: comparison, required: true, visual_family: harvey_balls_table}
+      - {slot: winner_is_not_enough, function: nuance, required: true, visual_family: quadrant_text_bullets}
+      - {slot: absorption_map, function: mechanism, required: true, visual_family: module_composition}
+      - {slot: build_vs_absorb, function: decision, required: true, visual_family: comparison_columns}
+      - {slot: roadmap, function: plan, required: true, visual_family: roadmap_vertical}
+      - {slot: qa, function: credibility, required: false, visual_family: checklist}
+      - {slot: appendix, function: evidence, required: false, visual_family: basic_table}
+    evidence_policy:
+      - Every score must cite source path, observed behavior, or explicit assumption.
+      - Matrix summaries must avoid repeating the same sentence under every score.
+      - Comparisons must separate app, skill, engine, and runtime categories when mixed players are present.
+    qa_gates: [template_selection_gate, evidence_gate, matrix_noise_gate, decision_gate]
+    absorbed_from: [ppt-master, Presenton, presentation-ai, PPTAgent, banana-slides]
+
+  - id: webinar_conversion
+    name: Webinar Conversion
+    job: Move a cold or warm audience from attention to a concrete CTA.
+    audience: [leads, prospects, community, students]
+    pick_when:
+      - The deck supports a webinar, masterclass, live training, or recorded event.
+      - The deck must educate and convert.
+    skip_when:
+      - The deck is a neutral technical tutorial with no CTA.
+    default_slide_count: {min: 18, ideal: 32, max: 45}
+    narrative_arc:
+      - promise
+      - enemy
+      - mistake
+      - new_mechanism
+      - proof
+      - framework
+      - implementation
+      - offer
+      - objections
+      - action
+    slide_sequence:
+      - {slot: promise, function: hook, required: true, visual_family: hero_claim}
+      - {slot: stakes, function: tension, required: true, visual_family: contrast}
+      - {slot: enemy, function: diagnosis, required: true, visual_family: fishbone_diagram}
+      - {slot: false_beliefs, function: objection_preempt, required: true, visual_family: pros_cons_chart}
+      - {slot: mechanism, function: mechanism, required: true, visual_family: layered_architecture}
+      - {slot: framework, function: teaching, required: true, visual_family: numbered_steps}
+      - {slot: example, function: proof, required: true, visual_family: before_after}
+      - {slot: implementation, function: plan, required: true, visual_family: pipeline_with_stages}
+      - {slot: offer, function: conversion, required: true, visual_family: offer_stack}
+      - {slot: objections, function: risk_reversal, required: true, visual_family: comparison_table}
+      - {slot: cta, function: action, required: true, visual_family: decision}
+    evidence_policy:
+      - Use at least one concrete before/after, demo, artifact, or case.
+      - Do not keep generic motivational slides.
+    qa_gates: [belief_shift_gate, offer_clarity_gate, visual_density_gate]
+    absorbed_from: [slide-deck-ai, presentation-ai, banana-slides]
+
+  - id: financial_presentation
+    name: Financial Presentation
+    job: Explain performance, variance, financial risk, and decision asks.
+    audience: [founders, board, finance, investors]
+    pick_when:
+      - The deck contains revenue, margin, burn, CAC, LTV, forecast, budget, or variance.
+    skip_when:
+      - The content is a marketing pitch with only one financial slide.
+    default_slide_count: {min: 8, ideal: 14, max: 24}
+    narrative_arc:
+      - headline_result
+      - context
+      - drivers
+      - variance
+      - risk
+      - options
+      - recommendation
+      - decision_ask
+    slide_sequence:
+      - {slot: executive_summary, function: answer_first, required: true, visual_family: kpi_cards}
+      - {slot: revenue_trend, function: proof, required: true, visual_family: line_chart}
+      - {slot: variance_bridge, function: explanation, required: true, visual_family: waterfall_chart}
+      - {slot: segment_breakdown, function: comparison, required: false, visual_family: stacked_bar_chart}
+      - {slot: unit_economics, function: diagnosis, required: false, visual_family: bullet_chart}
+      - {slot: scenarios, function: decision, required: true, visual_family: comparison_columns}
+      - {slot: ask, function: action, required: true, visual_family: decision}
+    evidence_policy:
+      - Numbers need source or assumption label.
+      - Tables must be right-aligned and totals visually distinct.
+    qa_gates: [data_integrity_gate, chart_selection_gate, decision_gate]
+    absorbed_from: [ppt-master, powerpoint-skill, slide-deck-ai]
+
+  - id: sales_deck
+    name: Sales Deck
+    job: Turn customer pain into urgency, trust, and next step.
+    audience: [prospects, buyers, champions, economic_buyer]
+    pick_when:
+      - The deck must support a sales conversation, proposal, or product pitch.
+    skip_when:
+      - The user wants a purely educational training deck.
+    default_slide_count: {min: 8, ideal: 14, max: 22}
+    narrative_arc:
+      - customer_problem
+      - cost_of_inaction
+      - new_way
+      - solution
+      - proof
+      - implementation
+      - commercial_next_step
+    slide_sequence:
+      - {slot: customer_truth, function: hook, required: true, visual_family: hero_claim}
+      - {slot: pain_map, function: diagnosis, required: true, visual_family: fishbone_diagram}
+      - {slot: new_way, function: reframe, required: true, visual_family: contrast}
+      - {slot: solution_system, function: mechanism, required: true, visual_family: module_composition}
+      - {slot: proof, function: proof, required: true, visual_family: before_after}
+      - {slot: plan, function: plan, required: true, visual_family: numbered_steps}
+      - {slot: investment, function: commercial, required: false, visual_family: comparison_columns}
+      - {slot: next_step, function: action, required: true, visual_family: decision}
+    evidence_policy:
+      - Claims must connect to buyer pain or measurable outcome.
+      - Product features cannot appear before problem and new mechanism.
+    qa_gates: [buyer_relevance_gate, proof_gate, cta_gate]
+    absorbed_from: [presentation-ai, slide-deck-ai, ppt-master]
+
+  - id: board_update
+    name: Board Update
+    job: Give leaders a high-signal update and force the right decisions.
+    audience: [board, founders, executives]
+    pick_when:
+      - The deck reviews company status, risks, priorities, or asks.
+    skip_when:
+      - The deck is for external marketing.
+    default_slide_count: {min: 8, ideal: 12, max: 18}
+    narrative_arc:
+      - answer_first
+      - what_changed
+      - metrics
+      - strategic_tension
+      - risks
+      - decisions_needed
+      - next_90_days
+    slide_sequence:
+      - {slot: answer_first, function: executive_summary, required: true, visual_family: kpi_cards}
+      - {slot: what_changed, function: update, required: true, visual_family: timeline}
+      - {slot: metrics, function: proof, required: true, visual_family: bullet_chart}
+      - {slot: risks, function: risk, required: true, visual_family: matrix_2x2}
+      - {slot: decisions, function: decision, required: true, visual_family: decision}
+      - {slot: roadmap, function: plan, required: true, visual_family: roadmap_vertical}
+    evidence_policy:
+      - Use explicit decision asks, not passive updates.
+    qa_gates: [executive_density_gate, decision_gate, data_integrity_gate]
+    absorbed_from: [ppt-master, powerpoint-skill]
+
+  - id: product_strategy
+    name: Product Strategy
+    job: Align product bets, architecture, market insight, and roadmap.
+    audience: [product, engineering, founders, GTM]
+    pick_when:
+      - The deck must explain what to build, why, and in what order.
+    skip_when:
+      - The goal is only implementation documentation.
+    default_slide_count: {min: 10, ideal: 18, max: 28}
+    narrative_arc:
+      - market_shift
+      - customer_gap
+      - product_thesis
+      - mechanism
+      - capability_map
+      - tradeoffs
+      - roadmap
+      - operating_model
+    slide_sequence:
+      - {slot: thesis, function: reframe, required: true, visual_family: hero_claim}
+      - {slot: customer_gap, function: diagnosis, required: true, visual_family: journey_map}
+      - {slot: system, function: mechanism, required: true, visual_family: layered_architecture}
+      - {slot: capability_map, function: comparison, required: true, visual_family: harvey_balls_table}
+      - {slot: tradeoffs, function: decision, required: true, visual_family: pros_cons_chart}
+      - {slot: roadmap, function: plan, required: true, visual_family: roadmap_vertical}
+    evidence_policy:
+      - Every roadmap item must tie to customer gap or strategic constraint.
+    qa_gates: [strategy_traceability_gate, roadmap_gate, visual_density_gate]
+    absorbed_from: [Presenton, presentation-ai, ppt-master, PPTAgent]
+
+  - id: discovery_report
+    name: Discovery Report
+    job: Convert exploratory research into a clear map of what is known, unknown, and next.
+    audience: [founders, analysts, product, strategy]
+    pick_when:
+      - Evidence is incomplete and the honest output is a research map, not a final decision.
+    skip_when:
+      - The user already has enough evidence for a recommendation.
+    default_slide_count: {min: 8, ideal: 12, max: 18}
+    narrative_arc:
+      - question
+      - method
+      - findings
+      - uncertainty
+      - hypotheses
+      - next_tests
+    slide_sequence:
+      - {slot: question, function: scope, required: true, visual_family: hero_claim}
+      - {slot: method, function: credibility, required: true, visual_family: process_flow}
+      - {slot: findings, function: synthesis, required: true, visual_family: vertical_list}
+      - {slot: unknowns, function: uncertainty, required: true, visual_family: matrix_2x2}
+      - {slot: next_tests, function: plan, required: true, visual_family: numbered_steps}
+    evidence_policy:
+      - Unverified claims must be marked as hypotheses.
+    qa_gates: [evidence_gate, uncertainty_gate]
+    absorbed_from: [banana-slides, slide-deck-ai, ppt-master]
+

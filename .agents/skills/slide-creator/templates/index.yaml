@@ -1,0 +1,277 @@
+version: 1
+name: slide-creator-template-system
+purpose: >
+  Canonical self-contained template registry for narrative-first slide creation.
+  The registry absorbs benchmark behavior from open-source slide systems without
+  copying their UI or implementation.
+
+selection_order:
+  - deck_template
+  - slide_function_template
+  - visual_template
+  - theme_profile
+  - research_route
+  - import_pipeline
+  - runtime_job
+  - rendered_eval
+  - qa_gates
+
+registries:
+  deck:
+    files:
+      - deck/route-map.yaml
+      - deck/copy-derived.yaml
+    description: Complete roteiro templates by presentation job.
+  slide:
+    file: slide/function-library.yaml
+    description: Slide-level structures by audience function.
+  visual:
+    files:
+      - visual/charts-and-diagrams.yaml
+      - visual/chart-data-contracts.yaml
+      - visual/ai-image-type-routing.yaml
+      - visual/layout-families.yaml
+      - visual/media-layouts.yaml
+      - visual/brand-system-patterns.yaml
+      - visual/aiox-brandbook-deep-patterns.yaml
+      - visual/redpine-deep-patterns.yaml
+    description: Visual pattern grammar, layout families, media-fit rules.
+  theme:
+    files:
+      - theme/theme-tokens.yaml
+      - theme/brand-systems.yaml
+    description: Theme tokens separated from slide structure.
+  runtime:
+    files:
+      - runtime/jobs.yaml
+      - runtime/edit-operations.yaml
+      - runtime/import-template.yaml
+      - runtime/diagram-rendering.yaml
+      - runtime/manuscript-pipeline.yaml
+      - runtime/html-to-pptx.yaml
+      - runtime/export-contract.yaml
+      - runtime/template-example-routing.yaml
+      - runtime/trace-handoff.yaml
+      - runtime/provider-routing.yaml
+      - runtime/edit-history.yaml
+    description: Generation, manuscript, edit, batch, import, prompt-to-edit, render, and export contracts.
+  research:
+    files:
+      - research/source-routing.yaml
+      - research/evidence-ledger.yaml
+    description: Source, media, scholar, and local-file retrieval routes for evidence-backed slide creation.
+  import:
+    files:
+      - import/document-extraction.yaml
+      - import/induced-layout-packs.yaml
+      - import/pptx-template-manifest.yaml
+    description: Structured extraction of documents, metadata, sections, claims, media, and tables.
+  qa:
+    files:
+      - qa/narrative-gates.yaml
+      - qa/visual-gates.yaml
+      - qa/template-selection-gates.yaml
+      - qa/copy-gates.yaml
+      - qa/regression-fixtures.yaml
+      - qa/pptx-technical-gates.yaml
+    description: Blockers, scoring, and regression checks.
+  eval:
+    files:
+      - eval/rendered-eval.yaml
+    description: Rendered multimodal slide evaluation using vision/content/logic/technical-render categories.
+
+bench_absorption:
+  presenton:
+    paths:
+      - ../../../../../../bench/presenton/servers/nextjs/lib/compile-template-schema.ts
+      - ../../../../../../bench/presenton/servers/nextjs/app/presentation-templates
+    absorbed:
+      - template_family_metadata
+      - layout_schema
+      - sample_data
+      - prompt_to_edit_layout
+      - template_import_pipeline
+      - provider_capability_routing
+      - local_model_download_state
+  ppt_master:
+    paths:
+      - ../../../../../../bench/ppt-master/skills/ppt-master/templates/charts/charts_index.json
+      - ../../../../../../bench/ppt-master/skills/ppt-master/templates/layouts/layouts_index.json
+      - ../../../../../../bench/ppt-master/skills/ppt-master/templates/spec_lock_reference.md
+      - ../../../../../../bench/ppt-master/skills/ppt-master/references/image-type-templates/_index.md
+      - ../../../../../../bench/ppt-master/skills/ppt-master/scripts/template_import/manifest.py
+    absorbed:
+      - visual_selection_grammar
+      - design_spec_vs_execution_lock
+      - chart_layout_indexing
+      - strict_forbidden_rules
+      - ai_image_type_routing
+      - pptx_template_manifest_import
+  pptagent:
+    paths:
+      - ../../../../../../bench/PPTAgent/pptagent/templates/default/slide_induction.json
+      - ../../../../../../bench/PresentAgent-2/pptagent/roles/layout_selector.yaml
+      - ../../../../../../bench/PPTAgent/pptagent/ppteval.py
+      - ../../../../../../bench/PPTAgent/deeppresenter/roles/Planner.yaml
+      - ../../../../../../bench/PPTAgent/deeppresenter/roles/Research.yaml
+      - ../../../../../../bench/PPTAgent/deeppresenter/html2pptx/html2pptx.js
+      - ../../../../../../bench/PPTAgent/pptagent/document/document.py
+      - ../../../../../../bench/PPTAgent/pptagent/prompts/document
+      - ../../../../../../bench/PPTAgent/pptagent/templates/beamer/slide_induction.json
+      - ../../../../../../bench/PPTAgent/pptagent/templates/cip/slide_induction.json
+      - ../../../../../../bench/PPTAgent/pptagent/templates/hit/slide_induction.json
+      - ../../../../../../bench/PPTAgent/pptagent/templates/thu/slide_induction.json
+      - ../../../../../../bench/PPTAgent/pptagent/templates/ucas/slide_induction.json
+      - ../../../../../../bench/PPTAgent/pptagent/templates/*/image_stats.json
+    absorbed:
+      - induced_layout_elements
+      - suggested_character_limits
+      - media_fit_reasoning
+      - functional_keys
+      - multimodal_rendered_eval
+      - manuscript_first_pipeline
+      - html_to_pptx_render_contract
+      - structured_document_extraction
+      - induced_layout_pack_selection
+      - media_area_statistics
+  presentation_ai:
+    paths:
+      - ../../../../../../bench/presentation-ai/src/ai/tools/presentation/tools.ts
+      - ../../../../../../bench/presentation-ai/src/lib/presentation/themes.ts
+      - ../../../../../../bench/presentation-ai/src/constants/antv-templates.ts
+      - ../../../../../../bench/presentation-ai/src/components/notebook/presentation/utils/template-serializer.ts
+      - ../../../../../../bench/presentation-ai/src/components/notebook/presentation/utils/templates.tsx
+      - ../../../../../../bench/presentation-ai/src/components/notebook/presentation/charts/chart-data-editor/types.ts
+      - ../../../../../../bench/presentation-ai/src/components/notebook/presentation/charts/chart-data-editor/use-chart-editor.ts
+    absorbed:
+      - edit_operations
+      - theme_profiles
+      - scenario_audience_tone
+      - visual_component_dsl
+      - serialized_template_examples
+      - outline_template_overrides
+      - chart_data_mode_contracts
+      - chart_editor_mode_mapping
+  banana_slides:
+    paths:
+      - ../../../../../../bench/banana-slides/scripts/job_templates
+      - ../../../../../../bench/banana-slides/skills/banana-cli/SKILL.md
+    absorbed:
+      - job_presets
+      - reference_files
+      - material_files
+      - batch_generation
+      - export_policy
+      - editable_pptx_reverse_export
+  powerpoint_skill:
+    paths:
+      - ../../../../../../bench/powerpoint-skill/powerpoint-slides/SKILL.md
+      - ../../../../../../bench/powerpoint-skill/powerpoint-slides/scripts/check_overlaps.py
+      - ../../../../../../bench/powerpoint-skill/powerpoint-slides/diagram-rendering.md
+    absorbed:
+      - visual_qa
+      - overlap_boundary_checks
+      - pptx_generation_constraints
+      - pptx_technical_scoring
+      - text_fit_and_math_safety
+      - diagram_engine_routing
+      - figure_extraction_policy
+  slide_deck_ai:
+    paths:
+      - ../../../../../../bench/slide-deck-ai/src/slidedeckai/prompts/initial_template_v4_two_cols_img.txt
+      - ../../../../../../bench/slide-deck-ai/src/slidedeckai/prompts/refinement_template_v4_two_cols_img.txt
+    absorbed:
+      - narrative_arc_prompting
+      - structure_markers
+      - table_process_icon_patterns
+  presentagent_deepresearch:
+    paths:
+      - ../../../../../../bench/PresentAgent-2/DeepResearch/inference/prompt.py
+      - ../../../../../../bench/PresentAgent-2/DeepResearch/inference/prompt_media.py
+      - ../../../../../../bench/PresentAgent-2/DeepResearch/inference/file_tools
+      - ../../../../../../bench/PresentAgent-2/DeepResearch/evaluation
+    absorbed:
+      - html_source_retrieval
+      - motion_media_retrieval
+      - scholar_and_benchmark_routing
+      - local_file_retrieval
+      - deep_research_evaluation_contract
+      - evidence_ledger
+  deeph:
+    paths:
+      - ../../../../../../bench/deepH/docs/AGENTS_AND_SPECS.md
+      - ../../../../../../bench/deepH/docs/WORKFLOWS_AND_UNIVERSES.md
+      - ../../../../../../bench/deepH/crews/reviewflow.yaml
+    absorbed:
+      - typed_handoffs
+      - multiverse_review_synthesis
+      - traceable_runtime_flows
+      - focused_working_set_principle
+      - process_regression_fixtures
+      - edit_history_handoff_patterns
+  sinkra_copy_squad:
+    paths:
+      - ../../../../squads/copy/reference/agent-packs/alex-hormozi/offer-systems.md
+      - ../../../../squads/copy/reference/agent-packs/jon-benson/vsl-frameworks.md
+      - ../../../../squads/copy/reference/agent-packs/ry-schwartz/course-launch-frameworks.md
+      - ../../../../squads/copy/data/copy-mappings.yaml
+      - ../../../../squads/pitch-deck/data/pitch-type-matrix.yaml
+    absorbed:
+      - grand_slam_offer_sequence
+      - proof_promise_plan_argument
+      - five_step_vsl_process
+      - coaching_the_conversion_method
+      - awareness_level_routing
+      - proof_hierarchy
+  redpine_ds:
+    paths:
+      - ../../../../apps/redpine-ds/src/design-system/tokens.json
+      - ../../../../apps/redpine-ds/src/design-system/components.manifest.json
+      - ../../../../apps/design/src/data/designs/redpine/DESIGN.md
+    absorbed:
+      - editorial_precision_theme
+      - square_hairline_surface_system
+      - component_status_and_a11y_cards
+      - risk_incident_table_pattern
+      - twelve_column_report_grid
+      - semantic_palette_surface_stack
+      - accessible_status_rows
+      - decision_panels
+  aiox_brandbook:
+    paths:
+      - ../../../../outputs/design-system/aiox-brandbook-gaps-bundle-2026-04-18/project/README.md
+      - ../../../../outputs/design-system/aiox-brandbook-gaps-bundle-2026-04-18/project/slides/index.html
+      - ../../../../outputs/design-system/aiox-brandbook-gaps-bundle-2026-04-18/project/ui_kits/brandbook/README.md
+    absorbed:
+      - cockpit_dark_theme
+      - four_column_hero_grid
+      - manifesto_quote_slide
+      - bordered_stat_strip
+      - hud_pillar_cards
+      - mono_bracket_navigation_language
+      - editorial_book_spreads
+      - evidence_wall
+      - hero_journey_four_acts
+      - problem_ticker_stage
+      - offer_two_column_stack
+      - pitch_page_header_metric_insight_components
+      - category_creation_matrix
+      - gate_driven_roadmap
+
+quality_target:
+  minimum_score: 90
+  excellent_score: 95
+  block_if:
+    - no_declared_deck_template
+    - no_declared_slide_function_template
+    - no_visual_template_for_key_slides
+    - no_reason_for_template_selection
+    - repeated_layout_more_than_two_times
+    - no_qa_gate_report
+    - research_required_but_no_source_route
+    - high_stakes_claim_without_evidence_ledger
+    - rendered_key_slide_not_evaluated
+    - export_claimed_without_verified_output
+    - known_failure_without_regression_fixture
+    - pptx_requested_without_technical_gate
+    - provider_required_but_not_declared

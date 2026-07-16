@@ -1,0 +1,41 @@
+version: 1
+gates:
+  - id: visual_density_gate
+    gate: Slides fit their visual role.
+    blocks_if:
+      - Visible words exceed template limit without appendix reason.
+      - More than two consecutive slides use the same layout family.
+      - A key slide has no visual structure.
+    pass_if:
+      - Density is appropriate for audience and slide function.
+    score_weight: 15
+    absorbed_from: [powerpoint-skill, ppt-master]
+  - id: chart_selection_gate
+    gate: Chart matches data shape.
+    blocks_if:
+      - Chart type is chosen for aesthetics instead of data shape.
+      - Axes, units, or target baselines are missing.
+    pass_if:
+      - Pick/skip rule justifies the selected chart.
+    score_weight: 10
+    absorbed_from: [ppt-master]
+  - id: media_relevance_gate
+    gate: Images and videos carry meaning.
+    blocks_if:
+      - Media is atmospheric or decorative.
+      - Media lacks relevance reason.
+    pass_if:
+      - Media either proves, demonstrates, or clarifies the claim.
+    score_weight: 10
+    absorbed_from: [PPTAgent, banana-slides]
+  - id: overlap_boundary_gate
+    gate: Rendered slides have no overlap or boundary violations.
+    blocks_if:
+      - Text overlaps charts, cards, or other text.
+      - Element exceeds canvas bounds.
+      - Font is too small for intended display.
+    pass_if:
+      - Layout can pass visual inspection or automated overlap check.
+    score_weight: 10
+    absorbed_from: [powerpoint-skill]
+

@@ -3326,7 +3326,10 @@ Retorne APENAS o JSON:`;
       // configured as '/open-slide/' (see open-slide.config.ts) to match.
       path: req.originalUrl,
       method: req.method,
-      headers: { ...req.headers, host: target.host },
+      // Vite's dev server rejects unrecognized Host headers (DNS-rebinding
+      // guard) but always allows 'localhost' — send that instead of the
+      // docker network alias so the proxy isn't blocked with 403.
+      headers: { ...req.headers, host: 'localhost' },
     }, (proxyRes) => {
       res.writeHead(proxyRes.statusCode || 502, proxyRes.headers);
       proxyRes.pipe(res);

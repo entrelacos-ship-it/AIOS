@@ -1,0 +1,193 @@
+version: 1
+slide_templates:
+  - id: hook_hero_claim
+    function: hook
+    pick_when:
+      - The audience must immediately understand the central claim or promise.
+    skip_when:
+      - The slide needs dense evidence or comparison.
+    compatible_visuals: [hero_claim, full_bleed_image, kpi_cards]
+    slots:
+      - {name: action_title, type: text, required: true, max_chars: 90, role: claim}
+      - {name: subtitle, type: text, required: false, max_chars: 140, role: context}
+      - {name: proof_chip, type: text, required: false, max_chars: 40, role: credibility}
+    constraints:
+      max_visible_words: 28
+      max_bullets: 0
+      requires_evidence: false
+      avoid: [generic_topic_title, decorative_background_only]
+    qa: [action_title_gate, density_gate]
+    absorbed_from: [slide-deck-ai, Presenton]
+
+  - id: reframe_contrast
+    function: reframe
+    pick_when:
+      - The deck must replace an old mental model with a new one.
+    skip_when:
+      - There are more than four comparison dimensions; use comparison_table.
+    compatible_visuals: [comparison_columns, before_after, pros_cons_chart]
+    slots:
+      - {name: old_belief, type: text, required: true, max_chars: 120, role: contrast_left}
+      - {name: new_belief, type: text, required: true, max_chars: 120, role: contrast_right}
+      - {name: bridge, type: text, required: false, max_chars: 90, role: transition}
+    constraints:
+      max_visible_words: 45
+      max_bullets: 4
+      requires_evidence: false
+      avoid: [balanced_but_no_point_of_view, vague_old_way]
+    qa: [belief_shift_gate, contrast_gate]
+    absorbed_from: [presentation-ai, ppt-master]
+
+  - id: diagnosis_fishbone
+    function: diagnosis
+    pick_when:
+      - The audience sees symptoms but not root causes.
+    skip_when:
+      - The message is a simple linear process; use process_flow.
+    compatible_visuals: [fishbone_diagram, module_composition, layered_architecture]
+    slots:
+      - {name: symptom, type: text, required: true, max_chars: 90, role: observed_problem}
+      - {name: causes, type: list, required: true, max_chars: 240, role: root_causes}
+      - {name: implication, type: text, required: true, max_chars: 120, role: why_it_matters}
+    constraints:
+      max_visible_words: 65
+      max_bullets: 8
+      requires_evidence: true
+      avoid: [blame_without_mechanism, too_many_causes]
+    qa: [evidence_gate, causality_gate]
+    absorbed_from: [ppt-master, powerpoint-skill]
+
+  - id: mechanism_layered_system
+    function: mechanism
+    pick_when:
+      - The deck must explain how a system creates the promised result.
+    skip_when:
+      - The idea is only a sequence of steps; use process_flow or numbered_steps.
+    compatible_visuals: [layered_architecture, module_composition, hub_spoke]
+    slots:
+      - {name: mechanism_name, type: text, required: true, max_chars: 70, role: system_name}
+      - {name: layers_or_modules, type: list, required: true, max_chars: 360, role: components}
+      - {name: causality, type: text, required: true, max_chars: 140, role: why_it_works}
+    constraints:
+      max_visible_words: 75
+      max_bullets: 9
+      requires_evidence: true
+      avoid: [feature_dump, unlabeled_arrows, no_causal_link]
+    qa: [mechanism_gate, visual_density_gate]
+    absorbed_from: [Presenton, ppt-master, PPTAgent]
+
+  - id: proof_before_after
+    function: proof
+    pick_when:
+      - The audience needs to see a concrete state change.
+    skip_when:
+      - The proof is a time series; use line_chart.
+    compatible_visuals: [before_after, dumbbell_chart, waterfall_chart]
+    slots:
+      - {name: before, type: text, required: true, max_chars: 100, role: baseline}
+      - {name: after, type: text, required: true, max_chars: 100, role: outcome}
+      - {name: evidence_source, type: text, required: true, max_chars: 140, role: source}
+    constraints:
+      max_visible_words: 50
+      max_bullets: 4
+      requires_evidence: true
+      avoid: [testimonial_without_specifics, fake_precision]
+    qa: [proof_gate, source_gate]
+    absorbed_from: [banana-slides, ppt-master, slide-deck-ai]
+
+  - id: comparison_matrix
+    function: comparison
+    pick_when:
+      - Multiple players are compared across multiple dimensions.
+    skip_when:
+      - There are fewer than three dimensions; use comparison_columns.
+    compatible_visuals: [harvey_balls_table, feature_matrix_table, heatmap_chart]
+    slots:
+      - {name: players, type: list, required: true, max_chars: 240, role: compared_entities}
+      - {name: dimensions, type: list, required: true, max_chars: 360, role: criteria}
+      - {name: scoring_note, type: text, required: true, max_chars: 180, role: method}
+    constraints:
+      max_visible_words: 110
+      max_bullets: 0
+      requires_evidence: true
+      avoid: [repeated_cell_text, mixed_categories_without_split, no_method]
+    qa: [matrix_noise_gate, scoring_method_gate]
+    absorbed_from: [ppt-master, presentation-ai]
+
+  - id: decision_options
+    function: decision
+    pick_when:
+      - The audience must choose among options.
+    skip_when:
+      - The slide only lists pros and cons with no recommendation.
+    compatible_visuals: [comparison_columns, matrix_2x2, decision_card]
+    slots:
+      - {name: options, type: list, required: true, max_chars: 220, role: choices}
+      - {name: recommendation, type: text, required: true, max_chars: 120, role: preferred_choice}
+      - {name: tradeoff, type: text, required: true, max_chars: 140, role: cost}
+    constraints:
+      max_visible_words: 65
+      max_bullets: 5
+      requires_evidence: true
+      avoid: [no_recommendation, equal_weight_everything]
+    qa: [decision_gate, tradeoff_gate]
+    absorbed_from: [ppt-master, powerpoint-skill]
+
+  - id: roadmap_vertical
+    function: plan
+    pick_when:
+      - The deck needs ordered phases or milestones with ownership/status.
+    skip_when:
+      - The timeline has real task durations; use gantt_chart.
+    compatible_visuals: [roadmap_vertical, gantt_chart, numbered_steps]
+    slots:
+      - {name: phases, type: list, required: true, max_chars: 320, role: sequence}
+      - {name: owners, type: list, required: false, max_chars: 160, role: accountability}
+      - {name: success_metric, type: text, required: false, max_chars: 90, role: measurable_outcome}
+    constraints:
+      max_visible_words: 80
+      max_bullets: 8
+      requires_evidence: false
+      avoid: [roadmap_without_dates_or_order, overloaded_phase]
+    qa: [roadmap_gate, accountability_gate]
+    absorbed_from: [ppt-master, banana-slides]
+
+  - id: teaching_framework
+    function: teaching
+    pick_when:
+      - The audience must learn a repeatable method.
+    skip_when:
+      - The method is not sequential or repeatable.
+    compatible_visuals: [numbered_steps, circular_stages, chevron_process]
+    slots:
+      - {name: framework_name, type: text, required: true, max_chars: 70, role: model}
+      - {name: steps, type: list, required: true, max_chars: 300, role: method}
+      - {name: example, type: text, required: true, max_chars: 140, role: concrete_use}
+    constraints:
+      max_visible_words: 80
+      max_bullets: 6
+      requires_evidence: false
+      avoid: [abstract_steps_without_example, too_many_steps]
+    qa: [didactic_clarity_gate, example_gate]
+    absorbed_from: [slide-deck-ai, presentation-ai]
+
+  - id: offer_stack
+    function: conversion
+    pick_when:
+      - The slide needs to make the offer legible and valuable.
+    skip_when:
+      - There is no commercial CTA.
+    compatible_visuals: [comparison_columns, module_composition, kpi_cards]
+    slots:
+      - {name: offer_name, type: text, required: true, max_chars: 70, role: product}
+      - {name: components, type: list, required: true, max_chars: 260, role: value_stack}
+      - {name: risk_reversal, type: text, required: false, max_chars: 120, role: trust}
+      - {name: cta, type: text, required: true, max_chars: 80, role: next_step}
+    constraints:
+      max_visible_words: 85
+      max_bullets: 7
+      requires_evidence: false
+      avoid: [feature_list_without_outcome, unclear_next_step]
+    qa: [offer_clarity_gate, cta_gate]
+    absorbed_from: [presentation-ai, banana-slides]
+

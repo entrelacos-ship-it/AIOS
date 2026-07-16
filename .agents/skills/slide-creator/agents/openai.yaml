@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slide Creator"
+  short_description: "Narrative-first deck creation pipeline"
+  default_prompt: "Use $slide-creator to turn this briefing into a complete narrative-first presentation deck."
