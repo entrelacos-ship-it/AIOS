@@ -3316,8 +3316,12 @@ Retorne APENAS o JSON:`;
   // be embedded via iframe under the app's own origin (avoids CORS/frame issues).
   // No WebSocket/HMR forwarding: the iframe shows the deck, live-reload just needs
   // a manual refresh after an agent edits the workspace.
+  // The open-slide client also calls its own API routes (assets, comments,
+  // folders, notes, ...) via root-absolute fetch('/__xyz') calls that Vite's
+  // `base` rewriting doesn't touch (only static imports get base-prefixed,
+  // not runtime fetch() strings) — so those must be proxied unprefixed too.
   const OPEN_SLIDE_TARGET = process.env.OPEN_SLIDE_URL || 'http://localhost:4100';
-  app.use('/open-slide', (req, res) => {
+  app.use(['/open-slide', /^\/__/], (req, res) => {
     const target = new URL(OPEN_SLIDE_TARGET);
     const proxyReq = http.request({
       host: target.hostname,
